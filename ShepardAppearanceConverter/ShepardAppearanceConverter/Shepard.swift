@@ -337,7 +337,8 @@ struct Shepard {
         }
         
         var alerts = [Attributes: String]()
-        var notices = [Attributes: String]()
+        var notices: [Attributes: String] = [:]
+        static var defaultNotices: [Attributes: String] = [.Scar: "Scar has no equivalent in Game 2 or 3"]
         static let HairColorNotFound = "Hair color has no equivalent"
         static let HairColorConverted = "Hair color was changed to an approximate equivalent"
         static let EyeShadowColorNotFound = "Eyeshadow color has no equivalent"
@@ -346,6 +347,7 @@ struct Shepard {
         
         mutating func convert(toGame toGame: Game) {
             alerts = [:]
+            notices = Appearance.defaultNotices
             var newAppearance = [Attributes: Int]()
             if let sourceAttributes = Appearance.attributes[gender]?[game] {
                 for attribute in sourceAttributes {

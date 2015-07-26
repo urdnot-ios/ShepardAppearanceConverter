@@ -55,22 +55,20 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
     @IBAction func ME2CodeChanged(sender: AnyObject) {
         ME2CodeField.text = formatCode(ME2CodeField.text)
         ME2CodeLabel.text = ME2CodeField.text
-        //format automatically ala the phone number formatter I made
     }
     
     private var lastCode = String()
     func formatCode(code: String!) -> String {
-        //strip to numbers
+        //strip to valid characters
         var unformattedCode: String! = code?.uppercaseString.onlyCharacters(Shepard.Appearance.CharacterList)
         if unformattedCode == nil || unformattedCode.isEmpty {
             lastCode = ""
             return ""
         }
-        //if characters removed by user, change to remove numbers instead of formatting
+        //if characters removed by user, change to remove valid characters instead of other formatting
         let lastUnformattedCode = lastCode.onlyCharacters(Shepard.Appearance.CharacterList)
         let requestedSubtractChars = lastCode.length - code.length
         let actualSubtractChars = max(0, lastUnformattedCode.length - unformattedCode.length)
-        print("\(requestedSubtractChars) \(actualSubtractChars)")
         if requestedSubtractChars > 0 && actualSubtractChars < requestedSubtractChars {
             let subtractChars = requestedSubtractChars - actualSubtractChars
             unformattedCode = subtractChars >= unformattedCode.length  ? "" : unformattedCode.stringFrom(0, to: -1 * subtractChars)
@@ -81,7 +79,6 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
             formattedCode = formattedCode.stringFrom(0, to: -1)
         }
         lastCode = formattedCode
-        print("code \(formattedCode.characters.count)")
         return formattedCode
     }
 
@@ -96,12 +93,6 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
         }
         restrictSlidersToGender(gender)
         displayMessages(appearance)
-        for (attribute, alert) in appearance.alerts {
-            showSliderAlert(attribute, alert: alert)
-        }
-        for (attribute, notice) in appearance.notices {
-            showSliderNotice(attribute, notice: notice)
-        }
     }
     
     @IBAction func ME1SlidersSubmit(sender: AnyObject) {
@@ -116,12 +107,6 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
         ME2CodeField.text = appearance.format()
         ME2CodeLabel.text = ME2CodeField.text
         displayMessages(appearance)
-        for (attribute, alert) in appearance.alerts {
-            showSliderAlert(attribute, alert: alert)
-        }
-        for (attribute, notice) in appearance.notices {
-            showSliderNotice(attribute, notice: notice)
-        }
     }
     
     @IBAction func game23Changed(sender: AnyObject) {
@@ -158,7 +143,9 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
     
     func setupGame23Fields() {
         ME2AlertLabel.hidden = true
+        ME2NoticeLabel.hidden = true
         ME2CodeField.delegate = self
+//        ME2CodeLabel.text = formatCode(ME2CodeField.text)
     }
     
     var groups: [Shepard.Appearance.AttributeGroups: [Shepard.Gender: Int]] = [:]
@@ -207,7 +194,7 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
                     sliders[attribute]?[gender] = (value: sliderStack.valueLabel, slider: sliderStack.valueSlider, alert: sliderStack.alertLabel, notice: sliderStack.noticeLabel)
                     
                     // set slider value to nothing
-                    setSliderValue(attribute, value: nil)
+                    setSliderValue(attribute, value: 1)
                     
                     sliderStack.hidden = false
                 }
@@ -222,6 +209,11 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
                 groups[group]?[gender] = ME1GroupsList.arrangedSubviews.count - 1
                 
             }
+        }
+        
+        //show any default notices
+        for (attribute, notice) in Shepard.Appearance.defaultNotices {
+            showSliderNotice(attribute, notice: notice)
         }
     }
     
@@ -270,6 +262,12 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
             ME2NoticeLabel.hidden = false
         } else {
             ME2NoticeLabel.hidden = true
+        }
+        for (attribute, alert) in appearance.alerts {
+            showSliderAlert(attribute, alert: alert)
+        }
+        for (attribute, notice) in appearance.notices {
+            showSliderNotice(attribute, notice: notice)
         }
     }
     
