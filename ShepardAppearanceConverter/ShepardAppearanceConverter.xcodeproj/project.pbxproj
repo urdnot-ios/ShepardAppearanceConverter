@@ -1,0 +1,305 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B168D9DB1B64A6D600F7AB1E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B168D9DA1B64A6D600F7AB1E /* StringExtension.swift */; };
+		B1BE84AC1B644DB4006434FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84AB1B644DB4006434FA /* AppDelegate.swift */; };
+		B1BE84B31B644DB4006434FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1BE84B21B644DB4006434FA /* Assets.xcassets */; };
+		B1BE84B61B644DB4006434FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1BE84B41B644DB4006434FA /* LaunchScreen.storyboard */; };
+		B1BE84C31B644DCC006434FA /* RoundedCornersBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84BD1B644DCC006434FA /* RoundedCornersBox.swift */; };
+		B1BE84C41B644DCC006434FA /* Shepard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84BE1B644DCC006434FA /* Shepard.swift */; };
+		B1BE84C51B644DCC006434FA /* ShepardAppearanceConverterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84BF1B644DCC006434FA /* ShepardAppearanceConverterController.swift */; };
+		B1BE84C61B644DCC006434FA /* ShepardAppearanceME1Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84C01B644DCC006434FA /* ShepardAppearanceME1Group.swift */; };
+		B1BE84C71B644DCC006434FA /* ShepardAppearanceME1Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84C11B644DCC006434FA /* ShepardAppearanceME1Slider.swift */; };
+		B1BE84C81B644DCC006434FA /* ShepardAppearanceConverter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1BE84C21B644DCC006434FA /* ShepardAppearanceConverter.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B168D9DA1B64A6D600F7AB1E /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		B1BE84A81B644DB4006434FA /* ShepardAppearanceConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShepardAppearanceConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1BE84AB1B644DB4006434FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B1BE84B21B644DB4006434FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B1BE84B51B644DB4006434FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B1BE84B71B644DB4006434FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1BE84BD1B644DCC006434FA /* RoundedCornersBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornersBox.swift; sourceTree = "<group>"; };
+		B1BE84BE1B644DCC006434FA /* Shepard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.swift; sourceTree = "<group>"; };
+		B1BE84BF1B644DCC006434FA /* ShepardAppearanceConverterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardAppearanceConverterController.swift; sourceTree = "<group>"; };
+		B1BE84C01B644DCC006434FA /* ShepardAppearanceME1Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardAppearanceME1Group.swift; sourceTree = "<group>"; };
+		B1BE84C11B644DCC006434FA /* ShepardAppearanceME1Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardAppearanceME1Slider.swift; sourceTree = "<group>"; };
+		B1BE84C21B644DCC006434FA /* ShepardAppearanceConverter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShepardAppearanceConverter.storyboard; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B1BE84A51B644DB4006434FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B1BE849F1B644DB4006434FA = {
+			isa = PBXGroup;
+			children = (
+				B1BE84AA1B644DB4006434FA /* ShepardAppearanceConverter */,
+				B1BE84A91B644DB4006434FA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B1BE84A91B644DB4006434FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B1BE84A81B644DB4006434FA /* ShepardAppearanceConverter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B1BE84AA1B644DB4006434FA /* ShepardAppearanceConverter */ = {
+			isa = PBXGroup;
+			children = (
+				B1BE84AB1B644DB4006434FA /* AppDelegate.swift */,
+				B1BE84BD1B644DCC006434FA /* RoundedCornersBox.swift */,
+				B1BE84BE1B644DCC006434FA /* Shepard.swift */,
+				B168D9DA1B64A6D600F7AB1E /* StringExtension.swift */,
+				B1BE84BF1B644DCC006434FA /* ShepardAppearanceConverterController.swift */,
+				B1BE84C01B644DCC006434FA /* ShepardAppearanceME1Group.swift */,
+				B1BE84C11B644DCC006434FA /* ShepardAppearanceME1Slider.swift */,
+				B1BE84C21B644DCC006434FA /* ShepardAppearanceConverter.storyboard */,
+				B1BE84B21B644DB4006434FA /* Assets.xcassets */,
+				B1BE84B41B644DB4006434FA /* LaunchScreen.storyboard */,
+				B1BE84B71B644DB4006434FA /* Info.plist */,
+			);
+			path = ShepardAppearanceConverter;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B1BE84A71B644DB4006434FA /* ShepardAppearanceConverter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1BE84BA1B644DB4006434FA /* Build configuration list for PBXNativeTarget "ShepardAppearanceConverter" */;
+			buildPhases = (
+				B1BE84A41B644DB4006434FA /* Sources */,
+				B1BE84A51B644DB4006434FA /* Frameworks */,
+				B1BE84A61B644DB4006434FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShepardAppearanceConverter;
+			productName = ShepardAppearanceConverter;
+			productReference = B1BE84A81B644DB4006434FA /* ShepardAppearanceConverter.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B1BE84A01B644DB4006434FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = urdnot;
+				TargetAttributes = {
+					B1BE84A71B644DB4006434FA = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = B1BE84A31B644DB4006434FA /* Build configuration list for PBXProject "ShepardAppearanceConverter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B1BE849F1B644DB4006434FA;
+			productRefGroup = B1BE84A91B644DB4006434FA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B1BE84A71B644DB4006434FA /* ShepardAppearanceConverter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B1BE84A61B644DB4006434FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1BE84B61B644DB4006434FA /* LaunchScreen.storyboard in Resources */,
+				B1BE84B31B644DB4006434FA /* Assets.xcassets in Resources */,
+				B1BE84C81B644DCC006434FA /* ShepardAppearanceConverter.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B1BE84A41B644DB4006434FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1BE84C31B644DCC006434FA /* RoundedCornersBox.swift in Sources */,
+				B168D9DB1B64A6D600F7AB1E /* StringExtension.swift in Sources */,
+				B1BE84C51B644DCC006434FA /* ShepardAppearanceConverterController.swift in Sources */,
+				B1BE84AC1B644DB4006434FA /* AppDelegate.swift in Sources */,
+				B1BE84C41B644DCC006434FA /* Shepard.swift in Sources */,
+				B1BE84C61B644DCC006434FA /* ShepardAppearanceME1Group.swift in Sources */,
+				B1BE84C71B644DCC006434FA /* ShepardAppearanceME1Slider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B1BE84B41B644DB4006434FA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B1BE84B51B644DB4006434FA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B1BE84B81B644DB4006434FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B1BE84B91B644DB4006434FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B1BE84BB1B644DB4006434FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ShepardAppearanceConverter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.urdnot.ShepardAppearanceConverter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B1BE84BC1B644DB4006434FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ShepardAppearanceConverter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.urdnot.ShepardAppearanceConverter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B1BE84A31B644DB4006434FA /* Build configuration list for PBXProject "ShepardAppearanceConverter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1BE84B81B644DB4006434FA /* Debug */,
+				B1BE84B91B644DB4006434FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1BE84BA1B644DB4006434FA /* Build configuration list for PBXNativeTarget "ShepardAppearanceConverter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1BE84BB1B644DB4006434FA /* Debug */,
+				B1BE84BC1B644DB4006434FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B1BE84A01B644DB4006434FA /* Project object */;
+}
