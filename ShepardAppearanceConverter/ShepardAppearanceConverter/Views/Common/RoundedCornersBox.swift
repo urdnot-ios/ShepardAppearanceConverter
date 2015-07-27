@@ -1,6 +1,6 @@
 //
 //  RoundedCornersBox.swift
-//  FaceConverter
+//  ShepardAppearanceConverter
 //
 //  Created by Emily Ivie on 7/19/15.
 //  Copyright © 2015 urdnot. All rights reserved.

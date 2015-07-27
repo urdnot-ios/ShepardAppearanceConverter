@@ -1,7 +1,6 @@
 //
 //  ShepardAppearanceConverterController.swift
-//  ShepardAppearanceConverterController
-
+//  ShepardAppearanceConverter
 //
 //  Created by Emily Ivie on 7/18/15.
 //  Copyright © 2015 urdnot. All rights reserved.
@@ -30,59 +29,43 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
     @IBOutlet weak var notesLabel1: UILabel!
     @IBOutlet weak var notesLabel2: UILabel!
     
+    let ConvertAlert = "This conversion may be flawed. See more notes on the sliders below."
+    let ConvertNotice = "This conversion is approximate. See more notes on the sliders below."
+    
     var gender = Shepard.Gender.Male
     var game23 = Shepard.Game.Game2
     
+    lazy var spinner: Spinner = {
+        return Spinner(parent: self)
+    }()
+    
     //MARK: Page Events
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        spinner.start()
         setupGame23Fields()
         setupGame1Fields()
         ME1GenderSegment.selectedSegmentIndex = gender == .Male ? 0 : 1
         restrictSlidersToGender(gender)
+        spinner.stop()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
 
     //MARK: @IBActions
     
+    private var lastCode: String?
     @IBAction func ME2CodeChanged(sender: AnyObject) {
-        ME2CodeField.text = formatCode(ME2CodeField.text)
+        ME2CodeField.text = Shepard.Appearance.formatCode(ME2CodeField.text, lastCode: lastCode)
+        lastCode = ME2CodeField.text
         ME2CodeLabel.text = ME2CodeField.text
-    }
-    
-    private var lastCode = String()
-    func formatCode(code: String!) -> String {
-        //strip to valid characters
-        var unformattedCode: String! = code?.uppercaseString.onlyCharacters(Shepard.Appearance.CharacterList)
-        if unformattedCode == nil || unformattedCode.isEmpty {
-            lastCode = ""
-            return ""
-        }
-        //if characters removed by user, change to remove valid characters instead of other formatting
-        let lastUnformattedCode = lastCode.onlyCharacters(Shepard.Appearance.CharacterList)
-        let requestedSubtractChars = lastCode.length - code.length
-        let actualSubtractChars = max(0, lastUnformattedCode.length - unformattedCode.length)
-        if requestedSubtractChars > 0 && actualSubtractChars < requestedSubtractChars {
-            let subtractChars = requestedSubtractChars - actualSubtractChars
-            unformattedCode = subtractChars >= unformattedCode.length  ? "" : unformattedCode.stringFrom(0, to: -1 * subtractChars)
-        }
-        //add formatting
-        var formattedCode = unformattedCode.stringByReplacingOccurrencesOfString("([^\\.]{3})", withString: "$1.", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-        if formattedCode.stringFrom(-1) == "." {
-            formattedCode = formattedCode.stringFrom(0, to: -1)
-        }
-        lastCode = formattedCode
-        return formattedCode
     }
 
     @IBAction func ME2CodeSubmit(sender: AnyObject) {
+        spinner.start()
         var appearance = Shepard.Appearance(ME2CodeField.text?.uppercaseString ?? "", fromGame: game23)
         appearance.convert(toGame: .Game1)
         gender = appearance.gender
@@ -93,9 +76,11 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
         }
         restrictSlidersToGender(gender)
         displayMessages(appearance)
+        spinner.stop()
     }
     
     @IBAction func ME1SlidersSubmit(sender: AnyObject) {
+        spinner.start()
         var appearance = Shepard.Appearance()
         appearance.game = .Game1
         appearance.gender = gender
@@ -107,6 +92,8 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
         ME2CodeField.text = appearance.format()
         ME2CodeLabel.text = ME2CodeField.text
         displayMessages(appearance)
+        scrollView.contentOffset = CGPointZero
+        spinner.stop()
     }
     
     @IBAction func game23Changed(sender: AnyObject) {
@@ -114,11 +101,13 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
     }
     
     @IBAction func genderChanged(sender: UISegmentedControl) {
+        spinner.start()
         let oldGender = gender
         gender = sender.selectedSegmentIndex == 0 ? .Male : .Female
         if oldGender != gender {
             restrictSlidersToGender(gender)
         }
+        spinner.stop()
     }
     
     @IBAction func sliderChanged(sender: UISlider) {
@@ -134,7 +123,7 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
     // UITaxtFieldDelegate
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        textField.resignFirstResponder() // close keyboard
         return false
     }
     
@@ -145,7 +134,6 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
         ME2AlertLabel.hidden = true
         ME2NoticeLabel.hidden = true
         ME2CodeField.delegate = self
-//        ME2CodeLabel.text = formatCode(ME2CodeField.text)
     }
     
     var groups: [Shepard.Appearance.AttributeGroups: [Shepard.Gender: Int]] = [:]
@@ -158,9 +146,10 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
         sliders = [:]
                 
         // remove groupStack placeholder:
-        ME1GroupsList.arrangedSubviews.first?.hidden = true
+        ME1Group.removeFromSuperview()
         // remove sliderStack placeholder:
-        ME1Slider.hidden = true
+        ME1Slider.removeFromSuperview()
+        
         for group in Shepard.Appearance.sortedAttributeGroups {
             for gender in Shepard.Gender.list() {
                 
@@ -195,8 +184,6 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
                     
                     // set slider value to nothing
                     setSliderValue(attribute, value: 1)
-                    
-                    sliderStack.hidden = false
                 }
                 
                 // add groupStack to view hierarchy:
@@ -207,7 +194,6 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
                     groups[group] = [:]
                 }
                 groups[group]?[gender] = ME1GroupsList.arrangedSubviews.count - 1
-                
             }
         }
         
@@ -242,12 +228,12 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
     func displayMessages(appearance: Shepard.Appearance) {
         ME2AlertLabel.text = nil
         ME2NoticeLabel.text = nil
-        if appearance.initAlert != nil {
-            ME2AlertLabel.text = appearance.initAlert!
+        if appearance.initError != nil {
+            ME2AlertLabel.text = appearance.initError!
         } else if appearance.alerts.count > 0 {
-            ME2AlertLabel.text = "This conversion may be flawed. See more notes on the sliders below."
+            ME2AlertLabel.text = ConvertAlert
         } else if appearance.notices.count > 0 {
-            ME2NoticeLabel.text = "This conversion is approximate. See more notes on the sliders below."
+            ME2NoticeLabel.text = ConvertNotice
         }
         if ME2AlertLabel.text != nil {
             ME2AlertLabel.sizeToFit()
@@ -269,33 +255,45 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
         for (attribute, notice) in appearance.notices {
             showSliderNotice(attribute, notice: notice)
         }
+        //show any default notices
+        for (attribute, notice) in Shepard.Appearance.defaultNotices {
+            showSliderNotice(attribute, notice: notice)
+        }
     }
     
     func showSliderAlert(attribute: Shepard.Appearance.Attributes, alert: String) {
-        if let slider = sliders[attribute]?[gender] {
-            slider.alert?.text = alert
-            slider.alert?.hidden = false
+        for gender in Shepard.Gender.list() {
+            if let slider = sliders[attribute]?[gender] {
+                slider.alert?.text = alert
+                slider.alert?.hidden = false
+            }
         }
     }
     
     func showSliderNotice(attribute: Shepard.Appearance.Attributes, notice: String) {
-        if let slider = sliders[attribute]?[gender] {
-            slider.notice?.text = notice
-            slider.notice?.hidden = false
+        for gender in Shepard.Gender.list() {
+            if let slider = sliders[attribute]?[gender] {
+                slider.notice?.text = notice
+                slider.notice?.hidden = false
+            }
         }
     }
     
     func hideSliderAlert(attribute: Shepard.Appearance.Attributes) {
-        if let slider = sliders[attribute]?[gender] {
-            slider.alert?.text = ""
-            slider.alert?.hidden = true
+        for gender in Shepard.Gender.list() {
+            if let slider = sliders[attribute]?[gender] {
+                slider.alert?.text = ""
+                slider.alert?.hidden = true
+            }
         }
     }
     
     func hideSliderNotice(attribute: Shepard.Appearance.Attributes) {
-        if let slider = sliders[attribute]?[gender] {
-            slider.notice?.text = ""
-            slider.notice?.hidden = true
+        for gender in Shepard.Gender.list() {
+            if let slider = sliders[attribute]?[gender] {
+                slider.notice?.text = ""
+                slider.notice?.hidden = true
+            }
         }
     }
     
@@ -335,7 +333,7 @@ class ShepardAppearanceConverterController: UIViewController, UITextFieldDelegat
     func cloneView(view: UIView) -> UIView! {
         let viewData = NSKeyedArchiver.archivedDataWithRootObject(view)
         return NSKeyedUnarchiver.unarchiveObjectWithData(viewData) as? UIView
-//snapshotViewAfterScreenUpdates
+        //snapshotViewAfterScreenUpdates ?
     }
 
 }

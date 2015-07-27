@@ -1,6 +1,6 @@
 //
 //  ShepardAppearance.swift
-//  ShepardAppearance
+//  ShepardAppearanceConverter
 //
 //  Created by Emily Ivie on 7/19/15.
 //  Copyright © 2015 urdnot. All rights reserved.
@@ -258,28 +258,6 @@ struct Shepard {
                 ]
             ]
         }()
-        // Notes on conversions
-        // FEMALE
-        // Lip: Matte plain, Pale pink, Vivid pink, Gold, Bright coral, Black, Gloss plain
-        // Eyeshadow
-        // ME2: Plain, Pink w/Purple liner, Pink w/Pink liner, Coral, Red, Black, Brown, Purple/Violet, Fuschia, Marigold, Leaf
-        // ME1: plain, purple, pink, orange, red, black, brown, plain with liner
-        // Haircolor:
-        // ME1: Blond, Dark Blond, Red, Light Brown, Brown, Dark Brown, Black
-        // ME3: Blond, Dark Blond, Light Brown, Brown, Dark Brown, Black, Dark Gray, Gray, Light Gray, Silver, Dark Red, Red, Bright Red, Fuschia, Purple, Dark Purple Red
-        // Hair:
-        // ME1: Shaved, Shoulder-length, Pixie, Bob, Knot (nape), Ragged Bob, French Twist, Bun (back), Bun (top), Pony tail
-        // ME3: Shaved, Shoulder-length, Pixie, Bob, Pulled back (hidden), Ragged Bob, French Twist, Bun (back), Bun (top), Pony tail, Short "Rachel", Bun (nape), 60s bob
-        // MALE
-        // Eye color
-        // ME3: Light blue, blue, Green light green, Gray, blue, dark blue, vivid blue, light brown, yellow/brown, brown, orange/brown, brown, black, red, silver
-        // Hair
-        // TODO verify the caesars - I think they were switched
-        // ME1: Shaved, Short styled up, Caesar, Buzz, Short slicked caesar, shaved sides, short with front styled up, bald
-        // ME3: Shaved, Short styled up, Caesar, Buzz, Short slicked caesar, shaved sides, mohawk, short with front styled up, bald, shaved 2, messy caesar, bald top, short with spiky front, slicked to right, slicked down messy, receding
-        // Haircolor:
-        // ME1: Blond, Dark Blond, Red, Light Brown, Brown, Dark Brown, Black
-        // ME3: Blond, Dark Blond, Light Brown, Brown, Dark Brown, Black, Dark Gray, Gray, Light Gray, Silver, Dark Red, Red, Bright Red
         static let attributeGroups: [Gender: [AttributeGroups: [Attributes]]] = [
             .Female: [
                 .FacialStructure: [.FacialStructure, .SkinTone, .Complexion, .Scar],
@@ -311,24 +289,25 @@ struct Shepard {
         var contents: [Attributes: Int] = [:]
         var gender: Gender = .Male
         var game: Game = .Game1
-        var initAlert: String?
+        var initError: String?
+        static let CodeLengthIncorrect = "Warning: code length (%d) does not match game selected (expected M=%d F=%d)"
 
         init() {}
         init(_ appearance: String, fromGame: Game) {
             //ME1 format?
             contents = [Attributes: Int]()
             self.game = fromGame
-            let oldAppearance = appearance.stringByReplacingOccurrencesOfString(".", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            if oldAppearance.characters.count == Appearance.expectedCodeLength[.Male]?[game] {
+            let oldAppearanceCode = Appearance.unformatCode(appearance)
+            if oldAppearanceCode.characters.count == Appearance.expectedCodeLength[.Male]?[game] {
                 gender = .Male
-            } else if oldAppearance.characters.count == Appearance.expectedCodeLength[.Female]?[game] {
+            } else if oldAppearanceCode.characters.count == Appearance.expectedCodeLength[.Female]?[game] {
                 gender = .Female
             } else {
                 let reportLengthMale = Appearance.expectedCodeLength[.Male]?[game] ?? 0
                 let reportLengthFemale = Appearance.expectedCodeLength[.Female]?[game] ?? 0
-                initAlert = "Warning: code length does not match game selected (expected M=\(reportLengthMale) F=\(reportLengthFemale))."
+                initError = String(format: Appearance.CodeLengthIncorrect, oldAppearanceCode.characters.count, reportLengthMale, reportLengthFemale)
             }
-            for element in oldAppearance.characters {
+            for element in oldAppearanceCode.characters {
                 if let attributeList = Appearance.attributes[gender]?[game] where attributeList.count > contents.count {
                     let attribute = attributeList[contents.count]
                     contents[attribute] = Appearance.CharacterList.intIndexOf(element) ?? 0
@@ -336,18 +315,10 @@ struct Shepard {
             }
         }
         
-        var alerts = [Attributes: String]()
-        var notices: [Attributes: String] = [:]
-        static var defaultNotices: [Attributes: String] = [.Scar: "Scar has no equivalent in Game 2 or 3"]
-        static let HairColorNotFound = "Hair color has no equivalent"
-        static let HairColorConverted = "Hair color was changed to an approximate equivalent"
-        static let EyeShadowColorNotFound = "Eyeshadow color has no equivalent"
-        static let EyeShadowColorConverted = "Eyeshadow color was changed to an approximate equivalent"
-        static let HairNotFound = "Hair style not found"
-        
+        /// Converts attribute values between games.
         mutating func convert(toGame toGame: Game) {
             alerts = [:]
-            notices = Appearance.defaultNotices
+            notices = [:]
             var newAppearance = [Attributes: Int]()
             if let sourceAttributes = Appearance.attributes[gender]?[game] {
                 for attribute in sourceAttributes {
@@ -355,7 +326,8 @@ struct Shepard {
                     if attributeValue == nil { // not set, skip
                         continue
                     }
-                    if attribute == .EyeShadowColor && game == .Game2 && toGame == .Game1 {
+                    // game 1 limited on makeup colors
+                    if attribute == .EyeShadowColor && toGame == .Game1 {
                         if attributeValue == 8 { // purple ~= pink/purple
                             notices[attribute] = Appearance.EyeShadowColorConverted
                             attributeValue = 2
@@ -370,7 +342,14 @@ struct Shepard {
                             attributeValue = 0
                         }
                     }
-                    if attribute == .HairColor && game == .Game3 {
+                    if attribute == .BlushColor && toGame == .Game1 {
+                        notices[attribute] = Appearance.BlushColorConverted
+                        if attributeValue > 5 {
+                            attributeValue = 5
+                        }
+                    }
+                    // game 3 has extra hair colors
+                    if (attribute == .HairColor || attribute == .BrowColor || attribute == .FacialHairColor) && game == .Game3 {
                         if attributeValue == 15 { // purple
                             alerts[attribute] = Appearance.HairColorNotFound
                             attributeValue = 0
@@ -382,18 +361,14 @@ struct Shepard {
                             attributeValue = 0
                         }
                     }
-                    if attribute == .FacialHairColor && game == .Game3 {
-                        if attributeValue > 6 {
-                            alerts[attribute] = Appearance.HairColorNotFound
-                            attributeValue = 0
-                        }
-                    }
+                    // game 3 sorted hair color differently
                     if attribute == .HairColor && toGame == .Game3 {
                         if attributeValue == 3 { // red
                             notices[attribute] = Appearance.HairColorConverted
                             attributeValue = 12
                         }
                     }
+                    // game 3 has extra hair styles
                     if attribute == .Hair && game == .Game3 {
                         if gender == .Male && (attributeValue == 7 || attributeValue > 10) { // mohawk, other new styles
                             alerts[attribute] = Appearance.HairNotFound
@@ -414,38 +389,87 @@ struct Shepard {
             game = toGame
         }
         
+        /// Alert/Notice messages on conversion failures
+        var alerts = [Attributes: String]()
+        var notices: [Attributes: String] = [:]
+        static var defaultNotices: [Attributes: String] = [.Scar: "Scar has no equivalent in Game 2 or 3"]
+        static let HairColorNotFound = "Hair color has no equivalent"
+        static let HairColorConverted = "Hair color was changed to an approximate equivalent"
+        static let EyeShadowColorNotFound = "Eyeshadow color has no equivalent"
+        static let EyeShadowColorConverted = "Eyeshadow color was changed to an approximate equivalent"
+        static let HairNotFound = "Hair style not found"
+        static let BlushColorConverted = "Blush colors are too subtle to determine comparison"
+        
+        /// Returns a formatted code, of the typical XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X format.
         func format() -> String {
             var newAppearance = String()
-            var count = 0
             if let sourceAttributes = Appearance.attributes[gender]?[game] {
                 for attribute in sourceAttributes {
-                    switch game {
-                    case .Game1:
-                        //divide by section?
-                        if newAppearance != "" {
-                            newAppearance += "-"
-                        }
-                        if let attributeValue = contents[attribute] {
-                            newAppearance += "\(attributeValue)"
-                        } else {
-                            newAppearance += "?"
-                        }
-                    case .Game2: fallthrough
-                    case .Game3:
-                        //Example: 121.1MF.UWF.131.J6M.MDW.DM7.67W.717.1H2.157.6
-                        if count > 0 && count % 3 == 0 {
-                            newAppearance += "."
-                        }
-                        if let attributeValue = contents[attribute] {
-                            newAppearance += Appearance.CharacterList[attributeValue]
-                        } else {
-                            newAppearance += "?"
-                        }
-                        count++
+                    //Example: 121.1MF.UWF.131.J6M.MDW.DM7.67W.717.1H2.157.6
+                    if let attributeValue = contents[attribute] {
+                        newAppearance += Appearance.CharacterList[attributeValue]
+                    } else {
+                        newAppearance += "?"
                     }
                 }
             }
-            return newAppearance
+            return game == .Game1 ? newAppearance : Appearance.formatCode(newAppearance)
+        }
+        
+        //MARK: class functions
+    
+        /// Unformats a string from XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X into allowed characters
+        static func unformatCode(code: String!) -> String {
+            let unformattedCode: String! = code?.uppercaseString.onlyCharacters(Appearance.CharacterList)
+            return unformattedCode == nil ? "" : unformattedCode!
+        }
+        
+        /// Formats an alphanumeric string into the XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X format
+        static func formatCode(code: String!, lastCode: String! = nil) -> String {
+            //strip to valid characters
+            var unformattedCode: String! = Appearance.unformatCode(code)
+            if unformattedCode.isEmpty {
+                return ""
+            }
+            if lastCode != nil {
+                //if characters removed by user, change to remove valid characters instead of other formatting
+                let lastUnformattedCode = Appearance.unformatCode(lastCode)
+                let requestedSubtractChars = lastCode.length - code.length
+                let actualSubtractChars = max(0, lastUnformattedCode.length - unformattedCode.length)
+                if requestedSubtractChars > 0 && actualSubtractChars < requestedSubtractChars {
+                    let subtractChars = requestedSubtractChars - actualSubtractChars
+                    unformattedCode = subtractChars >= unformattedCode.length  ? "" : unformattedCode.stringFrom(0, to: -1 * subtractChars)
+                }
+            }
+            //add formatting
+            var formattedCode = unformattedCode.stringByReplacingOccurrencesOfString("([^\\.]{3})", withString: "$1.", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+            if formattedCode.stringFrom(-1) == "." {
+                formattedCode = formattedCode.stringFrom(0, to: -1)
+            }
+            return formattedCode
         }
     }
+
+// Notes on conversions
+// FEMALE
+// Lip: Matte plain, Pale pink, Vivid pink, Gold, Bright coral, Black, Gloss plain
+// Eyeshadow
+// ME2: Plain, Pink w/Purple liner, Pink w/Pink liner, Coral, Red, Black, Brown, Purple/Violet, Fuschia, Marigold, Leaf
+// ME1: plain, purple, pink, orange, red, black, brown, plain with liner
+// Haircolor:
+// ME1: Blond, Dark Blond, Red, Light Brown, Brown, Dark Brown, Black
+// ME3: Blond, Dark Blond, Light Brown, Brown, Dark Brown, Black, Dark Gray, Gray, Light Gray, Silver, Dark Red, Red, Bright Red, Fuschia, Purple, Dark Purple Red
+// Hair:
+// ME1: Shaved, Shoulder-length, Pixie, Bob, Knot (nape), Ragged Bob, French Twist, Bun (back), Bun (top), Pony tail
+// ME3: Shaved, Shoulder-length, Pixie, Bob, Pulled back (hidden), Ragged Bob, French Twist, Bun (back), Bun (top), Pony tail, Short "Rachel", Bun (nape), 60s bob
+// MALE
+// Eye color
+// ME3: Light blue, blue, Green light green, Gray, blue, dark blue, vivid blue, light brown, yellow/brown, brown, orange/brown, brown, black, red, silver
+// Hair
+// TODO verify the caesars - I think they were switched
+// ME1: Shaved, Short styled up, Caesar, Buzz, Short slicked caesar, shaved sides, short with front styled up, bald
+// ME3: Shaved, Short styled up, Caesar, Buzz, Short slicked caesar, shaved sides, mohawk, short with front styled up, bald, shaved 2, messy caesar, bald top, short with spiky front, slicked to right, slicked down messy, receding
+// Haircolor:
+// ME1: Blond, Dark Blond, Red, Light Brown, Brown, Dark Brown, Black
+// ME3: Blond, Dark Blond, Light Brown, Brown, Dark Brown, Black, Dark Gray, Gray, Light Gray, Silver, Dark Red, Red, Bright Red
 }

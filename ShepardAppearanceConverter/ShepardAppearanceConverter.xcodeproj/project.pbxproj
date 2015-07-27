@@ -7,31 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B168D9DB1B64A6D600F7AB1E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B168D9DA1B64A6D600F7AB1E /* StringExtension.swift */; };
+		B1AC39B01B65F24C00E8F23B /* Shepard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC39A91B65F24C00E8F23B /* Shepard.swift */; };
+		B1AC39C21B65F2C600E8F23B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC39B61B65F2C600E8F23B /* StringExtension.swift */; };
+		B1AC39C41B65F2C600E8F23B /* RoundedCornersBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC39BB1B65F2C600E8F23B /* RoundedCornersBox.swift */; };
+		B1AC39C51B65F2C600E8F23B /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC39BC1B65F2C600E8F23B /* Spinner.swift */; };
+		B1AC39C61B65F2C600E8F23B /* ShepardAppearanceConverter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1AC39BE1B65F2C600E8F23B /* ShepardAppearanceConverter.storyboard */; };
+		B1AC39C71B65F2C600E8F23B /* ShepardAppearanceConverterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC39BF1B65F2C600E8F23B /* ShepardAppearanceConverterController.swift */; };
+		B1AC39C81B65F2C600E8F23B /* ShepardAppearanceME1Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC39C01B65F2C600E8F23B /* ShepardAppearanceME1Group.swift */; };
+		B1AC39C91B65F2C600E8F23B /* ShepardAppearanceME1Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC39C11B65F2C600E8F23B /* ShepardAppearanceME1Slider.swift */; };
 		B1BE84AC1B644DB4006434FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84AB1B644DB4006434FA /* AppDelegate.swift */; };
 		B1BE84B31B644DB4006434FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1BE84B21B644DB4006434FA /* Assets.xcassets */; };
 		B1BE84B61B644DB4006434FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1BE84B41B644DB4006434FA /* LaunchScreen.storyboard */; };
-		B1BE84C31B644DCC006434FA /* RoundedCornersBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84BD1B644DCC006434FA /* RoundedCornersBox.swift */; };
-		B1BE84C41B644DCC006434FA /* Shepard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84BE1B644DCC006434FA /* Shepard.swift */; };
-		B1BE84C51B644DCC006434FA /* ShepardAppearanceConverterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84BF1B644DCC006434FA /* ShepardAppearanceConverterController.swift */; };
-		B1BE84C61B644DCC006434FA /* ShepardAppearanceME1Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84C01B644DCC006434FA /* ShepardAppearanceME1Group.swift */; };
-		B1BE84C71B644DCC006434FA /* ShepardAppearanceME1Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BE84C11B644DCC006434FA /* ShepardAppearanceME1Slider.swift */; };
-		B1BE84C81B644DCC006434FA /* ShepardAppearanceConverter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1BE84C21B644DCC006434FA /* ShepardAppearanceConverter.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B168D9DA1B64A6D600F7AB1E /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		B1AC39A91B65F24C00E8F23B /* Shepard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.swift; sourceTree = "<group>"; };
+		B1AC39B61B65F2C600E8F23B /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		B1AC39BB1B65F2C600E8F23B /* RoundedCornersBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornersBox.swift; sourceTree = "<group>"; };
+		B1AC39BC1B65F2C600E8F23B /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		B1AC39BE1B65F2C600E8F23B /* ShepardAppearanceConverter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShepardAppearanceConverter.storyboard; sourceTree = "<group>"; };
+		B1AC39BF1B65F2C600E8F23B /* ShepardAppearanceConverterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardAppearanceConverterController.swift; sourceTree = "<group>"; };
+		B1AC39C01B65F2C600E8F23B /* ShepardAppearanceME1Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardAppearanceME1Group.swift; sourceTree = "<group>"; };
+		B1AC39C11B65F2C600E8F23B /* ShepardAppearanceME1Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardAppearanceME1Slider.swift; sourceTree = "<group>"; };
 		B1BE84A81B644DB4006434FA /* ShepardAppearanceConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShepardAppearanceConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BE84AB1B644DB4006434FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1BE84B21B644DB4006434FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B1BE84B51B644DB4006434FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B1BE84B71B644DB4006434FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B1BE84BD1B644DCC006434FA /* RoundedCornersBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornersBox.swift; sourceTree = "<group>"; };
-		B1BE84BE1B644DCC006434FA /* Shepard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.swift; sourceTree = "<group>"; };
-		B1BE84BF1B644DCC006434FA /* ShepardAppearanceConverterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardAppearanceConverterController.swift; sourceTree = "<group>"; };
-		B1BE84C01B644DCC006434FA /* ShepardAppearanceME1Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardAppearanceME1Group.swift; sourceTree = "<group>"; };
-		B1BE84C11B644DCC006434FA /* ShepardAppearanceME1Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardAppearanceME1Slider.swift; sourceTree = "<group>"; };
-		B1BE84C21B644DCC006434FA /* ShepardAppearanceConverter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShepardAppearanceConverter.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B1AC39A81B65F24C00E8F23B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B1AC39A91B65F24C00E8F23B /* Shepard.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B1AC39B51B65F2C600E8F23B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B1AC39B61B65F2C600E8F23B /* StringExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B1AC39B91B65F2C600E8F23B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B1AC39BA1B65F2C600E8F23B /* Common */,
+				B1AC39BD1B65F2C600E8F23B /* ShepardAppearanceConverter */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B1AC39BA1B65F2C600E8F23B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B1AC39BB1B65F2C600E8F23B /* RoundedCornersBox.swift */,
+				B1AC39BC1B65F2C600E8F23B /* Spinner.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		B1AC39BD1B65F2C600E8F23B /* ShepardAppearanceConverter */ = {
+			isa = PBXGroup;
+			children = (
+				B1AC39BE1B65F2C600E8F23B /* ShepardAppearanceConverter.storyboard */,
+				B1AC39BF1B65F2C600E8F23B /* ShepardAppearanceConverterController.swift */,
+				B1AC39C01B65F2C600E8F23B /* ShepardAppearanceME1Group.swift */,
+				B1AC39C11B65F2C600E8F23B /* ShepardAppearanceME1Slider.swift */,
+			);
+			path = ShepardAppearanceConverter;
+			sourceTree = "<group>";
+		};
 		B1BE849F1B644DB4006434FA = {
 			isa = PBXGroup;
 			children = (
@@ -64,14 +111,10 @@
 		B1BE84AA1B644DB4006434FA /* ShepardAppearanceConverter */ = {
 			isa = PBXGroup;
 			children = (
+				B1AC39B51B65F2C600E8F23B /* Extensions */,
+				B1AC39A81B65F24C00E8F23B /* Models */,
+				B1AC39B91B65F2C600E8F23B /* Views */,
 				B1BE84AB1B644DB4006434FA /* AppDelegate.swift */,
-				B1BE84BD1B644DCC006434FA /* RoundedCornersBox.swift */,
-				B1BE84BE1B644DCC006434FA /* Shepard.swift */,
-				B168D9DA1B64A6D600F7AB1E /* StringExtension.swift */,
-				B1BE84BF1B644DCC006434FA /* ShepardAppearanceConverterController.swift */,
-				B1BE84C01B644DCC006434FA /* ShepardAppearanceME1Group.swift */,
-				B1BE84C11B644DCC006434FA /* ShepardAppearanceME1Slider.swift */,
-				B1BE84C21B644DCC006434FA /* ShepardAppearanceConverter.storyboard */,
 				B1BE84B21B644DB4006434FA /* Assets.xcassets */,
 				B1BE84B41B644DB4006434FA /* LaunchScreen.storyboard */,
 				B1BE84B71B644DB4006434FA /* Info.plist */,
@@ -138,7 +181,7 @@
 			files = (
 				B1BE84B61B644DB4006434FA /* LaunchScreen.storyboard in Resources */,
 				B1BE84B31B644DB4006434FA /* Assets.xcassets in Resources */,
-				B1BE84C81B644DCC006434FA /* ShepardAppearanceConverter.storyboard in Resources */,
+				B1AC39C61B65F2C600E8F23B /* ShepardAppearanceConverter.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,13 +192,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1BE84C31B644DCC006434FA /* RoundedCornersBox.swift in Sources */,
-				B168D9DB1B64A6D600F7AB1E /* StringExtension.swift in Sources */,
-				B1BE84C51B644DCC006434FA /* ShepardAppearanceConverterController.swift in Sources */,
+				B1AC39C81B65F2C600E8F23B /* ShepardAppearanceME1Group.swift in Sources */,
+				B1AC39B01B65F24C00E8F23B /* Shepard.swift in Sources */,
+				B1AC39C41B65F2C600E8F23B /* RoundedCornersBox.swift in Sources */,
+				B1AC39C21B65F2C600E8F23B /* StringExtension.swift in Sources */,
+				B1AC39C71B65F2C600E8F23B /* ShepardAppearanceConverterController.swift in Sources */,
+				B1AC39C51B65F2C600E8F23B /* Spinner.swift in Sources */,
 				B1BE84AC1B644DB4006434FA /* AppDelegate.swift in Sources */,
-				B1BE84C41B644DCC006434FA /* Shepard.swift in Sources */,
-				B1BE84C61B644DCC006434FA /* ShepardAppearanceME1Group.swift in Sources */,
-				B1BE84C71B644DCC006434FA /* ShepardAppearanceME1Slider.swift in Sources */,
+				B1AC39C91B65F2C600E8F23B /* ShepardAppearanceME1Slider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,16 +19,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="has-Jq-NWe" userLabel="Root Wrapper">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="672"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="662"/>
                                 <subviews>
                                     <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ah7-KD-Wv3">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="672"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="662"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="CJg-gV-idk" userLabel="Form Size">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="672"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="662"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="q6O-ks-eTq" userLabel="Form Padding">
-                                                        <rect key="frame" x="20" y="0.0" width="560" height="672"/>
+                                                        <rect key="frame" x="20" y="0.0" width="560" height="662"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mass Effect Face Converter" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2k-RU-ol2" userLabel="Page Title">
                                                                 <rect key="frame" x="0.0" y="25" width="560" height="24"/>
@@ -37,7 +37,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KmB-C4-TZ8" userLabel="Form Wrapper">
-                                                                <rect key="frame" x="0.0" y="49" width="560" height="623"/>
+                                                                <rect key="frame" x="0.0" y="49" width="560" height="613"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hHk-qM-awu" userLabel="ME2 Wrapper">
                                                                         <rect key="frame" x="0.0" y="15" width="560" height="182"/>
@@ -192,14 +192,14 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="oY4-UF-8cD" userLabel="ME1 Wrapper">
-                                                                        <rect key="frame" x="0.0" y="222" width="560" height="222"/>
+                                                                        <rect key="frame" x="0.0" y="222" width="560" height="212"/>
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fO0-ur-eW4" userLabel="Background" customClass="RoundedCornersBox" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                                                                <rect key="frame" x="-5" y="-5" width="570" height="232"/>
+                                                                                <rect key="frame" x="-5" y="-5" width="570" height="222"/>
                                                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                             </view>
                                                                             <stackView contentMode="scaleToFill" verticalHuggingPriority="300" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Bxn-6A-yo3" userLabel="ME1">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="560" height="222"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="560" height="212"/>
                                                                                 <subviews>
                                                                                     <stackView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uF7-kS-CzG" userLabel="ME1 Header">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="560" height="28"/>
@@ -250,19 +250,19 @@
                                                                                         </variation>
                                                                                     </stackView>
                                                                                     <stackView contentMode="scaleToFill" verticalHuggingPriority="300" fixedFrame="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="bdg-zZ-ymb" userLabel="Groups">
-                                                                                        <rect key="frame" x="0.0" y="36" width="560" height="120"/>
+                                                                                        <rect key="frame" x="0.0" y="36" width="560" height="110"/>
                                                                                         <subviews>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dpI-rY-z7f" userLabel="Group" customClass="ShepardAppearanceME1Group" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="560" height="120"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="560" height="110"/>
                                                                                                 <subviews>
                                                                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="760" text="Face:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxk-vv-Dvp" userLabel="Group Label">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="39" height="28"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="39" height="18"/>
                                                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                         <nil key="highlightedColor"/>
                                                                                                     </label>
-                                                                                                    <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="800" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="c6G-5N-2fq" userLabel="Sliders">
-                                                                                                        <rect key="frame" x="10" y="38" width="550" height="82"/>
+                                                                                                    <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="800" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="c6G-5N-2fq" userLabel="Sliders">
+                                                                                                        <rect key="frame" x="10" y="28" width="550" height="82"/>
                                                                                                         <subviews>
                                                                                                             <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="800" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ci4-wq-beM" userLabel="Slider Row" customClass="ShepardAppearanceME1Slider" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="550" height="82"/>
@@ -386,7 +386,7 @@
                                                                                         </variation>
                                                                                     </stackView>
                                                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0Q-F9-Pcw">
-                                                                                        <rect key="frame" x="0.0" y="164" width="560" height="58"/>
+                                                                                        <rect key="frame" x="0.0" y="154" width="560" height="58"/>
                                                                                         <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                                                                         <state key="normal" title="Generate Code"/>
                                                                                         <variation key="widthClass=compact" fixedFrame="YES">
@@ -418,7 +418,7 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="du1-bR-RR0" userLabel="Notes Wrapper">
-                                                                        <rect key="frame" x="0.0" y="469" width="560" height="154"/>
+                                                                        <rect key="frame" x="0.0" y="459" width="560" height="154"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2d-FP-TOk" userLabel="Notes Label">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="20"/>
