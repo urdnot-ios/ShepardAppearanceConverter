@@ -1,5 +1,5 @@
 //
-//  ShepardAppearanceME1Slider.swift
+//  AppearanceME1Slider.swift
 //  ShepardAppearanceConverter
 //
 //  Created by Emily Ivie on 7/23/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class ShepardAppearanceME1Slider: UIStackView {
+public class AppearanceME1Slider: UIStackView {
     
     public lazy var valueStack: UIView! = {
         for view in self.subviews {

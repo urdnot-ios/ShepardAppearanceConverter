@@ -8,25 +8,76 @@
 
 import Foundation
 
-struct Shepard {
+public struct Shepard {
+    
+    public var game = Game.Game1
+    public var gender = Gender.Male
+    
+    public var name = "John"
+//    public var photo =
+//    public var origin
+//    public var reputation
+//    public var class =
+    public var appearance = String("")
+    
+    public init() {}
+    public init(data: HTTPData) {
+        setData(data)
+    }
+    
+    public func getData() -> HTTPData {
+        var list = [String: AnyObject]()
+        list["gender"] = gender == .Male ? "M" : "F"
+        list["name"] = name
+        list["appearance"] = appearance
+        return HTTPData(list)
+    }
+    
+    public mutating func setData(data: HTTPData) {
+        gender = data["gender"].string == "M" ? .Male : .Female
+        name = data["name"].string ?? "John"
+        appearance = data["appearance"].string ?? ""
+    }
+    
+    public mutating func setName(name: String) {
+        self.name = name
+    }
+    
+    public mutating func setAppearance(appearance: String) {
+        self.appearance = appearance
+    }
+}
 
-    enum Gender {
+
+
+//MARK: Data types
+
+extension Shepard {
+
+    public enum Gender {
         case Male, Female
         static func list() -> [Gender] {
             return [.Male, .Female]
         }
     }
     
-    enum Game {
+}
+
+extension Shepard {
+
+    public enum Game {
         case Game1, Game2, Game3
         func list() -> [Game] {
             return [.Game1, .Game2, .Game3]
         }
     }
+}
+
+extension Shepard {
+
+    public struct Appearance {
     
-    struct Appearance {
-    
-        enum Attributes {
+        public enum Attributes {
             case
             //face
             FacialStructure, SkinTone, Complexion, Scar,
@@ -90,7 +141,7 @@ struct Shepard {
             }
         }
         
-        enum AttributeGroups {
+        public enum AttributeGroups {
             case FacialStructure, Head, Eyes, Jaw, Mouth, Nose, Hair, Makeup
             var title: String {
                 switch self {
@@ -106,11 +157,11 @@ struct Shepard {
             }
         }
         
-        static let sortedAttributeGroups: [AttributeGroups] = [
+        public static let sortedAttributeGroups: [AttributeGroups] = [
             .FacialStructure, .Head, .Eyes, .Jaw, .Mouth, .Nose, .Hair, .Makeup
         ]
         
-        static let attributes: [Gender: [Game: [Attributes]]] = [
+        public static let attributes: [Gender: [Game: [Attributes]]] = [
             .Female: [
                 .Game1: [
                 .FacialStructure, .SkinTone, .Complexion, .Scar,
@@ -175,7 +226,7 @@ struct Shepard {
             ]
         ]
         
-        static let slidersMax : [Gender: [Attributes: [Game: Int]]] = {
+        public static let slidersMax : [Gender: [Attributes: [Game: Int]]] = {
             func sliderMaxValues(value1: Int, _ value2: Int, _ value3: Int) -> [Game: Int] {
                 return [.Game1: value1, .Game2: value2, .Game3: value3]
             }
@@ -258,7 +309,7 @@ struct Shepard {
                 ]
             ]
         }()
-        static let attributeGroups: [Gender: [AttributeGroups: [Attributes]]] = [
+        public static let attributeGroups: [Gender: [AttributeGroups: [Attributes]]] = [
             .Female: [
                 .FacialStructure: [.FacialStructure, .SkinTone, .Complexion, .Scar],
                 .Head: [.NeckThickness, .FaceSize, .CheekWidth, .CheekBones, .CheekGaunt, .EarsSize, .EarsOrientation],
@@ -280,32 +331,27 @@ struct Shepard {
             ],
         ]
         
-        static let CharacterList = "0123456789ABCDEFGHIJKLMNPQRSTUVW" // include 0 because values start at 1
-        static let expectedCodeLength: [Gender: [Game: Int]] = [
+        public static let CharacterList = "0123456789ABCDEFGHIJKLMNPQRSTUVW" // include 0 because values start at 1
+        public static let expectedCodeLength: [Gender: [Game: Int]] = [
             .Male: [.Game1: 35, .Game2: 34, .Game3: 34],
             .Female: [.Game1: 37, .Game2: 36, .Game3: 36]
         ]
         
-        var contents: [Attributes: Int] = [:]
-        var gender: Gender = .Male
-        var game: Game = .Game1
-        var initError: String?
-        static let CodeLengthIncorrect = "Warning: code length (%d) does not match game selected (expected M=%d F=%d)"
+        public var contents: [Attributes: Int] = [:]
+        public var gender: Gender = .Male
+        public var game: Game = .Game1
+        public var initError: String?
+        public static let CodeLengthIncorrect = "Warning: code length (%d) does not match game selected (expected %d)"
 
-        init() {}
-        init(_ appearance: String, fromGame: Game) {
+        public init() {}
+        public init(_ appearance: String, fromGame: Game = .Game1, withGender: Shepard.Gender = .Male) {
             //ME1 format?
             contents = [Attributes: Int]()
             self.game = fromGame
             let oldAppearanceCode = Appearance.unformatCode(appearance)
-            if oldAppearanceCode.characters.count == Appearance.expectedCodeLength[.Male]?[game] {
-                gender = .Male
-            } else if oldAppearanceCode.characters.count == Appearance.expectedCodeLength[.Female]?[game] {
-                gender = .Female
-            } else {
-                let reportLengthMale = Appearance.expectedCodeLength[.Male]?[game] ?? 0
-                let reportLengthFemale = Appearance.expectedCodeLength[.Female]?[game] ?? 0
-                initError = String(format: Appearance.CodeLengthIncorrect, oldAppearanceCode.characters.count, reportLengthMale, reportLengthFemale)
+            if !oldAppearanceCode.isEmpty && oldAppearanceCode.characters.count != Appearance.expectedCodeLength[gender]?[game] {
+                let reportLength = Appearance.expectedCodeLength[gender]?[game] ?? 0
+                initError = String(format: Appearance.CodeLengthIncorrect, oldAppearanceCode.characters.count, reportLength)
             }
             for element in oldAppearanceCode.characters {
                 if let attributeList = Appearance.attributes[gender]?[game] where attributeList.count > contents.count {
@@ -316,7 +362,7 @@ struct Shepard {
         }
         
         /// Converts attribute values between games.
-        mutating func convert(toGame toGame: Game) {
+        public mutating func convert(toGame toGame: Game) {
             alerts = [:]
             notices = [:]
             var newAppearance = [Attributes: Int]()
@@ -390,18 +436,18 @@ struct Shepard {
         }
         
         /// Alert/Notice messages on conversion failures
-        var alerts = [Attributes: String]()
-        var notices: [Attributes: String] = [:]
-        static var defaultNotices: [Attributes: String] = [.Scar: "Scar has no equivalent in Game 2 or 3"]
-        static let HairColorNotFound = "Hair color has no equivalent"
-        static let HairColorConverted = "Hair color was changed to an approximate equivalent"
-        static let EyeShadowColorNotFound = "Eyeshadow color has no equivalent"
-        static let EyeShadowColorConverted = "Eyeshadow color was changed to an approximate equivalent"
-        static let HairNotFound = "Hair style not found"
-        static let BlushColorConverted = "Blush colors are too subtle to determine comparison"
+        public var alerts = [Attributes: String]()
+        public var notices: [Attributes: String] = [:]
+        public static var defaultNotices: [Attributes: String] = [.Scar: "Scar has no equivalent in Game 2 or 3"]
+        internal static let HairColorNotFound = "Hair color has no equivalent"
+        internal static let HairColorConverted = "Hair color was changed to an approximate equivalent"
+        internal static let EyeShadowColorNotFound = "Eyeshadow color has no equivalent"
+        internal static let EyeShadowColorConverted = "Eyeshadow color was changed to an approximate equivalent"
+        internal static let HairNotFound = "Hair style not found"
+        internal static let BlushColorConverted = "Blush colors are too subtle to determine comparison"
         
         /// Returns a formatted code, of the typical XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X format.
-        func format() -> String {
+        public func format() -> String {
             var newAppearance = String()
             if let sourceAttributes = Appearance.attributes[gender]?[game] {
                 for attribute in sourceAttributes {
@@ -413,19 +459,19 @@ struct Shepard {
                     }
                 }
             }
-            return game == .Game1 ? newAppearance : Appearance.formatCode(newAppearance)
+            return Appearance.formatCode(newAppearance)
         }
         
         //MARK: class functions
     
         /// Unformats a string from XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X into allowed characters
-        static func unformatCode(code: String!) -> String {
+        public static func unformatCode(code: String!) -> String {
             let unformattedCode: String! = code?.uppercaseString.onlyCharacters(Appearance.CharacterList)
             return unformattedCode == nil ? "" : unformattedCode!
         }
         
         /// Formats an alphanumeric string into the XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X format
-        static func formatCode(code: String!, lastCode: String! = nil) -> String {
+        public static func formatCode(code: String!, lastCode: String! = nil) -> String {
             //strip to valid characters
             var unformattedCode: String! = Appearance.unformatCode(code)
             if unformattedCode.isEmpty {

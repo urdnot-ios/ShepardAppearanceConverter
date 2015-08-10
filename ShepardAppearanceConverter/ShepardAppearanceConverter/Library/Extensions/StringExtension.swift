@@ -105,4 +105,18 @@ extension String {
         let test = NSPredicate(format:"SELF MATCHES %@", pattern)
         return test.evaluateWithObject(self)
     }
+    /**
+        Replaces a string with another string
+        
+        :param: find                The string to search for
+        :param: replace             The string to replace with
+        :returns: new string
+    */
+    func replace(find: String, _ replace: String) -> String {
+        var string = self
+        if let range = string.rangeOfString(find) {
+            string.replaceRange(range, with: replace)
+        }
+        return string
+    }
 }

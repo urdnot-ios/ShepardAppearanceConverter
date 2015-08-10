@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  ShepardAppearanceConverter
 //
-//  Created by Emily Ivie on 7/25/15.
-//  Copyright © 2015 urdnot. All rights reserved.
+//  Created by Emily Ivie on 8/2/15.
+//  Copyright © 2015 Emily Ivie. All rights reserved.
 //
 
 import UIKit
