@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gMY-Pj-yTQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8152.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gMY-Pj-yTQ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8124.4"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -22,10 +22,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="700"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdn-rL-6c2">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="703"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="702.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rmA-Rx-ywm" userLabel="Form Wrapper">
-                                                <rect key="frame" x="15" y="15" width="570" height="673"/>
+                                                <rect key="frame" x="15" y="15" width="570" height="672.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="7EC-53-dfs" userLabel="ME2 Wrapper">
                                                         <rect key="frame" x="0.0" y="0.0" width="570" height="197"/>
@@ -73,7 +73,7 @@
                                                                 <rect key="frame" x="-15" y="33" width="600" height="164"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="9T9-0l-qde" userLabel="ME2">
-                                                                        <rect key="frame" x="15" y="7" width="570" height="150"/>
+                                                                        <rect key="frame" x="15" y="7" width="570" height="149.5"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="240" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qLq-nk-dsN" userLabel="Code Field">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="570" height="30"/>
@@ -93,7 +93,7 @@
                                                                                 </connections>
                                                                             </textField>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rD9-K7-wbe" userLabel="Repeat Code">
-                                                                                <rect key="frame" x="0.0" y="34" width="570" height="14"/>
+                                                                                <rect key="frame" x="0.0" y="34" width="570" height="13.5"/>
                                                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="11"/>
                                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <nil key="highlightedColor"/>
@@ -108,7 +108,7 @@
                                                                                 </variation>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notice! Something to know about this slider." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpD-Mh-yuF">
-                                                                                <rect key="frame" x="0.0" y="52" width="570" height="16"/>
+                                                                                <rect key="frame" x="0.0" y="51.5" width="570" height="16"/>
                                                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
                                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <nil key="highlightedColor"/>
@@ -123,7 +123,7 @@
                                                                                 </variation>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="760" fixedFrame="YES" text="Alert! This code is problematic for some reason. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfZ-1i-tqh" userLabel="Alert Label">
-                                                                                <rect key="frame" x="0.0" y="72" width="570" height="16"/>
+                                                                                <rect key="frame" x="0.0" y="71.5" width="570" height="16"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -138,7 +138,7 @@
                                                                                 </variation>
                                                                             </label>
                                                                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="760" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lv1-ep-FSv" userLabel="Code Button">
-                                                                                <rect key="frame" x="0.0" y="92" width="570" height="58"/>
+                                                                                <rect key="frame" x="0.0" y="91.5" width="570" height="58"/>
                                                                                 <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                                                                 <state key="normal" title="Convert"/>
                                                                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -188,10 +188,10 @@
                                                         <rect key="frame" x="0.0" y="212" width="570" height="238"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAD-iJ-pU7" userLabel="ME1 Header">
-                                                                <rect key="frame" x="0.0" y="0.0" width="570" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="570" height="19.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game 1 Sliders:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pjw-qV-Xis" userLabel="ME1 Label">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="570" height="20"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="570" height="19.5"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -220,7 +220,7 @@
                                                                                         <rect key="frame" x="0.0" y="0.0" width="570" height="140"/>
                                                                                         <subviews>
                                                                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="760" text="Face:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKA-Ut-z7N" userLabel="Group Label">
-                                                                                                <rect key="frame" x="0.0" y="7" width="39" height="37"/>
+                                                                                                <rect key="frame" x="0.0" y="7" width="38.5" height="37"/>
                                                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <nil key="highlightedColor"/>
@@ -234,16 +234,16 @@
                                                                                                             <view contentMode="scaleToFill" verticalHuggingPriority="260" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="COW-xP-IeI" userLabel="Slider Fields">
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="563" height="50"/>
                                                                                                                 <subviews>
-                                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="760" verticalCompressionResistancePriority="800" text="Facial Structure:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWV-nE-zax" userLabel="Slider Label">
+                                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="760" verticalCompressionResistancePriority="800" misplaced="YES" text="Facial Structure:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWV-nE-zax" userLabel="Slider Label">
                                                                                                                         <rect key="frame" x="0.0" y="0.0" width="112" height="21"/>
                                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                                         <nil key="highlightedColor"/>
                                                                                                                     </label>
-                                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text="X/Y" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPb-XX-OgT" userLabel="Slider Value">
+                                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" misplaced="YES" text="X/Y" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPb-XX-OgT" userLabel="Slider Value">
                                                                                                                         <rect key="frame" x="139" y="25" width="26" height="20"/>
-                                                                                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                                         <nil key="highlightedColor"/>
                                                                                                                         <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                                                                                                             <rect key="frame" x="75" y="5" width="26" height="20"/>
@@ -427,13 +427,13 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="glY-En-Od2" userLabel="Notes Wrapper">
-                                                        <rect key="frame" x="0.0" y="465" width="570" height="183"/>
+                                                        <rect key="frame" x="0.0" y="465" width="570" height="182.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y92-3n-Rs5" userLabel="Notes Header">
-                                                                <rect key="frame" x="0.0" y="0.0" width="570" height="20"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="570" height="19.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notes:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkW-xG-Wq0" userLabel="Notes Label">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="570" height="20"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="570" height="19.5"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -450,10 +450,10 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HaL-sP-OPE" userLabel="Background" customClass="HairlineBorderView" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                                                <rect key="frame" x="-15" y="25" width="600" height="158"/>
+                                                                <rect key="frame" x="-15" y="25" width="600" height="157.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" horizontalCompressionResistancePriority="700" verticalCompressionResistancePriority="1000" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTB-EK-Pd8" userLabel="Notes Text 1">
-                                                                        <rect key="frame" x="15" y="7" width="570" height="144"/>
+                                                                        <rect key="frame" x="15" y="7" width="570" height="143.5"/>
                                                                         <string key="text">Due to the import process between Game 1 and Game 2, you will see a different Shepard if you import unchanged than if you customize using exactly the same values. Eye colors were more vivid in Game 1 and the Scar attribute is not available in Game 2.
 
 Game 3 has many more hair colors, styles, and makeup colors (for FemShep). None of these values convert down to Game 1 or 2, but you may want to specially customize your Game 3 Shepard to take advantage of these.</string>

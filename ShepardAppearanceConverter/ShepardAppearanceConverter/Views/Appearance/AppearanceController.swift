@@ -32,7 +32,7 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
     
     var game23SliderChoice = Shepard.Game.Game2 // set by slider
     
-    var appearance: String { return CurrentGame.shepard.appearance }
+    var appearance: Shepard.Appearance { return CurrentGame.shepard.appearance }
     var gender: Shepard.Gender { return CurrentGame.shepard.gender }
     var game: Shepard.Game { return CurrentGame.shepard.game }
     
@@ -72,15 +72,13 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
     
     @IBAction func ME1SlidersSubmit(sender: AnyObject) {
         spinner.start()
-        var appearance = Shepard.Appearance()
-        appearance.game = game
-        appearance.gender = gender
+        var newAppearance = Shepard.Appearance("", fromGame: .Game1, withGender: gender)
         for (attribute, slider) in sliders {
-            appearance.contents[attribute] = Int(slider.slider?.value ?? 0.0)
+            newAppearance.contents[attribute] = Int(slider.slider?.value ?? 0.0)
         }
-        appearance.convert(toGame: game23SliderChoice)
+        newAppearance.convert(toGame: game23SliderChoice)
         resetSliders(resetValues: false)
-        ME2CodeField.text = appearance.format()
+        ME2CodeField.text = newAppearance.format()
         ME2CodeLabel.text = ME2CodeField.text
         displayMessages(appearance)
         scrollView.contentOffset = CGPointZero
@@ -101,15 +99,14 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
     public func save() {
         spinner.start()
         if game == .Game1 {
-            var appearance = Shepard.Appearance()
-            appearance.game = game
-            appearance.gender = gender
+            var newAppearance = Shepard.Appearance("", fromGame: .Game1, withGender: gender)
             for (attribute, slider) in sliders {
-                appearance.contents[attribute] = Int(slider.slider?.value ?? 0.0)
+                newAppearance.contents[attribute] = Int(slider.slider?.value ?? 0.0)
             }
-            CurrentGame.shepard.appearance = appearance.format()
-        } else if let appearance = ME2CodeField.text {
-            CurrentGame.shepard.appearance = appearance
+            CurrentGame.shepard.setAppearance(newAppearance)
+        } else if let appearanceCode = ME2CodeField.text {
+            let newAppearance = Shepard.Appearance(appearanceCode, fromGame: game23SliderChoice, withGender: gender)
+            CurrentGame.shepard.setAppearance(newAppearance)
         }
         spinner.stop()
     }
@@ -127,10 +124,14 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
     func setupData() {
         ME23GameSegment.selectedSegmentIndex = game == .Game3 ? 1 : 0
         
-        var appearance = Shepard.Appearance(CurrentGame.shepard.appearance, fromGame: CurrentGame.shepard.game, withGender: CurrentGame.shepard.gender)
+        // Game 1 Sliders:
+        var appearance = CurrentGame.shepard.appearance // value type == copy
+        appearance.convert(toGame: .Game1)
         for (attribute, value) in appearance.contents {
             setSliderValue(attribute, value: value)
         }
+        // Game 2/3 Code:
+        appearance = CurrentGame.shepard.appearance // value type == copy
         appearance.convert(toGame: CurrentGame.shepard.game == .Game3 ? .Game3 : .Game2)
         ME2CodeField.text = appearance.format()
         

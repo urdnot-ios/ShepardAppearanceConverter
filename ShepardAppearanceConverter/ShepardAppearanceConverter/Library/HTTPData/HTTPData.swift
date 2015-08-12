@@ -98,18 +98,10 @@ public struct HTTPData {
 //                initFromArray(anyData: a)
             }
         }
-        if let d = data as? [String: Any?] {
+        if let d = data as? [String: Any] {
             initFromDictionary(anyData: d)
             return
-        } else if let a = data as? [Any?] {
-            initFromArray(anyData: a)
-            return
-        } else if let d = getSpecificOptionalDictionary(data) {
-            // some specific optional dictionaries like [String: String?] are not picked up by prior conversions
-            initFromDictionary(anyData: d)
-            return
-        } else if let a = getSpecificOptionalArray(data) {
-            // some specific optional arrays like [String?] are not picked up by prior conversions
+        } else if let a = data as? [Any] {
             initFromArray(anyData: a)
             return
         }
@@ -125,7 +117,7 @@ public struct HTTPData {
         }
         contents = .DictionaryType(dataList)
     }
-    private mutating func initFromDictionary(anyData data: [String: Any?]){ //allowed
+    private mutating func initFromDictionary(anyData data: [String: Any]){ //allowed
         var dataList = [String: HTTPData]()
         for (key, value) in data {
             dataList[key] = HTTPData(value)
@@ -141,7 +133,7 @@ public struct HTTPData {
         contents = .ArrayType(dataList)
     }
     
-    private mutating func initFromArray(anyData data: [Any?]){ //allowed
+    private mutating func initFromArray(anyData data: [Any]){ //allowed
         var dataList = [HTTPData]()
         for value in data {
             dataList.append(HTTPData(value))

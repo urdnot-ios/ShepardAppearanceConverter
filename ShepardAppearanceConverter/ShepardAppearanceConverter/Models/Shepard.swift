@@ -6,51 +6,174 @@
 //  Copyright © 2015 urdnot. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-public struct Shepard {
+public struct Shepard: Equatable {
+
+    public static let DefaultSurname = "Shepard"
     
-    public var game = Game.Game1
-    public var gender = Gender.Male
+    public init(game: Game = .Game1) {
+        _game = game
+        _appearance = Appearance(game: game)
+    }
+
+//MARK: Properties
+    internal var _uuid = "\(NSUUID().UUIDString)"
+    public var uuid: String { return _uuid }
     
-    public var name = "John"
-//    public var photo =
+    internal var _game: Game
+    public var game: Game { return _game }
+    
+    internal var _gender = Gender.Male
+    public var gender: Gender { return _gender }
+    
+    internal var _name = Name.DefaultMaleName
+    public var name: Name { return _name }
+    
+    internal var _photo = Photo.DefaultMalePhoto
+    public var photo: Photo { return _photo }
+
+    internal var _appearance: Appearance
+    public var appearance: Appearance { return _appearance }
+    
 //    public var origin
 //    public var reputation
 //    public var class =
-    public var appearance = String("")
     
-    public init() {}
-    public init(data: HTTPData) {
-        setData(data)
+//MARK: Supporting Functions
+
+    public mutating func setName(name: String?) {
+        if name == Name.DefaultMaleName.stringValue || (name == nil && gender == .Male) {
+            _name = .DefaultMaleName
+        }
+        if name == Name.DefaultFemaleName.stringValue || (name == nil && gender == .Female)  {
+            _name = .DefaultFemaleName
+        } else if name != nil {
+            _name = .Custom(name: name!)
+        }
     }
     
+    public mutating func setAppearance(appearance: Appearance) {
+        _appearance = appearance
+    }
+    
+    public mutating func setPhoto(image: UIImage) -> Bool {
+        let fileName = "MyShepardPhoto\(_uuid)"
+        if SavedData.saveImageToDocuments(fileName, image: image) {
+            _photo = .Custom(file: fileName)
+            return true
+        }
+        return false
+    }
+    
+    public mutating func setGender(gender: Gender) {
+        _gender = gender
+        switch gender {
+        case .Male:
+            if _name == .DefaultFemaleName {
+                _name = .DefaultMaleName
+            }
+            if _photo == .DefaultFemalePhoto {
+                _photo = .DefaultMalePhoto
+            }
+            // appearance?
+        case .Female:
+            if _name == .DefaultMaleName {
+                _name = .DefaultFemaleName
+            }
+            if _photo == .DefaultMalePhoto {
+                _photo = .DefaultFemalePhoto
+            }
+            // appearance?
+        }
+    }
+    
+}
+
+public func ==(a: Shepard, b: Shepard) -> Bool {
+    return a._uuid == b._uuid
+}
+
+
+
+//MARK: Save/Retrieve Data
+
+extension Shepard {
+
+    public init(data: HTTPData) {
+        let game = Game(rawValue: data["game"].string ?? "0") ?? .Game1
+        self.init(game: game)
+        setData(data)
+    }
     public func getData() -> HTTPData {
         var list = [String: AnyObject]()
+        list["uuid"] = _uuid
+        list["game"] = game.rawValue
         list["gender"] = gender == .Male ? "M" : "F"
-        list["name"] = name
-        list["appearance"] = appearance
+        list["name"] = name.stringValue
+        list["appearance"] = appearance.format()
+        list["photo"] = photo.stringValue
         return HTTPData(list)
     }
     
-    public mutating func setData(data: HTTPData) {
-        gender = data["gender"].string == "M" ? .Male : .Female
-        name = data["name"].string ?? "John"
-        appearance = data["appearance"].string ?? ""
-    }
-    
-    public mutating func setName(name: String) {
-        self.name = name
-    }
-    
-    public mutating func setAppearance(appearance: String) {
-        self.appearance = appearance
+    public mutating func setData(data: HTTPData, source: SetDataSource = .SavedData) {
+        if source == .SavedData {
+            _uuid = data["uuid"].string ?? _uuid
+            _game = Game(rawValue: data["game"].string ?? "0") ?? .Game1
+        }
+        
+        setName(data["name"].string)
+        if case let .GameConversion(oldGame) = source {
+            var appearance = Appearance(data["appearance"].string ?? "", fromGame: oldGame, withGender: gender)
+            appearance.convert(toGame: game)
+            setAppearance(appearance)
+        } else {
+            setAppearance(Appearance(data["appearance"].string ?? "", fromGame: game, withGender: gender))
+        }
+        
+        // do gender last (it changes stuff):
+        setGender(data["gender"].string == "M" ? .Male : .Female)
+        
+        if let photoName = data["photo"].string {
+            if photoName == Photo.DefaultMalePhoto.stringValue, let photo = Photo.DefaultMalePhoto.image() {
+                setPhoto(photo)
+            } else if photoName == Photo.DefaultFemalePhoto.stringValue, let photo = Photo.DefaultFemalePhoto.image() {
+                setPhoto(photo)
+            } else if photoName.stringFrom(0, to: 7) == "Custom:", let photo = SavedData.loadImageFromDocuments(photoName.stringFrom(7)) {
+                setPhoto(photo)
+            }
+        }
     }
 }
 
 
 
-//MARK: Data types
+//MARK: Supporting Data types
+
+extension Shepard {
+
+    public enum SetDataSource: Equatable {
+        case SavedData, GameConversion(priorGame: Game)
+    }
+}
+
+public func ==(a: Shepard.SetDataSource, b: Shepard.SetDataSource) -> Bool {
+    switch (a, b) {
+    case (.SavedData, .SavedData): return true
+    case (.GameConversion(let a), .GameConversion(let b)) where a == b: return true
+    default: return false
+    }
+}
+
+extension Shepard {
+
+    public enum Game: String {
+        case Game1 = "1", Game2 = "2", Game3 = "3"
+        func list() -> [Game] {
+            return [.Game1, .Game2, .Game3]
+        }
+    }
+}
 
 extension Shepard {
 
@@ -65,17 +188,85 @@ extension Shepard {
 
 extension Shepard {
 
-    public enum Game {
-        case Game1, Game2, Game3
-        func list() -> [Game] {
-            return [.Game1, .Game2, .Game3]
+    public enum Name: Equatable {
+        case DefaultMaleName
+        case DefaultFemaleName
+        case Custom(name: String)
+        var stringValue: String? {
+            let defaultMaleName = "John"
+            let defaultFemaleName = "Jane"
+            switch self {
+            case .DefaultMaleName:
+                return defaultMaleName
+            case .DefaultFemaleName:
+                return defaultFemaleName
+            case .Custom(let name):
+                return name
+            }
         }
+    }
+    
+}
+
+public func ==(a: Shepard.Name, b: Shepard.Name) -> Bool {
+    switch (a, b) {
+    case (.DefaultMaleName, .DefaultMaleName): return true
+    case (.DefaultFemaleName, .DefaultFemaleName): return true
+    case (.Custom(let a), .Custom(let b)) where a == b: return true
+    default: return false
+    }
+}
+
+extension Shepard {
+
+    public enum Photo: Equatable {
+        case DefaultMalePhoto
+        case DefaultFemalePhoto
+        case Custom(file: String)
+        var stringValue: String {
+            switch self {
+            case .DefaultMalePhoto:
+                return "BroShep Sample"
+            case .DefaultFemalePhoto:
+                return "FemShep Sample"
+            case .Custom(let fileName):
+                return "Custom:\(fileName)"
+            }
+        }
+        func image() -> UIImage? {
+            switch self {
+            case .DefaultMalePhoto:
+                if let photo = UIImage(named: self.stringValue, inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil) {
+                    return photo
+                }
+            case .DefaultFemalePhoto:
+                if let photo = UIImage(named: self.stringValue, inBundle: NSBundle.mainBundle(), compatibleWithTraitCollection: nil) {
+                    return photo
+                }
+            case .Custom(let fileName):
+                if let photo = SavedData.loadImageFromDocuments(fileName) {
+                    return photo
+                }
+            }
+            return nil
+        }
+    }
+}
+
+public func ==(a: Shepard.Photo, b: Shepard.Photo) -> Bool {
+    switch (a, b) {
+    case (.DefaultMalePhoto, .DefaultMalePhoto): return true
+    case (.DefaultFemalePhoto, .DefaultFemalePhoto): return true
+    case (.Custom(let a), .Custom(let b)) where a == b: return true
+    default: return false
     }
 }
 
 extension Shepard {
 
     public struct Appearance {
+        
+        static let SampleAppearance = "XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X "
     
         public enum Attributes {
             case
@@ -331,7 +522,7 @@ extension Shepard {
             ],
         ]
         
-        public static let CharacterList = "0123456789ABCDEFGHIJKLMNPQRSTUVW" // include 0 because values start at 1
+        public static let CharacterList = "0123456789ABCDEFGHIJKLMNPQRSTUVWX" // include 0 because values start at 1
         public static let expectedCodeLength: [Gender: [Game: Int]] = [
             .Male: [.Game1: 35, .Game2: 34, .Game3: 34],
             .Female: [.Game1: 37, .Game2: 36, .Game3: 36]
@@ -343,7 +534,9 @@ extension Shepard {
         public var initError: String?
         public static let CodeLengthIncorrect = "Warning: code length (%d) does not match game selected (expected %d)"
 
-        public init() {}
+        public init(game: Game) {
+            self.game = game
+        }
         public init(_ appearance: String, fromGame: Game = .Game1, withGender: Shepard.Gender = .Male) {
             //ME1 format?
             contents = [Attributes: Int]()
@@ -455,7 +648,7 @@ extension Shepard {
                     if let attributeValue = contents[attribute] {
                         newAppearance += Appearance.CharacterList[attributeValue]
                     } else {
-                        newAppearance += "?"
+                        newAppearance += "X"
                     }
                 }
             }

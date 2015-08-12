@@ -8,24 +8,25 @@
 
 import UIKit
 
-class ShepardController: UITableViewController, UIImagePickerControllerDelegate {
+class ShepardController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var tableHeader: UIView!
     
     @IBOutlet weak var nameField: UITextField!
-    var testNameLabel = UILabel()
-    var testNameWidth: CGFloat!
-    let defaultMaleName = "John"
-    let defaultFemaleName = "Jane"
+        var testNameLabel = UILabel()
+        var testNameWidth: CGFloat!
     @IBOutlet weak var surnameLabel: UILabel!
-    var minSurnameWidth: CGFloat!
-    let defaultSurname = " Shepard"
+        var minSurnameWidth: CGFloat!
     @IBOutlet weak var genderSegment: UISegmentedControl!
     @IBOutlet weak var gameSegment: UISegmentedControl!
     
     @IBOutlet weak var photoImageView: UIImageView!
-    lazy var sampleMalePhoto: UIImage? = { return UIImage(named: "BroShep Sample", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil) }()
-    lazy var sampleFemalePhoto: UIImage? = { return UIImage(named: "FemShep Sample", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil) }()
+    
+    lazy var imagePicker: UIImagePickerController = {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        return imagePicker
+    }()
     
     @IBOutlet weak var appearanceLabel: UILabel!
     
@@ -41,7 +42,7 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        setupData()
+        setupPage()
     }
     
 
@@ -53,7 +54,7 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate 
         testNameLabel.font = nameField.font
         testNameLabel.sizeToFit()
         testNameWidth = testNameLabel.bounds.width
-        testNameLabel.text = defaultSurname
+        testNameLabel.text = " \(Shepard.DefaultSurname)"
         testNameLabel.sizeToFit()
         minSurnameWidth = testNameLabel.bounds.width
     }
@@ -73,7 +74,7 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate 
     @IBAction func doneChangingName(sender: AnyObject) {
         sender.resignFirstResponder()
         if nameField.text == nil || nameField.text!.isEmpty {
-            nameField.text = CurrentGame.shepard.gender == .Male ? defaultMaleName : defaultFemaleName
+            nameField.text = CurrentGame.shepard.name.stringValue
             nameChanged(nameField)
         }
         nameField.superview?.setNeedsLayout()
@@ -81,17 +82,12 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate 
     }
     
     @IBAction func genderChanged(sender: AnyObject) {
-        CurrentGame.shepard.gender = genderSegment.selectedSegmentIndex == 0 ? .Male : .Female
-        if nameField.text == defaultMaleName || nameField.text == defaultFemaleName {
-            nameField.text = CurrentGame.shepard.gender == .Male ? defaultMaleName : defaultFemaleName
-        }
-        if photoImageView.image == sampleMalePhoto || photoImageView.image == sampleFemalePhoto {
-            photoImageView.image = CurrentGame.shepard.gender == .Male ? sampleMalePhoto : sampleFemalePhoto
-        }
+        CurrentGame.shepard.setGender(genderSegment.selectedSegmentIndex == 0 ? .Male : .Female)
+        setupPage()
     }
     
     @IBAction func gameChanged(sender: AnyObject) {
-        CurrentGame.shepard.game = {
+        let newGame: Shepard.Game = {
             switch gameSegment.selectedSegmentIndex {
             case 0: return .Game1
             case 1: return .Game2
@@ -99,19 +95,18 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate 
             default: return .Game1
             }
         }()
+        CurrentGame.changeGame(newGame)
     }
     
     @IBAction func changePhoto(sender: UIButton) {
-    }
-    
-    @IBAction func selectAppearance(sender: UIButton) {
+        pickPhoto()
     }
     
     
     
     //MARK: Setup Page Elements
 
-    func setupData() {
+    func setupPage() {
         genderSegment.selectedSegmentIndex = CurrentGame.shepard.gender == .Male ? 0 : 1
         gameSegment.selectedSegmentIndex = {
             switch CurrentGame.shepard.game {
@@ -120,9 +115,13 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate 
             case .Game3: return 2
             }
         }()
-        if !CurrentGame.shepard.appearance.isEmpty {
-            appearanceLabel.text = CurrentGame.shepard.appearance
-        }
+        let appearanceCode = CurrentGame.shepard.appearance.format()
+        appearanceLabel.text = appearanceCode.isEmpty ? Shepard.Appearance.SampleAppearance : CurrentGame.shepard.appearance.format()
+        setupPhoto()
+    }
+    
+    func setupPhoto() {
+        photoImageView.image = CurrentGame.shepard.photo.image()
     }
 
     //MARK: Protocol - UITableViewDelegate
@@ -181,11 +180,11 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate 
     
     
     //MARK: Photo
-    
     func pickPhoto() {
-        // camera access and set image
-//        let imagePicker = UIImagePickerController()
-//        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .PhotoLibrary
+            
+        presentViewController(imagePicker, animated: true, completion: nil)
 //        let imageController = UIAlertController(title: title, message: "Select Image", preferredStyle:UIAlertControllerStyle.ActionSheet)
 //        self.presentViewController(imageController, animated: true, completion: nil)
 //        imageController.addAction(UIAlertAction(title: "Camera Roll", style: UIAlertActionStyle.Default)
@@ -227,17 +226,20 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate 
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        if CurrentGame.shepard.setPhoto(image) {
+            setupPhoto()
+        } else {
+            let alert = UIAlertController(title: nil, message: "There was an error saving this image", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Try Again", style: UIAlertActionStyle.Default, handler: { (action) in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            presentViewController(alert, animated: true, completion: nil)
+        }
     }
-//    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
-//        self.contactImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-//        self.contactImageView.contentMode = UIViewContentMode.ScaleAspectFill
-//        self.contactImageView.transform = CGAffineTransformMakeRotation(0)
-//        self.contactImageView.clipsToBounds = true
-//        self.dismissViewControllerAnimated(true, completion: nil)
-//    }
+    
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
