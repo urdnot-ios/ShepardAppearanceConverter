@@ -18,27 +18,44 @@ public struct Shepard: Equatable {
     }
 
 //MARK: Properties
+    internal var dontMarkUpdated = false
+
     internal var _uuid = "\(NSUUID().UUIDString)"
     public var uuid: String { return _uuid }
+    
+    internal var _createdDate = NSDate()
+    public var createdDate: NSDate { return _createdDate }
+    
+    internal var _modifiedDate = NSDate()
+    public var modifiedDate: NSDate { return _modifiedDate }
     
     internal var _game: Game
     public var game: Game { return _game }
     
-    internal var _gender = Gender.Male
+    internal var _gender = Gender.Male { didSet{ markUpdated() } }
     public var gender: Gender { return _gender }
     
-    internal var _name = Name.DefaultMaleName
+    internal var _name = Name.DefaultMaleName { didSet{ markUpdated() } }
     public var name: Name { return _name }
+    public var fullName: String { return "\(name.stringValue!) Shepard" }
     
-    internal var _photo = Photo.DefaultMalePhoto
+    internal var _photo = Photo.DefaultMalePhoto { didSet{ markUpdated() } }
     public var photo: Photo { return _photo }
 
-    internal var _appearance: Appearance
+    internal var _appearance: Appearance { didSet{ markUpdated() } }
     public var appearance: Appearance { return _appearance }
     
 //    public var origin
 //    public var reputation
 //    public var class =
+    
+    public var title: String { return "" }
+    
+    public mutating func markUpdated() {
+        if !dontMarkUpdated {
+            _modifiedDate = NSDate()
+        }
+    }
     
 //MARK: Supporting Functions
 
@@ -108,6 +125,8 @@ extension Shepard {
     public func getData() -> HTTPData {
         var list = [String: AnyObject]()
         list["uuid"] = _uuid
+        list["created_date"] = createdDate
+        list["modified_date"] = modifiedDate
         list["game"] = game.rawValue
         list["gender"] = gender == .Male ? "M" : "F"
         list["name"] = name.stringValue
@@ -118,8 +137,11 @@ extension Shepard {
     
     public mutating func setData(data: HTTPData, source: SetDataSource = .SavedData) {
         if source == .SavedData {
+            dontMarkUpdated = true
             _uuid = data["uuid"].string ?? _uuid
             _game = Game(rawValue: data["game"].string ?? "0") ?? .Game1
+            _createdDate = data["created_date"].date ?? NSDate()
+            _modifiedDate = data["modified_date"].date ?? NSDate()
         }
         
         setName(data["name"].string)
@@ -143,6 +165,7 @@ extension Shepard {
                 setPhoto(photo)
             }
         }
+        dontMarkUpdated = false
     }
 }
 

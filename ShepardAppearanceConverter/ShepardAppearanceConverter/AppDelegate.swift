@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SavedData.retrieve()
         
+        ShepardFlowController.appInit = true
+        
         return true
     }
 

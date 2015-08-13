@@ -32,12 +32,6 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -170,13 +164,6 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate,
             parentViewController?.performSegueWithIdentifier("Edit Appearance", sender: nil)
         }
     }
-    
-    //MARK: Table Elements
-    
-//    func setupTableCustomCells() {
-//        let bundle =  NSBundle(forClass: self.dynamicType)
-//        tableView.registerNib(UINib(nibName: "ContactDetailsCell", bundle: bundle), forCellReuseIdentifier: "ContactDetail")
-//    }
     
     
     //MARK: Photo

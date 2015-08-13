@@ -10,22 +10,36 @@ import UIKit
 
 public class SavedData {
     
-    public static var shepards: [[Shepard.Game: Shepard]] = []
+    public static var shepards: [ShepardSet] = []
     
     public class func addNewShepard(game: Shepard.Game = .Game1) -> Shepard {
         let newShepard = Shepard(game: game)
-        let shepardGames = [game: newShepard]
+        let shepardGames = ShepardSet(game: game, shepard: newShepard)
         shepards.append(shepardGames)
         return newShepard
     }
     
     public class func findShepard(uuid: String) -> Shepard? {
-        return shepards.reduce([], combine: { $0 + $1.filter { $1.uuid == uuid } }).first?.1
+        for shepardSet in shepards {
+            if let shepard = shepardSet.find(uuid) {
+                return shepard
+            }
+        }
+        return nil
     }
     
-    public class func saveShepard(shepard: Shepard) {
-        if let foundIndex = shepards.indexOf({ $0[shepard.game] == shepard }) {
-            shepards[foundIndex][shepard.game] = shepard
+    public class func deleteShepard(shepard: Shepard) -> Bool {
+        if let foundIndex = shepards.indexOf({ $0.match(shepard) }) {
+            shepards.removeAtIndex(foundIndex)
+            return true
+        }
+        return false
+    }
+    
+    public class func saveShepard(var shepard: Shepard) {
+        if let foundIndex = shepards.indexOf({ $0.match(shepard) }) {
+//            shepard.markUpdated()
+            shepards[foundIndex].setGame(shepard.game, shepard: shepard)
         }
     }
 
@@ -68,15 +82,13 @@ extension SavedData {
     public class func getData() -> HTTPData {
         saveShepard(CurrentGame.shepard)
         var list = [String: HTTPData]()
-        list["shepards"] = HTTPData(shepards.map { HTTPData(Dictionary($0.map { ($0.rawValue, $1.getData()) })) })
+        list["shepards"] = HTTPData(shepards.map { $0.getData() })
         list["current_game"] = CurrentGame.getData()
         return HTTPData(list)
     }
     
     public class func setData(data: HTTPData) {
-        shepards = data["shepards"].array.map {
-            Dictionary( $0.dictionary.map { (Shepard.Game(rawValue: $0 ?? "0") ?? .Game1, Shepard(data: $1)) })
-        }
+        shepards = data["shepards"].array.map { ShepardSet(data: $0) }
         CurrentGame.setData(data["current_game"])
     }
 }

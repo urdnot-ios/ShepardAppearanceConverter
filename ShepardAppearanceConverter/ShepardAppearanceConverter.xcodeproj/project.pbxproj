@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B00AB2721B7AA2CA0002C44B /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB2711B7AA2CA0002C44B /* NSBundle.swift */; };
 		B00AB2741B7AB19D0002C44B /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB2731B7AB19D0002C44B /* Dictionary.swift */; };
 		B03883651B76D57E00895145 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B03883631B76D57E00895145 /* Assets.xcassets */; };
+		B06FD2211B7C4DF600326CA0 /* ShepardSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FD2201B7C4DF600326CA0 /* ShepardSet.swift */; };
 		B08699071B76E63A00C3BF3F /* AppearanceCodeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08699011B76E63A00C3BF3F /* AppearanceCodeReader.swift */; };
 		B08699081B76E63A00C3BF3F /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08699021B76E63A00C3BF3F /* AppearanceController.swift */; };
 		B08699091B76E63A00C3BF3F /* AppearanceME1Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08699031B76E63A00C3BF3F /* AppearanceME1Group.swift */; };
@@ -34,14 +34,21 @@
 		B0AD40071B6EEE730013C0F7 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD40051B6EEE730013C0F7 /* Spinner.swift */; };
 		B0AD40181B6EEE970013C0F7 /* Shepard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0AD40151B6EEE970013C0F7 /* Shepard.storyboard */; };
 		B0AD40191B6EEE970013C0F7 /* ShepardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD40171B6EEE970013C0F7 /* ShepardController.swift */; };
+		B0D4C23A1B7C26970023B9C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0D4C2351B7C26970023B9C4 /* Assets.xcassets */; };
+		B0D4C23B1B7C26970023B9C4 /* Shepards.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D4C2371B7C26970023B9C4 /* Shepards.storyboard */; };
+		B0D4C23C1B7C26970023B9C4 /* ShepardsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D4C2391B7C26970023B9C4 /* ShepardsController.swift */; };
+		B0D4C2431B7C283A0023B9C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0D4C23E1B7C283A0023B9C4 /* Assets.xcassets */; };
+		B0D4C2441B7C283A0023B9C4 /* ShepardRowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0D4C2401B7C283A0023B9C4 /* ShepardRowCell.xib */; };
+		B0D4C2451B7C283A0023B9C4 /* ShepardRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D4C2421B7C283A0023B9C4 /* ShepardRowCell.swift */; };
+		B0D4C2471B7C31D90023B9C4 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D4C2461B7C31D90023B9C4 /* Date.swift */; };
 		B12949941B78425F003B88FD /* ShepardFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12949931B78425F003B88FD /* ShepardFlowController.swift */; };
 		B12949961B78747F003B88FD /* CurrentGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12949951B78747F003B88FD /* CurrentGame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B00AB2711B7AA2CA0002C44B /* NSBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundle.swift; sourceTree = "<group>"; };
 		B00AB2731B7AB19D0002C44B /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		B03883641B76D57E00895145 /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
+		B06FD2201B7C4DF600326CA0 /* ShepardSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardSet.swift; sourceTree = "<group>"; };
 		B08699011B76E63A00C3BF3F /* AppearanceCodeReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceCodeReader.swift; sourceTree = "<group>"; };
 		B08699021B76E63A00C3BF3F /* AppearanceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceController.swift; sourceTree = "<group>"; };
 		B08699031B76E63A00C3BF3F /* AppearanceME1Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceME1Group.swift; sourceTree = "<group>"; };
@@ -68,6 +75,13 @@
 		B0AD40051B6EEE730013C0F7 /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		B0AD40161B6EEE970013C0F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Shepard.storyboard; sourceTree = "<group>"; };
 		B0AD40171B6EEE970013C0F7 /* ShepardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardController.swift; sourceTree = "<group>"; };
+		B0D4C2361B7C26970023B9C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
+		B0D4C2381B7C26970023B9C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Shepards.storyboard; sourceTree = "<group>"; };
+		B0D4C2391B7C26970023B9C4 /* ShepardsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardsController.swift; sourceTree = "<group>"; };
+		B0D4C23F1B7C283A0023B9C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
+		B0D4C2411B7C283A0023B9C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ShepardRowCell.xib; sourceTree = "<group>"; };
+		B0D4C2421B7C283A0023B9C4 /* ShepardRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardRowCell.swift; sourceTree = "<group>"; };
+		B0D4C2461B7C31D90023B9C4 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = ShepardAppearanceConverter/Models/Date.swift; sourceTree = SOURCE_ROOT; };
 		B12949931B78425F003B88FD /* ShepardFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardFlowController.swift; sourceTree = "<group>"; };
 		B12949951B78747F003B88FD /* CurrentGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,7 +155,6 @@
 			children = (
 				B0AD3FD21B6EEDEA0013C0F7 /* StringExtension.swift */,
 				B0AD3FD31B6EEDEA0013C0F7 /* UIView.swift */,
-				B00AB2711B7AA2CA0002C44B /* NSBundle.swift */,
 				B00AB2731B7AB19D0002C44B /* Dictionary.swift */,
 			);
 			path = Extensions;
@@ -170,6 +183,7 @@
 				B0AD3FE21B6EEE290013C0F7 /* ShepardFlow.storyboard */,
 				B12949931B78425F003B88FD /* ShepardFlowController.swift */,
 				B0AD40031B6EEE730013C0F7 /* Common */,
+				B0D4C2341B7C26970023B9C4 /* Shepards */,
 				B0AD40141B6EEE970013C0F7 /* Shepard */,
 				B08699001B76E63A00C3BF3F /* Appearance */,
 			);
@@ -179,9 +193,11 @@
 		B0AD3FFE1B6EEE640013C0F7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B12949951B78747F003B88FD /* CurrentGame.swift */,
+				B0D4C2461B7C31D90023B9C4 /* Date.swift */,
 				B0AD3FFF1B6EEE640013C0F7 /* SavedData.swift */,
 				B0AD40001B6EEE640013C0F7 /* Shepard.swift */,
-				B12949951B78747F003B88FD /* CurrentGame.swift */,
+				B06FD2201B7C4DF600326CA0 /* ShepardSet.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -206,6 +222,27 @@
 				B0AD40171B6EEE970013C0F7 /* ShepardController.swift */,
 			);
 			path = Shepard;
+			sourceTree = "<group>";
+		};
+		B0D4C2341B7C26970023B9C4 /* Shepards */ = {
+			isa = PBXGroup;
+			children = (
+				B0D4C2351B7C26970023B9C4 /* Assets.xcassets */,
+				B0D4C2371B7C26970023B9C4 /* Shepards.storyboard */,
+				B0D4C2391B7C26970023B9C4 /* ShepardsController.swift */,
+				B0D4C23D1B7C283A0023B9C4 /* Shepard Row */,
+			);
+			path = Shepards;
+			sourceTree = "<group>";
+		};
+		B0D4C23D1B7C283A0023B9C4 /* Shepard Row */ = {
+			isa = PBXGroup;
+			children = (
+				B0D4C23E1B7C283A0023B9C4 /* Assets.xcassets */,
+				B0D4C2401B7C283A0023B9C4 /* ShepardRowCell.xib */,
+				B0D4C2421B7C283A0023B9C4 /* ShepardRowCell.swift */,
+			);
+			path = "Shepard Row";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,11 +304,15 @@
 			files = (
 				B0AD3F5C1B6EEC6D0013C0F7 /* LaunchScreen.storyboard in Resources */,
 				B0AD3F591B6EEC6D0013C0F7 /* Assets.xcassets in Resources */,
+				B0D4C2431B7C283A0023B9C4 /* Assets.xcassets in Resources */,
 				B0AD3FF41B6EEE290013C0F7 /* ShepardFlow.storyboard in Resources */,
 				B0AD40181B6EEE970013C0F7 /* Shepard.storyboard in Resources */,
 				B03883651B76D57E00895145 /* Assets.xcassets in Resources */,
+				B0D4C2441B7C283A0023B9C4 /* ShepardRowCell.xib in Resources */,
 				B091875B1B7A8B3900A2F8E4 /* Assets.xcassets in Resources */,
 				B091875E1B7A8BD200A2F8E4 /* Assets.xcassets in Resources */,
+				B0D4C23A1B7C26970023B9C4 /* Assets.xcassets in Resources */,
+				B0D4C23B1B7C26970023B9C4 /* Shepards.storyboard in Resources */,
 				B086990B1B76E63A00C3BF3F /* Appearance.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,9 +330,9 @@
 				B0AD40061B6EEE730013C0F7 /* RoundedCornersBox.swift in Sources */,
 				B12949941B78425F003B88FD /* ShepardFlowController.swift in Sources */,
 				B08699071B76E63A00C3BF3F /* AppearanceCodeReader.swift in Sources */,
+				B06FD2211B7C4DF600326CA0 /* ShepardSet.swift in Sources */,
 				B08699091B76E63A00C3BF3F /* AppearanceME1Group.swift in Sources */,
 				B0AD40191B6EEE970013C0F7 /* ShepardController.swift in Sources */,
-				B00AB2721B7AA2CA0002C44B /* NSBundle.swift in Sources */,
 				B0AD3FD61B6EEDEA0013C0F7 /* StringExtension.swift in Sources */,
 				B0AD3F521B6EEC6D0013C0F7 /* AppDelegate.swift in Sources */,
 				B00AB2741B7AB19D0002C44B /* Dictionary.swift in Sources */,
@@ -302,8 +343,11 @@
 				B0AD3FDC1B6EEE000013C0F7 /* IBIncludedThing.swift in Sources */,
 				B0AD40021B6EEE640013C0F7 /* Shepard.swift in Sources */,
 				B0AD40071B6EEE730013C0F7 /* Spinner.swift in Sources */,
+				B0D4C2471B7C31D90023B9C4 /* Date.swift in Sources */,
+				B0D4C23C1B7C26970023B9C4 /* ShepardsController.swift in Sources */,
 				B09187601B7A8C5800A2F8E4 /* Styles.swift in Sources */,
 				B08699281B76E96800C3BF3F /* HairlineBorderView.swift in Sources */,
+				B0D4C2451B7C283A0023B9C4 /* ShepardRowCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +408,38 @@
 				B0AD40161B6EEE970013C0F7 /* Base */,
 			);
 			name = Shepard.storyboard;
+			sourceTree = "<group>";
+		};
+		B0D4C2351B7C26970023B9C4 /* Assets.xcassets */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0D4C2361B7C26970023B9C4 /* Base */,
+			);
+			name = Assets.xcassets;
+			sourceTree = "<group>";
+		};
+		B0D4C2371B7C26970023B9C4 /* Shepards.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0D4C2381B7C26970023B9C4 /* Base */,
+			);
+			name = Shepards.storyboard;
+			sourceTree = "<group>";
+		};
+		B0D4C23E1B7C283A0023B9C4 /* Assets.xcassets */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0D4C23F1B7C283A0023B9C4 /* Base */,
+			);
+			name = Assets.xcassets;
+			sourceTree = "<group>";
+		};
+		B0D4C2401B7C283A0023B9C4 /* ShepardRowCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0D4C2411B7C283A0023B9C4 /* Base */,
+			);
+			name = ShepardRowCell.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

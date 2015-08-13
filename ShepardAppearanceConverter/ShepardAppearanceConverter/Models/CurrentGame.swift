@@ -10,7 +10,7 @@ import Foundation
 
 public class CurrentGame {
     public static var shepard: Shepard = {
-        return SavedData.addNewShepard() // or load from NSUserDefaults or something?
+        return Shepard(game: .Game1) // or load from NSUserDefaults or something?
     }() {
         didSet {
             print("X")
@@ -21,17 +21,17 @@ public class CurrentGame {
         let oldGame = CurrentGame.shepard.game
         var newGameSameShepard = false
         let index: Int = {
-            if let foundIndex = SavedData.shepards.indexOf({ $0[oldGame] == CurrentGame.shepard }) {
-                SavedData.shepards[foundIndex][oldGame] = CurrentGame.shepard // save old shepard values
+            if let foundIndex = SavedData.shepards.indexOf({ $0.match(CurrentGame.shepard) }) {
+                SavedData.saveShepard(CurrentGame.shepard)
                 newGameSameShepard = true
                 return foundIndex
             } else {
-                let newShepardSet: [Shepard.Game: Shepard] = [:]
+                let newShepardSet = ShepardSet(game: newGame, shepard: Shepard(game: newGame))
                 SavedData.shepards.append(newShepardSet)
                 return SavedData.shepards.count - 1
             }
         }()
-        if let foundShepard = SavedData.shepards[index][newGame] {
+        if let foundShepard = SavedData.shepards[index].getGame(newGame) {
             CurrentGame.shepard = foundShepard
         } else {
             var newShepard = Shepard(game: newGame)
@@ -40,7 +40,7 @@ public class CurrentGame {
                 newShepard.setData(CurrentGame.shepard.getData(), source: .GameConversion(priorGame: oldGame))
             }
             CurrentGame.shepard = newShepard
-            SavedData.shepards[index][newGame] = CurrentGame.shepard
+            SavedData.shepards[index].addGame(newGame, shepard: newShepard)
         }
     }
 }
