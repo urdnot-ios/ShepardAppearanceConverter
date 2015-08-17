@@ -11,11 +11,7 @@ import Foundation
 public class CurrentGame {
     public static var shepard: Shepard = {
         return Shepard(game: .Game1) // or load from NSUserDefaults or something?
-    }() {
-        didSet {
-            print("X")
-        }
-    }
+    }()
     
     public class func changeGame(newGame: Shepard.Game) {
         let oldGame = CurrentGame.shepard.game

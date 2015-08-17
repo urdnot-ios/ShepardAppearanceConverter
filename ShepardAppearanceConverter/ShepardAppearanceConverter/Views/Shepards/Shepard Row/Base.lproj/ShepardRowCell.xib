@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8152.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8124.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -17,29 +18,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="287" height="90.5"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BsP-uz-ZJT">
-                                <rect key="frame" x="15" y="9.5" width="70" height="70"/>
+                                <rect key="frame" x="10" y="10" width="70" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="cfM-Iz-63T"/>
-                                    <constraint firstAttribute="width" constant="70" id="x06-mJ-JGt"/>
+                                    <constraint firstAttribute="height" constant="70" id="cfM-Iz-63T">
+                                        <variation key="widthClass=compact" constant="50"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" secondItem="BsP-uz-ZJT" secondAttribute="height" multiplier="1:1" id="iQk-5b-VGC"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IWA-yA-NZ1">
-                                <rect key="frame" x="100" y="13" width="182" height="64.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="IWA-yA-NZ1">
+                                <rect key="frame" x="90" y="10.5" width="192" height="69.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" fixedFrame="YES" text="John Shepard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNo-50-FPl">
-                                        <rect key="frame" x="0.0" y="0.0" width="182" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="200" verticalCompressionResistancePriority="751" fixedFrame="YES" text="John Shepard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNo-50-FPl">
+                                        <rect key="frame" x="0.0" y="0.0" width="111" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="751" fixedFrame="YES" text="War Hero Colonist Spacer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1X-rw-eor" userLabel="Title">
-                                        <rect key="frame" x="0.0" y="25.5" width="182" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="200" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="751" fixedFrame="YES" text="War Hero Colonist Spacer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1X-rw-eor" userLabel="Title">
+                                        <rect key="frame" x="0.0" y="28" width="166.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="751" fixedFrame="YES" text="Last Played: 1 January, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhq-9D-jeK" userLabel="Date">
-                                        <rect key="frame" x="0.0" y="47.5" width="182" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="200" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="751" fixedFrame="YES" text="Last Played: 1 January, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhq-9D-jeK" userLabel="Date">
+                                        <rect key="frame" x="0.0" y="52.5" width="182" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -50,14 +53,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="BsP-uz-ZJT" firstAttribute="centerY" secondItem="Wkv-5A-jUU" secondAttribute="centerY" id="24S-Q7-PJx"/>
+                            <constraint firstItem="IWA-yA-NZ1" firstAttribute="bottom" secondItem="BsP-uz-ZJT" secondAttribute="bottom" priority="100" id="312-e2-ZoH"/>
                             <constraint firstItem="IWA-yA-NZ1" firstAttribute="centerY" secondItem="Wkv-5A-jUU" secondAttribute="centerY" id="GuV-e0-MRr"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="IWA-yA-NZ1" secondAttribute="bottom" constant="8" id="N0p-Af-P8l"/>
-                            <constraint firstItem="BsP-uz-ZJT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Wkv-5A-jUU" secondAttribute="top" constant="5" id="NPn-go-std"/>
-                            <constraint firstItem="BsP-uz-ZJT" firstAttribute="leading" secondItem="Wkv-5A-jUU" secondAttribute="leading" constant="15" id="QX5-At-14S"/>
+                            <constraint firstItem="BsP-uz-ZJT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Wkv-5A-jUU" secondAttribute="top" constant="10" id="NPn-go-std"/>
+                            <constraint firstItem="BsP-uz-ZJT" firstAttribute="leading" secondItem="Wkv-5A-jUU" secondAttribute="leading" constant="10" id="QX5-At-14S"/>
                             <constraint firstAttribute="trailing" secondItem="IWA-yA-NZ1" secondAttribute="trailing" constant="5" id="Y4a-fh-PZN"/>
                             <constraint firstItem="IWA-yA-NZ1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Wkv-5A-jUU" secondAttribute="top" constant="8" id="Ze9-gY-eC8"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BsP-uz-ZJT" secondAttribute="bottom" constant="5" id="Zfh-qw-KXM"/>
-                            <constraint firstItem="IWA-yA-NZ1" firstAttribute="leading" secondItem="BsP-uz-ZJT" secondAttribute="trailing" constant="15" id="yQ7-Ml-8W8"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BsP-uz-ZJT" secondAttribute="bottom" constant="10" id="Zfh-qw-KXM"/>
+                            <constraint firstItem="IWA-yA-NZ1" firstAttribute="top" secondItem="BsP-uz-ZJT" secondAttribute="top" priority="100" id="hJ8-5u-29R"/>
+                            <constraint firstItem="IWA-yA-NZ1" firstAttribute="leading" secondItem="BsP-uz-ZJT" secondAttribute="trailing" constant="10" id="yQ7-Ml-8W8"/>
                         </constraints>
                     </view>
                 </subviews>

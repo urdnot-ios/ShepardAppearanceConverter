@@ -46,12 +46,7 @@ public class ShepardRowCell: UITableViewCell {
         }
         if nameLabel == nil { return }
         nameLabel.text = name ?? ""
-        if let title = self.title {
-            titleLabel.text = title
-            titleLabel.hidden = false
-        } else {
-            titleLabel.hidden = true
-        }
+        titleLabel.text = title
         dateLabel.text = String(format: DateMessage, date ?? "")
     }
     

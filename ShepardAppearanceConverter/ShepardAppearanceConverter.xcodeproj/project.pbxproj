@@ -10,6 +10,28 @@
 		B00AB2741B7AB19D0002C44B /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00AB2731B7AB19D0002C44B /* Dictionary.swift */; };
 		B03883651B76D57E00895145 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B03883631B76D57E00895145 /* Assets.xcassets */; };
 		B06FD2211B7C4DF600326CA0 /* ShepardSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FD2201B7C4DF600326CA0 /* ShepardSet.swift */; };
+		B071D2221B811F8700A54F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B071D2111B811F8700A54F8F /* Assets.xcassets */; };
+		B071D2231B811F8700A54F8F /* ShepardClass.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B071D2131B811F8700A54F8F /* ShepardClass.storyboard */; };
+		B071D2241B811F8700A54F8F /* ShepardClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B071D2151B811F8700A54F8F /* ShepardClassController.swift */; };
+		B071D2251B811F8700A54F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B071D2171B811F8700A54F8F /* Assets.xcassets */; };
+		B071D2261B811F8700A54F8F /* ShepardOrigin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B071D2191B811F8700A54F8F /* ShepardOrigin.storyboard */; };
+		B071D2271B811F8700A54F8F /* ShepardOriginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B071D21B1B811F8700A54F8F /* ShepardOriginController.swift */; };
+		B071D2281B811F8700A54F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B071D21D1B811F8700A54F8F /* Assets.xcassets */; };
+		B071D2291B811F8700A54F8F /* ShepardReputation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B071D21F1B811F8700A54F8F /* ShepardReputation.storyboard */; };
+		B071D22A1B811F8700A54F8F /* ShepardReputationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B071D2211B811F8700A54F8F /* ShepardReputationController.swift */; };
+		B07699E81B805F5D00BAE295 /* HideAutolayoutUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699E71B805F5D00BAE295 /* HideAutolayoutUtility.swift */; };
+		B07699EB1B80639E00BAE295 /* Shepard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699EA1B80639E00BAE295 /* Shepard.swift */; };
+		B07699ED1B8063B800BAE295 /* Shepard.ClassTalent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699EC1B8063B800BAE295 /* Shepard.ClassTalent.swift */; };
+		B07699F01B8066C400BAE295 /* Shepard.Origin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699EE1B8066C400BAE295 /* Shepard.Origin.swift */; };
+		B07699F11B8066C400BAE295 /* Shepard.Reputation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699EF1B8066C400BAE295 /* Shepard.Reputation.swift */; };
+		B07699F31B806AF600BAE295 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699F21B806AF600BAE295 /* UIViewController.swift */; };
+		B07699F51B806D1B00BAE295 /* NSBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699F41B806D1B00BAE295 /* NSBundle.swift */; };
+		B07699F71B80736B00BAE295 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699F61B80736B00BAE295 /* Delay.swift */; };
+		B07699F91B80755800BAE295 /* Shepard.Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699F81B80755800BAE295 /* Shepard.Photo.swift */; };
+		B07699FB1B80757B00BAE295 /* Shepard.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699FA1B80757B00BAE295 /* Shepard.Name.swift */; };
+		B07699FD1B8075B700BAE295 /* Shepard.Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699FC1B8075B700BAE295 /* Shepard.Gender.swift */; };
+		B07699FF1B8075D800BAE295 /* Shepard.Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07699FE1B8075D800BAE295 /* Shepard.Game.swift */; };
+		B0769A021B80762F00BAE295 /* Shepard.Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0769A011B80762F00BAE295 /* Shepard.Appearance.swift */; };
 		B08699071B76E63A00C3BF3F /* AppearanceCodeReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08699011B76E63A00C3BF3F /* AppearanceCodeReader.swift */; };
 		B08699081B76E63A00C3BF3F /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08699021B76E63A00C3BF3F /* AppearanceController.swift */; };
 		B08699091B76E63A00C3BF3F /* AppearanceME1Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08699031B76E63A00C3BF3F /* AppearanceME1Group.swift */; };
@@ -29,7 +51,6 @@
 		B0AD3FDD1B6EEE000013C0F7 /* IBIncludedWrapperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD3FDB1B6EEE000013C0F7 /* IBIncludedWrapperViewController.swift */; };
 		B0AD3FF41B6EEE290013C0F7 /* ShepardFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0AD3FE21B6EEE290013C0F7 /* ShepardFlow.storyboard */; };
 		B0AD40011B6EEE640013C0F7 /* SavedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD3FFF1B6EEE640013C0F7 /* SavedData.swift */; };
-		B0AD40021B6EEE640013C0F7 /* Shepard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD40001B6EEE640013C0F7 /* Shepard.swift */; };
 		B0AD40061B6EEE730013C0F7 /* RoundedCornersBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD40041B6EEE730013C0F7 /* RoundedCornersBox.swift */; };
 		B0AD40071B6EEE730013C0F7 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD40051B6EEE730013C0F7 /* Spinner.swift */; };
 		B0AD40181B6EEE970013C0F7 /* Shepard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0AD40151B6EEE970013C0F7 /* Shepard.storyboard */; };
@@ -41,6 +62,17 @@
 		B0D4C2441B7C283A0023B9C4 /* ShepardRowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0D4C2401B7C283A0023B9C4 /* ShepardRowCell.xib */; };
 		B0D4C2451B7C283A0023B9C4 /* ShepardRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D4C2421B7C283A0023B9C4 /* ShepardRowCell.swift */; };
 		B0D4C2471B7C31D90023B9C4 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D4C2461B7C31D90023B9C4 /* Date.swift */; };
+		B0EF00431B8149C500E74F94 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF00421B8149C500E74F94 /* RadioButton.swift */; };
+		B0EF00511B8154E100E74F94 /* FauxContentRowNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0EF00461B8154E100E74F94 /* FauxContentRowNib.xib */; };
+		B0EF00521B8154E100E74F94 /* FauxContentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF00481B8154E100E74F94 /* FauxContentRow.swift */; };
+		B0EF00531B8154E100E74F94 /* FauxRowNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0EF004A1B8154E100E74F94 /* FauxRowNib.xib */; };
+		B0EF00541B8154E100E74F94 /* FauxRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF004C1B8154E100E74F94 /* FauxRow.swift */; };
+		B0EF00551B8154E100E74F94 /* FauxValueRowNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0EF004E1B8154E100E74F94 /* FauxValueRowNib.xib */; };
+		B0EF00561B8154E100E74F94 /* FauxValueRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF00501B8154E100E74F94 /* FauxValueRow.swift */; };
+		B0EF005B1B81551400E74F94 /* FauxRadioRowNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0EF00581B81551400E74F94 /* FauxRadioRowNib.xib */; };
+		B0EF005C1B81551400E74F94 /* FauxRadioRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF005A1B81551400E74F94 /* FauxRadioRow.swift */; };
+		B0EF00611B8157BC00E74F94 /* SideEffectsNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0EF005E1B8157BC00E74F94 /* SideEffectsNib.xib */; };
+		B0EF00621B8157BC00E74F94 /* SideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF00601B8157BC00E74F94 /* SideEffects.swift */; };
 		B12949941B78425F003B88FD /* ShepardFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12949931B78425F003B88FD /* ShepardFlowController.swift */; };
 		B12949961B78747F003B88FD /* CurrentGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12949951B78747F003B88FD /* CurrentGame.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +81,28 @@
 		B00AB2731B7AB19D0002C44B /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		B03883641B76D57E00895145 /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
 		B06FD2201B7C4DF600326CA0 /* ShepardSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardSet.swift; sourceTree = "<group>"; };
+		B071D2121B811F8700A54F8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
+		B071D2141B811F8700A54F8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ShepardClass.storyboard; sourceTree = "<group>"; };
+		B071D2151B811F8700A54F8F /* ShepardClassController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardClassController.swift; sourceTree = "<group>"; };
+		B071D2181B811F8700A54F8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
+		B071D21A1B811F8700A54F8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ShepardOrigin.storyboard; sourceTree = "<group>"; };
+		B071D21B1B811F8700A54F8F /* ShepardOriginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardOriginController.swift; sourceTree = "<group>"; };
+		B071D21E1B811F8700A54F8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
+		B071D2201B811F8700A54F8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ShepardReputation.storyboard; sourceTree = "<group>"; };
+		B071D2211B811F8700A54F8F /* ShepardReputationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardReputationController.swift; sourceTree = "<group>"; };
+		B07699E71B805F5D00BAE295 /* HideAutolayoutUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideAutolayoutUtility.swift; sourceTree = "<group>"; };
+		B07699EA1B80639E00BAE295 /* Shepard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.swift; sourceTree = "<group>"; };
+		B07699EC1B8063B800BAE295 /* Shepard.ClassTalent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.ClassTalent.swift; sourceTree = "<group>"; };
+		B07699EE1B8066C400BAE295 /* Shepard.Origin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.Origin.swift; sourceTree = "<group>"; };
+		B07699EF1B8066C400BAE295 /* Shepard.Reputation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.Reputation.swift; sourceTree = "<group>"; };
+		B07699F21B806AF600BAE295 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		B07699F41B806D1B00BAE295 /* NSBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBundle.swift; sourceTree = "<group>"; };
+		B07699F61B80736B00BAE295 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
+		B07699F81B80755800BAE295 /* Shepard.Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.Photo.swift; sourceTree = "<group>"; };
+		B07699FA1B80757B00BAE295 /* Shepard.Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.Name.swift; sourceTree = "<group>"; };
+		B07699FC1B8075B700BAE295 /* Shepard.Gender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.Gender.swift; sourceTree = "<group>"; };
+		B07699FE1B8075D800BAE295 /* Shepard.Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.Game.swift; sourceTree = "<group>"; };
+		B0769A011B80762F00BAE295 /* Shepard.Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.Appearance.swift; sourceTree = "<group>"; };
 		B08699011B76E63A00C3BF3F /* AppearanceCodeReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceCodeReader.swift; sourceTree = "<group>"; };
 		B08699021B76E63A00C3BF3F /* AppearanceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceController.swift; sourceTree = "<group>"; };
 		B08699031B76E63A00C3BF3F /* AppearanceME1Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceME1Group.swift; sourceTree = "<group>"; };
@@ -70,7 +124,6 @@
 		B0AD3FDB1B6EEE000013C0F7 /* IBIncludedWrapperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBIncludedWrapperViewController.swift; sourceTree = "<group>"; };
 		B0AD3FE31B6EEE290013C0F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ShepardFlow.storyboard; sourceTree = "<group>"; };
 		B0AD3FFF1B6EEE640013C0F7 /* SavedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedData.swift; sourceTree = "<group>"; };
-		B0AD40001B6EEE640013C0F7 /* Shepard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shepard.swift; sourceTree = "<group>"; };
 		B0AD40041B6EEE730013C0F7 /* RoundedCornersBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornersBox.swift; sourceTree = "<group>"; };
 		B0AD40051B6EEE730013C0F7 /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		B0AD40161B6EEE970013C0F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Shepard.storyboard; sourceTree = "<group>"; };
@@ -82,6 +135,17 @@
 		B0D4C2411B7C283A0023B9C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ShepardRowCell.xib; sourceTree = "<group>"; };
 		B0D4C2421B7C283A0023B9C4 /* ShepardRowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardRowCell.swift; sourceTree = "<group>"; };
 		B0D4C2461B7C31D90023B9C4 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = ShepardAppearanceConverter/Models/Date.swift; sourceTree = SOURCE_ROOT; };
+		B0EF00421B8149C500E74F94 /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioButton.swift; path = ../../../../../iris/Iris/Iris/App/Views/Common/Styles/RadioButton.swift; sourceTree = "<group>"; };
+		B0EF00471B8154E100E74F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FauxContentRowNib.xib; sourceTree = "<group>"; };
+		B0EF00481B8154E100E74F94 /* FauxContentRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FauxContentRow.swift; sourceTree = "<group>"; };
+		B0EF004B1B8154E100E74F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FauxRowNib.xib; sourceTree = "<group>"; };
+		B0EF004C1B8154E100E74F94 /* FauxRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FauxRow.swift; sourceTree = "<group>"; };
+		B0EF004F1B8154E100E74F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FauxValueRowNib.xib; sourceTree = "<group>"; };
+		B0EF00501B8154E100E74F94 /* FauxValueRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FauxValueRow.swift; sourceTree = "<group>"; };
+		B0EF00591B81551400E74F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FauxRadioRowNib.xib; sourceTree = "<group>"; };
+		B0EF005A1B81551400E74F94 /* FauxRadioRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FauxRadioRow.swift; sourceTree = "<group>"; };
+		B0EF005F1B8157BC00E74F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SideEffectsNib.xib; sourceTree = "<group>"; };
+		B0EF00601B8157BC00E74F94 /* SideEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideEffects.swift; sourceTree = "<group>"; };
 		B12949931B78425F003B88FD /* ShepardFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardFlowController.swift; sourceTree = "<group>"; };
 		B12949951B78747F003B88FD /* CurrentGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +161,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B071D2101B811F8700A54F8F /* Shepard Class */ = {
+			isa = PBXGroup;
+			children = (
+				B071D2111B811F8700A54F8F /* Assets.xcassets */,
+				B071D2131B811F8700A54F8F /* ShepardClass.storyboard */,
+				B071D2151B811F8700A54F8F /* ShepardClassController.swift */,
+			);
+			path = "Shepard Class";
+			sourceTree = "<group>";
+		};
+		B071D2161B811F8700A54F8F /* Shepard Origin */ = {
+			isa = PBXGroup;
+			children = (
+				B071D2171B811F8700A54F8F /* Assets.xcassets */,
+				B071D2191B811F8700A54F8F /* ShepardOrigin.storyboard */,
+				B071D21B1B811F8700A54F8F /* ShepardOriginController.swift */,
+			);
+			path = "Shepard Origin";
+			sourceTree = "<group>";
+		};
+		B071D21C1B811F8700A54F8F /* Shepard Reputation */ = {
+			isa = PBXGroup;
+			children = (
+				B071D21D1B811F8700A54F8F /* Assets.xcassets */,
+				B071D21F1B811F8700A54F8F /* ShepardReputation.storyboard */,
+				B071D2211B811F8700A54F8F /* ShepardReputationController.swift */,
+			);
+			path = "Shepard Reputation";
+			sourceTree = "<group>";
+		};
+		B07699E91B80639E00BAE295 /* Shepard */ = {
+			isa = PBXGroup;
+			children = (
+				B07699EA1B80639E00BAE295 /* Shepard.swift */,
+				B0769A001B80762F00BAE295 /* Shepard.Appearance */,
+				B07699EC1B8063B800BAE295 /* Shepard.ClassTalent.swift */,
+				B07699FE1B8075D800BAE295 /* Shepard.Game.swift */,
+				B07699FC1B8075B700BAE295 /* Shepard.Gender.swift */,
+				B07699FA1B80757B00BAE295 /* Shepard.Name.swift */,
+				B07699EE1B8066C400BAE295 /* Shepard.Origin.swift */,
+				B07699F81B80755800BAE295 /* Shepard.Photo.swift */,
+				B07699EF1B8066C400BAE295 /* Shepard.Reputation.swift */,
+			);
+			path = Shepard;
+			sourceTree = "<group>";
+		};
+		B0769A001B80762F00BAE295 /* Shepard.Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				B0769A011B80762F00BAE295 /* Shepard.Appearance.swift */,
+			);
+			path = Shepard.Appearance;
+			sourceTree = "<group>";
+		};
 		B08699001B76E63A00C3BF3F /* Appearance */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +261,9 @@
 		B0AD3FC31B6EEDC90013C0F7 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				B07699F61B80736B00BAE295 /* Delay.swift */,
+				B07699E71B805F5D00BAE295 /* HideAutolayoutUtility.swift */,
+				B07699F41B806D1B00BAE295 /* NSBundle.swift */,
 				B0AD3FD11B6EEDEA0013C0F7 /* Extensions */,
 				B0AD3FD41B6EEDEA0013C0F7 /* HTTPData */,
 				B0AD3FD91B6EEE000013C0F7 /* IBIncluded */,
@@ -153,9 +274,10 @@
 		B0AD3FD11B6EEDEA0013C0F7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B00AB2731B7AB19D0002C44B /* Dictionary.swift */,
 				B0AD3FD21B6EEDEA0013C0F7 /* StringExtension.swift */,
 				B0AD3FD31B6EEDEA0013C0F7 /* UIView.swift */,
-				B00AB2731B7AB19D0002C44B /* Dictionary.swift */,
+				B07699F21B806AF600BAE295 /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -180,11 +302,14 @@
 		B0AD3FE11B6EEE290013C0F7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B0AD40031B6EEE730013C0F7 /* Common */,
 				B0AD3FE21B6EEE290013C0F7 /* ShepardFlow.storyboard */,
 				B12949931B78425F003B88FD /* ShepardFlowController.swift */,
-				B0AD40031B6EEE730013C0F7 /* Common */,
 				B0D4C2341B7C26970023B9C4 /* Shepards */,
 				B0AD40141B6EEE970013C0F7 /* Shepard */,
+				B071D2161B811F8700A54F8F /* Shepard Origin */,
+				B071D21C1B811F8700A54F8F /* Shepard Reputation */,
+				B071D2101B811F8700A54F8F /* Shepard Class */,
 				B08699001B76E63A00C3BF3F /* Appearance */,
 			);
 			path = Views;
@@ -196,7 +321,7 @@
 				B12949951B78747F003B88FD /* CurrentGame.swift */,
 				B0D4C2461B7C31D90023B9C4 /* Date.swift */,
 				B0AD3FFF1B6EEE640013C0F7 /* SavedData.swift */,
-				B0AD40001B6EEE640013C0F7 /* Shepard.swift */,
+				B07699E91B80639E00BAE295 /* Shepard */,
 				B06FD2201B7C4DF600326CA0 /* ShepardSet.swift */,
 			);
 			path = Models;
@@ -206,10 +331,13 @@
 			isa = PBXGroup;
 			children = (
 				B091875C1B7A8BD200A2F8E4 /* Assets.xcassets */,
-				B091875F1B7A8C5800A2F8E4 /* Styles.swift */,
+				B0EF00441B8154E100E74F94 /* Faux Row */,
 				B08699271B76E96800C3BF3F /* HairlineBorderView.swift */,
+				B0EF00421B8149C500E74F94 /* RadioButton.swift */,
 				B0AD40041B6EEE730013C0F7 /* RoundedCornersBox.swift */,
+				B0EF005D1B8157BC00E74F94 /* Side Effects */,
 				B0AD40051B6EEE730013C0F7 /* Spinner.swift */,
+				B091875F1B7A8C5800A2F8E4 /* Styles.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -243,6 +371,62 @@
 				B0D4C2421B7C283A0023B9C4 /* ShepardRowCell.swift */,
 			);
 			path = "Shepard Row";
+			sourceTree = "<group>";
+		};
+		B0EF00441B8154E100E74F94 /* Faux Row */ = {
+			isa = PBXGroup;
+			children = (
+				B0EF00451B8154E100E74F94 /* FauxContentRow */,
+				B0EF00491B8154E100E74F94 /* FauxRow */,
+				B0EF004D1B8154E100E74F94 /* FauxValueRow */,
+				B0EF00571B81551400E74F94 /* FauxRadioRow */,
+			);
+			path = "Faux Row";
+			sourceTree = "<group>";
+		};
+		B0EF00451B8154E100E74F94 /* FauxContentRow */ = {
+			isa = PBXGroup;
+			children = (
+				B0EF00461B8154E100E74F94 /* FauxContentRowNib.xib */,
+				B0EF00481B8154E100E74F94 /* FauxContentRow.swift */,
+			);
+			path = FauxContentRow;
+			sourceTree = "<group>";
+		};
+		B0EF00491B8154E100E74F94 /* FauxRow */ = {
+			isa = PBXGroup;
+			children = (
+				B0EF004A1B8154E100E74F94 /* FauxRowNib.xib */,
+				B0EF004C1B8154E100E74F94 /* FauxRow.swift */,
+			);
+			path = FauxRow;
+			sourceTree = "<group>";
+		};
+		B0EF004D1B8154E100E74F94 /* FauxValueRow */ = {
+			isa = PBXGroup;
+			children = (
+				B0EF004E1B8154E100E74F94 /* FauxValueRowNib.xib */,
+				B0EF00501B8154E100E74F94 /* FauxValueRow.swift */,
+			);
+			path = FauxValueRow;
+			sourceTree = "<group>";
+		};
+		B0EF00571B81551400E74F94 /* FauxRadioRow */ = {
+			isa = PBXGroup;
+			children = (
+				B0EF00581B81551400E74F94 /* FauxRadioRowNib.xib */,
+				B0EF005A1B81551400E74F94 /* FauxRadioRow.swift */,
+			);
+			path = FauxRadioRow;
+			sourceTree = "<group>";
+		};
+		B0EF005D1B8157BC00E74F94 /* Side Effects */ = {
+			isa = PBXGroup;
+			children = (
+				B0EF005E1B8157BC00E74F94 /* SideEffectsNib.xib */,
+				B0EF00601B8157BC00E74F94 /* SideEffects.swift */,
+			);
+			path = "Side Effects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,16 +487,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0AD3F5C1B6EEC6D0013C0F7 /* LaunchScreen.storyboard in Resources */,
+				B071D2261B811F8700A54F8F /* ShepardOrigin.storyboard in Resources */,
 				B0AD3F591B6EEC6D0013C0F7 /* Assets.xcassets in Resources */,
+				B0EF00511B8154E100E74F94 /* FauxContentRowNib.xib in Resources */,
 				B0D4C2431B7C283A0023B9C4 /* Assets.xcassets in Resources */,
+				B0EF00611B8157BC00E74F94 /* SideEffectsNib.xib in Resources */,
+				B071D2291B811F8700A54F8F /* ShepardReputation.storyboard in Resources */,
 				B0AD3FF41B6EEE290013C0F7 /* ShepardFlow.storyboard in Resources */,
 				B0AD40181B6EEE970013C0F7 /* Shepard.storyboard in Resources */,
+				B071D2231B811F8700A54F8F /* ShepardClass.storyboard in Resources */,
 				B03883651B76D57E00895145 /* Assets.xcassets in Resources */,
+				B0EF00531B8154E100E74F94 /* FauxRowNib.xib in Resources */,
 				B0D4C2441B7C283A0023B9C4 /* ShepardRowCell.xib in Resources */,
+				B0EF00551B8154E100E74F94 /* FauxValueRowNib.xib in Resources */,
 				B091875B1B7A8B3900A2F8E4 /* Assets.xcassets in Resources */,
+				B0EF005B1B81551400E74F94 /* FauxRadioRowNib.xib in Resources */,
 				B091875E1B7A8BD200A2F8E4 /* Assets.xcassets in Resources */,
 				B0D4C23A1B7C26970023B9C4 /* Assets.xcassets in Resources */,
+				B071D2281B811F8700A54F8F /* Assets.xcassets in Resources */,
 				B0D4C23B1B7C26970023B9C4 /* Shepards.storyboard in Resources */,
+				B071D2221B811F8700A54F8F /* Assets.xcassets in Resources */,
+				B071D2251B811F8700A54F8F /* Assets.xcassets in Resources */,
 				B086990B1B76E63A00C3BF3F /* Appearance.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,6 +519,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0EF005C1B81551400E74F94 /* FauxRadioRow.swift in Sources */,
 				B12949961B78747F003B88FD /* CurrentGame.swift in Sources */,
 				B086990A1B76E63A00C3BF3F /* AppearanceME1Slider.swift in Sources */,
 				B0AD3FD71B6EEDEA0013C0F7 /* UIView.swift in Sources */,
@@ -335,18 +531,38 @@
 				B0AD40191B6EEE970013C0F7 /* ShepardController.swift in Sources */,
 				B0AD3FD61B6EEDEA0013C0F7 /* StringExtension.swift in Sources */,
 				B0AD3F521B6EEC6D0013C0F7 /* AppDelegate.swift in Sources */,
+				B071D22A1B811F8700A54F8F /* ShepardReputationController.swift in Sources */,
+				B071D2271B811F8700A54F8F /* ShepardOriginController.swift in Sources */,
 				B00AB2741B7AB19D0002C44B /* Dictionary.swift in Sources */,
+				B0EF00621B8157BC00E74F94 /* SideEffects.swift in Sources */,
+				B07699FD1B8075B700BAE295 /* Shepard.Gender.swift in Sources */,
+				B07699F91B80755800BAE295 /* Shepard.Photo.swift in Sources */,
+				B07699F11B8066C400BAE295 /* Shepard.Reputation.swift in Sources */,
+				B071D2241B811F8700A54F8F /* ShepardClassController.swift in Sources */,
+				B0EF00431B8149C500E74F94 /* RadioButton.swift in Sources */,
+				B07699F31B806AF600BAE295 /* UIViewController.swift in Sources */,
+				B07699EB1B80639E00BAE295 /* Shepard.swift in Sources */,
 				B0AD3FDD1B6EEE000013C0F7 /* IBIncludedWrapperViewController.swift in Sources */,
 				B08699081B76E63A00C3BF3F /* AppearanceController.swift in Sources */,
 				B0AD40011B6EEE640013C0F7 /* SavedData.swift in Sources */,
+				B0769A021B80762F00BAE295 /* Shepard.Appearance.swift in Sources */,
+				B0EF00521B8154E100E74F94 /* FauxContentRow.swift in Sources */,
 				B0AD3FD81B6EEDEA0013C0F7 /* HTTPData.swift in Sources */,
 				B0AD3FDC1B6EEE000013C0F7 /* IBIncludedThing.swift in Sources */,
-				B0AD40021B6EEE640013C0F7 /* Shepard.swift in Sources */,
 				B0AD40071B6EEE730013C0F7 /* Spinner.swift in Sources */,
 				B0D4C2471B7C31D90023B9C4 /* Date.swift in Sources */,
+				B0EF00541B8154E100E74F94 /* FauxRow.swift in Sources */,
+				B0EF00561B8154E100E74F94 /* FauxValueRow.swift in Sources */,
+				B07699FF1B8075D800BAE295 /* Shepard.Game.swift in Sources */,
 				B0D4C23C1B7C26970023B9C4 /* ShepardsController.swift in Sources */,
+				B07699E81B805F5D00BAE295 /* HideAutolayoutUtility.swift in Sources */,
+				B07699F01B8066C400BAE295 /* Shepard.Origin.swift in Sources */,
+				B07699F51B806D1B00BAE295 /* NSBundle.swift in Sources */,
+				B07699F71B80736B00BAE295 /* Delay.swift in Sources */,
+				B07699FB1B80757B00BAE295 /* Shepard.Name.swift in Sources */,
 				B09187601B7A8C5800A2F8E4 /* Styles.swift in Sources */,
 				B08699281B76E96800C3BF3F /* HairlineBorderView.swift in Sources */,
+				B07699ED1B8063B800BAE295 /* Shepard.ClassTalent.swift in Sources */,
 				B0D4C2451B7C283A0023B9C4 /* ShepardRowCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +576,54 @@
 				B03883641B76D57E00895145 /* Base */,
 			);
 			name = Assets.xcassets;
+			sourceTree = "<group>";
+		};
+		B071D2111B811F8700A54F8F /* Assets.xcassets */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B071D2121B811F8700A54F8F /* Base */,
+			);
+			name = Assets.xcassets;
+			sourceTree = "<group>";
+		};
+		B071D2131B811F8700A54F8F /* ShepardClass.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B071D2141B811F8700A54F8F /* Base */,
+			);
+			name = ShepardClass.storyboard;
+			sourceTree = "<group>";
+		};
+		B071D2171B811F8700A54F8F /* Assets.xcassets */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B071D2181B811F8700A54F8F /* Base */,
+			);
+			name = Assets.xcassets;
+			sourceTree = "<group>";
+		};
+		B071D2191B811F8700A54F8F /* ShepardOrigin.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B071D21A1B811F8700A54F8F /* Base */,
+			);
+			name = ShepardOrigin.storyboard;
+			sourceTree = "<group>";
+		};
+		B071D21D1B811F8700A54F8F /* Assets.xcassets */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B071D21E1B811F8700A54F8F /* Base */,
+			);
+			name = Assets.xcassets;
+			sourceTree = "<group>";
+		};
+		B071D21F1B811F8700A54F8F /* ShepardReputation.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B071D2201B811F8700A54F8F /* Base */,
+			);
+			name = ShepardReputation.storyboard;
 			sourceTree = "<group>";
 		};
 		B08699051B76E63A00C3BF3F /* Appearance.storyboard */ = {
@@ -440,6 +704,46 @@
 				B0D4C2411B7C283A0023B9C4 /* Base */,
 			);
 			name = ShepardRowCell.xib;
+			sourceTree = "<group>";
+		};
+		B0EF00461B8154E100E74F94 /* FauxContentRowNib.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0EF00471B8154E100E74F94 /* Base */,
+			);
+			name = FauxContentRowNib.xib;
+			sourceTree = "<group>";
+		};
+		B0EF004A1B8154E100E74F94 /* FauxRowNib.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0EF004B1B8154E100E74F94 /* Base */,
+			);
+			name = FauxRowNib.xib;
+			sourceTree = "<group>";
+		};
+		B0EF004E1B8154E100E74F94 /* FauxValueRowNib.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0EF004F1B8154E100E74F94 /* Base */,
+			);
+			name = FauxValueRowNib.xib;
+			sourceTree = "<group>";
+		};
+		B0EF00581B81551400E74F94 /* FauxRadioRowNib.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0EF00591B81551400E74F94 /* Base */,
+			);
+			name = FauxRadioRowNib.xib;
+			sourceTree = "<group>";
+		};
+		B0EF005E1B8157BC00E74F94 /* SideEffectsNib.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0EF005F1B8157BC00E74F94 /* Base */,
+			);
+			name = SideEffectsNib.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

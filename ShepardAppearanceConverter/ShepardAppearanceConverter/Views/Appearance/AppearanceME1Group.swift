@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class AppearanceME1Group: UIView {
+public class AppearanceME1Group: FauxContentRow {
 
     public lazy var titleLabel: UILabel! = {
         for view in self.subviews where view is UILabel {

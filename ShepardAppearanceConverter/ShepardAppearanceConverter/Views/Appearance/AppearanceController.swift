@@ -49,6 +49,12 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
         setupData()
         spinner.stop()
     }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        view.frame.size.height = 100000
+//        view.sizeToFit()
+    }
 
     //MARK: Actions
     private var lastCode: String?

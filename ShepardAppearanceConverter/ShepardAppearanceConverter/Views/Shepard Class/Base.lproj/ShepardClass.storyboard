@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FE8-Fz-nu7">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Shepard Class Controller-->
+        <scene sceneID="XFS-Ed-snS">
+            <objects>
+                <viewController id="FE8-Fz-nu7" customClass="ShepardClassController" customModule="ShepardAppearanceConverter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CTG-ij-bLR"/>
+                        <viewControllerLayoutGuide type="bottom" id="BCg-J2-dR4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="343-25-6Qo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8LF-94-JEJ" userLabel="Values">
+                                <rect key="frame" x="0.0" y="20" width="600" height="1211.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TaD-Rh-2xJ" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isFirst" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Soldier"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isLast" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C5G-bE-aiw" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44" width="600" height="180.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="text">
+                                                <string key="value">Soldiers can specialize in any weapon, and are the only class with access to assault rifles. They begin with medium armor, and are the only class with access to heavy armor. 
+
+Soldiers have combat abilities, but no biotic and tech abilities.
+
+The Soldier class talent increases health, and grants a small amount of health regeneration.</string>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMs-Yw-LAy" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="224.5" width="600" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isFirst" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Engineer"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isLast" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JUO-hf-OEM" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="268.5" width="600" height="146.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="text">
+                                                <string key="value">Engineers can only equip light armor. They have limited weapon choices.
+
+Engineers have tech abilities, but no combat or biotic abilities.
+
+The Engineer class talent reduces recharge time for tech abilities, and increases tech protection.</string>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fal-wR-vho" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="415" width="600" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Adept"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isLast" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isFirst" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c19-41-8IL" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="459" width="600" height="146.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="text">
+                                                <string key="value">Adepts can only equip light armor. They have limited weapon choices.
+
+Adepts have biotic abilities, but no combat or tech abilities.
+
+The Adept class talent reduces recharge time for biotic abilities, and increases biotic protection.</string>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KSy-ea-687" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="605.5" width="600" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Infiltrator"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isLast" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isFirst" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6O2-F9-DTH" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="649.5" width="600" height="164.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="text">
+                                                <string key="value">Infiltrators can gain access to medium armor. They have limited weapon choices, but have access to sniper rifles.
+
+Infiltrators have a mixture of combat and tech abilities, but no biotic abilities. 
+
+The Infiltrator class talent reduces weapon heat buildup, and increases damage for proximity mine explosions.</string>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gaL-2S-LFW" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="814" width="600" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Sentinel"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isLast" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isFirst" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Gl-eZ-NU4" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="858" width="600" height="146.5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="text">
+                                                <string key="value">Sentinels can only equip light armor. They have limited weapon choices.
+
+Sentinels have a mixture of biotic and tech abilities, but no combat abilities. 
+
+The Sentinel class reduces cooldown time on abilities and small improvement to weapon accuracy/damage.</string>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2H4-kq-bed" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1004.5" width="600" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Vanguard"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isLast" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isFirst" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UrK-ej-pWs" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1048.5" width="600" height="163"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="text">
+                                                <string key="value">Vanguards can gain access to medium armor. They have limited weapon choices, but have access to shotguns.
+
+Vanguards have a mixture of combat and biotic abilities, but no tech abilities. 
+
+The Vanguard class talent increases weapon damage, and increases biotic protection.</string>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t1R-8u-jj8">
+                                <rect key="frame" x="0.0" y="1231.5" width="600" height="68.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="100" constant="1000" id="VdI-ij-asQ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="8LF-94-JEJ" secondAttribute="trailing" id="3ff-Rf-3Ic"/>
+                            <constraint firstItem="8LF-94-JEJ" firstAttribute="leading" secondItem="343-25-6Qo" secondAttribute="leading" id="8wG-c0-26J"/>
+                            <constraint firstItem="BCg-J2-dR4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8LF-94-JEJ" secondAttribute="bottom" constant="20" id="EXl-ve-3Ve"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="t1R-8u-jj8" secondAttribute="bottom" id="Fpf-7N-5vP"/>
+                            <constraint firstAttribute="trailing" secondItem="t1R-8u-jj8" secondAttribute="trailing" id="SO8-p6-kGm"/>
+                            <constraint firstItem="t1R-8u-jj8" firstAttribute="leading" secondItem="343-25-6Qo" secondAttribute="leading" id="cnG-RX-VGb"/>
+                            <constraint firstItem="t1R-8u-jj8" firstAttribute="top" secondItem="8LF-94-JEJ" secondAttribute="bottom" id="g4u-pT-LKJ"/>
+                            <constraint firstItem="8LF-94-JEJ" firstAttribute="top" secondItem="343-25-6Qo" secondAttribute="topMargin" constant="20" id="oJi-OQ-6Tb"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="1300"/>
+                    <connections>
+                        <outlet property="adeptRadio" destination="fal-wR-vho" id="osk-dA-c1X"/>
+                        <outlet property="engineerRadio" destination="nMs-Yw-LAy" id="cY6-iJ-6j2"/>
+                        <outlet property="infiltratorRadio" destination="KSy-ea-687" id="zIG-ML-maL"/>
+                        <outlet property="sentinelRadio" destination="gaL-2S-LFW" id="9zS-qe-TJ2"/>
+                        <outlet property="soldierRadio" destination="TaD-Rh-2xJ" id="OnT-3U-xLm"/>
+                        <outlet property="vanguardRadio" destination="2H4-kq-bed" id="10c-9p-465"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c5N-bv-Yi9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="922" y="271"/>
+        </scene>
+    </scenes>
+</document>

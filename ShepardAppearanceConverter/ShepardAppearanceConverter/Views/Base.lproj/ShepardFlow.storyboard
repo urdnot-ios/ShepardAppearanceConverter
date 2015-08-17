@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8152.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="W6H-Rw-Bju">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="W6H-Rw-Bju">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8124.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -9,7 +9,6 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W6H-Rw-Bju" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hrq-co-heX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -21,7 +20,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsw-NL-zCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3011" y="2227"/>
+            <point key="canvasLocation" x="2796" y="2227"/>
         </scene>
         <!--Shepard-->
         <scene sceneID="7HB-ae-oEr">
@@ -31,29 +30,59 @@
                         <viewControllerLayoutGuide type="top" id="0rP-P6-dSz"/>
                         <viewControllerLayoutGuide type="bottom" id="JnK-7Z-lJM"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QRg-Nc-ytH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <view key="view" contentMode="scaleToFill" id="QRg-Nc-ytH" userLabel="Root">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Yh-ZM-Ai7" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="storyboard" value="Shepard"/>
-                                </userDefinedRuntimeAttributes>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wPX-66-JtG">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2bH-37-hXk">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DEj-gZ-J2Q" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="storyboard" value="Shepard"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="treatAsNib" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="constrainHeight" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="DEj-gZ-J2Q" firstAttribute="height" relation="greaterThanOrEqual" secondItem="2bH-37-hXk" secondAttribute="height" id="Izg-c1-xtX"/>
+                                            <constraint firstAttribute="trailing" secondItem="DEj-gZ-J2Q" secondAttribute="trailing" id="f9c-PY-KV1"/>
+                                            <constraint firstAttribute="bottom" secondItem="DEj-gZ-J2Q" secondAttribute="bottom" id="j6s-Av-Z8m"/>
+                                            <constraint firstItem="DEj-gZ-J2Q" firstAttribute="top" secondItem="2bH-37-hXk" secondAttribute="top" id="n5d-FC-Cah"/>
+                                            <constraint firstItem="DEj-gZ-J2Q" firstAttribute="leading" secondItem="2bH-37-hXk" secondAttribute="leading" id="yzg-xG-oXH"/>
+                                        </constraints>
+                                    </scrollView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="2bH-37-hXk" firstAttribute="top" secondItem="wPX-66-JtG" secondAttribute="top" id="2bY-Pd-P7G"/>
+                                    <constraint firstItem="2bH-37-hXk" firstAttribute="width" secondItem="wPX-66-JtG" secondAttribute="width" id="Icw-ae-FG8"/>
+                                    <constraint firstAttribute="trailing" secondItem="2bH-37-hXk" secondAttribute="trailing" id="IoR-4N-hmq"/>
+                                    <constraint firstAttribute="bottom" secondItem="2bH-37-hXk" secondAttribute="bottom" id="RHV-VM-shU"/>
+                                    <constraint firstItem="DEj-gZ-J2Q" firstAttribute="height" secondItem="wPX-66-JtG" secondAttribute="height" priority="100" id="Zjm-Yz-9l7"/>
+                                    <constraint firstItem="2bH-37-hXk" firstAttribute="leading" secondItem="wPX-66-JtG" secondAttribute="leading" id="bjx-bN-GKh"/>
+                                    <constraint firstItem="DEj-gZ-J2Q" firstAttribute="width" secondItem="wPX-66-JtG" secondAttribute="width" id="isC-cl-JrD"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="JnK-7Z-lJM" firstAttribute="top" secondItem="6Yh-ZM-Ai7" secondAttribute="bottom" id="2vJ-rN-jef"/>
-                            <constraint firstItem="6Yh-ZM-Ai7" firstAttribute="top" secondItem="0rP-P6-dSz" secondAttribute="bottom" id="3zr-ls-HCB"/>
-                            <constraint firstAttribute="trailing" secondItem="6Yh-ZM-Ai7" secondAttribute="trailing" id="Jy3-AU-tQ2"/>
-                            <constraint firstItem="6Yh-ZM-Ai7" firstAttribute="leading" secondItem="QRg-Nc-ytH" secondAttribute="leading" id="OLG-TV-89H"/>
+                            <constraint firstAttribute="trailing" secondItem="wPX-66-JtG" secondAttribute="trailing" id="A47-EJ-HxA"/>
+                            <constraint firstItem="wPX-66-JtG" firstAttribute="leading" secondItem="QRg-Nc-ytH" secondAttribute="leading" id="K4I-mJ-dpu"/>
+                            <constraint firstItem="JnK-7Z-lJM" firstAttribute="top" secondItem="wPX-66-JtG" secondAttribute="bottom" id="Sej-Za-DDA"/>
+                            <constraint firstItem="wPX-66-JtG" firstAttribute="top" secondItem="0rP-P6-dSz" secondAttribute="bottom" id="geS-C2-k2j"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Shepard" id="FDN-ke-hZE"/>
                     <connections>
                         <segue destination="W9f-E9-pzv" kind="show" identifier="Edit Appearance" id="NKR-JN-hfm"/>
+                        <segue destination="F3g-Ok-fpq" kind="show" identifier="Edit Reputation" id="dXO-Pi-4BC"/>
+                        <segue destination="B0r-dN-n4h" kind="show" identifier="Edit Origin" id="ogy-gH-8ui"/>
+                        <segue destination="b3E-Xj-lkd" kind="show" identifier="Edit Class" id="euz-3H-2Pp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qxg-iT-rbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -68,28 +97,51 @@
                         <viewControllerLayoutGuide type="top" id="1S4-GR-nCA"/>
                         <viewControllerLayoutGuide type="bottom" id="gsg-c2-j28"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HBm-FL-4cA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <view key="view" contentMode="scaleToFill" id="HBm-FL-4cA" userLabel="Root">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMC-YL-RxK" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBX-HP-heH">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F77-4W-ukW">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZLI-o4-QFo" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="2715"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="storyboard" value="Appearance"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="treatAsNib" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="constrainHeight" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="ZLI-o4-QFo" firstAttribute="leading" secondItem="F77-4W-ukW" secondAttribute="leading" id="0la-6c-bCJ"/>
+                                            <constraint firstItem="ZLI-o4-QFo" firstAttribute="height" relation="greaterThanOrEqual" secondItem="F77-4W-ukW" secondAttribute="height" id="3hf-93-aUH"/>
+                                            <constraint firstItem="ZLI-o4-QFo" firstAttribute="top" secondItem="F77-4W-ukW" secondAttribute="top" id="l36-lP-MKs"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZLI-o4-QFo" secondAttribute="trailing" id="odS-x4-u0T"/>
+                                            <constraint firstAttribute="bottom" secondItem="ZLI-o4-QFo" secondAttribute="bottom" id="tqb-8i-DmD"/>
+                                        </constraints>
+                                    </scrollView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="672" id="0xD-FF-YpM"/>
+                                    <constraint firstAttribute="bottom" secondItem="F77-4W-ukW" secondAttribute="bottom" id="Fcc-sg-h2U"/>
+                                    <constraint firstAttribute="trailing" secondItem="F77-4W-ukW" secondAttribute="trailing" id="ShF-13-cNZ"/>
+                                    <constraint firstItem="F77-4W-ukW" firstAttribute="leading" secondItem="QBX-HP-heH" secondAttribute="leading" id="XND-Ff-4h4"/>
+                                    <constraint firstItem="ZLI-o4-QFo" firstAttribute="height" secondItem="QBX-HP-heH" secondAttribute="height" priority="100" id="rY6-xq-Cru"/>
+                                    <constraint firstItem="ZLI-o4-QFo" firstAttribute="width" secondItem="QBX-HP-heH" secondAttribute="width" id="tXi-Ez-25F"/>
+                                    <constraint firstItem="F77-4W-ukW" firstAttribute="width" secondItem="QBX-HP-heH" secondAttribute="width" id="vZP-za-sNX"/>
+                                    <constraint firstItem="F77-4W-ukW" firstAttribute="top" secondItem="QBX-HP-heH" secondAttribute="top" id="wem-PT-riT"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="storyboard" value="Appearance"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="treatAsNib" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="vMC-YL-RxK" firstAttribute="top" secondItem="1S4-GR-nCA" secondAttribute="bottom" id="1SG-eg-6Vs"/>
-                            <constraint firstItem="gsg-c2-j28" firstAttribute="top" secondItem="vMC-YL-RxK" secondAttribute="bottom" id="K3v-RK-dcm"/>
-                            <constraint firstAttribute="trailing" secondItem="vMC-YL-RxK" secondAttribute="trailing" id="fsN-z1-fPo"/>
-                            <constraint firstItem="vMC-YL-RxK" firstAttribute="leading" secondItem="HBm-FL-4cA" secondAttribute="leading" id="w8k-fC-3Vw"/>
+                            <constraint firstItem="QBX-HP-heH" firstAttribute="top" secondItem="1S4-GR-nCA" secondAttribute="bottom" id="0Uk-yV-kWM"/>
+                            <constraint firstAttribute="trailing" secondItem="QBX-HP-heH" secondAttribute="trailing" id="1TS-NP-Ng2"/>
+                            <constraint firstItem="QBX-HP-heH" firstAttribute="leading" secondItem="HBm-FL-4cA" secondAttribute="leading" id="3um-5G-ZiT"/>
+                            <constraint firstItem="gsg-c2-j28" firstAttribute="top" secondItem="QBX-HP-heH" secondAttribute="bottom" id="v40-gz-o7I"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Appearance" id="MzR-F3-Rd3">
@@ -102,7 +154,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6I-xC-njA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4664" y="2227"/>
+            <point key="canvasLocation" x="4925" y="2227"/>
         </scene>
         <!--Shepards-->
         <scene sceneID="Ypa-cg-7AG">
@@ -112,25 +164,25 @@
                         <viewControllerLayoutGuide type="top" id="p7g-yA-UOF"/>
                         <viewControllerLayoutGuide type="bottom" id="oKV-bz-oc7"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="noX-gZ-vQv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <view key="view" contentMode="scaleToFill" id="noX-gZ-vQv" userLabel="Root">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6b-9M-yg6" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4BP-CK-hMg" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="storyboard" value="Shepards"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="treatAsNib" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="constrainHeight" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="H6b-9M-yg6" firstAttribute="top" secondItem="p7g-yA-UOF" secondAttribute="bottom" id="3rg-EM-6Cv"/>
-                            <constraint firstItem="H6b-9M-yg6" firstAttribute="leading" secondItem="noX-gZ-vQv" secondAttribute="leading" id="Dj5-a5-faz"/>
-                            <constraint firstAttribute="trailing" secondItem="H6b-9M-yg6" secondAttribute="trailing" id="nfA-xc-BNa"/>
-                            <constraint firstItem="oKV-bz-oc7" firstAttribute="top" secondItem="H6b-9M-yg6" secondAttribute="bottom" id="zv0-pB-cdW"/>
+                            <constraint firstAttribute="trailing" secondItem="4BP-CK-hMg" secondAttribute="trailing" id="BKs-Li-ucR"/>
+                            <constraint firstItem="4BP-CK-hMg" firstAttribute="leading" secondItem="noX-gZ-vQv" secondAttribute="leading" id="c1G-yN-bgi"/>
+                            <constraint firstItem="oKV-bz-oc7" firstAttribute="top" secondItem="4BP-CK-hMg" secondAttribute="bottom" id="c6f-XO-twh"/>
+                            <constraint firstItem="4BP-CK-hMg" firstAttribute="top" secondItem="p7g-yA-UOF" secondAttribute="bottom" id="txw-Im-ccq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Saved Games" id="kek-XH-KGA">
@@ -146,7 +198,190 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n3X-iV-XCu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3563" y="2227"/>
+            <point key="canvasLocation" x="3460" y="2227"/>
+        </scene>
+        <!--Edit Reputation-->
+        <scene sceneID="zhw-sZ-toU">
+            <objects>
+                <viewController storyboardIdentifier="Reputation" automaticallyAdjustsScrollViewInsets="NO" id="F3g-Ok-fpq" customClass="ShepardFlowController" customModule="ShepardAppearanceConverter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gsB-65-Jae"/>
+                        <viewControllerLayoutGuide type="bottom" id="VRx-58-Opr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WBZ-XD-NxP" userLabel="Root">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8PF-4t-01o">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kJz-Gf-un7">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCJ-RV-46o" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="storyboard" value="ShepardReputation"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="treatAsNib" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="constrainHeight" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="oCJ-RV-46o" firstAttribute="leading" secondItem="kJz-Gf-un7" secondAttribute="leading" id="1Kf-3i-KaP"/>
+                                            <constraint firstItem="oCJ-RV-46o" firstAttribute="top" secondItem="kJz-Gf-un7" secondAttribute="top" id="4EA-9c-4ZG"/>
+                                            <constraint firstItem="oCJ-RV-46o" firstAttribute="height" relation="greaterThanOrEqual" secondItem="kJz-Gf-un7" secondAttribute="height" id="DJT-hR-TRh"/>
+                                            <constraint firstAttribute="bottom" secondItem="oCJ-RV-46o" secondAttribute="bottom" id="NHW-mn-jJE"/>
+                                            <constraint firstAttribute="trailing" secondItem="oCJ-RV-46o" secondAttribute="trailing" id="ncJ-qd-hXt"/>
+                                        </constraints>
+                                    </scrollView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="oCJ-RV-46o" firstAttribute="height" secondItem="8PF-4t-01o" secondAttribute="height" priority="100" id="3Wg-Ei-eOg"/>
+                                    <constraint firstAttribute="bottom" secondItem="kJz-Gf-un7" secondAttribute="bottom" id="8FT-Jt-iRc"/>
+                                    <constraint firstItem="kJz-Gf-un7" firstAttribute="leading" secondItem="8PF-4t-01o" secondAttribute="leading" id="DNz-vc-aD6"/>
+                                    <constraint firstItem="kJz-Gf-un7" firstAttribute="width" secondItem="8PF-4t-01o" secondAttribute="width" id="OH3-ei-Vz1"/>
+                                    <constraint firstItem="kJz-Gf-un7" firstAttribute="top" secondItem="8PF-4t-01o" secondAttribute="top" id="idu-f5-0Uk"/>
+                                    <constraint firstItem="oCJ-RV-46o" firstAttribute="width" secondItem="8PF-4t-01o" secondAttribute="width" id="pvR-Ga-wdA"/>
+                                    <constraint firstAttribute="trailing" secondItem="kJz-Gf-un7" secondAttribute="trailing" id="zVw-XL-CRV"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="8PF-4t-01o" firstAttribute="leading" secondItem="WBZ-XD-NxP" secondAttribute="leading" id="9qF-KU-gBB"/>
+                            <constraint firstItem="8PF-4t-01o" firstAttribute="top" secondItem="gsB-65-Jae" secondAttribute="bottom" id="SIy-cK-K4c"/>
+                            <constraint firstAttribute="trailing" secondItem="8PF-4t-01o" secondAttribute="trailing" id="T8l-CB-ATF"/>
+                            <constraint firstItem="VRx-58-Opr" firstAttribute="top" secondItem="8PF-4t-01o" secondAttribute="bottom" id="VTw-OJ-TrZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Reputation" id="KEi-LT-1gL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DiD-21-mzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4925" y="926"/>
+        </scene>
+        <!--Origin-->
+        <scene sceneID="1fV-hM-YQv">
+            <objects>
+                <viewController storyboardIdentifier="Origin" automaticallyAdjustsScrollViewInsets="NO" id="B0r-dN-n4h" userLabel="Origin" customClass="ShepardFlowController" customModule="ShepardAppearanceConverter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Vk-Wa-FFY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wbh-Rt-AXQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wOr-g9-bVP" userLabel="Root">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KSq-ye-d6e">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvV-kg-Wtu">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UkF-vo-UvW" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="storyboard" value="ShepardOrigin"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="treatAsNib" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="constrainHeight" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="UkF-vo-UvW" firstAttribute="height" relation="greaterThanOrEqual" secondItem="dvV-kg-Wtu" secondAttribute="height" id="CUZ-Lc-Q6C"/>
+                                            <constraint firstItem="UkF-vo-UvW" firstAttribute="top" secondItem="dvV-kg-Wtu" secondAttribute="top" id="SNm-rF-1rl"/>
+                                            <constraint firstItem="UkF-vo-UvW" firstAttribute="leading" secondItem="dvV-kg-Wtu" secondAttribute="leading" id="ZdI-Db-sAA"/>
+                                            <constraint firstAttribute="bottom" secondItem="UkF-vo-UvW" secondAttribute="bottom" id="cY5-Jg-lBY"/>
+                                            <constraint firstAttribute="trailing" secondItem="UkF-vo-UvW" secondAttribute="trailing" id="hue-Lu-1n0"/>
+                                        </constraints>
+                                    </scrollView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="dvV-kg-Wtu" firstAttribute="width" secondItem="KSq-ye-d6e" secondAttribute="width" id="6zn-jB-hmq"/>
+                                    <constraint firstAttribute="bottom" secondItem="dvV-kg-Wtu" secondAttribute="bottom" id="7Iw-Be-AJu"/>
+                                    <constraint firstItem="UkF-vo-UvW" firstAttribute="height" secondItem="KSq-ye-d6e" secondAttribute="height" priority="100" id="Ord-b6-Exj"/>
+                                    <constraint firstAttribute="trailing" secondItem="dvV-kg-Wtu" secondAttribute="trailing" id="Rhl-MR-pSI"/>
+                                    <constraint firstItem="dvV-kg-Wtu" firstAttribute="top" secondItem="KSq-ye-d6e" secondAttribute="top" id="UHO-cU-awi"/>
+                                    <constraint firstItem="dvV-kg-Wtu" firstAttribute="leading" secondItem="KSq-ye-d6e" secondAttribute="leading" id="ZDd-Dg-DJH"/>
+                                    <constraint firstItem="UkF-vo-UvW" firstAttribute="width" secondItem="KSq-ye-d6e" secondAttribute="width" id="o5F-GK-z6i"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="KSq-ye-d6e" secondAttribute="trailing" id="1Io-yZ-Sb8"/>
+                            <constraint firstItem="KSq-ye-d6e" firstAttribute="top" secondItem="5Vk-Wa-FFY" secondAttribute="bottom" id="5uQ-dx-grG"/>
+                            <constraint firstItem="KSq-ye-d6e" firstAttribute="leading" secondItem="wOr-g9-bVP" secondAttribute="leading" id="dDg-iO-4hu"/>
+                            <constraint firstItem="Wbh-Rt-AXQ" firstAttribute="top" secondItem="KSq-ye-d6e" secondAttribute="bottom" id="wVM-pl-XgG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Origin" id="TcY-Ig-x7E"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4K4-aZ-oSP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4925" y="266"/>
+        </scene>
+        <!--Class-->
+        <scene sceneID="Dyr-pO-5PQ">
+            <objects>
+                <viewController storyboardIdentifier="Class" automaticallyAdjustsScrollViewInsets="NO" id="b3E-Xj-lkd" userLabel="Class" customClass="ShepardFlowController" customModule="ShepardAppearanceConverter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TgK-kD-dPe"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dtp-Bu-56W"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PIC-Pg-45E" userLabel="Root">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fSH-04-W35">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NoV-ME-jvh">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ShA-7Y-1BE" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="storyboard" value="ShepardClass"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="treatAsNib" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="constrainHeight" value="NO"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="ShA-7Y-1BE" secondAttribute="bottom" id="9eV-3V-L1r"/>
+                                            <constraint firstItem="ShA-7Y-1BE" firstAttribute="leading" secondItem="NoV-ME-jvh" secondAttribute="leading" id="DTj-51-iYj"/>
+                                            <constraint firstAttribute="trailing" secondItem="ShA-7Y-1BE" secondAttribute="trailing" id="Nop-Lg-3cj"/>
+                                            <constraint firstItem="ShA-7Y-1BE" firstAttribute="height" relation="greaterThanOrEqual" secondItem="NoV-ME-jvh" secondAttribute="height" id="OBu-8n-B2P"/>
+                                            <constraint firstItem="ShA-7Y-1BE" firstAttribute="top" secondItem="NoV-ME-jvh" secondAttribute="top" id="xQb-nr-21b"/>
+                                        </constraints>
+                                    </scrollView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ShA-7Y-1BE" firstAttribute="width" secondItem="fSH-04-W35" secondAttribute="width" id="4uN-fr-57c"/>
+                                    <constraint firstItem="NoV-ME-jvh" firstAttribute="width" secondItem="fSH-04-W35" secondAttribute="width" id="Djg-0g-8FY"/>
+                                    <constraint firstAttribute="bottom" secondItem="NoV-ME-jvh" secondAttribute="bottom" id="JMb-ok-X1p"/>
+                                    <constraint firstAttribute="trailing" secondItem="NoV-ME-jvh" secondAttribute="trailing" id="LJr-mi-kxx"/>
+                                    <constraint firstItem="NoV-ME-jvh" firstAttribute="top" secondItem="fSH-04-W35" secondAttribute="top" id="XJV-nh-WL9"/>
+                                    <constraint firstItem="ShA-7Y-1BE" firstAttribute="height" secondItem="fSH-04-W35" secondAttribute="height" priority="100" id="cvk-vj-M7d"/>
+                                    <constraint firstItem="NoV-ME-jvh" firstAttribute="leading" secondItem="fSH-04-W35" secondAttribute="leading" id="j5u-Ij-BAH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="fSH-04-W35" firstAttribute="leading" secondItem="PIC-Pg-45E" secondAttribute="leading" id="9Vs-yM-4x3"/>
+                            <constraint firstAttribute="trailing" secondItem="fSH-04-W35" secondAttribute="trailing" id="bB1-Fb-wrl"/>
+                            <constraint firstItem="Dtp-Bu-56W" firstAttribute="top" secondItem="fSH-04-W35" secondAttribute="bottom" id="fBm-e6-kOL"/>
+                            <constraint firstItem="fSH-04-W35" firstAttribute="top" secondItem="TgK-kD-dPe" secondAttribute="bottom" id="gFr-MU-74w"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Class" id="bQH-Sa-CZO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oZF-ri-3pA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4925" y="1582"/>
         </scene>
     </scenes>
 </document>

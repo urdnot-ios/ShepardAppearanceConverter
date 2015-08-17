@@ -40,3 +40,12 @@ extension UIView {
 //        view.removeFromSuperview()
 //    }
 }
+
+
+extension UIView {
+    func clone() -> UIView! {
+        let viewData = NSKeyedArchiver.archivedDataWithRootObject(self)
+        return NSKeyedUnarchiver.unarchiveObjectWithData(viewData) as? UIView
+        //snapshotViewAfterScreenUpdates ?
+    }
+}

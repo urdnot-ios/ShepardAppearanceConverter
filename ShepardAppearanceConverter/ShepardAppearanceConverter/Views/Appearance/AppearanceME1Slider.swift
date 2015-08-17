@@ -10,37 +10,24 @@ import UIKit
 
 public class AppearanceME1Slider: UIStackView {
     
-    public lazy var valueStack: UIView! = {
-        for view in self.subviews {
-            return view
-        }
-        return nil
+    public lazy var headerStack: UIStackView! = {
+        return self.arrangedSubviews.first as? UIStackView
+    }()
+    
+    public lazy var valueStack: UIStackView! = {
+        return self.headerStack.arrangedSubviews.last as? UIStackView
     }()
 
     public lazy var titleLabel: UILabel! = {
-        let subviews: [UIView] = self.valueStack?.subviews ?? []
-        for view in subviews where view is UILabel {
-            return view as? UILabel
-        }
-        return nil
+        return self.headerStack?.arrangedSubviews.first as? UILabel
     }()
     
     public lazy var valueLabel: UILabel! = {
-        var count = 0
-        let subviews: [UIView] = self.valueStack?.subviews ?? []
-        for view in subviews where view is UILabel {
-            if count++ < 1 { continue }
-            return view as? UILabel
-        }
-        return nil
+        return self.valueStack?.arrangedSubviews.last as? UILabel
     }()
     
     public lazy var valueSlider: UISlider! = {
-        let subviews: [UIView] = self.valueStack?.subviews ?? []
-        for view in subviews where view is UISlider {
-            return view as? UISlider
-        }
-        return nil
+        return self.valueStack?.arrangedSubviews.first as? UISlider
     }()
     
     public lazy var noticeLabel: UILabel! = {
@@ -58,5 +45,24 @@ public class AppearanceME1Slider: UIStackView {
         }
         return nil
     }()
+    
+    
+    // stack orientation by size classes still buggy in iOS 9. This hack corrects it. :(
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        configureViewForSizeClass()
+    }
+    
+    var lastHorizontalSizeClass: UIUserInterfaceSizeClass?
 
+    private func configureViewForSizeClass() {
+        if lastHorizontalSizeClass != .Regular && traitCollection.horizontalSizeClass == .Regular {
+            headerStack.axis = .Horizontal
+            lastHorizontalSizeClass = .Regular
+        } else if lastHorizontalSizeClass != .Compact && traitCollection.horizontalSizeClass == .Compact {
+            headerStack.axis = .Vertical
+            lastHorizontalSizeClass = .Compact
+        }
+    }
 }

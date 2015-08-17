@@ -10,11 +10,11 @@ import UIKit
 
 @IBDesignable
 public class HairlineBorderView: UIView {
-    @IBInspectable public var color: UIColor! = UIColor.blackColor()
-    @IBInspectable public var top: Bool! = true
-    @IBInspectable public var bottom: Bool! = true
-    @IBInspectable public var left: Bool! = true
-    @IBInspectable public var right: Bool! = true
+    @IBInspectable public var color: UIColor = UIColor.clearColor()
+    @IBInspectable public var top: Bool = true
+    @IBInspectable public var bottom: Bool = true
+    @IBInspectable public var left: Bool = true
+    @IBInspectable public var right: Bool = true
     
     var borderLayer: CAShapeLayer?
 

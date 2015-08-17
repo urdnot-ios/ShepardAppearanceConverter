@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ShepardController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-    @IBOutlet weak var tableHeader: UIView!
+class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    @IBOutlet weak var headerWrapper: UIView!
+    @IBOutlet weak var headerLinks: UIStackView!
     
     @IBOutlet weak var nameField: UITextField!
         var testNameLabel = UILabel()
@@ -28,7 +29,10 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate,
         return imagePicker
     }()
     
-    @IBOutlet weak var appearanceLabel: UILabel!
+    @IBOutlet weak var originRow: FauxValueRow!
+    @IBOutlet weak var reputationRow: FauxValueRow!
+    @IBOutlet weak var classRow: FauxValueRow!
+    @IBOutlet weak var appearanceRow: FauxValueRow!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,38 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate,
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setupPage()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        configureViewForSizeClass()
+    }
+    
+    var lastHorizontalSizeClass: UIUserInterfaceSizeClass?
+
+    func configureViewForSizeClass() {
+        if lastHorizontalSizeClass != .Regular && view.traitCollection.horizontalSizeClass == .Regular {
+            configureViewForRegularSizeClass()
+            lastHorizontalSizeClass = .Regular
+        } else if lastHorizontalSizeClass != .Compact && view.traitCollection.horizontalSizeClass == .Compact {
+            configureViewForCompactSizeClass()
+            lastHorizontalSizeClass = .Compact
+        }
+    }
+    
+    func configureViewForRegularSizeClass() {
+        for link in headerLinks.arrangedSubviews where link is FauxValueRow {
+            if let row = link as? FauxValueRow {
+                row.hideTitle = false
+            }
+        }
+    }
+    func configureViewForCompactSizeClass() {
+        for link in headerLinks.arrangedSubviews where link is FauxValueRow {
+            if let row = link as? FauxValueRow {
+                row.hideTitle = true
+            }
+        }
     }
     
 
@@ -109,62 +145,33 @@ class ShepardController: UITableViewController, UIImagePickerControllerDelegate,
             case .Game3: return 2
             }
         }()
-        let appearanceCode = CurrentGame.shepard.appearance.format()
-        appearanceLabel.text = appearanceCode.isEmpty ? Shepard.Appearance.SampleAppearance : CurrentGame.shepard.appearance.format()
         setupPhoto()
+        setupFauxRows()
+    }
+    
+    func setupFauxRows() {
+        reputationRow.value = CurrentGame.shepard.reputation.rawValue
+        reputationRow.onClick = { () in
+            self.parentViewController?.performSegueWithIdentifier("Edit Reputation", sender: nil)
+        }
+        originRow.value = CurrentGame.shepard.origin.rawValue
+        originRow.onClick = { () in
+            self.parentViewController?.performSegueWithIdentifier("Edit Origin", sender: nil)
+        }
+        classRow.value = CurrentGame.shepard.classTalent.rawValue
+        classRow.onClick = { () in
+            self.parentViewController?.performSegueWithIdentifier("Edit Class", sender: nil)
+        }
+        let appearanceCode = CurrentGame.shepard.appearance.format()
+        appearanceRow.value = appearanceCode.isEmpty ? Shepard.Appearance.SampleAppearance : CurrentGame.shepard.appearance.format()
+        appearanceRow.onClick = { () in
+            self.parentViewController?.performSegueWithIdentifier("Edit Appearance", sender: nil)
+        }
     }
     
     func setupPhoto() {
         photoImageView.image = CurrentGame.shepard.photo.image()
     }
-
-    //MARK: Protocol - UITableViewDelegate
-    
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return 1
-//    }
-    
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 3
-//    }
-
-//    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//    }
-    
-//    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//    }
-    
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
-//    }
-    
-//    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//    }
-    
-//    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//    }
-
-//    override func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-//    }
-    
-//    override func tableView(tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-//    }
-    
-//    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//    }
-    
-    /**
-        Determines what to do when a row is clicked
-    */
-    
-    var prepareAfterIBIncludedSegue: PrepareAfterIBIncludedSegueType = { destination in }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 0 {
-            parentViewController?.performSegueWithIdentifier("Edit Appearance", sender: nil)
-        }
-    }
-    
     
     //MARK: Photo
     func pickPhoto() {

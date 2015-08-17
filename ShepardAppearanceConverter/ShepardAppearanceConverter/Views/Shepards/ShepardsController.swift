@@ -14,6 +14,10 @@ class ShepardsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if isInterfaceBuilder {
+            dummyData()
+        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -102,6 +106,12 @@ class ShepardsController: UITableViewController {
     }
     
     //MARK: Table Data
+    
+    func dummyData() {
+        let sampleShepard1 = Shepard()
+        let sampleShepard2 = Shepard()
+        SavedData.shepards = [ShepardSet(game: .Game1, shepard: sampleShepard1), ShepardSet(game: .Game1, shepard: sampleShepard2)]
+    }
 
     func setupShepards() {
         shepards = SavedData.shepards.sort { $0.last.modifiedDate.compare($1.last.modifiedDate) == .OrderedDescending }
