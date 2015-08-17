@@ -2,7 +2,7 @@
 
 A Swift 2.0 experiment
 
-![Screenshot](/ShepardAppearanceConverter/blob/master/ScreenShot.png?raw=true)
+![Screenshot](/ScreenShot.png?raw=true)
 
 ## Project Goals
 
