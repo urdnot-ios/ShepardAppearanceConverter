@@ -92,7 +92,7 @@
                                             <constraint firstItem="m7D-Ro-5UT" firstAttribute="leading" secondItem="aOL-n6-EQC" secondAttribute="leading" constant="1" id="vqV-of-QOJ"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ap3-MV-ssv" userLabel="Values">
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ap3-MV-ssv" userLabel="Values">
                                         <rect key="frame" x="165" y="122" width="435" height="132"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UuV-kF-VDj" customClass="FauxValueRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
@@ -173,7 +173,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="zfv-Dx-DqT" firstAttribute="leading" secondItem="pUp-Qz-wJR" secondAttribute="leading" id="3zc-dj-HQ3"/>
                             <constraint firstAttribute="trailing" secondItem="zxB-id-nwo" secondAttribute="trailing" id="D8o-3T-1S5"/>

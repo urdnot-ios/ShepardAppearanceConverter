@@ -19,6 +19,8 @@ public struct Shepard: Equatable {
 
 //MARK: Properties
     internal var dontMarkUpdated = false
+    internal var hasUnsavedData = false
+
 
     internal var _uuid = "\(NSUUID().UUIDString)"
     public var uuid: String { return _uuid }
@@ -58,6 +60,7 @@ public struct Shepard: Equatable {
     public mutating func markUpdated() {
         if !dontMarkUpdated {
             _modifiedDate = NSDate()
+            hasUnsavedData = true
         }
     }
     
@@ -73,7 +76,7 @@ public struct Shepard: Equatable {
             if _photo == .DefaultFemalePhoto {
                 _photo = .DefaultMalePhoto
             }
-            // appearance?
+            _appearance.gender = gender
         case .Female:
             if _name == .DefaultMaleName {
                 _name = .DefaultFemaleName
@@ -81,7 +84,7 @@ public struct Shepard: Equatable {
             if _photo == .DefaultMalePhoto {
                 _photo = .DefaultFemalePhoto
             }
-            // appearance?
+            _appearance.gender = gender
         }
     }
 

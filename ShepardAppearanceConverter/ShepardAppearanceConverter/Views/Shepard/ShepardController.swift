@@ -132,8 +132,6 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
         pickPhoto()
     }
     
-    
-    
     //MARK: Setup Page Elements
 
     func setupPage() {
@@ -145,6 +143,7 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
             case .Game3: return 2
             }
         }()
+        nameField.text = CurrentGame.shepard.name.stringValue
         setupPhoto()
         setupFauxRows()
     }
@@ -174,6 +173,7 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
     
     //MARK: Photo
+    
     func pickPhoto() {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .PhotoLibrary

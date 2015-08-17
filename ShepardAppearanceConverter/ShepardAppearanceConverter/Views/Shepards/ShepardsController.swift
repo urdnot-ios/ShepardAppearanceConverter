@@ -39,9 +39,15 @@ class ShepardsController: UITableViewController {
     //MARK: Setup Page Elements
 
     func setupPage() {
-        setupShepards()
-        setupTableCustomCells()
         tableView.allowsMultipleSelectionDuringEditing = false
+        setupTableCustomCells()
+        setupShepards()
+        if CurrentGame.shepard.hasUnsavedData {
+            // this would be more elegants accomplished with signals/notifications. But, for now, this works.
+            SavedData.saveShepard(CurrentGame.shepard)
+            setupShepards()
+            tableView.reloadData()
+        }
     }
 
     //MARK: Protocol - UITableViewDelegate

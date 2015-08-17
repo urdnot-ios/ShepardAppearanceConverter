@@ -16,16 +16,16 @@
                     <rect key="frame" x="0.0" y="0.0" width="500" height="57"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Side Effects" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vc-kv-pdI">
-                            <rect key="frame" x="15" y="8" width="92" height="14"/>
+                            <rect key="frame" x="15" y="8" width="92" height="16.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7u2-iJ-BEE">
-                            <rect key="frame" x="30" y="26.5" width="440" height="22.5"/>
+                            <rect key="frame" x="30" y="29" width="440" height="20"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xQT-1Q-aRD" userLabel="Entry Wrapper">
-                                    <rect key="frame" x="0.0" y="0.0" width="440" height="22.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="440" height="20"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Alert" translatesAutoresizingMaskIntoConstraints="NO" id="9Ad-Rk-KJC" userLabel="Alert Image View">
                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -35,7 +35,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ibg-95-syh">
-                                            <rect key="frame" x="30" y="5.5" width="410" height="17"/>
+                                            <rect key="frame" x="30" y="1.5" width="410" height="18.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -49,7 +49,7 @@
                                         <constraint firstItem="9Ad-Rk-KJC" firstAttribute="top" secondItem="xQT-1Q-aRD" secondAttribute="top" id="ckL-kR-ZJB"/>
                                         <constraint firstItem="Ibg-95-syh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xQT-1Q-aRD" secondAttribute="top" id="ku3-qK-ymN"/>
                                         <constraint firstItem="Ibg-95-syh" firstAttribute="leading" secondItem="9Ad-Rk-KJC" secondAttribute="trailing" constant="10" id="sny-SW-d9R"/>
-                                        <constraint firstItem="Ibg-95-syh" firstAttribute="firstBaseline" secondItem="9Ad-Rk-KJC" secondAttribute="baseline" constant="-1" id="tNd-Qa-L59"/>
+                                        <constraint firstItem="Ibg-95-syh" firstAttribute="firstBaseline" secondItem="9Ad-Rk-KJC" secondAttribute="baseline" constant="-5" id="tNd-Qa-L59"/>
                                     </constraints>
                                 </view>
                             </subviews>

@@ -40,6 +40,7 @@ public class SavedData {
         if let foundIndex = shepards.indexOf({ $0.match(shepard) }) {
 //            shepard.markUpdated()
             shepards[foundIndex].setGame(shepard.game, shepard: shepard)
+            shepard.hasUnsavedData = false
         }
     }
 
