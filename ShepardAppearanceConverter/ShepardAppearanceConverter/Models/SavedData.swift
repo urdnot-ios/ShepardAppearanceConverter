@@ -10,12 +10,20 @@ import UIKit
 
 public class SavedData {
     
-    public static var shepards: [ShepardSet] = []
+    private static var shepards: [ShepardSet] = []
     
-    public class func addNewShepard(game: Shepard.Game = .Game1) -> Shepard {
-        let newShepard = Shepard(game: game)
+    public static var shepardSets: [ShepardSet] {
+        if CurrentGame.shepard.hasUnsavedData {
+            saveShepard(CurrentGame.shepard)
+        }
+        return shepards
+    }
+    
+    public class func addNewShepard(game: Shepard.Game = .Game1, shepard: Shepard? = nil) -> Shepard {
+        let newShepard = shepard != nil ? shepard! : Shepard(game: game)
         let shepardGames = ShepardSet(game: game, shepard: newShepard)
         shepards.append(shepardGames)
+        onShepardsListChange.fire(true)
         return newShepard
     }
     
@@ -31,13 +39,17 @@ public class SavedData {
     public class func deleteShepard(shepard: Shepard) -> Bool {
         if let foundIndex = shepards.indexOf({ $0.match(shepard) }) {
             shepards.removeAtIndex(foundIndex)
+            onShepardsListChange.fire(true)
             return true
         }
         return false
     }
     
-    public class func saveShepard(var shepard: Shepard) {
-        if let foundIndex = shepards.indexOf({ $0.match(shepard) }) {
+    public class func saveShepard(var shepard: Shepard, atIndex: Int? = nil) {
+        if let foundIndex = atIndex where foundIndex < shepards.count {
+            shepards[foundIndex].setGame(shepard.game, shepard: shepard)
+            shepard.hasUnsavedData = false
+        } else if let foundIndex = shepards.indexOf({ $0.match(shepard) }) {
 //            shepard.markUpdated()
             shepards[foundIndex].setGame(shepard.game, shepard: shepard)
             shepard.hasUnsavedData = false
@@ -48,15 +60,20 @@ public class SavedData {
         
     public class func store() {
         let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(getData().jsonString, forKey: nsUserDefaultsKey)
+        defaults.setObject(SavedData().getData().jsonString, forKey: nsUserDefaultsKey)
 //        defaults.synchronize()
     }
     
     public class func retrieve() {
         let defaults = NSUserDefaults.standardUserDefaults()
         if let data = defaults.objectForKey(nsUserDefaultsKey) as? String {
-            setData(HTTPData(jsonString: data))
+            do {
+                let mixedData = try SerializableData(jsonString: data)
+                SavedData().setData(mixedData)
+                return
+            } catch {}
         }
+        SavedData().setData(SerializableData())
     }
     
     public class func loadImageFromDocuments(fileName: String) -> UIImage? {
@@ -76,20 +93,30 @@ public class SavedData {
     }
 }
     
-//MARK: Saving/Retrieving Data
+//MARK: Notifications
 
 extension SavedData {
+    
+    public static let onShepardsListChange = Signal<(Bool)>()
+}
+    
+//MARK: Saving/Retrieving Data
 
-    public class func getData() -> HTTPData {
-        saveShepard(CurrentGame.shepard)
-        var list = [String: HTTPData]()
-        list["shepards"] = HTTPData(shepards.map { $0.getData() })
-        list["current_game"] = CurrentGame.getData()
-        return HTTPData(list)
+extension SavedData: SerializableDataType {
+
+    public func getData() -> SerializableData {
+        SavedData.saveShepard(CurrentGame.shepard)
+        var list = [String: SerializableDataType?]()
+        list["shepards"] = SerializableData(SavedData.shepards.map { $0.getData() })
+        list["current_game"] = CurrentGame().getData()
+        return SerializableData(list)
     }
     
-    public class func setData(data: HTTPData) {
-        shepards = data["shepards"].array.map { ShepardSet(data: $0) }
-        CurrentGame.setData(data["current_game"])
+    public func setData(data: SerializableData) {
+        SavedData.shepards = (data["shepards"]?.array ?? []).map { ShepardSet(data: $0) }
+        CurrentGame().setData(data["current_game"] ?? SerializableData())
+        if SavedData.shepards.count == 0 {
+            SavedData.addNewShepard(CurrentGame.shepard.game, shepard: CurrentGame.shepard)
+        }
     }
 }

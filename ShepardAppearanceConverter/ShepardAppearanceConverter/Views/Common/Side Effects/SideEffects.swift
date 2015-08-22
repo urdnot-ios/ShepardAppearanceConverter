@@ -80,9 +80,10 @@ import UIKit
                     break
                 }
             }
-            let entryWrapperView = entriesStack?.arrangedSubviews[i]
-            for view in entryWrapperView?.subviews ?? [] where view is UILabel {
-                (view as? UILabel)?.text = entries[i]
+            if let entryWrapperView = entriesStack?.arrangedSubviews[i] {
+                for view in entryWrapperView.subviews ?? [] where view is UILabel {
+                    (view as? UILabel)?.text = entries[i]
+                }
             }
         }
     }

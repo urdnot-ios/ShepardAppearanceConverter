@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qpA-9h-eyQ" userLabel="Values">
-                                <rect key="frame" x="0.0" y="20" width="600" height="336"/>
+                            <stackView contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qpA-9h-eyQ" userLabel="Values">
+                                <rect key="frame" x="0.0" y="10" width="600" height="557.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vl6-sZ-qWN" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -44,13 +44,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EgV-qO-8Ef" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="152" width="600" height="64"/>
+                                        <rect key="frame" x="0.0" y="152" width="600" height="61.5"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="text" value="War Hero grants a Paragon bonus."/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e6W-g4-GbM" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="216" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="213.5" width="600" height="44"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Sole Survivor"/>
@@ -59,30 +59,21 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NHL-pb-5CD" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="260" width="600" height="76"/>
+                                        <rect key="frame" x="0.0" y="257.5" width="600" height="300"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="text" value="Sole Survivor grants a part-Renegade/part-Paragon bonus."/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9X7-cL-zNg">
-                                <rect key="frame" x="0.0" y="354" width="600" height="246"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="100" constant="1000" id="ESk-3u-WjY"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="qpA-9h-eyQ" secondAttribute="trailing" id="Bxv-Rn-GNO"/>
-                            <constraint firstAttribute="trailing" secondItem="9X7-cL-zNg" secondAttribute="trailing" id="EW2-Hd-KkL"/>
-                            <constraint firstItem="9X7-cL-zNg" firstAttribute="top" secondItem="qpA-9h-eyQ" secondAttribute="bottom" id="ivh-DC-jXV"/>
                             <constraint firstItem="qQi-8n-dRX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="qpA-9h-eyQ" secondAttribute="bottom" constant="20" id="q8u-qu-SWm"/>
                             <constraint firstItem="qpA-9h-eyQ" firstAttribute="leading" secondItem="PdT-Y2-Dyb" secondAttribute="leading" id="tHI-Gq-G91"/>
-                            <constraint firstItem="qpA-9h-eyQ" firstAttribute="top" secondItem="uKK-y5-u3J" secondAttribute="bottom" constant="20" id="uXC-Lr-uKY"/>
-                            <constraint firstItem="9X7-cL-zNg" firstAttribute="leading" secondItem="PdT-Y2-Dyb" secondAttribute="leading" id="xd1-kS-Uar"/>
-                            <constraint firstItem="qQi-8n-dRX" firstAttribute="top" secondItem="9X7-cL-zNg" secondAttribute="bottom" id="yUV-Ea-34B"/>
+                            <constraint firstItem="qpA-9h-eyQ" firstAttribute="top" secondItem="uKK-y5-u3J" secondAttribute="bottom" constant="10" id="uXC-Lr-uKY"/>
+                            <constraint firstItem="qQi-8n-dRX" firstAttribute="top" secondItem="qpA-9h-eyQ" secondAttribute="bottom" priority="100" constant="20" id="w1I-UN-vJf"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

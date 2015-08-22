@@ -36,11 +36,14 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupPage()
+        CurrentGame.onCurrentShepardChange.listen(self) { [weak self] (_) in
+            self?.setupPage()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        setupPage()
     }
     
     override func viewDidLayoutSubviews() {
@@ -106,6 +109,8 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
         if nameField.text == nil || nameField.text!.isEmpty {
             nameField.text = CurrentGame.shepard.name.stringValue
             nameChanged(nameField)
+        } else {
+            CurrentGame.shepard.setName(nameField.text)
         }
         nameField.superview?.setNeedsLayout()
         nameField.superview?.layoutIfNeeded()
@@ -146,25 +151,32 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
         nameField.text = CurrentGame.shepard.name.stringValue
         setupPhoto()
         setupFauxRows()
+        
+        CurrentGame.shepard.onChange.listen(self) { [weak self] (shepard) in
+            self?.setupPage()
+        }
     }
     
     func setupFauxRows() {
-        reputationRow.value = CurrentGame.shepard.reputation.rawValue
-        reputationRow.onClick = { () in
-            self.parentViewController?.performSegueWithIdentifier("Edit Reputation", sender: nil)
-        }
         originRow.value = CurrentGame.shepard.origin.rawValue
-        originRow.onClick = { () in
-            self.parentViewController?.performSegueWithIdentifier("Edit Origin", sender: nil)
+        originRow.onClick = { [weak self] () in
+            let parentController = self?.parentViewController as? ShepardFlowController
+            parentController?.performChangeableSegue("Edit Origin", sender: self?.originRow)
+        }
+        reputationRow.value = CurrentGame.shepard.reputation.rawValue
+        reputationRow.onClick = { [weak self] () in
+            let parentController = self?.parentViewController as? ShepardFlowController
+            parentController?.performChangeableSegue("Edit Reputation", sender: self?.reputationRow)
         }
         classRow.value = CurrentGame.shepard.classTalent.rawValue
-        classRow.onClick = { () in
-            self.parentViewController?.performSegueWithIdentifier("Edit Class", sender: nil)
+        classRow.onClick = { [weak self] () in
+            let parentController = self?.parentViewController as? ShepardFlowController
+            parentController?.performChangeableSegue("Edit Class", sender: self?.classRow)
         }
         let appearanceCode = CurrentGame.shepard.appearance.format()
         appearanceRow.value = appearanceCode.isEmpty ? Shepard.Appearance.SampleAppearance : CurrentGame.shepard.appearance.format()
-        appearanceRow.onClick = { () in
-            self.parentViewController?.performSegueWithIdentifier("Edit Appearance", sender: nil)
+        appearanceRow.onClick = { [weak self] () in
+            self?.parentViewController?.performSegueWithIdentifier("Edit Appearance", sender: appearanceRow)
         }
     }
     

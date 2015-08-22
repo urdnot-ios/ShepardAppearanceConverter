@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="300" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AYY-2v-sQD" userLabel="Values">
-                                <rect key="frame" x="0.0" y="20" width="600" height="420"/>
+                                <rect key="frame" x="0.0" y="10" width="600" height="560"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g46-5d-vGL" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -59,7 +59,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kaf-to-08w" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="329.5" width="600" height="90.5"/>
+                                        <rect key="frame" x="0.0" y="329.5" width="600" height="230.5"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="text">
                                                 <string key="value">Colonist grants a part-Renegade/part-Paragon bonus.  Game 1 Mission Citadel: I Remember Me is only available if you select Colonist.</string>
@@ -68,23 +68,14 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CB8-Bn-vN0">
-                                <rect key="frame" x="0.0" y="434" width="600" height="166"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="100" constant="1000" id="3Dq-Ez-xvg"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="BCg-J2-dR4" firstAttribute="top" secondItem="AYY-2v-sQD" secondAttribute="bottom" priority="100" constant="20" id="9he-eB-Ear"/>
                             <constraint firstItem="AYY-2v-sQD" firstAttribute="leading" secondItem="1jD-Wb-SIN" secondAttribute="leading" id="9o2-6v-Sel"/>
-                            <constraint firstItem="AYY-2v-sQD" firstAttribute="top" secondItem="CTG-ij-bLR" secondAttribute="bottom" constant="20" id="F4I-oZ-eXG"/>
-                            <constraint firstAttribute="trailing" secondItem="CB8-Bn-vN0" secondAttribute="trailing" id="M5J-oP-3Te"/>
+                            <constraint firstItem="AYY-2v-sQD" firstAttribute="top" secondItem="CTG-ij-bLR" secondAttribute="bottom" constant="10" id="F4I-oZ-eXG"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AYY-2v-sQD" secondAttribute="bottom" constant="20" id="n2n-Ku-jYc"/>
-                            <constraint firstItem="CB8-Bn-vN0" firstAttribute="leading" secondItem="1jD-Wb-SIN" secondAttribute="leading" id="o97-IN-wbM"/>
-                            <constraint firstItem="BCg-J2-dR4" firstAttribute="top" secondItem="CB8-Bn-vN0" secondAttribute="bottom" id="qyL-nY-01K"/>
                             <constraint firstAttribute="trailing" secondItem="AYY-2v-sQD" secondAttribute="trailing" id="wBY-z0-mRA"/>
-                            <constraint firstItem="CB8-Bn-vN0" firstAttribute="top" secondItem="AYY-2v-sQD" secondAttribute="bottom" id="wF1-Yf-3x5"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

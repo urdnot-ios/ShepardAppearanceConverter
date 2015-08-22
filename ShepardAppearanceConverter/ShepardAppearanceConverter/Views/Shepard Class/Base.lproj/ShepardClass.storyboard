@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8LF-94-JEJ" userLabel="Values">
-                                <rect key="frame" x="0.0" y="20" width="600" height="1211.5"/>
+                                <rect key="frame" x="0.0" y="10" width="600" height="1236.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TaD-Rh-2xJ" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -114,7 +114,7 @@ The Infiltrator class talent reduces weapon heat buildup, and increases damage f
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Gl-eZ-NU4" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="858" width="600" height="146.5"/>
+                                        <rect key="frame" x="0.0" y="858" width="600" height="123"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="text">
                                                 <string key="value">Sentinels can only equip light armor. They have limited weapon choices.
@@ -126,7 +126,7 @@ The Sentinel class reduces cooldown time on abilities and small improvement to w
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2H4-kq-bed" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1004.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="981" width="600" height="44"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Vanguard"/>
@@ -135,7 +135,7 @@ The Sentinel class reduces cooldown time on abilities and small improvement to w
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UrK-ej-pWs" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1048.5" width="600" height="163"/>
+                                        <rect key="frame" x="0.0" y="1025" width="600" height="211.5"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="text">
                                                 <string key="value">Vanguards can gain access to medium armor. They have limited weapon choices, but have access to shotguns.
@@ -148,23 +148,14 @@ The Vanguard class talent increases weapon damage, and increases biotic protecti
                                     </view>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t1R-8u-jj8">
-                                <rect key="frame" x="0.0" y="1231.5" width="600" height="68.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="100" constant="1000" id="VdI-ij-asQ"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="8LF-94-JEJ" secondAttribute="trailing" id="3ff-Rf-3Ic"/>
                             <constraint firstItem="8LF-94-JEJ" firstAttribute="leading" secondItem="343-25-6Qo" secondAttribute="leading" id="8wG-c0-26J"/>
-                            <constraint firstItem="BCg-J2-dR4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8LF-94-JEJ" secondAttribute="bottom" constant="20" id="EXl-ve-3Ve"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="t1R-8u-jj8" secondAttribute="bottom" id="Fpf-7N-5vP"/>
-                            <constraint firstAttribute="trailing" secondItem="t1R-8u-jj8" secondAttribute="trailing" id="SO8-p6-kGm"/>
-                            <constraint firstItem="t1R-8u-jj8" firstAttribute="leading" secondItem="343-25-6Qo" secondAttribute="leading" id="cnG-RX-VGb"/>
-                            <constraint firstItem="t1R-8u-jj8" firstAttribute="top" secondItem="8LF-94-JEJ" secondAttribute="bottom" id="g4u-pT-LKJ"/>
-                            <constraint firstItem="8LF-94-JEJ" firstAttribute="top" secondItem="343-25-6Qo" secondAttribute="topMargin" constant="20" id="oJi-OQ-6Tb"/>
+                            <constraint firstItem="BCg-J2-dR4" firstAttribute="top" secondItem="8LF-94-JEJ" secondAttribute="bottom" priority="100" constant="20" id="EXl-ve-3Ve"/>
+                            <constraint firstItem="BCg-J2-dR4" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8LF-94-JEJ" secondAttribute="bottom" constant="20" id="PQ8-AD-v0b"/>
+                            <constraint firstItem="8LF-94-JEJ" firstAttribute="top" secondItem="343-25-6Qo" secondAttribute="topMargin" constant="10" id="oJi-OQ-6Tb"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

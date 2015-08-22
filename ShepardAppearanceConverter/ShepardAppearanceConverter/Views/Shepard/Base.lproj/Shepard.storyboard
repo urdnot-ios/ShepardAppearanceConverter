@@ -27,9 +27,10 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                                 <connections>
-                                                    <action selector="doneChangingName:" destination="FE8-Fz-nu7" eventType="editingDidEnd" id="9ns-s4-GF7"/>
-                                                    <action selector="nameChanged:" destination="FE8-Fz-nu7" eventType="valueChanged" id="W5g-pr-F9G"/>
-                                                    <action selector="startChangingName:" destination="FE8-Fz-nu7" eventType="editingDidBegin" id="8gm-YH-DV2"/>
+                                                    <action selector="doneChangingName:" destination="FE8-Fz-nu7" eventType="editingDidEnd" id="uxC-pP-pK5"/>
+                                                    <action selector="doneChangingName:" destination="FE8-Fz-nu7" eventType="primaryActionTriggered" id="ykr-IZ-b3n"/>
+                                                    <action selector="nameChanged:" destination="FE8-Fz-nu7" eventType="editingChanged" id="OR7-R3-umN"/>
+                                                    <action selector="startChangingName:" destination="FE8-Fz-nu7" eventType="editingDidBegin" id="GhJ-N7-DTY"/>
                                                 </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text=" Shepard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqP-pb-4o7">
@@ -92,7 +93,7 @@
                                             <constraint firstItem="m7D-Ro-5UT" firstAttribute="leading" secondItem="aOL-n6-EQC" secondAttribute="leading" constant="1" id="vqV-of-QOJ"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ap3-MV-ssv" userLabel="Values">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ap3-MV-ssv" userLabel="Values">
                                         <rect key="frame" x="165" y="122" width="435" height="132"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UuV-kF-VDj" customClass="FauxValueRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">

@@ -52,7 +52,7 @@ import UIKit
             }
         }
     }
-    @IBInspectable public var highlight: UIColor = Styles.RowHighlightColor {
+    @IBInspectable public var highlight: UIColor = Styles.Colors.RowHighlightColor {
         didSet {
             if oldValue != highlight {
                 setupRow()

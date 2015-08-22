@@ -59,7 +59,7 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
     //MARK: Actions
     private var lastCode: String?
     @IBAction func ME2CodeChanged(sender: AnyObject) {
-        ME2CodeField.text = Shepard.Appearance.formatCode(ME2CodeField.text, lastCode: lastCode)
+        ME2CodeField.text = Shepard.Appearance.Formatting.formatCode(ME2CodeField.text, lastCode: lastCode)
         lastCode = ME2CodeField.text
         ME2CodeLabel.text = ME2CodeField.text
     }

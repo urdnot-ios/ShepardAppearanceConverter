@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct Shepard: Equatable {
+public struct Shepard {
 
     public static let DefaultSurname = "Shepard"
     
@@ -18,9 +18,6 @@ public struct Shepard: Equatable {
     }
 
 //MARK: Properties
-    internal var dontMarkUpdated = false
-    internal var hasUnsavedData = false
-
 
     internal var _uuid = "\(NSUUID().UUIDString)"
     public var uuid: String { return _uuid }
@@ -55,13 +52,6 @@ public struct Shepard: Equatable {
     
     public var title: String {
         return "\(origin.rawValue) \(reputation.rawValue) \(classTalent.rawValue)"
-    }
-    
-    public mutating func markUpdated() {
-        if !dontMarkUpdated {
-            _modifiedDate = NSDate()
-            hasUnsavedData = true
-        }
     }
     
 //MARK: Supporting Functions
@@ -112,8 +102,26 @@ public struct Shepard: Equatable {
         _appearance = appearance
     }
     
+//MARK: Listeners
+
+    internal var dontMarkUpdated = false
+    internal var hasUnsavedData = false
+    
+    public mutating func markUpdated() {
+        if !dontMarkUpdated {
+            _modifiedDate = NSDate()
+            hasUnsavedData = true
+            // for some reason, the changes aren't propogated up to CurrentGame.Shepard (despite value type), unless we do this delayed call?
+            Delay.bySeconds(0, { self.onChange.fire(self) })
+        }
+    }
+    
+    /// Don't use this. Use CurrentGame.onCurrentShepardChange instead.
+    internal let onChange = Signal<(Shepard)>()
 }
 
+
+extension Shepard: Equatable {}
 public func ==(a: Shepard, b: Shepard) -> Bool {
     return a._uuid == b._uuid
 }
@@ -122,16 +130,19 @@ public func ==(a: Shepard, b: Shepard) -> Bool {
 
 //MARK: Save/Retrieve Data
 
-extension Shepard {
+extension Shepard: SerializableDataType {
 
-    public init(data: HTTPData) {
-        let game = Game(rawValue: data["game"].string ?? "0") ?? .Game1
+    public init(data: SerializableData) {
+        let game = Game(rawValue: data["game"]?.string ?? "0") ?? .Game1
         self.init(game: game)
         setData(data)
     }
     
-    public func getData() -> HTTPData {
-        var list = [String: AnyObject]()
+    ///
+    /// Extracts all data from this shepard and stores it in a dictionary.
+    ///
+    public func getData() -> SerializableData {
+        var list = [String: SerializableDataType?]()
         list["uuid"] = _uuid
         list["created_date"] = createdDate
         list["modified_date"] = modifiedDate
@@ -143,46 +154,58 @@ extension Shepard {
         list["origin"] = origin.rawValue
         list["reputation"] = reputation.rawValue
         list["class"] = classTalent.rawValue
-        return HTTPData(list)
+        return SerializableData(list)
     }
     
-    public mutating func setData(data: HTTPData, source: SetDataSource = .SavedData) {
+    public mutating func setData(data: SerializableData) {
+        setData(data, source: .SavedData)
+    }
+    
+    ///
+    /// Creates a shepard with a dictionary of data. Can be from saved values, or from a previous game.
+    /// Values general to all shepards within a set should be placed in setCommonData instead.
+    ///
+    public mutating func setData(data: SerializableData, source: SetDataSource) {
         if source == .SavedData {
             dontMarkUpdated = true
-            _uuid = data["uuid"].string ?? _uuid
-            _game = Game(rawValue: data["game"].string ?? "0") ?? .Game1
-            _createdDate = data["created_date"].date ?? NSDate()
-            _modifiedDate = data["modified_date"].date ?? NSDate()
+            _uuid = data["uuid"]?.string ?? _uuid
+            _game = Game(rawValue: data["game"]?.string ?? "0") ?? .Game1
+            _createdDate = data["created_date"]?.date ?? NSDate()
+            _modifiedDate = data["modified_date"]?.date ?? NSDate()
         }
         
-        setName(data["name"].string)
-        
-        if let photoName = data["photo"].string {
-            if photoName == Photo.DefaultMalePhoto.stringValue, let photo = Photo.DefaultMalePhoto.image() {
-                setPhoto(photo)
-            } else if photoName == Photo.DefaultFemalePhoto.stringValue, let photo = Photo.DefaultFemalePhoto.image() {
-                setPhoto(photo)
-            } else if photoName.stringFrom(0, to: 7) == "Custom:", let photo = SavedData.loadImageFromDocuments(photoName.stringFrom(7)) {
-                setPhoto(photo)
-            }
-        }
+        let gender = data["gender"]?.string == "M" ? Gender.Male : Gender.Female
         
         if case let .GameConversion(oldGame) = source {
-            var appearance = Appearance(data["appearance"].string ?? "", fromGame: oldGame, withGender: gender)
+            var appearance = Appearance(data["appearance"]?.string ?? "", fromGame: oldGame, withGender: gender)
             appearance.convert(toGame: game)
             setAppearance(appearance)
         } else {
-            setAppearance(Appearance(data["appearance"].string ?? "", fromGame: game, withGender: gender))
+            setAppearance(Appearance(data["appearance"]?.string ?? "", fromGame: game, withGender: gender))
         }
         
-        origin = Origin(rawValue: data["origin"].string ?? "") ?? origin
-        reputation = Reputation(rawValue: data["reputation"].string ?? "") ?? reputation
-        classTalent = ClassTalent(rawValue: data["class"].string ?? "") ?? classTalent
+        classTalent = ClassTalent(rawValue: data["class"]?.string ?? "") ?? classTalent
         
-        // do gender last (it changes stuff):
-        setGender(data["gender"].string == "M" ? .Male : .Female)
+        setCommonData(data)
         
         dontMarkUpdated = false
+    }
+    
+    ///
+    /// Data shared by all shepards in a Set.
+    /// Put souvenirs/achievements here?
+    ///
+    public mutating func setCommonData(data: SerializableData) {
+    
+        let gender = data["gender"]?.string == "M" ? Gender.Male : Gender.Female
+        
+        setName(data["name"]?.string)
+        
+        origin = Origin(rawValue: data["origin"]?.string ?? "") ?? origin
+        reputation = Reputation(rawValue: data["reputation"]?.string ?? "") ?? reputation
+        
+        // do gender last (it changes stuff):
+        setGender(gender)
     }
 }
 

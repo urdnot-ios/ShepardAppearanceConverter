@@ -8,12 +8,25 @@
 
 import Foundation
 
-// from: http://stackoverflow.com/a/24219069
 extension Dictionary {
-    init(_ pairs: [Element]) {
+    // from: http://stackoverflow.com/a/24219069
+    public init(_ pairs: [Element]) {
         self.init()
         for (k, v) in pairs {
             self[k] = v
         }
+    }
+    
+    public func merge<T, U>(dictionary: [T: U]) -> [T: U] {
+        var base = [T: U]()
+        for (key, value) in self {
+            if let k = key as? T, let v = value as? U {
+                base[k] = v
+            }
+        }
+        for (key, value) in dictionary {
+            base[key] = value
+        }
+        return base
     }
 }

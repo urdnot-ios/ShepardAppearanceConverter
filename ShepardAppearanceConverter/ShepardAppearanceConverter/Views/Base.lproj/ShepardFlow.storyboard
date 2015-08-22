@@ -80,9 +80,18 @@
                     <navigationItem key="navigationItem" title="Shepard" id="FDN-ke-hZE"/>
                     <connections>
                         <segue destination="W9f-E9-pzv" kind="show" identifier="Edit Appearance" id="NKR-JN-hfm"/>
-                        <segue destination="F3g-Ok-fpq" kind="show" identifier="Edit Reputation" id="dXO-Pi-4BC"/>
-                        <segue destination="B0r-dN-n4h" kind="show" identifier="Edit Origin" id="ogy-gH-8ui"/>
-                        <segue destination="b3E-Xj-lkd" kind="show" identifier="Edit Class" id="euz-3H-2Pp"/>
+                        <segue destination="F3g-Ok-fpq" kind="popoverPresentation" identifier="Edit Reputation (Popover)" popoverAnchorView="DEj-gZ-J2Q" id="dXO-Pi-4BC">
+                            <popoverArrowDirection key="popoverArrowDirection"/>
+                        </segue>
+                        <segue destination="B0r-dN-n4h" kind="popoverPresentation" identifier="Edit Origin (Popover)" popoverAnchorView="DEj-gZ-J2Q" id="ogy-gH-8ui">
+                            <popoverArrowDirection key="popoverArrowDirection"/>
+                        </segue>
+                        <segue destination="b3E-Xj-lkd" kind="show" identifier="Edit Class (Show)" id="tFJ-ET-gIM"/>
+                        <segue destination="F3g-Ok-fpq" kind="show" identifier="Edit Reputation (Show)" id="4JU-Dn-Ioq"/>
+                        <segue destination="B0r-dN-n4h" kind="show" identifier="Edit Origin (Show)" id="Cv8-Zc-9Se"/>
+                        <segue destination="b3E-Xj-lkd" kind="popoverPresentation" identifier="Edit Class (Popover)" popoverAnchorView="DEj-gZ-J2Q" id="6qf-7n-gCa">
+                            <popoverArrowDirection key="popoverArrowDirection"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qxg-iT-rbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -203,23 +212,23 @@
         <!--Edit Reputation-->
         <scene sceneID="zhw-sZ-toU">
             <objects>
-                <viewController storyboardIdentifier="Reputation" automaticallyAdjustsScrollViewInsets="NO" id="F3g-Ok-fpq" customClass="ShepardFlowController" customModule="ShepardAppearanceConverter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Reputation" automaticallyAdjustsScrollViewInsets="NO" id="F3g-Ok-fpq" customClass="ShepardPopoverController" customModule="ShepardAppearanceConverter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gsB-65-Jae"/>
                         <viewControllerLayoutGuide type="bottom" id="VRx-58-Opr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WBZ-XD-NxP" userLabel="Root">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8PF-4t-01o">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8PF-4t-01o">
+                                <rect key="frame" x="0.0" y="20" width="400" height="380"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kJz-Gf-un7">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kJz-Gf-un7">
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="380"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCJ-RV-46o" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oCJ-RV-46o" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="380"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="storyboard" value="ShepardReputation"/>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="treatAsNib" value="YES"/>
@@ -230,8 +239,8 @@
                                         <constraints>
                                             <constraint firstItem="oCJ-RV-46o" firstAttribute="leading" secondItem="kJz-Gf-un7" secondAttribute="leading" id="1Kf-3i-KaP"/>
                                             <constraint firstItem="oCJ-RV-46o" firstAttribute="top" secondItem="kJz-Gf-un7" secondAttribute="top" id="4EA-9c-4ZG"/>
-                                            <constraint firstItem="oCJ-RV-46o" firstAttribute="height" relation="greaterThanOrEqual" secondItem="kJz-Gf-un7" secondAttribute="height" id="DJT-hR-TRh"/>
                                             <constraint firstAttribute="bottom" secondItem="oCJ-RV-46o" secondAttribute="bottom" id="NHW-mn-jJE"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" secondItem="oCJ-RV-46o" secondAttribute="height" id="Nnc-Hp-Ker"/>
                                             <constraint firstAttribute="trailing" secondItem="oCJ-RV-46o" secondAttribute="trailing" id="ncJ-qd-hXt"/>
                                         </constraints>
                                     </scrollView>
@@ -256,31 +265,36 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Reputation" id="KEi-LT-1gL"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="400" height="400"/>
+                    <connections>
+                        <outlet property="targetView" destination="oCJ-RV-46o" id="pCk-vI-aSk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DiD-21-mzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4925" y="926"/>
+            <point key="canvasLocation" x="4925" y="1214"/>
         </scene>
         <!--Origin-->
         <scene sceneID="1fV-hM-YQv">
             <objects>
-                <viewController storyboardIdentifier="Origin" automaticallyAdjustsScrollViewInsets="NO" id="B0r-dN-n4h" userLabel="Origin" customClass="ShepardFlowController" customModule="ShepardAppearanceConverter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Origin" automaticallyAdjustsScrollViewInsets="NO" id="B0r-dN-n4h" userLabel="Origin" customClass="ShepardPopoverController" customModule="ShepardAppearanceConverter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Vk-Wa-FFY"/>
                         <viewControllerLayoutGuide type="bottom" id="Wbh-Rt-AXQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wOr-g9-bVP" userLabel="Root">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KSq-ye-d6e">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KSq-ye-d6e">
+                                <rect key="frame" x="0.0" y="20" width="400" height="380"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvV-kg-Wtu">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dvV-kg-Wtu">
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="380"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UkF-vo-UvW" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UkF-vo-UvW" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="608.5"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="storyboard" value="ShepardOrigin"/>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="treatAsNib" value="YES"/>
@@ -317,31 +331,36 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Origin" id="TcY-Ig-x7E"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="400" height="400"/>
+                    <connections>
+                        <outlet property="targetView" destination="UkF-vo-UvW" id="vYo-js-Gy0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4K4-aZ-oSP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4925" y="266"/>
+            <point key="canvasLocation" x="4925" y="763"/>
         </scene>
         <!--Class-->
         <scene sceneID="Dyr-pO-5PQ">
             <objects>
-                <viewController storyboardIdentifier="Class" automaticallyAdjustsScrollViewInsets="NO" id="b3E-Xj-lkd" userLabel="Class" customClass="ShepardFlowController" customModule="ShepardAppearanceConverter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Class" automaticallyAdjustsScrollViewInsets="NO" id="b3E-Xj-lkd" userLabel="Class" customClass="ShepardPopoverController" customModule="ShepardAppearanceConverter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TgK-kD-dPe"/>
                         <viewControllerLayoutGuide type="bottom" id="Dtp-Bu-56W"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PIC-Pg-45E" userLabel="Root">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="ZtR-hG-oxI" userLabel="Root">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="400"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fSH-04-W35">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19V-R5-hIh">
+                                <rect key="frame" x="0.0" y="64" width="400" height="336"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NoV-ME-jvh">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JXI-a5-4c7">
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="336"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ShA-7Y-1BE" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXs-Di-IgW" customClass="IBIncludedStoryboard" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="1350"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="storyboard" value="ShepardClass"/>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="treatAsNib" value="YES"/>
@@ -350,38 +369,48 @@
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="ShA-7Y-1BE" secondAttribute="bottom" id="9eV-3V-L1r"/>
-                                            <constraint firstItem="ShA-7Y-1BE" firstAttribute="leading" secondItem="NoV-ME-jvh" secondAttribute="leading" id="DTj-51-iYj"/>
-                                            <constraint firstAttribute="trailing" secondItem="ShA-7Y-1BE" secondAttribute="trailing" id="Nop-Lg-3cj"/>
-                                            <constraint firstItem="ShA-7Y-1BE" firstAttribute="height" relation="greaterThanOrEqual" secondItem="NoV-ME-jvh" secondAttribute="height" id="OBu-8n-B2P"/>
-                                            <constraint firstItem="ShA-7Y-1BE" firstAttribute="top" secondItem="NoV-ME-jvh" secondAttribute="top" id="xQb-nr-21b"/>
+                                            <constraint firstAttribute="bottom" secondItem="JXs-Di-IgW" secondAttribute="bottom" id="1Vg-2j-n2g"/>
+                                            <constraint firstItem="JXs-Di-IgW" firstAttribute="leading" secondItem="JXI-a5-4c7" secondAttribute="leading" id="DpM-No-PsI"/>
+                                            <constraint firstItem="JXs-Di-IgW" firstAttribute="top" secondItem="JXI-a5-4c7" secondAttribute="top" id="c7A-9V-Mun"/>
+                                            <constraint firstItem="JXs-Di-IgW" firstAttribute="height" relation="greaterThanOrEqual" secondItem="JXI-a5-4c7" secondAttribute="height" id="cSv-qb-a3B"/>
+                                            <constraint firstAttribute="trailing" secondItem="JXs-Di-IgW" secondAttribute="trailing" id="dp9-0n-MpC"/>
                                         </constraints>
                                     </scrollView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="ShA-7Y-1BE" firstAttribute="width" secondItem="fSH-04-W35" secondAttribute="width" id="4uN-fr-57c"/>
-                                    <constraint firstItem="NoV-ME-jvh" firstAttribute="width" secondItem="fSH-04-W35" secondAttribute="width" id="Djg-0g-8FY"/>
-                                    <constraint firstAttribute="bottom" secondItem="NoV-ME-jvh" secondAttribute="bottom" id="JMb-ok-X1p"/>
-                                    <constraint firstAttribute="trailing" secondItem="NoV-ME-jvh" secondAttribute="trailing" id="LJr-mi-kxx"/>
-                                    <constraint firstItem="NoV-ME-jvh" firstAttribute="top" secondItem="fSH-04-W35" secondAttribute="top" id="XJV-nh-WL9"/>
-                                    <constraint firstItem="ShA-7Y-1BE" firstAttribute="height" secondItem="fSH-04-W35" secondAttribute="height" priority="100" id="cvk-vj-M7d"/>
-                                    <constraint firstItem="NoV-ME-jvh" firstAttribute="leading" secondItem="fSH-04-W35" secondAttribute="leading" id="j5u-Ij-BAH"/>
+                                    <constraint firstItem="JXI-a5-4c7" firstAttribute="top" secondItem="19V-R5-hIh" secondAttribute="top" id="7fY-qv-fbT"/>
+                                    <constraint firstAttribute="bottom" secondItem="JXI-a5-4c7" secondAttribute="bottom" id="8YQ-Am-xXk"/>
+                                    <constraint firstAttribute="trailing" secondItem="JXI-a5-4c7" secondAttribute="trailing" id="Bnc-KJ-Omz"/>
+                                    <constraint firstItem="JXI-a5-4c7" firstAttribute="leading" secondItem="19V-R5-hIh" secondAttribute="leading" id="Bx8-z6-sLH"/>
+                                    <constraint firstItem="JXI-a5-4c7" firstAttribute="width" secondItem="19V-R5-hIh" secondAttribute="width" id="JmU-Nd-vYU"/>
+                                    <constraint firstItem="JXs-Di-IgW" firstAttribute="width" secondItem="19V-R5-hIh" secondAttribute="width" id="ZzK-Ij-my1"/>
+                                    <constraint firstItem="JXs-Di-IgW" firstAttribute="height" secondItem="19V-R5-hIh" secondAttribute="height" priority="100" id="h0g-7c-9Sv"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="fSH-04-W35" firstAttribute="leading" secondItem="PIC-Pg-45E" secondAttribute="leading" id="9Vs-yM-4x3"/>
-                            <constraint firstAttribute="trailing" secondItem="fSH-04-W35" secondAttribute="trailing" id="bB1-Fb-wrl"/>
-                            <constraint firstItem="Dtp-Bu-56W" firstAttribute="top" secondItem="fSH-04-W35" secondAttribute="bottom" id="fBm-e6-kOL"/>
-                            <constraint firstItem="fSH-04-W35" firstAttribute="top" secondItem="TgK-kD-dPe" secondAttribute="bottom" id="gFr-MU-74w"/>
+                            <constraint firstAttribute="trailing" secondItem="19V-R5-hIh" secondAttribute="trailing" id="8VO-xL-KJa"/>
+                            <constraint firstItem="19V-R5-hIh" firstAttribute="leading" secondItem="ZtR-hG-oxI" secondAttribute="leading" id="RGU-28-qWY"/>
+                            <constraint firstItem="Dtp-Bu-56W" firstAttribute="top" secondItem="19V-R5-hIh" secondAttribute="bottom" id="RJw-We-lj8"/>
+                            <constraint firstItem="19V-R5-hIh" firstAttribute="top" secondItem="TgK-kD-dPe" secondAttribute="bottom" id="TZ6-Pi-uyg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Class" id="bQH-Sa-CZO"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="400" height="400"/>
+                    <connections>
+                        <outlet property="targetView" destination="JXs-Di-IgW" id="5A0-F1-L97"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oZF-ri-3pA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4925" y="1582"/>
+            <point key="canvasLocation" x="4925" y="1672"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Cv8-Zc-9Se"/>
+        <segue reference="4JU-Dn-Ioq"/>
+        <segue reference="6qf-7n-gCa"/>
+    </inferredMetricsTieBreakers>
 </document>

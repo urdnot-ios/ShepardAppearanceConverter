@@ -268,7 +268,6 @@ extension Shepard {
             ],
         ]
         
-        public static let CharacterList = "0123456789ABCDEFGHIJKLMNPQRSTUVWX" // include 0 because values start at 1
         public static let expectedCodeLength: [Gender: [Game: Int]] = [
             .Male: [.Game1: 35, .Game2: 34, .Game3: 34],
             .Female: [.Game1: 37, .Game2: 36, .Game3: 36]
@@ -287,7 +286,7 @@ extension Shepard {
             //ME1 format?
             contents = [Attributes: Int]()
             self.game = fromGame
-            let oldAppearanceCode = Appearance.unformatCode(appearance)
+            let oldAppearanceCode = Formatting.unformatCode(appearance)
             if !oldAppearanceCode.isEmpty && oldAppearanceCode.characters.count != Appearance.expectedCodeLength[gender]?[game] {
                 let reportLength = Appearance.expectedCodeLength[gender]?[game] ?? 0
                 initError = String(format: Appearance.CodeLengthIncorrect, oldAppearanceCode.characters.count, reportLength)
@@ -295,7 +294,7 @@ extension Shepard {
             for element in oldAppearanceCode.characters {
                 if let attributeList = Appearance.attributes[gender]?[game] where attributeList.count > contents.count {
                     let attribute = attributeList[contents.count]
-                    contents[attribute] = Appearance.CharacterList.intIndexOf(element) ?? 0
+                    contents[attribute] = Formatting.unformatAttribute(element)
                 }
             }
         }
@@ -389,49 +388,56 @@ extension Shepard {
         public func format() -> String {
             var newAppearance = String()
             if let sourceAttributes = Appearance.attributes[gender]?[game] {
-                for attribute in sourceAttributes {
-                    //Example: 121.1MF.UWF.131.J6M.MDW.DM7.67W.717.1H2.157.6
-                    if let attributeValue = contents[attribute] {
-                        newAppearance += Appearance.CharacterList[attributeValue]
-                    } else {
-                        newAppearance += "X"
+                newAppearance = sourceAttributes.reduce("") { $0 + Formatting.formatAttribute(contents[$1]) }
+            }
+            return Formatting.formatCode(newAppearance)
+        }
+        
+    
+        public struct Formatting {
+        
+            public static let AvailableAlphabet = "123456789ABCDEFGHIJKLMNPQRSTUVW"
+            
+            public static func formatAttribute(attributeValue: Int?) -> String {
+                if attributeValue > 0 {
+                    return AvailableAlphabet[attributeValue! - 1] // starts at 1, not 0
+                }
+                return "X"
+            }
+            
+            public static func unformatAttribute(attributeString: Character?) -> Int {
+                return AvailableAlphabet.intIndexOf(attributeString ?? "X") ?? 0
+            }
+            
+            /// Unformats a string from XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X into allowed characters
+            public static func unformatCode(code: String) -> String {
+                return code.uppercaseString.onlyCharacters(AvailableAlphabet + "X")
+            }
+            
+            /// Formats an alphanumeric string into the XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X format
+            public static func formatCode(code: String!, lastCode: String! = nil) -> String {
+                //strip to valid characters
+                var unformattedCode: String! = unformatCode(code)
+                if unformattedCode.isEmpty {
+                    return ""
+                }
+                if lastCode != nil {
+                    //if characters removed by user, change to remove valid characters instead of other formatting
+                    let lastUnformattedCode = unformatCode(lastCode)
+                    let requestedSubtractChars = lastCode.length - code.length
+                    let actualSubtractChars = max(0, lastUnformattedCode.length - unformattedCode.length)
+                    if requestedSubtractChars > 0 && actualSubtractChars < requestedSubtractChars {
+                        let subtractChars = requestedSubtractChars - actualSubtractChars
+                        unformattedCode = subtractChars >= unformattedCode.length  ? "" : unformattedCode.stringFrom(0, to: -1 * subtractChars)
                     }
                 }
-            }
-            return Appearance.formatCode(newAppearance)
-        }
-        
-        //MARK: class functions
-    
-        /// Unformats a string from XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X into allowed characters
-        public static func unformatCode(code: String!) -> String {
-            let unformattedCode: String! = code?.uppercaseString.onlyCharacters(Appearance.CharacterList)
-            return unformattedCode == nil ? "" : unformattedCode!
-        }
-        
-        /// Formats an alphanumeric string into the XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X format
-        public static func formatCode(code: String!, lastCode: String! = nil) -> String {
-            //strip to valid characters
-            var unformattedCode: String! = Appearance.unformatCode(code)
-            if unformattedCode.isEmpty {
-                return ""
-            }
-            if lastCode != nil {
-                //if characters removed by user, change to remove valid characters instead of other formatting
-                let lastUnformattedCode = Appearance.unformatCode(lastCode)
-                let requestedSubtractChars = lastCode.length - code.length
-                let actualSubtractChars = max(0, lastUnformattedCode.length - unformattedCode.length)
-                if requestedSubtractChars > 0 && actualSubtractChars < requestedSubtractChars {
-                    let subtractChars = requestedSubtractChars - actualSubtractChars
-                    unformattedCode = subtractChars >= unformattedCode.length  ? "" : unformattedCode.stringFrom(0, to: -1 * subtractChars)
+                //add formatting
+                var formattedCode = unformattedCode.stringByReplacingOccurrencesOfString("([^\\.]{3})", withString: "$1.", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+                if formattedCode.stringFrom(-1) == "." {
+                    formattedCode = formattedCode.stringFrom(0, to: -1)
                 }
+                return formattedCode
             }
-            //add formatting
-            var formattedCode = unformattedCode.stringByReplacingOccurrencesOfString("([^\\.]{3})", withString: "$1.", options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
-            if formattedCode.stringFrom(-1) == "." {
-                formattedCode = formattedCode.stringFrom(0, to: -1)
-            }
-            return formattedCode
         }
     }
 

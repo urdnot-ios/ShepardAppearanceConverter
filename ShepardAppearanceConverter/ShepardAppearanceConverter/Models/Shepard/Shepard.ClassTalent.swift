@@ -9,6 +9,7 @@
 import Foundation
 
 extension Shepard {
+
     // dumb reserved words ! :P
     public enum ClassTalent: String {
         case Soldier = "Soldier"
