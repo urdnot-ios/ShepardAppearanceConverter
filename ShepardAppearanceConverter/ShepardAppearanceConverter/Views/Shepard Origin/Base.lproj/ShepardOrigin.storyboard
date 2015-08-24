@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="300" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AYY-2v-sQD" userLabel="Values">
-                                <rect key="frame" x="0.0" y="10" width="600" height="560"/>
+                                <rect key="frame" x="0.0" y="10" width="600" height="570"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g46-5d-vGL" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isFirst" value="YES"/>
@@ -29,13 +29,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="do9-aI-bdT" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44" width="600" height="90.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="600" height="90.5"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="text" value="Earthborn grants a Renegade bonus.  Game 1 Mission Citadel: Old Friends is only available if you select Earthborn."/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k51-d7-Fui" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="134.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="140.5" width="600" height="42"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isFirst" value="YES"/>
@@ -44,13 +44,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ovU-Ir-AbC" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="178.5" width="600" height="107"/>
+                                        <rect key="frame" x="0.0" y="182.5" width="600" height="107"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="text" value="Spacer grants a Paragon bonus.  Game 1 Mission Citadel: Old, Unhappy, Far-Off Things is only available if you select Spacer."/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7L-kC-Ess" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="285.5" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="289.5" width="600" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Colonist"/>
@@ -59,7 +59,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kaf-to-08w" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="329.5" width="600" height="230.5"/>
+                                        <rect key="frame" x="0.0" y="339.5" width="600" height="230.5"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="text">
                                                 <string key="value">Colonist grants a part-Renegade/part-Paragon bonus.  Game 1 Mission Citadel: I Remember Me is only available if you select Colonist.</string>

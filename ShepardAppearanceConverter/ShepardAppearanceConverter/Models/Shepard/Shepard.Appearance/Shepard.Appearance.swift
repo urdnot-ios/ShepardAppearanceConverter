@@ -297,6 +297,8 @@ extension Shepard {
                     contents[attribute] = Formatting.unformatAttribute(element)
                 }
             }
+            print(appearance)
+            print(oldAppearanceCode)
         }
         
         /// Converts attribute values between games.
@@ -406,7 +408,7 @@ extension Shepard {
             }
             
             public static func unformatAttribute(attributeString: Character?) -> Int {
-                return AvailableAlphabet.intIndexOf(attributeString ?? "X") ?? 0
+                return (AvailableAlphabet.intIndexOf(attributeString ?? "X") ?? -1) + 1
             }
             
             /// Unformats a string from XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X into allowed characters
@@ -437,6 +439,10 @@ extension Shepard {
                     formattedCode = formattedCode.stringFrom(0, to: -1)
                 }
                 return formattedCode
+            }
+            
+            public static func isEmpty(code: String) -> Bool {
+                return code.uppercaseString.onlyCharacters(AvailableAlphabet).isEmpty
             }
         }
     }

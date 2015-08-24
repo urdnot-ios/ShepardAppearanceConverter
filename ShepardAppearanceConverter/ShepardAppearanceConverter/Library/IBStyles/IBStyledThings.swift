@@ -9,7 +9,7 @@ import UIKit
 @IBDesignable
 public class IBStyledView: UIView, IBStylable {
     @IBInspectable public var identifier: String! {
-        didSet{ styler.applyStyles(isLayout: false) }
+        didSet{ styler.applyStyles() }
     }
     var defaultIdentifier: String { return "View" }
     internal lazy var styler: IBStyler = { return IBStyler(delegate: self) }()
@@ -23,7 +23,7 @@ public class IBStyledView: UIView, IBStylable {
 @IBDesignable
 public class IBStyledLabel: UILabel, IBStylable {
     @IBInspectable public var identifier: String!{
-        didSet{ styler.applyStyles(isLayout: false) }
+        didSet{ styler.applyStyles() }
     }
     var defaultIdentifier: String { return "Label" }
     internal lazy var styler: IBStyler = { return IBStyler(delegate: self) }()
@@ -41,7 +41,7 @@ public class IBStyledLabel: UILabel, IBStylable {
 @IBDesignable
 public class IBStyledTextField: UITextField, IBStylable {
     @IBInspectable public var identifier: String!{
-        didSet{ styler.applyStyles(isLayout: false) }
+        didSet{ styler.applyStyles() }
     }
     var defaultIdentifier: String { return "TextField" }
     internal lazy var styler: IBStyler = { return IBStyler(delegate: self) }()
@@ -55,7 +55,7 @@ public class IBStyledTextField: UITextField, IBStylable {
 @IBDesignable
 public class IBStyledTextView: UITextView, IBStylable {
     @IBInspectable public var identifier: String!{
-        didSet{ styler.applyStyles(isLayout: false) }
+        didSet{ styler.applyStyles() }
     }
     var defaultIdentifier: String { return "TextView" }
     internal lazy var styler: IBStyler = { return IBStyler(delegate: self) }()
@@ -69,7 +69,7 @@ public class IBStyledTextView: UITextView, IBStylable {
 @IBDesignable
 public class IBStyledImageView: UIImageView, IBStylable {
     @IBInspectable public var identifier: String!{
-        didSet{ styler.applyStyles(isLayout: false) }
+        didSet{ styler.applyStyles() }
     }
     var defaultIdentifier: String { return "ImageView" }
     internal lazy var styler: IBStyler = { return IBStyler(delegate: self) }()
@@ -83,7 +83,7 @@ public class IBStyledImageView: UIImageView, IBStylable {
 @IBDesignable
 public class IBStyledButton: UIButton, IBStylable {
     @IBInspectable public var identifier: String!{
-        didSet{ styler.applyStyles(isLayout: false) }
+        didSet{ styler.applyStyles() }
     }
     var defaultIdentifier: String { return "Button" }
     @IBInspectable public var previewDisabled: Bool = false
@@ -131,5 +131,19 @@ public class IBStyledButton: UIButton, IBStylable {
         didSet {
             styler.applyState(self.state)
         }
+    }
+}
+
+@IBDesignable
+public class IBStyledSegmentedControl: UISegmentedControl, IBStylable {
+    @IBInspectable public var identifier: String! {
+        didSet{ styler.applyStyles() }
+    }
+    var defaultIdentifier: String { return "SegmentedControl" }
+    internal lazy var styler: IBStyler = { return IBStyler(delegate: self) }()
+    
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        styler.applyStyles()
     }
 }

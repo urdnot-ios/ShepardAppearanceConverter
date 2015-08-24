@@ -7,15 +7,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Shepard Row" rowHeight="91" id="yzf-4T-iho" customClass="ShepardRowCell" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Shepard Row" rowHeight="91" id="yzf-4T-iho" customClass="ShepardRowCell" customModule="ShepardAppearanceConverter" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yzf-4T-iho" id="Qgq-6p-m1T">
-                <rect key="frame" x="0.0" y="0.0" width="287" height="90.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="90.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wkv-5A-jUU">
-                        <rect key="frame" x="0.0" y="0.0" width="287" height="90.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="90.5"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BsP-uz-ZJT">
                                 <rect key="frame" x="10" y="10" width="70" height="70"/>
@@ -27,41 +27,61 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="IWA-yA-NZ1">
-                                <rect key="frame" x="90" y="10.5" width="192" height="69.5"/>
+                                <rect key="frame" x="90" y="10" width="205" height="69.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="200" verticalCompressionResistancePriority="751" fixedFrame="YES" text="John Shepard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNo-50-FPl">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="300" verticalCompressionResistancePriority="751" fixedFrame="YES" text="John Shepard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNo-50-FPl" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="111" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorText.17.Medium"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="200" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="751" fixedFrame="YES" text="War Hero Colonist Spacer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1X-rw-eor" userLabel="Title">
-                                        <rect key="frame" x="0.0" y="28" width="166.5" height="17"/>
-                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="200" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="751" fixedFrame="YES" text="War Hero Colonist Spacer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1X-rw-eor" userLabel="Title" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="29" width="156.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorText.13.Italic"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="200" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="751" fixedFrame="YES" text="Last Played: 1 January, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhq-9D-jeK" userLabel="Date">
-                                        <rect key="frame" x="0.0" y="52.5" width="182" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="200" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="751" fixedFrame="YES" text="Last Played: 1 January, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhq-9D-jeK" userLabel="Date" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="53.5" width="171" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="AccentColorText.13"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="0To-J6-eAi">
+                                <rect key="frame" x="299" y="39" width="8" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="8" id="BJO-gS-k91"/>
+                                    <constraint firstAttribute="height" constant="13" id="voO-5q-At8"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="BsP-uz-ZJT" firstAttribute="centerY" secondItem="Wkv-5A-jUU" secondAttribute="centerY" id="24S-Q7-PJx"/>
                             <constraint firstItem="IWA-yA-NZ1" firstAttribute="bottom" secondItem="BsP-uz-ZJT" secondAttribute="bottom" priority="100" id="312-e2-ZoH"/>
+                            <constraint firstItem="0To-J6-eAi" firstAttribute="centerY" secondItem="Wkv-5A-jUU" secondAttribute="centerY" id="5hI-Qx-Zs4"/>
                             <constraint firstItem="IWA-yA-NZ1" firstAttribute="centerY" secondItem="Wkv-5A-jUU" secondAttribute="centerY" id="GuV-e0-MRr"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="IWA-yA-NZ1" secondAttribute="bottom" constant="8" id="N0p-Af-P8l"/>
                             <constraint firstItem="BsP-uz-ZJT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Wkv-5A-jUU" secondAttribute="top" constant="10" id="NPn-go-std"/>
                             <constraint firstItem="BsP-uz-ZJT" firstAttribute="leading" secondItem="Wkv-5A-jUU" secondAttribute="leading" constant="10" id="QX5-At-14S"/>
-                            <constraint firstAttribute="trailing" secondItem="IWA-yA-NZ1" secondAttribute="trailing" constant="5" id="Y4a-fh-PZN"/>
+                            <constraint firstAttribute="trailing" secondItem="IWA-yA-NZ1" secondAttribute="trailing" constant="25" id="Y4a-fh-PZN"/>
                             <constraint firstItem="IWA-yA-NZ1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Wkv-5A-jUU" secondAttribute="top" constant="8" id="Ze9-gY-eC8"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BsP-uz-ZJT" secondAttribute="bottom" constant="10" id="Zfh-qw-KXM"/>
+                            <constraint firstAttribute="trailing" secondItem="0To-J6-eAi" secondAttribute="trailing" constant="13" id="bUp-re-YEU"/>
                             <constraint firstItem="IWA-yA-NZ1" firstAttribute="top" secondItem="BsP-uz-ZJT" secondAttribute="top" priority="100" id="hJ8-5u-29R"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="0To-J6-eAi" secondAttribute="bottom" id="iQ2-Mo-Y3g"/>
+                            <constraint firstItem="0To-J6-eAi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Wkv-5A-jUU" secondAttribute="top" id="vOz-mi-Whv"/>
                             <constraint firstItem="IWA-yA-NZ1" firstAttribute="leading" secondItem="BsP-uz-ZJT" secondAttribute="trailing" constant="10" id="yQ7-Ml-8W8"/>
                         </constraints>
                     </view>
@@ -82,4 +102,7 @@
             <point key="canvasLocation" x="31" y="258.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Disclosure" width="8" height="13"/>
+    </resources>
 </document>

@@ -6,6 +6,48 @@
 
 import UIKit
 
+// MARK: Stylesheet Base and Example
+
+public protocol Stylesheet {
+    static var fontsList: [IBFontStyle: String] { get }
+    static var stylesList: [String: IBStyleProperties] { get }
+    static func applyGlobalStyles(window: UIWindow?)
+}
+extension Stylesheet {
+    public static var fontsList: [IBFontStyle: String] { return [:] }
+    public static var stylesList: [String: IBStyleProperties] { return [:] }
+    public static func applyGlobalStyles(window: UIWindow?) {}
+}
+
+/// extend this struct in your own styles file to add your styles to the IBStyles functionality
+public struct Styles: Stylesheet {}
+    
+//Example:
+//
+//extension Styles {
+//    public static var fontsList: [IBFontStyle: String] {
+//        return [
+//        .Normal: "Avenir-Regular",
+//        ]
+//    }
+//    
+//    public static var stylesList: [String: IBStyleProperties] {
+//        return [
+//        "NormalColorText.17": [
+//                    .Font: IBFont.SizeStyle(17,.Normal),
+//                    .TextColor: Colors.NormalColor,
+//                ],
+//        ]
+//    }
+//    
+//    public static func applyGlobalStyles(window: UIWindow?) {
+//        IBStyles.fontsList = fontsList
+//        IBStyles.stylesList = stylesList
+//    }
+//}
+
+
+
 //MARK: IBStylePropertyName
 /**
     All the current possible IBStyle options.
@@ -37,7 +79,6 @@ public enum IBStylePropertyName {
     case Font //IBFont
     case TextColor //UIColor
     case CornerRadius //Double
-    case CircleMask //Bool
     case BorderWidth //Double
     case BorderColor //UIColor
     case BackgroundColor //UIColor
@@ -63,9 +104,10 @@ public struct IBStyles {
     // I can't figure out any way to let Styles write to IBStyles at IB app load since appDelegate is never called in IB :(
     // So, this kinda sucks:
     
-    public static var stylesList: [String: IBStyleProperties] = Styles.stylesList // [:]
-    public static var fontsList: [IBFontStyle: String] = Styles.fontsList // [:] // http://iosfonts.com/
+    public static var stylesList: [String: IBStyleProperties] = Styles.stylesList
+    public static var fontsList: [IBFontStyle: String] = Styles.fontsList // http://iosfonts.com/
     public static var deviceKind = UIDevice.currentDevice().userInterfaceIdiom ?? UIUserInterfaceIdiom.Phone
+    public static var hasAppliedGlobalStyles = false
     
     /**
         Verify that all styles are the expected type.
@@ -83,7 +125,6 @@ public struct IBStyles {
                 case .Font: assert(value as? IBFont != nil)
                 case .TextColor: assert(value as? UIColor != nil)
                 case .CornerRadius: assert(value as? Double != nil)
-                case .CircleMask: assert(value as? Bool != nil)
                 case .BorderWidth: assert(value as? Double != nil)
                 case .BorderColor: fallthrough
                 case .BackgroundColor: assert(value as? UIColor != nil)
@@ -106,6 +147,10 @@ public struct IBStyles {
         :param: to (element)    the element to be styled
     */
     public static func apply(identifier: String, to element: UIView!) {
+        if element.isInterfaceBuilder && !hasAppliedGlobalStyles {
+            Styles.applyGlobalStyles(element?.window)
+            hasAppliedGlobalStyles = true
+        }
         if let properties = stylesList[identifier] {
             let inheritProperties = properties[.Inherit] as? [String] ?? []
             var properties2 = IBStyleProperties()
@@ -222,12 +267,6 @@ public struct IBStyles {
                     element.layer.cornerRadius = CGFloat(value as? Double ?? 0.0)
                     element.layer.masksToBounds = element.layer.cornerRadius > CGFloat(0)
                 
-                case .CircleMask:
-                    if let useValue = value as? Bool where useValue {
-                        element.layer.cornerRadius = element.frame.size.width / 2.0
-                        element.layer.masksToBounds = true
-                    }
-                
                 case .BorderWidth:
                     element.layer.borderWidth = CGFloat(value as? Double ?? 0.0)
                 
@@ -322,7 +361,7 @@ public struct IBGradient {
     public var colors: [UIColor] = []
     public var locations: [Double] = []
     
-    init(direction: Direction, colors: [UIColor]){
+    init(direction: Direction, colors: [UIColor]) {
         self.direction = direction
         self.colors = colors
     }
@@ -398,4 +437,5 @@ public class IBGradientView: UIView {
         layer.endPoint = endPoint
     }
 }
+
 

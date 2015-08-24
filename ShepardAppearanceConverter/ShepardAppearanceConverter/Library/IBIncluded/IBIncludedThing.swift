@@ -263,8 +263,8 @@ public class IBIncludedNib: UIView, IBIncludingView {
     */
     public func getViewController() -> UIViewController? {
         if nib == nil { return nil }
-        let bundle = NSBundle(forClass: self.dynamicType)
-        if controller != nil, let ControllerType = classFromString(controller!, bundle: bundle) as? UIViewController.Type {
+        if controller != nil, let ControllerType = classFromString(controller!) as? UIViewController.Type {
+            let bundle = NSBundle(forClass: self.dynamicType)
             return ControllerType.init(nibName: nib, bundle: bundle) as UIViewController
         }
         return nil
@@ -288,9 +288,9 @@ public class IBIncludedNib: UIView, IBIncludingView {
         - parameter bundle:          (optional) bundle to look for class in
         - returns: an instantiated object of stated class, or nil
     */
-    private func classFromString(className: String, bundle: NSBundle? = nil) -> (AnyClass!) {
-        let useBundle = bundle ?? NSBundle.mainBundle()
-        if let appName = useBundle.objectForInfoDictionaryKey("CFBundleName") as? String {
+    private func classFromString(className: String) -> (AnyClass!) {
+        let bundle = NSBundle(forClass: self.dynamicType)
+        if let appName = bundle.objectForInfoDictionaryKey("CFBundleName") as? String {
             let classStringName = "\(appName).\(className)"
             //? "_TtC\(appName!.utf16count)\(appName)\(countElements(className))\(className)"
             return NSClassFromString(classStringName)

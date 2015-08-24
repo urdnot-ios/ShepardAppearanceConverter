@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "slider-track.png",
+      "filename" : "slider_empty@1x.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "slider-track@2x.png",
       "scale" : "2x"
     },
     {

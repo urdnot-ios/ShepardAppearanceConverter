@@ -17,15 +17,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="zfv-Dx-DqT" userLabel="Header">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="312"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="296"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xyn-6v-Kpl" userLabel="NameWrapper">
-                                        <rect key="frame" x="15" y="15" width="570" height="24"/>
+                                        <rect key="frame" x="15" y="7" width="570" height="24"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="John" placeholder="John" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zco-9l-Ov9" userLabel="Name Field">
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="John" placeholder="John" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zco-9l-Ov9" userLabel="Name Field" customClass="IBStyledTextField" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorText.20.Medium"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="doneChangingName:" destination="FE8-Fz-nu7" eventType="editingDidEnd" id="uxC-pP-pK5"/>
                                                     <action selector="doneChangingName:" destination="FE8-Fz-nu7" eventType="primaryActionTriggered" id="ykr-IZ-b3n"/>
@@ -33,11 +36,14 @@
                                                     <action selector="startChangingName:" destination="FE8-Fz-nu7" eventType="editingDidBegin" id="GhJ-N7-DTY"/>
                                                 </connections>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text=" Shepard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqP-pb-4o7">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text=" Shepard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqP-pb-4o7" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                                 <rect key="frame" x="49" y="0.0" width="521" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorText.20.Medium"/>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                         </subviews>
                                         <constraints>
@@ -50,8 +56,8 @@
                                             <constraint firstItem="SqP-pb-4o7" firstAttribute="leading" secondItem="Zco-9l-Ov9" secondAttribute="trailing" id="n8O-0H-Mge"/>
                                         </constraints>
                                     </view>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VAQ-zb-J9q">
-                                        <rect key="frame" x="535" y="54" width="50" height="29"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VAQ-zb-J9q" customClass="IBStyledSegmentedControl" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="535" y="38" width="50" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="ZJf-ho-i2o"/>
                                         </constraints>
@@ -64,7 +70,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOL-n6-EQC" userLabel="Photo Frame">
-                                        <rect key="frame" x="15" y="54" width="150" height="200"/>
+                                        <rect key="frame" x="15" y="38" width="150" height="200"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" image="BroShep Sample" translatesAutoresizingMaskIntoConstraints="NO" id="m7D-Ro-5UT" userLabel="Photo">
                                                 <rect key="frame" x="1" y="1" width="148" height="198"/>
@@ -75,7 +81,9 @@
                                                     <constraint firstAttribute="height" constant="32" id="aM7-RC-sdO"/>
                                                     <constraint firstAttribute="width" constant="32" id="sAv-Gv-Rcj"/>
                                                 </constraints>
-                                                <state key="normal" image="Camera"/>
+                                                <state key="normal" image="Add"/>
+                                                <state key="selected" image="Add (On)"/>
+                                                <state key="highlighted" image="Add (On)"/>
                                                 <connections>
                                                     <action selector="changePhoto:" destination="FE8-Fz-nu7" eventType="touchUpInside" id="3Xh-iA-vKR"/>
                                                 </connections>
@@ -94,7 +102,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ap3-MV-ssv" userLabel="Values">
-                                        <rect key="frame" x="165" y="122" width="435" height="132"/>
+                                        <rect key="frame" x="165" y="106" width="435" height="132"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UuV-kF-VDj" customClass="FauxValueRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="435" height="44"/>
@@ -125,8 +133,8 @@
                                             </view>
                                         </subviews>
                                     </stackView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="300" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iwQ-xh-tdL">
-                                        <rect key="frame" x="15" y="269" width="570" height="29"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="300" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iwQ-xh-tdL" customClass="IBStyledSegmentedControl" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="15" y="253" width="570" height="29"/>
                                         <segments>
                                             <segment title="Game 1"/>
                                             <segment title="Game 2"/>
@@ -141,14 +149,14 @@
                                     <constraint firstAttribute="bottom" secondItem="iwQ-xh-tdL" secondAttribute="bottom" constant="15" id="7xR-an-xVT"/>
                                     <constraint firstItem="aOL-n6-EQC" firstAttribute="leading" secondItem="zfv-Dx-DqT" secondAttribute="leading" constant="15" id="Fme-fE-Q8n"/>
                                     <constraint firstAttribute="trailing" secondItem="iwQ-xh-tdL" secondAttribute="trailing" constant="15" id="HDf-zX-lbQ"/>
-                                    <constraint firstItem="aOL-n6-EQC" firstAttribute="top" secondItem="xyn-6v-Kpl" secondAttribute="bottom" constant="15" id="Hmt-0k-Z7Z"/>
+                                    <constraint firstItem="aOL-n6-EQC" firstAttribute="top" secondItem="xyn-6v-Kpl" secondAttribute="bottom" constant="7" id="Hmt-0k-Z7Z"/>
                                     <constraint firstItem="VAQ-zb-J9q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aOL-n6-EQC" secondAttribute="trailing" constant="15" id="Ijq-RS-idg"/>
                                     <constraint firstItem="ap3-MV-ssv" firstAttribute="bottom" secondItem="aOL-n6-EQC" secondAttribute="bottom" id="b6R-kA-u8o"/>
                                     <constraint firstAttribute="trailing" secondItem="xyn-6v-Kpl" secondAttribute="trailing" constant="15" id="bh4-zt-DWn"/>
                                     <constraint firstItem="xyn-6v-Kpl" firstAttribute="leading" secondItem="zfv-Dx-DqT" secondAttribute="leading" constant="15" id="dcl-eb-awR"/>
                                     <constraint firstAttribute="trailing" secondItem="VAQ-zb-J9q" secondAttribute="trailing" constant="15" id="dgb-4k-mHu"/>
                                     <constraint firstItem="iwQ-xh-tdL" firstAttribute="leading" secondItem="zfv-Dx-DqT" secondAttribute="leading" constant="15" id="fMj-kM-rz3"/>
-                                    <constraint firstItem="xyn-6v-Kpl" firstAttribute="top" secondItem="zfv-Dx-DqT" secondAttribute="top" constant="15" id="gpa-Jo-g4v"/>
+                                    <constraint firstItem="xyn-6v-Kpl" firstAttribute="top" secondItem="zfv-Dx-DqT" secondAttribute="top" constant="7" id="gpa-Jo-g4v"/>
                                     <constraint firstAttribute="trailing" secondItem="ap3-MV-ssv" secondAttribute="trailing" id="jgF-sw-RKg"/>
                                     <constraint firstItem="iwQ-xh-tdL" firstAttribute="top" secondItem="aOL-n6-EQC" secondAttribute="bottom" constant="15" id="kju-5K-yKd"/>
                                     <constraint firstItem="ap3-MV-ssv" firstAttribute="leading" secondItem="aOL-n6-EQC" secondAttribute="trailing" id="lqT-gK-bx9"/>
@@ -156,7 +164,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zxB-id-nwo">
-                                <rect key="frame" x="0.0" y="312" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="296" width="600" height="44"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="piV-Sv-m4y" customClass="FauxValueRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -208,7 +216,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Add" width="17" height="17"/>
+        <image name="Add (On)" width="17" height="17"/>
         <image name="BroShep Sample" width="159" height="200"/>
-        <image name="Camera" width="16" height="16"/>
     </resources>
 </document>

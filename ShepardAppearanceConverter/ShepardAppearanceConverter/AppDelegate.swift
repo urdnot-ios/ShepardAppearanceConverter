@@ -17,11 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        Styles.applyGlobalStyles(window)
-        
         SavedData.retrieve()
         
         ShepardFlowController.appInit = true
+        
+        Styles.applyGlobalStyles(window)
         
         return true
     }

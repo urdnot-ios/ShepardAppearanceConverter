@@ -19,7 +19,10 @@ public class AppearanceME1Slider: UIStackView {
     }()
 
     public lazy var titleLabel: UILabel! = {
-        return self.headerStack?.arrangedSubviews.first as? UILabel
+        if let wrapper = self.headerStack?.arrangedSubviews.first {
+            return wrapper.subviews.first as? UILabel
+        }
+        return nil
     }()
     
     public lazy var valueLabel: UILabel! = {

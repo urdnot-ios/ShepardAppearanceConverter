@@ -7,7 +7,7 @@ A Swift 2.0 experiment
 ## Project Goals
 
 - ~~Convert codes between Game 1 and Game 2 or 3~~ (completed)
-- Style with a custom UISlider and other fancier UI choices
+- ~~Style with a custom UISlider and other fancier UI choices~~
 - Read codes in via camera text recognition
 - ~~Save Shepard codes to device~~ (completed)
 - Save photos with Shepard codes
@@ -16,13 +16,8 @@ A Swift 2.0 experiment
 - ~~Save multiple Shepards~~ (completed)
 - Save to a database instead of NSUserDefaults
 
-## Current issues
-
-- Need real icons/colors/slider styles
-
 ## Things learned
 
 - UIStackView is very buggy still, particularly in vertical compression/expansion.
-- Size Classes don't seem to be working right
-- UIStackView size class settings not working
+- Size Classes don't seem to be working right, particularly with UIStackView
 - Baseline autolayout is easily broken by other autolayout settings and/or compression/expansion settings, in very unintuitive ways.

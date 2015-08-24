@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8LF-94-JEJ" userLabel="Values">
-                                <rect key="frame" x="0.0" y="10" width="600" height="1236.5"/>
+                                <rect key="frame" x="0.0" y="10" width="600" height="1234"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TaD-Rh-2xJ" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -114,7 +114,7 @@ The Infiltrator class talent reduces weapon heat buildup, and increases damage f
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Gl-eZ-NU4" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="858" width="600" height="123"/>
+                                        <rect key="frame" x="0.0" y="858" width="600" height="120.5"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="text">
                                                 <string key="value">Sentinels can only equip light armor. They have limited weapon choices.
@@ -126,7 +126,7 @@ The Sentinel class reduces cooldown time on abilities and small improvement to w
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2H4-kq-bed" customClass="FauxRadioRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="981" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="978.5" width="600" height="44"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="Vanguard"/>
@@ -135,7 +135,7 @@ The Sentinel class reduces cooldown time on abilities and small improvement to w
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UrK-ej-pWs" customClass="SideEffects" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1025" width="600" height="211.5"/>
+                                        <rect key="frame" x="0.0" y="1022.5" width="600" height="211.5"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="text">
                                                 <string key="value">Vanguards can gain access to medium armor. They have limited weapon choices, but have access to shotguns.

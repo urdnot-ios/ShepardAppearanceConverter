@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gMY-Pj-yTQ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Appearance Controller-->
@@ -21,16 +20,19 @@
                                 <rect key="frame" x="15" y="20" width="570" height="760"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="7EC-53-dfs" userLabel="ME2 Wrapper">
-                                        <rect key="frame" x="0.0" y="-5" width="570" height="197.5"/>
+                                        <rect key="frame" x="0.0" y="-5" width="570" height="300.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="JPq-OO-ZdH" userLabel="ME2 Header">
-                                                <rect key="frame" x="0.0" y="0.0" width="570" height="28"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="570" height="112.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" fixedFrame="YES" text="Game 2/3 Code:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyH-ag-krF" userLabel="ME2 Label">
-                                                        <rect key="frame" x="0.0" y="8.5" width="447" height="19.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" fixedFrame="YES" text="Game 2/3 Code:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YyH-ag-krF" userLabel="ME2 Label" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="93" width="447" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorText.17.Medium"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <variation key="widthClass=compact" fixedFrame="YES">
                                                             <rect key="frame" x="0.0" y="8.5" width="447" height="19.5"/>
                                                         </variation>
@@ -41,8 +43,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="637" height="28"/>
                                                         </variation>
                                                     </label>
-                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="1000" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Dxj-iJ-QU6">
-                                                        <rect key="frame" x="447" y="0.0" width="123" height="29"/>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="1000" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Dxj-iJ-QU6" customClass="IBStyledSegmentedControl" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                        <rect key="frame" x="447" y="84.5" width="123" height="29"/>
                                                         <segments>
                                                             <segment title="Game 2"/>
                                                             <segment title="Game 3"/>
@@ -63,33 +65,40 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BpI-Xi-KCN" userLabel="Background" customClass="FauxContentRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                                <rect key="frame" x="-15" y="38" width="600" height="159.5"/>
+                                                <rect key="frame" x="-15" y="122.5" width="600" height="177.5"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="9T9-0l-qde" userLabel="ME2">
-                                                        <rect key="frame" x="15" y="10" width="570" height="139.5"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9T9-0l-qde" userLabel="ME2">
+                                                        <rect key="frame" x="15" y="0.0" width="570" height="177.5"/>
                                                         <subviews>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="240" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qLq-nk-dsN" userLabel="Code Field">
-                                                                <rect key="frame" x="0.0" y="0.0" width="570" height="30"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
-                                                                <variation key="widthClass=compact" fixedFrame="YES">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="570" height="30"/>
-                                                                </variation>
-                                                                <variation key="widthClass=regular" fixedFrame="YES">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="570" height="30"/>
-                                                                </variation>
-                                                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                                                    <rect key="frame" x="0.0" y="32" width="760" height="30"/>
-                                                                </variation>
-                                                                <connections>
-                                                                    <action selector="ME2CodeChanged:" destination="gMY-Pj-yTQ" eventType="editingChanged" id="V9t-mb-cee"/>
-                                                                </connections>
-                                                            </textField>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rD9-K7-wbe" userLabel="Repeat Code">
-                                                                <rect key="frame" x="0.0" y="34" width="570" height="13.5"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Av-u0-Sd7">
+                                                                <rect key="frame" x="0.0" y="0.0" width="570" height="52"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="240" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qLq-nk-dsN" userLabel="Code Field">
+                                                                        <rect key="frame" x="0.0" y="10" width="570" height="42"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                                                        <connections>
+                                                                            <action selector="ME2CodeChanged:" destination="gMY-Pj-yTQ" eventType="editingChanged" id="V9t-mb-cee"/>
+                                                                            <action selector="ME2CodeSelected:" destination="gMY-Pj-yTQ" eventType="editingDidBegin" id="qdL-CX-Z4C"/>
+                                                                        </connections>
+                                                                    </textField>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="qLq-nk-dsN" firstAttribute="leading" secondItem="1Av-u0-Sd7" secondAttribute="leading" id="YXZ-Nd-gpl"/>
+                                                                    <constraint firstItem="qLq-nk-dsN" firstAttribute="top" secondItem="1Av-u0-Sd7" secondAttribute="top" constant="10" id="ZFF-n2-KKD"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="qLq-nk-dsN" secondAttribute="bottom" id="b6Y-do-m59"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="qLq-nk-dsN" secondAttribute="trailing" id="sNI-Db-F1A"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rD9-K7-wbe" userLabel="Repeat Code" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="60" width="570" height="13.5"/>
                                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="11"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorFont.13.Italic"/>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <variation key="widthClass=compact" fixedFrame="YES">
                                                                     <rect key="frame" x="0.0" y="34" width="570" height="13.5"/>
                                                                 </variation>
@@ -100,11 +109,14 @@
                                                                     <rect key="frame" x="0.0" y="66" width="760" height="14"/>
                                                                 </variation>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notice! Something to know about this slider." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpD-Mh-yuF">
-                                                                <rect key="frame" x="0.0" y="51.5" width="570" height="16"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notice! Something to know about this slider." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpD-Mh-yuF" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="81.5" width="570" height="16"/>
                                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="AccentColorText.13.Italic"/>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <variation key="widthClass=compact" fixedFrame="YES">
                                                                     <rect key="frame" x="0.0" y="51.5" width="570" height="16"/>
                                                                 </variation>
@@ -115,13 +127,16 @@
                                                                     <rect key="frame" x="0.0" y="84" width="760" height="16"/>
                                                                 </variation>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="760" fixedFrame="YES" text="Alert! This code is problematic for some reason. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfZ-1i-tqh" userLabel="Alert Label">
-                                                                <rect key="frame" x="0.0" y="71.5" width="570" height="16"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="760" fixedFrame="YES" text="Alert! This code is problematic for some reason. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfZ-1i-tqh" userLabel="Alert Label" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="105.5" width="570" height="16"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="TintColorText.13.Medium"/>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                                                    <rect key="frame" x="0.0" y="71.5" width="570" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="71.5" width="570" height="18"/>
                                                                 </variation>
                                                                 <variation key="widthClass=regular" fixedFrame="YES">
                                                                     <rect key="frame" x="0.0" y="71.5" width="570" height="16"/>
@@ -131,11 +146,11 @@
                                                                 </variation>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="760" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lv1-ep-FSv" userLabel="Code Button">
-                                                                <rect key="frame" x="0.0" y="91.5" width="570" height="48"/>
+                                                                <rect key="frame" x="0.0" y="129.5" width="570" height="48"/>
                                                                 <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                                                                 <state key="normal" title="Convert"/>
                                                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                                                    <rect key="frame" x="0.0" y="91.5" width="570" height="48"/>
+                                                                    <rect key="frame" x="0.0" y="93.5" width="570" height="48"/>
                                                                 </variation>
                                                                 <variation key="widthClass=regular" fixedFrame="YES">
                                                                     <rect key="frame" x="0.0" y="91.5" width="570" height="48"/>
@@ -153,8 +168,8 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="9T9-0l-qde" firstAttribute="leading" secondItem="BpI-Xi-KCN" secondAttribute="leading" constant="15" id="0eN-Ck-7Wz"/>
-                                                    <constraint firstItem="9T9-0l-qde" firstAttribute="top" secondItem="BpI-Xi-KCN" secondAttribute="top" constant="10" id="Gg6-Zv-KRc"/>
-                                                    <constraint firstAttribute="bottom" secondItem="9T9-0l-qde" secondAttribute="bottom" constant="10" id="IPY-cm-jbJ"/>
+                                                    <constraint firstItem="9T9-0l-qde" firstAttribute="top" secondItem="BpI-Xi-KCN" secondAttribute="top" id="Gg6-Zv-KRc"/>
+                                                    <constraint firstAttribute="bottom" secondItem="9T9-0l-qde" secondAttribute="bottom" id="IPY-cm-jbJ"/>
                                                     <constraint firstAttribute="trailing" secondItem="9T9-0l-qde" secondAttribute="trailing" constant="15" id="YIh-PD-StI"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
@@ -175,16 +190,19 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="JOJ-IE-F3O" userLabel="ME1 Wrapper">
-                                        <rect key="frame" x="0.0" y="207" width="570" height="220.5"/>
+                                        <rect key="frame" x="0.0" y="310" width="570" height="207"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAD-iJ-pU7" userLabel="ME1 Header">
                                                 <rect key="frame" x="0.0" y="0.0" width="570" height="19.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game 1 Sliders:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pjw-qV-Xis" userLabel="ME1 Label">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game 1 Sliders:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pjw-qV-Xis" userLabel="ME1 Label" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="570" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorText.17.Medium"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <variation key="widthClass=compact" fixedFrame="YES">
                                                             <rect key="frame" x="0.0" y="0.0" width="570" height="19.5"/>
                                                         </variation>
@@ -198,57 +216,89 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LWz-7s-F0k" userLabel="Background" customClass="FauxContentRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                                <rect key="frame" x="-15" y="29" width="600" height="191"/>
+                                                <rect key="frame" x="-15" y="29" width="600" height="178"/>
                                                 <subviews>
                                                     <stackView contentMode="scaleToFill" verticalHuggingPriority="300" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mGK-pi-7Bh" userLabel="ME1">
-                                                        <rect key="frame" x="15" y="5" width="570" height="176"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="178"/>
                                                         <subviews>
                                                             <stackView contentMode="scaleToFill" verticalHuggingPriority="300" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="H4q-Xb-PbA" userLabel="Groups">
-                                                                <rect key="frame" x="0.0" y="0.0" width="570" height="128"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFG-yW-hSS" userLabel="Group" customClass="AppearanceME1Group" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="570" height="128"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="760" misplaced="YES" text="Face:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKA-Ut-z7N" userLabel="Group Label">
-                                                                                <rect key="frame" x="0.0" y="10" width="38.5" height="71"/>
+                                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="300" verticalCompressionResistancePriority="760" text="Face" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKA-Ut-z7N" userLabel="Group Label" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                                                <rect key="frame" x="15" y="10" width="600" height="18"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
+                                                                                <userDefinedRuntimeAttributes>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorText.15.Medium"/>
+                                                                                </userDefinedRuntimeAttributes>
+                                                                                <variation key="widthClass=compact" misplaced="YES">
+                                                                                    <rect key="frame" x="15" y="0.0" width="605" height="23.5"/>
+                                                                                </variation>
                                                                             </label>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="800" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T7X-Qy-xNs" userLabel="Sliders">
-                                                                                <rect key="frame" x="10" y="86" width="560" height="62"/>
+                                                                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="800" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="T7X-Qy-xNs" userLabel="Sliders">
+                                                                                <rect key="frame" x="25" y="32.5" width="560" height="77.5"/>
                                                                                 <subviews>
-                                                                                    <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="800" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FLB-I1-Xuk" userLabel="Slider Row" customClass="AppearanceME1Slider" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="560" height="62"/>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="800" fixedFrame="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FLB-I1-Xuk" userLabel="Slider Row" customClass="AppearanceME1Slider" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="560" height="77.5"/>
                                                                                         <subviews>
-                                                                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="OFu-cG-TmB" userLabel="Slider Header">
+                                                                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OFu-cG-TmB" userLabel="Slider Header">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
                                                                                                 <subviews>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" misplaced="YES" text="Facial Structure:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWV-nE-zax" userLabel="Slider Label">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="186.5" height="30"/>
-                                                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                                        <nil key="highlightedColor"/>
-                                                                                                        <variation key="widthClass=regular" fixedFrame="YES">
-                                                                                                            <rect key="frame" x="0.0" y="0.0" width="111.5" height="30"/>
-                                                                                                        </variation>
-                                                                                                    </label>
-                                                                                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nFS-kY-mXX" userLabel="Slider Value">
-                                                                                                        <rect key="frame" x="191.5" y="0.0" width="368.5" height="30"/>
+                                                                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KNj-Sr-fXT">
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="151.5" height="30"/>
                                                                                                         <subviews>
-                                                                                                            <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="260" horizontalCompressionResistancePriority="700" verticalCompressionResistancePriority="760" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eoK-cm-pMd" userLabel="Slider">
-                                                                                                                <rect key="frame" x="-2" y="0.0" width="343" height="31"/>
-                                                                                                                <constraints>
-                                                                                                                    <constraint firstAttribute="height" constant="30" id="mx4-sC-b6q"/>
-                                                                                                                </constraints>
+                                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text="Facial Structure:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWV-nE-zax" userLabel="Slider Label" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                                                                                <rect key="frame" x="0.0" y="6" width="146.5" height="18"/>
+                                                                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                                                <nil key="highlightedColor"/>
+                                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorText.15"/>
+                                                                                                                </userDefinedRuntimeAttributes>
+                                                                                                            </label>
+                                                                                                        </subviews>
+                                                                                                        <constraints>
+                                                                                                            <constraint firstItem="eWV-nE-zax" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KNj-Sr-fXT" secondAttribute="top" id="P4G-fJ-6yC"/>
+                                                                                                            <constraint firstAttribute="trailing" secondItem="eWV-nE-zax" secondAttribute="trailing" constant="5" id="XCn-kf-hf1"/>
+                                                                                                            <constraint firstAttribute="bottom" secondItem="eWV-nE-zax" secondAttribute="bottom" id="Y4Z-RB-iRv"/>
+                                                                                                            <constraint firstAttribute="height" constant="30" id="Y8J-Z0-Heb"/>
+                                                                                                            <constraint firstItem="eWV-nE-zax" firstAttribute="centerY" secondItem="KNj-Sr-fXT" secondAttribute="centerY" priority="800" id="bcX-gk-QNI"/>
+                                                                                                            <constraint firstItem="eWV-nE-zax" firstAttribute="leading" secondItem="KNj-Sr-fXT" secondAttribute="leading" id="xrJ-XS-fyd"/>
+                                                                                                        </constraints>
+                                                                                                        <variation key="default">
+                                                                                                            <mask key="constraints">
+                                                                                                                <exclude reference="P4G-fJ-6yC"/>
+                                                                                                                <exclude reference="Y4Z-RB-iRv"/>
+                                                                                                            </mask>
+                                                                                                        </variation>
+                                                                                                        <variation key="widthClass=compact">
+                                                                                                            <mask key="constraints">
+                                                                                                                <include reference="P4G-fJ-6yC"/>
+                                                                                                                <include reference="Y4Z-RB-iRv"/>
+                                                                                                                <exclude reference="bcX-gk-QNI"/>
+                                                                                                            </mask>
+                                                                                                        </variation>
+                                                                                                    </view>
+                                                                                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="nFS-kY-mXX" userLabel="Slider Value">
+                                                                                                        <rect key="frame" x="151.5" y="0.0" width="408.5" height="30"/>
+                                                                                                        <subviews>
+                                                                                                            <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="260" horizontalCompressionResistancePriority="700" verticalCompressionResistancePriority="760" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eoK-cm-pMd" userLabel="Slider">
+                                                                                                                <rect key="frame" x="-2" y="0.0" width="383" height="31"/>
                                                                                                             </slider>
-                                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" fixedFrame="YES" text="X/Y" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPb-XX-OgT" userLabel="Slider Value">
-                                                                                                                <rect key="frame" x="344" y="0.0" width="24.5" height="30"/>
+                                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" fixedFrame="YES" text="X/Y" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPb-XX-OgT" userLabel="Slider Value" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                                                                                <rect key="frame" x="384" y="0.0" width="24.5" height="30"/>
                                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                                 <nil key="highlightedColor"/>
+                                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorText.15"/>
+                                                                                                                </userDefinedRuntimeAttributes>
                                                                                                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                                                                                                    <rect key="frame" x="535.5" y="0.0" width="24.5" height="30"/>
+                                                                                                                    <rect key="frame" x="565.5" y="0.0" width="24.5" height="25"/>
                                                                                                                 </variation>
                                                                                                                 <variation key="widthClass=regular" fixedFrame="YES">
                                                                                                                     <rect key="frame" x="419" y="0.0" width="24.5" height="30"/>
@@ -256,28 +306,30 @@
                                                                                                             </label>
                                                                                                         </subviews>
                                                                                                         <variation key="widthClass=compact" fixedFrame="YES">
-                                                                                                            <rect key="frame" x="0.0" y="23" width="560" height="30"/>
+                                                                                                            <rect key="frame" x="0.0" y="23" width="590" height="25"/>
                                                                                                         </variation>
                                                                                                         <variation key="widthClass=regular" fixedFrame="YES">
                                                                                                             <rect key="frame" x="116.5" y="0.0" width="443.5" height="30"/>
                                                                                                         </variation>
                                                                                                     </stackView>
                                                                                                 </subviews>
-                                                                                                <constraints>
-                                                                                                    <constraint firstItem="eWV-nE-zax" firstAttribute="width" secondItem="OFu-cG-TmB" secondAttribute="width" multiplier="1:3" priority="500" id="YVj-ff-dTA"/>
-                                                                                                </constraints>
-                                                                                                <variation key="widthClass=compact" axis="vertical"/>
+                                                                                                <variation key="widthClass=compact" axis="vertical" fixedFrame="YES">
+                                                                                                    <rect key="frame" x="0.0" y="0.0" width="590" height="48"/>
+                                                                                                </variation>
                                                                                                 <variation key="widthClass=regular" fixedFrame="YES">
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
                                                                                                 </variation>
                                                                                             </stackView>
-                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="260" verticalCompressionResistancePriority="800" fixedFrame="YES" text="Notice! Something to know about this slider." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mez-C9-X7l">
-                                                                                                <rect key="frame" x="0.0" y="30" width="560" height="16"/>
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" fixedFrame="YES" text="Notice! Something to know about this slider." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mez-C9-X7l" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                                                                <rect key="frame" x="0.0" y="34" width="560" height="16"/>
                                                                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
                                                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                                                 <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="AccentColorText.13.Italic"/>
+                                                                                                </userDefinedRuntimeAttributes>
                                                                                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                                                                                    <rect key="frame" x="0.0" y="53" width="560" height="16"/>
+                                                                                                    <rect key="frame" x="0.0" y="48" width="590" height="16"/>
                                                                                                 </variation>
                                                                                                 <variation key="widthClass=regular" fixedFrame="YES">
                                                                                                     <rect key="frame" x="0.0" y="30" width="560" height="16"/>
@@ -286,13 +338,16 @@
                                                                                                     <rect key="frame" x="0.0" y="52" width="750" height="16"/>
                                                                                                 </variation>
                                                                                             </label>
-                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="260" verticalCompressionResistancePriority="800" fixedFrame="YES" text="Alert! This slider is problematic for some reason." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEk-ro-tOz">
-                                                                                                <rect key="frame" x="0.0" y="46" width="560" height="16"/>
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="260" verticalCompressionResistancePriority="800" fixedFrame="YES" text="Alert! This slider is problematic for some reason." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEk-ro-tOz" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                                                                <rect key="frame" x="0.0" y="54" width="560" height="23.5"/>
                                                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                                                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                 <nil key="highlightedColor"/>
+                                                                                                <userDefinedRuntimeAttributes>
+                                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="TintColorText.13.Medium"/>
+                                                                                                </userDefinedRuntimeAttributes>
                                                                                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                                                                                    <rect key="frame" x="0.0" y="69" width="560" height="16"/>
+                                                                                                    <rect key="frame" x="0.0" y="64" width="590" height="16"/>
                                                                                                 </variation>
                                                                                                 <variation key="widthClass=regular" fixedFrame="YES">
                                                                                                     <rect key="frame" x="0.0" y="46" width="560" height="16"/>
@@ -303,7 +358,7 @@
                                                                                             </label>
                                                                                         </subviews>
                                                                                         <variation key="widthClass=compact" fixedFrame="YES">
-                                                                                            <rect key="frame" x="0.0" y="0.0" width="560" height="85"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="590" height="80"/>
                                                                                         </variation>
                                                                                         <variation key="widthClass=regular" fixedFrame="YES">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="560" height="62"/>
@@ -316,12 +371,13 @@
                                                                             </stackView>
                                                                         </subviews>
                                                                         <constraints>
-                                                                            <constraint firstItem="T7X-Qy-xNs" firstAttribute="leading" secondItem="BFG-yW-hSS" secondAttribute="leading" constant="10" id="IoM-wI-cgN"/>
+                                                                            <constraint firstItem="T7X-Qy-xNs" firstAttribute="leading" secondItem="BFG-yW-hSS" secondAttribute="leading" constant="25" id="IoM-wI-cgN"/>
+                                                                            <constraint firstItem="LKA-Ut-z7N" firstAttribute="trailing" secondItem="BFG-yW-hSS" secondAttribute="trailing" constant="15" id="KMs-kU-bgd"/>
                                                                             <constraint firstItem="T7X-Qy-xNs" firstAttribute="top" secondItem="LKA-Ut-z7N" secondAttribute="bottom" constant="5" id="YlL-Cm-f8f"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="T7X-Qy-xNs" secondAttribute="bottom" constant="10" id="fHA-HP-wgS"/>
-                                                                            <constraint firstItem="LKA-Ut-z7N" firstAttribute="leading" secondItem="BFG-yW-hSS" secondAttribute="leading" id="hs7-j1-kqP"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="T7X-Qy-xNs" secondAttribute="bottom" constant="20" id="fHA-HP-wgS"/>
+                                                                            <constraint firstItem="LKA-Ut-z7N" firstAttribute="leading" secondItem="BFG-yW-hSS" secondAttribute="leading" constant="15" id="hs7-j1-kqP"/>
                                                                             <constraint firstItem="LKA-Ut-z7N" firstAttribute="top" secondItem="BFG-yW-hSS" secondAttribute="top" constant="10" id="qAW-fy-LgO"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="T7X-Qy-xNs" secondAttribute="trailing" id="r2T-eS-AgS"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="T7X-Qy-xNs" secondAttribute="trailing" constant="15" id="r2T-eS-AgS"/>
                                                                         </constraints>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isFirst" value="NO"/>
@@ -330,7 +386,7 @@
                                                                     </view>
                                                                 </subviews>
                                                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="570" height="128"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="113.5"/>
                                                                 </variation>
                                                                 <variation key="widthClass=regular" fixedFrame="YES">
                                                                     <rect key="frame" x="0.0" y="0.0" width="570" height="135"/>
@@ -340,11 +396,11 @@
                                                                 </variation>
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="god-ED-NEE">
-                                                                <rect key="frame" x="0.0" y="128" width="570" height="48"/>
+                                                                <rect key="frame" x="0.0" y="130" width="600" height="48"/>
                                                                 <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                                                                 <state key="normal" title="Generate Code"/>
                                                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                                                    <rect key="frame" x="0.0" y="128" width="570" height="48"/>
+                                                                    <rect key="frame" x="0.0" y="113.5" width="600" height="48"/>
                                                                 </variation>
                                                                 <variation key="widthClass=regular" fixedFrame="YES">
                                                                     <rect key="frame" x="0.0" y="135" width="570" height="48"/>
@@ -361,10 +417,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="mGK-pi-7Bh" secondAttribute="trailing" constant="15" id="CFC-fu-hyg"/>
-                                                    <constraint firstItem="mGK-pi-7Bh" firstAttribute="top" secondItem="LWz-7s-F0k" secondAttribute="top" constant="5" id="RGF-mS-He3"/>
-                                                    <constraint firstItem="mGK-pi-7Bh" firstAttribute="leading" secondItem="LWz-7s-F0k" secondAttribute="leading" constant="15" id="tW2-0f-nqf"/>
-                                                    <constraint firstAttribute="bottom" secondItem="mGK-pi-7Bh" secondAttribute="bottom" constant="10" id="zcC-L9-DPh"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mGK-pi-7Bh" secondAttribute="trailing" id="CFC-fu-hyg"/>
+                                                    <constraint firstItem="mGK-pi-7Bh" firstAttribute="top" secondItem="LWz-7s-F0k" secondAttribute="top" id="RGF-mS-He3"/>
+                                                    <constraint firstItem="mGK-pi-7Bh" firstAttribute="leading" secondItem="LWz-7s-F0k" secondAttribute="leading" id="tW2-0f-nqf"/>
+                                                    <constraint firstAttribute="bottom" secondItem="mGK-pi-7Bh" secondAttribute="bottom" id="zcC-L9-DPh"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isFirst" value="YES"/>
@@ -384,16 +440,19 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="glY-En-Od2" userLabel="Notes Wrapper">
-                                        <rect key="frame" x="0.0" y="443" width="570" height="203"/>
+                                        <rect key="frame" x="0.0" y="532" width="570" height="202.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y92-3n-Rs5" userLabel="Notes Header">
                                                 <rect key="frame" x="0.0" y="0.0" width="570" height="19.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notes:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkW-xG-Wq0" userLabel="Notes Label">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notes:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkW-xG-Wq0" userLabel="Notes Label" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="570" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorText.17.Medium"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <variation key="widthClass=compact" fixedFrame="YES">
                                                             <rect key="frame" x="0.0" y="0.0" width="570" height="19.5"/>
                                                         </variation>
@@ -409,7 +468,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HaL-sP-OPE" userLabel="Background" customClass="FauxContentRow" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                                 <rect key="frame" x="-15" y="29" width="600" height="173.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" horizontalCompressionResistancePriority="700" verticalCompressionResistancePriority="1000" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTB-EK-Pd8" userLabel="Notes Text 1">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" horizontalCompressionResistancePriority="700" verticalCompressionResistancePriority="1000" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTB-EK-Pd8" userLabel="Notes Text 1" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="15" width="570" height="143.5"/>
                                                         <string key="text">Due to the import process between Game 1 and Game 2, you will see a different Shepard if you import unchanged than if you customize using exactly the same values. Eye colors were more vivid in Game 1 and the Scar attribute is not available in Game 2.
 
@@ -417,6 +476,9 @@ Game 3 has many more hair colors, styles, and makeup colors (for FemShep). None 
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="NormalColorText.15"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -452,18 +514,19 @@ Game 3 has many more hair colors, styles, and makeup colors (for FemShep). None 
                                     <constraint firstItem="JOJ-IE-F3O" firstAttribute="leading" secondItem="rmA-Rx-ywm" secondAttribute="leading" id="W12-LC-qFg"/>
                                     <constraint firstItem="JOJ-IE-F3O" firstAttribute="top" secondItem="7EC-53-dfs" secondAttribute="bottom" constant="15" id="Xzy-PY-4gT"/>
                                     <constraint firstItem="glY-En-Od2" firstAttribute="leading" secondItem="rmA-Rx-ywm" secondAttribute="leading" id="f9C-X6-uhj"/>
+                                    <constraint firstAttribute="bottom" secondItem="glY-En-Od2" secondAttribute="bottom" constant="25" id="fSg-ga-Qyr"/>
                                     <constraint firstItem="7EC-53-dfs" firstAttribute="top" secondItem="rmA-Rx-ywm" secondAttribute="top" constant="-5" id="iVu-vL-MxE"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="glY-En-Od2" secondAttribute="bottom" constant="25" id="oK5-ij-fS6"/>
                                     <constraint firstAttribute="trailing" secondItem="glY-En-Od2" secondAttribute="trailing" id="uxW-Z3-Wne"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="qLt-7b-dlK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rmA-Rx-ywm" secondAttribute="bottom" constant="20" id="3Ph-2Y-LSe"/>
                             <constraint firstItem="rmA-Rx-ywm" firstAttribute="leading" secondItem="wtj-eR-bfU" secondAttribute="leading" constant="15" id="Tl6-HN-Kea"/>
                             <constraint firstItem="rmA-Rx-ywm" firstAttribute="top" secondItem="UkN-4q-htw" secondAttribute="bottom" constant="20" id="VAQ-8x-Qil"/>
                             <constraint firstAttribute="trailing" secondItem="rmA-Rx-ywm" secondAttribute="trailing" constant="15" id="dF0-pN-YVu"/>
-                            <constraint firstItem="qLt-7b-dlK" firstAttribute="top" secondItem="rmA-Rx-ywm" secondAttribute="bottom" constant="20" id="hSo-22-6fc"/>
+                            <constraint firstItem="qLt-7b-dlK" firstAttribute="top" secondItem="rmA-Rx-ywm" secondAttribute="bottom" priority="100" constant="20" id="hSo-22-6fc"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

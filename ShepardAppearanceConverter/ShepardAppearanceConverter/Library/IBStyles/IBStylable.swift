@@ -66,12 +66,12 @@ public class IBStyler: NSObject {
             and most of those times the element is not correctky placed inside the View hierarchy).
         applyLayout() is currently not used by IBStyler, but that may change if we start allowing layout styles (like width/height).
     */
-    public func applyStyles(isLayout isLayout: Bool = true) {
+    public func applyStyles() {
         if !didApplyFormat {
-            applyFormat(isLayout: isLayout)
+            applyFormat()
         }
         if boundsChanged() {
-            applyLayout(isLayout: isLayout)
+            applyLayout()
         }
     }
     
@@ -80,29 +80,22 @@ public class IBStyler: NSObject {
             to differentiate, and only apply format styles here, with layout styles applies inside applyLayout().
         Maybe needs a better name?
     */
-    public func applyFormat(isLayout isLayout: Bool = true) {
+    public func applyFormat() {
         if !didApplyFormat && !delegateIdentifier.isEmpty {
             IBStyles.apply(delegateIdentifier, to: delegate as? UIView)
             // eventually restrict to format styles only,
             // add layout styles under applyLayout() instead
         }
         delegate.applyFormat?()
-        if isLayout {
-            // try to format again if format was called early by some other process
-            // (because we don't separate applyLayout from applyFormat yet, it does things wrong if called too early)
-            didApplyFormat = true
-            //TODO: remove this if{} and instead, call IBStyles.apply() twice with a .Style or .Layout param, then change IBStylesShell to check that first and re-apply properties as appropriate
-        }
+        didApplyFormat = true
     }
     
     /**
         Intended to apply layout styles (like width/height), but there are none right now,
             so just kicks it back to the delegate, in case the delegate has some fomatting things to do.
     */
-    public func applyLayout(isLayout isLayout: Bool = true) {
-        if isLayout {
-            delegate.applyLayout?()
-        }
+    public func applyLayout() {
+        delegate.applyLayout?()
     }
     
     /**

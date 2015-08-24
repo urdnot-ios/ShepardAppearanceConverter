@@ -11,8 +11,8 @@ import UIKit
 @IBDesignable public class RadioButton: UIButton {
     @IBInspectable var on: Bool = false { didSet{ toggle(on) } }
     
-    private static let uncheckedImage = UIImage(named: "Radio Empty", inBundle: NSBundle.currentAppBundle, compatibleWithTraitCollection: nil)
-    private static let checkedImage = UIImage(named: "Radio Filled", inBundle: NSBundle.currentAppBundle, compatibleWithTraitCollection: nil)
+    private static let uncheckedImage = UIImage(named: "Radio Empty", inBundle: NSBundle(forClass: RadioButton.self), compatibleWithTraitCollection: nil)
+    private static let checkedImage = UIImage(named: "Radio Filled", inBundle: NSBundle(forClass: RadioButton.self), compatibleWithTraitCollection: nil)
     
     private func toggle(on: Bool){
         if on {

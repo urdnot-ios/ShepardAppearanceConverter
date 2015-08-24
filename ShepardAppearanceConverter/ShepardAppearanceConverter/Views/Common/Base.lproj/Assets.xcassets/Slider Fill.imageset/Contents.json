@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "sliderFill@1x.png",
+      "filename" : "slider_filled@1x.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "sliderFill@2x.png",
       "scale" : "2x"
     },
     {

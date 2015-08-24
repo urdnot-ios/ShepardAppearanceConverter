@@ -52,13 +52,30 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        //find the scrollview:
+        if self.scrollView == nil {
+            var parentView = view
+            while parentView != nil {
+                if let scrollView = parentView as? UIScrollView {
+                    self.scrollView = scrollView
+                }
+                parentView = parentView.superview
+            }
+        }
 //        view.frame.size.height = 100000
 //        view.sizeToFit()
     }
 
     //MARK: Actions
+    @IBAction func ME2CodeSelected(sender: UITextField) {
+        if Shepard.Appearance.Formatting.isEmpty(ME2CodeField.text ?? "") {
+            ME2CodeField.text = ""
+        }
+    }
+    
     private var lastCode: String?
-    @IBAction func ME2CodeChanged(sender: AnyObject) {
+    @IBAction func ME2CodeChanged(sender: UITextField) {
         ME2CodeField.text = Shepard.Appearance.Formatting.formatCode(ME2CodeField.text, lastCode: lastCode)
         lastCode = ME2CodeField.text
         ME2CodeLabel.text = ME2CodeField.text
@@ -87,7 +104,7 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
         ME2CodeField.text = newAppearance.format()
         ME2CodeLabel.text = ME2CodeField.text
         displayMessages(appearance)
-        scrollView.contentOffset = CGPointZero
+        scrollView?.contentOffset = CGPointZero
         spinner.stop()
     }
     
@@ -172,7 +189,7 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
             else { continue }
         
             // setup groupStack values:
-            groupStack.titleLabel?.text = "\(group.title):"
+            groupStack.titleLabel?.text = "\(group.title)"
             
             // setup groupStack sliders:
             for attribute in sliderAttributes {

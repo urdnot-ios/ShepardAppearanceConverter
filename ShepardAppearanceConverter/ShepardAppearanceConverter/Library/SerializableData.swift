@@ -201,6 +201,8 @@ extension SerializableData {
     public var nsNumber: NSNumber? { return value() as NSNumber? }
     /// - Returns: Optional(NSDate) if this object can be converted to one
     public var date: NSDate? { return value() as NSDate? }
+    /// - Returns: Optional(NSDate) if this object can be converted to one
+    public var isNil: Bool { return contents == .Null }
     
     /// - Parameter value: A date string of format "YYYY-MM-dd HH:mm:ss"
     /// - Returns: Optional(NSDate)
@@ -424,7 +426,107 @@ extension SerializableData {
     }
 }
 
+// MARK: SerializableDataType
 
 extension SerializableData: SerializableDataType {
     public func getData() -> SerializableData { return self }
 }
+
+
+// MARK: LiteralConvertibles (for Setters)
+
+extension SerializableData: NilLiteralConvertible {
+	public init(nilLiteral: ()) {
+    }
+}
+extension SerializableData: StringLiteralConvertible {
+	public init(stringLiteral s: StringLiteralType) {
+        contents = .ValueType(s)
+	}
+	public init(extendedGraphemeClusterLiteral s: StringLiteralType) {
+        contents = .ValueType(s)
+	}
+	public init(unicodeScalarLiteral s: StringLiteralType) {
+        contents = .ValueType(s)
+	}
+}
+extension SerializableData: IntegerLiteralConvertible {
+	public init(integerLiteral i: IntegerLiteralType) {
+        contents = .ValueType(i)
+	}
+}
+extension SerializableData: FloatLiteralConvertible {
+	public init(floatLiteral f: FloatLiteralType) {
+        contents = .ValueType(f)
+	}
+}
+extension SerializableData: BooleanLiteralConvertible {
+	public init(booleanLiteral b: BooleanLiteralType) {
+        contents = .ValueType(b)
+	}
+}
+extension SerializableData:  DictionaryLiteralConvertible {
+    public typealias Key = String
+    public typealias Value = SerializableDataType
+	public init(dictionaryLiteral tuples: (Key, Value)...) {
+        var d = [String: SerializableData]()
+        tuples.map { (k,v) in d[k] = v.getData() }
+        contents = .DictionaryType(d)
+	}
+	public init(dictionaryLiteral tuples: (Key, Value?)...) {
+        var d = [String: SerializableData]()
+        tuples.map { (k,v) in d[k] = v?.getData() ?? SerializableData() }
+        contents = .DictionaryType(d)
+	}
+}
+extension SerializableData:  ArrayLiteralConvertible {
+    public typealias Element = SerializableDataType
+	public init(arrayLiteral elements: Element...) {
+        var a = [SerializableData]()
+        elements.map { (v) in a.append(v.getData()) }
+        contents = .ArrayType(a)
+	}
+	public init(arrayLiteral elements: Element?...) {
+        var a = [SerializableData]()
+        elements.map { (v) in a.append(v?.getData() ?? SerializableData()) }
+        contents = .ArrayType(a)
+	}
+}
+
+
+// MARK: - Equatable
+extension SerializableData.StorageType: Equatable {}
+func == (lhs: SerializableData.StorageType, rhs: SerializableData.StorageType) -> Bool {
+    switch (lhs, rhs) {
+    case (.Null, .Null):
+        return true
+    case (.ValueType(let v1), .ValueType(let v2)):
+        // do we care about type? I don't think so...
+        return "\(v1)" == "\(v2)"
+    case (.DictionaryType(let v1), .DictionaryType(let v2)):
+        return v1 == v2
+    case (.ArrayType(let v1), .ArrayType(let v2)):
+        return v1 == v2
+    default: return false
+    }
+}
+extension SerializableData: Equatable {}
+public func ==(lhs: SerializableData, rhs: SerializableData) -> Bool {
+    return lhs.contents == rhs.contents
+}
+public func ==(lhs: SerializableData?, rhs: SerializableData?) -> Bool {
+    return lhs?.contents ?? .Null == rhs?.contents ?? .Null
+}
+public func ==(lhs: SerializableData, rhs: SerializableData?) -> Bool {
+    return lhs.contents == rhs?.contents ?? .Null
+}
+public func ==(lhs: SerializableData?, rhs: SerializableData) -> Bool {
+    return lhs?.contents ?? .Null == rhs.contents
+}
+//extension SerializableDataType: Equatable {}
+// we can't declare SerializableDataType Equatable or ArrayLiteralConvertible and DictionaryLiteralConvertible break, also would have to be declared on SerializableDataType initial definition
+// also, since SerializableData is SerializableDataType, there is infinite looping. :(
+//public func ==(lhs: SerializableDataType?, rhs: SerializableDataType?) -> Bool {
+//    print("X")
+//    return (lhs?.getData() ?? nil) == (rhs?.getData() ?? nil)
+//}

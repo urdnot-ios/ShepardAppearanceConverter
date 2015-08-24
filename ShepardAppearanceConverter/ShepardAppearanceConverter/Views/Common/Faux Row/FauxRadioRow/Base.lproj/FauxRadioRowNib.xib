@@ -17,14 +17,14 @@
                             <rect key="frame" x="15" y="0.0" width="470" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bv6-Ck-PSW" customClass="RadioButton" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="12" width="20" height="20"/>
+                                    <rect key="frame" x="0.0" y="13.5" width="17" height="17"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="EyQ-Ym-2QD"/>
-                                        <constraint firstAttribute="width" constant="20" id="pmU-fL-7TY"/>
+                                        <constraint firstAttribute="height" constant="17" id="EyQ-Ym-2QD"/>
+                                        <constraint firstAttribute="width" constant="17" id="pmU-fL-7TY"/>
                                     </constraints>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONA-mM-e8e" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                    <rect key="frame" x="30" y="12" width="42" height="20.5"/>
+                                    <rect key="frame" x="27" y="12" width="42" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>

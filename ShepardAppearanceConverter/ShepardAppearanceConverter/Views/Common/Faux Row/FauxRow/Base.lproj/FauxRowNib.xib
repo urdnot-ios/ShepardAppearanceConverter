@@ -26,9 +26,9 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="9Ad-Rk-KJC">
-                                    <rect key="frame" x="464" y="14" width="8" height="16"/>
+                                    <rect key="frame" x="464" y="15.5" width="8" height="13"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="16" id="OXN-AU-14o"/>
+                                        <constraint firstAttribute="height" constant="13" id="OXN-AU-14o"/>
                                         <constraint firstAttribute="width" constant="8" id="p01-aV-cht"/>
                                     </constraints>
                                 </imageView>
@@ -74,6 +74,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Disclosure" width="8" height="16"/>
+        <image name="Disclosure" width="8" height="13"/>
     </resources>
 </document>
