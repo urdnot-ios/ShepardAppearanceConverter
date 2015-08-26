@@ -15,3 +15,5 @@ extension Shepard {
         case Colonist = "Colonist"
     }
 }
+
+// already Equatable

@@ -37,7 +37,7 @@ class ShepardFlowController: UIViewController {
     }
     
     func openApp() {
-        if SavedData.shepardSets.count == 0 {
+        if SavedData.shepardSets.isEmpty {
             createGame(nil)
         } else {
             performSegueWithIdentifier("Select Shepard", sender: nil)

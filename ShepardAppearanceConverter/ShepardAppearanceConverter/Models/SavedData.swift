@@ -23,7 +23,6 @@ public class SavedData {
         let newShepard = shepard != nil ? shepard! : Shepard(game: game)
         let shepardGames = ShepardSet(game: game, shepard: newShepard)
         shepards.append(shepardGames)
-        onShepardsListChange.fire(true)
         return newShepard
     }
     
@@ -36,21 +35,25 @@ public class SavedData {
         return nil
     }
     
+    public class func markShepardAsLastPlayed(shepard: Shepard) {
+        if let foundIndex = shepards.indexOf({ $0.match(shepard) }) {
+            SavedData.shepards[foundIndex].lastPlayedGame = shepard.game
+        }
+    }
+    
     public class func deleteShepard(shepard: Shepard) -> Bool {
         if let foundIndex = shepards.indexOf({ $0.match(shepard) }) {
             shepards.removeAtIndex(foundIndex)
-            onShepardsListChange.fire(true)
             return true
         }
         return false
     }
     
-    public class func saveShepard(var shepard: Shepard, atIndex: Int? = nil) {
-        if let foundIndex = atIndex where foundIndex < shepards.count {
+    public class func saveShepard(var shepard: Shepard, atIndex index: Int? = nil) {
+        if let foundIndex = index where foundIndex < shepards.count ?? 0 {
             shepards[foundIndex].setGame(shepard.game, shepard: shepard)
             shepard.hasUnsavedData = false
         } else if let foundIndex = shepards.indexOf({ $0.match(shepard) }) {
-//            shepard.markUpdated()
             shepards[foundIndex].setGame(shepard.game, shepard: shepard)
             shepard.hasUnsavedData = false
         }
@@ -115,7 +118,7 @@ extension SavedData: SerializableDataType {
     public func setData(data: SerializableData) {
         SavedData.shepards = (data["shepards"]?.array ?? []).map { ShepardSet(data: $0) }
         CurrentGame().setData(data["current_game"] ?? SerializableData())
-        if SavedData.shepards.count == 0 {
+        if SavedData.shepards.isEmpty {
             SavedData.addNewShepard(CurrentGame.shepard.game, shepard: CurrentGame.shepard)
         }
     }

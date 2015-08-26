@@ -15,3 +15,5 @@ extension Shepard {
         case Ruthless = "Ruthless"
     }
 }
+
+// already Equatable

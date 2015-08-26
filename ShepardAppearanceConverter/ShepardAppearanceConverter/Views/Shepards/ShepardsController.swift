@@ -22,17 +22,17 @@ class ShepardsController: UITableViewController {
         
         setupPage()
         
-        // find a way to only trigger one at a time?
         CurrentGame.onCurrentShepardChange.listen(self) { [weak self] (shepard) in
             if self?.updating == false {
                 self?.setupPage(reloadData: true)
             }
         }
-        SavedData.onShepardsListChange.listen(self) { [weak self] (shepard) in
-            if self?.updating == false {
-                self?.setupPage(reloadData: true)
-            }
-        }
+        // don't think we need this?
+//        SavedData.onShepardsListChange.listen(self) { [weak self] (shepard) in
+//            if self?.updating == false {
+//                self?.setupPage(reloadData: true)
+//            }
+//        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -86,9 +86,11 @@ class ShepardsController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row < shepards.count {
+            view.userInteractionEnabled = false
             let shepard = shepards[indexPath.row].lastPlayed
             CurrentGame.changeShepard(shepard)
             parentViewController?.performSegueWithIdentifier("Select Shepard", sender: nil)
+            view.userInteractionEnabled = true
         }
     }
     
@@ -99,6 +101,7 @@ class ShepardsController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             if indexPath.row < shepards.count {
+                view.userInteractionEnabled = false
                 updating = true
                 let shepard = shepards[indexPath.row].last
                 SavedData.deleteShepard(shepard)
@@ -107,6 +110,7 @@ class ShepardsController: UITableViewController {
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                 tableView.endUpdates()
                 updating = false
+                view.userInteractionEnabled = true
             }
         }
     }

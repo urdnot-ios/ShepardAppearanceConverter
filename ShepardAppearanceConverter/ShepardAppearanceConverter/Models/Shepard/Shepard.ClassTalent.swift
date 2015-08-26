@@ -20,3 +20,5 @@ extension Shepard {
         case Vanguard = "Vanguard"
     }
 }
+
+// already Equatable

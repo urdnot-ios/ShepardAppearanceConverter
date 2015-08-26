@@ -10,7 +10,7 @@ import UIKit
 
 extension Shepard {
 
-    public enum Photo: Equatable {
+    public enum Photo {
         case DefaultMalePhoto
         case DefaultFemalePhoto
         case Custom(file: String)
@@ -43,6 +43,8 @@ extension Shepard {
         }
     }
 }
+
+extension Shepard.Photo: Equatable {}
 
 public func ==(a: Shepard.Photo, b: Shepard.Photo) -> Bool {
     switch (a, b) {

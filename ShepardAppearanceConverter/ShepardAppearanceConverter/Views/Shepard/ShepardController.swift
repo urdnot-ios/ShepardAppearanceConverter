@@ -105,6 +105,7 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
     
     @IBAction func doneChangingName(sender: AnyObject) {
+        view.userInteractionEnabled = false
         sender.resignFirstResponder()
         if nameField.text == nil || nameField.text!.isEmpty {
             nameField.text = CurrentGame.shepard.name.stringValue
@@ -114,14 +115,17 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
         }
         nameField.superview?.setNeedsLayout()
         nameField.superview?.layoutIfNeeded()
+        view.userInteractionEnabled = true
     }
     
     @IBAction func genderChanged(sender: AnyObject) {
-        CurrentGame.shepard.setGender(genderSegment.selectedSegmentIndex == 0 ? .Male : .Female)
-        setupPage()
+        view.userInteractionEnabled = false
+        CurrentGame.shepard.gender = genderSegment.selectedSegmentIndex == 0 ? .Male : .Female
+        view.userInteractionEnabled = true
     }
     
     @IBAction func gameChanged(sender: AnyObject) {
+        view.userInteractionEnabled = false
         let newGame: Shepard.Game = {
             switch gameSegment.selectedSegmentIndex {
             case 0: return .Game1
@@ -131,6 +135,7 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
             }
         }()
         CurrentGame.changeGame(newGame)
+        view.userInteractionEnabled = true
     }
     
     @IBAction func changePhoto(sender: UIButton) {
@@ -140,6 +145,7 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
     //MARK: Setup Page Elements
 
     func setupPage() {
+        view.userInteractionEnabled = false
         genderSegment.selectedSegmentIndex = CurrentGame.shepard.gender == .Male ? 0 : 1
         gameSegment.selectedSegmentIndex = {
             switch CurrentGame.shepard.game {
@@ -149,12 +155,10 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
             }
         }()
         nameField.text = CurrentGame.shepard.name.stringValue
+        surnameLabel.text = Shepard.DefaultSurname
         setupPhoto()
         setupFauxRows()
-        
-        CurrentGame.shepard.onChange.listen(self) { [weak self] (shepard) in
-            self?.setupPage()
-        }
+        view.userInteractionEnabled = true
     }
     
     func setupFauxRows() {

@@ -16,5 +16,6 @@ extension Shepard {
             return [.Male, .Female]
         }
     }
-    
 }
+
+// already Equatable

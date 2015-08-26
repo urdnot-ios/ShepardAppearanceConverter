@@ -94,7 +94,7 @@ final public class Signal<T> {
                 }
             }
         }
-        if (removeListeners.count > 0) {
+        if !removeListeners.isEmpty {
             signalListeners = signalListeners.filter { signalListener in
                 let hash = (signalListener as AnyObject).hash
                 return removeListeners.indexForKey(hash) == nil

@@ -10,15 +10,16 @@ import Foundation
 
 public struct ShepardSet {
     private var contents: [Shepard.Game: Shepard] = [:]
-    public var lastPlayedGame = Shepard.Game.Game1
+    public var lastPlayedGame = Shepard.Game.Game1 
     public init(game: Shepard.Game, shepard: Shepard) {
         addGame(game, shepard: shepard)
     }
     public mutating func addGame(game: Shepard.Game, shepard: Shepard) {
-        lastPlayedGame = game // move to separate explicit function
+//        lastPlayedGame = game // move to separate explicit function
         contents[game] = shepard
     }
     public func getGame(game: Shepard.Game) -> Shepard? {
+//        lastPlayedGame = game // move to separate explicit function
         return contents[game]
     }
     public mutating func setGame(game: Shepard.Game, shepard: Shepard) {
@@ -29,7 +30,7 @@ public struct ShepardSet {
                 contents[otherGame] = otherGameShepard
             }
         }
-        lastPlayedGame = game // move to separate explicit function
+//        lastPlayedGame = game // move to separate explicit function
     }
     public var first: Shepard {
         return (contents[.Game1] ?? (contents[.Game2] ?? contents[.Game3]))!

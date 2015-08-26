@@ -16,13 +16,14 @@ public class CurrentGame {
             CurrentGame.onCurrentShepardChange.fire(true)
         }
         return shepard
-    }() {
-        didSet {
-            if shepard != oldValue && oldValue.hasUnsavedData {
-                SavedData.saveShepard(oldValue)
-            }
-        }
-    }
+    }()
+//    {
+//        didSet {
+//            if shepard != oldValue && oldValue.hasUnsavedData {
+//                SavedData.saveShepard(oldValue)
+//            }
+//        }
+//    }
     
     public class func changeGame(newGame: Shepard.Game) {
         let oldGame = CurrentGame.shepard.game
@@ -33,7 +34,8 @@ public class CurrentGame {
                 newGameSameShepard = true
                 return foundIndex
             } else {
-                SavedData.addNewShepard(newGame, shepard: Shepard(game: newGame))
+                var newShepard = SavedData.addNewShepard(newGame, shepard: Shepard(game: newGame))
+                newShepard.hasUnsavedData = true
                 return SavedData.shepardSets.count - 1
             }
         }()
@@ -45,20 +47,19 @@ public class CurrentGame {
                 //ask first?
                 newShepard.setData(CurrentGame.shepard.getData(), source: .GameConversion(priorGame: oldGame))
             }
-            CurrentGame.changeShepard(newShepard)
             SavedData.saveShepard(newShepard, atIndex: index)
+            CurrentGame.changeShepard(newShepard)
         }
-        onShepardChange.fire(CurrentGame.shepard)
     }
     
     public class func changeShepard(newShepard: Shepard) {
         CurrentGame.shepard.setData(newShepard.getData(), source: .SavedData)
+        SavedData.markShepardAsLastPlayed(newShepard)
+        CurrentGame.onCurrentShepardChange.fire(true)
     }
     
 //MARK: Listeners
     
-    // notifies we are switching between shepards or between games:
-    public static let onShepardChange = Signal<(Shepard)>()
     // notifies of any change to current shepard (which is really any change to any shepard, since you can only change the current one)
     public static let onCurrentShepardChange = Signal<(Bool)>()
 }

@@ -14,23 +14,39 @@ extension Shepard {
         
         static let SampleAppearance = "XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X "
     
-        public enum Attributes {
+        public enum GroupType {
+            case FacialStructure, Head, Eyes, Jaw, Mouth, Nose, Hair, Makeup
+            var title: String {
+                switch self {
+                case .FacialStructure: return "Facial Structure"
+                case .Head: return "Head"
+                case .Eyes: return "Eyes"
+                case .Jaw: return "Jaw"
+                case .Mouth: return "Mouth"
+                case .Nose: return "Nose"
+                case .Hair: return "Hair"
+                case .Makeup: return "Makeup"
+                }
+            }
+        }
+        
+        public enum AttributeType {
             case
-            //face
+            //FacialStructure
             FacialStructure, SkinTone, Complexion, Scar,
-            //head
+            //Head
             NeckThickness, FaceSize, CheekWidth, CheekBones, CheekGaunt, EarsSize, EarsOrientation,
-            //eyes
+            //Eyes
             EyeShape, EyeHeight, EyeWidth, EyeDepth, BrowDepth, BrowHeight, IrisColor,
-            //jaw
+            //Jaw
             ChinHeight, ChinDepth, ChinWidth, JawWidth,
-            //mouth
+            //Mouth
             MouthShape, MouthDepth, MouthWidth, MouthLipSize, MouthHeight,
-            //nose
+            //Nose
             NoseShape, NoseHeight, NoseDepth,
-            //hair
+            //Hair
             HairColor, Hair, Brow, BrowColor, Beard, FacialHairColor,
-            //makeup
+            //Makeup
             BlushColor, LipColor, EyeShadowColor
             
             var title: String {
@@ -78,27 +94,34 @@ extension Shepard {
             }
         }
         
-        public enum AttributeGroups {
-            case FacialStructure, Head, Eyes, Jaw, Mouth, Nose, Hair, Makeup
-            var title: String {
-                switch self {
-                case .FacialStructure: return "Facial Structure"
-                case .Head: return "Head"
-                case .Eyes: return "Eyes"
-                case .Jaw: return "Jaw"
-                case .Mouth: return "Mouth"
-                case .Nose: return "Nose"
-                case .Hair: return "Hair"
-                case .Makeup: return "Makeup"
-                }
-            }
-        }
         
-        public static let sortedAttributeGroups: [AttributeGroups] = [
+        public static let sortedAttributeGroups: [GroupType] = [
             .FacialStructure, .Head, .Eyes, .Jaw, .Mouth, .Nose, .Hair, .Makeup
         ]
         
-        public static let attributes: [Gender: [Game: [Attributes]]] = [
+        public static let attributeGroups: [Gender: [GroupType: [AttributeType]]] = [
+            .Female: [
+                .FacialStructure: [.FacialStructure, .SkinTone, .Complexion, .Scar],
+                .Head: [.NeckThickness, .FaceSize, .CheekWidth, .CheekBones, .CheekGaunt, .EarsSize, .EarsOrientation],
+                .Eyes: [.EyeShape, .EyeHeight, .EyeWidth, .EyeDepth, .BrowDepth, .BrowHeight, .IrisColor],
+                .Jaw: [.ChinHeight, .ChinDepth, .ChinWidth, .JawWidth],
+                .Mouth: [.MouthShape, .MouthDepth, .MouthWidth, .MouthLipSize, .MouthHeight],
+                .Nose: [.NoseShape, .NoseHeight, .NoseDepth],
+                .Hair: [.HairColor, .Hair, .Brow, .BrowColor],
+                .Makeup: [.BlushColor, .LipColor, .EyeShadowColor],
+            ],
+            .Male: [
+                .FacialStructure: [.FacialStructure, .SkinTone, .Complexion, .Scar],
+                .Head: [.NeckThickness, .FaceSize, .CheekWidth, .CheekBones, .CheekGaunt, .EarsSize, .EarsOrientation],
+                .Eyes: [.EyeShape, .EyeHeight, .EyeWidth, .EyeDepth, .BrowDepth, .BrowHeight, .IrisColor],
+                .Jaw: [.ChinHeight, .ChinDepth, .ChinWidth, .JawWidth],
+                .Mouth: [.MouthShape, .MouthDepth, .MouthWidth, .MouthLipSize, .MouthHeight],
+                .Nose: [.NoseShape, .NoseHeight, .NoseDepth],
+                .Hair: [.Beard, .Brow, .Hair, .HairColor, .FacialHairColor],
+            ],
+        ]
+        
+        public static let attributes: [Gender: [Game: [AttributeType]]] = [
             .Female: [
                 .Game1: [
                 .FacialStructure, .SkinTone, .Complexion, .Scar,
@@ -163,7 +186,7 @@ extension Shepard {
             ]
         ]
         
-        public static let slidersMax : [Gender: [Attributes: [Game: Int]]] = {
+        public static let slidersMax : [Gender: [AttributeType: [Game: Int]]] = {
             func sliderMaxValues(value1: Int, _ value2: Int, _ value3: Int) -> [Game: Int] {
                 return [.Game1: value1, .Game2: value2, .Game3: value3]
             }
@@ -246,66 +269,37 @@ extension Shepard {
                 ]
             ]
         }()
-        public static let attributeGroups: [Gender: [AttributeGroups: [Attributes]]] = [
-            .Female: [
-                .FacialStructure: [.FacialStructure, .SkinTone, .Complexion, .Scar],
-                .Head: [.NeckThickness, .FaceSize, .CheekWidth, .CheekBones, .CheekGaunt, .EarsSize, .EarsOrientation],
-                .Eyes: [.EyeShape, .EyeHeight, .EyeWidth, .EyeDepth, .BrowDepth, .BrowHeight, .IrisColor],
-                .Jaw: [.ChinHeight, .ChinDepth, .ChinWidth, .JawWidth],
-                .Mouth: [.MouthShape, .MouthDepth, .MouthWidth, .MouthLipSize, .MouthHeight],
-                .Nose: [.NoseShape, .NoseHeight, .NoseDepth],
-                .Hair: [.HairColor, .Hair, .Brow, .BrowColor],
-                .Makeup: [.BlushColor, .LipColor, .EyeShadowColor],
-            ],
-            .Male: [
-                .FacialStructure: [.FacialStructure, .SkinTone, .Complexion, .Scar],
-                .Head: [.NeckThickness, .FaceSize, .CheekWidth, .CheekBones, .CheekGaunt, .EarsSize, .EarsOrientation],
-                .Eyes: [.EyeShape, .EyeHeight, .EyeWidth, .EyeDepth, .BrowDepth, .BrowHeight, .IrisColor],
-                .Jaw: [.ChinHeight, .ChinDepth, .ChinWidth, .JawWidth],
-                .Mouth: [.MouthShape, .MouthDepth, .MouthWidth, .MouthLipSize, .MouthHeight],
-                .Nose: [.NoseShape, .NoseHeight, .NoseDepth],
-                .Hair: [.Beard, .Brow, .Hair, .HairColor, .FacialHairColor],
-            ],
-        ]
         
-        public static let expectedCodeLength: [Gender: [Game: Int]] = [
-            .Male: [.Game1: 35, .Game2: 34, .Game3: 34],
-            .Female: [.Game1: 37, .Game2: 36, .Game3: 36]
-        ]
-        
-        public var contents: [Attributes: Int] = [:]
+        public var contents: [AttributeType: Int] = [:]
         public var gender: Gender = .Male
         public var game: Game = .Game1
         public var initError: String?
-        public static let CodeLengthIncorrect = "Warning: code length (%d) does not match game selected (expected %d)"
 
         public init(game: Game) {
             self.game = game
         }
+        
         public init(_ appearance: String, fromGame: Game = .Game1, withGender: Shepard.Gender = .Male) {
             //ME1 format?
-            contents = [Attributes: Int]()
+            contents = [AttributeType: Int]()
             self.game = fromGame
-            let oldAppearanceCode = Formatting.unformatCode(appearance)
-            if !oldAppearanceCode.isEmpty && oldAppearanceCode.characters.count != Appearance.expectedCodeLength[gender]?[game] {
-                let reportLength = Appearance.expectedCodeLength[gender]?[game] ?? 0
-                initError = String(format: Appearance.CodeLengthIncorrect, oldAppearanceCode.characters.count, reportLength)
+            let oldAppearanceCode = Format.unformatCode(appearance)
+            if let error = Format.CodeLengthError(oldAppearanceCode, gender: gender, game: game) {
+                initError = error
             }
             for element in oldAppearanceCode.characters {
                 if let attributeList = Appearance.attributes[gender]?[game] where attributeList.count > contents.count {
                     let attribute = attributeList[contents.count]
-                    contents[attribute] = Formatting.unformatAttribute(element)
+                    contents[attribute] = Format.unformatAttribute(element)
                 }
             }
-            print(appearance)
-            print(oldAppearanceCode)
         }
         
         /// Converts attribute values between games.
         public mutating func convert(toGame toGame: Game) {
             alerts = [:]
             notices = [:]
-            var newAppearance = [Attributes: Int]()
+            var newAppearance = [AttributeType: Int]()
             if let sourceAttributes = Appearance.attributes[gender]?[game] {
                 for attribute in sourceAttributes {
                     var attributeValue = contents[attribute]
@@ -375,10 +369,10 @@ extension Shepard {
             game = toGame
         }
         
-        /// Alert/Notice messages on conversion failures
-        public var alerts = [Attributes: String]()
-        public var notices: [Attributes: String] = [:]
-        public static var defaultNotices: [Attributes: String] = [.Scar: "Scar has no equivalent in Game 2 or 3"]
+        //MARK: Alert/Notice messages on conversion failures
+        public var alerts = [AttributeType: String]()
+        public var notices: [AttributeType: String] = [:]
+        public static var defaultNotices: [AttributeType: String] = [.Scar: "Scar has no equivalent in Game 2 or 3"]
         internal static let HairColorNotFound = "Hair color has no equivalent"
         internal static let HairColorConverted = "Hair color was changed to an approximate equivalent"
         internal static let EyeShadowColorNotFound = "Eyeshadow color has no equivalent"
@@ -390,13 +384,30 @@ extension Shepard {
         public func format() -> String {
             var newAppearance = String()
             if let sourceAttributes = Appearance.attributes[gender]?[game] {
-                newAppearance = sourceAttributes.reduce("") { $0 + Formatting.formatAttribute(contents[$1]) }
+                newAppearance = sourceAttributes.reduce("") { $0 + Format.formatAttribute(contents[$1]) }
             }
-            return Formatting.formatCode(newAppearance)
+            return Format.formatCode(newAppearance)
         }
         
     
-        public struct Formatting {
+        public struct Format { // not an object, just a collection of functions
+        
+            public static let ExpectedCodeLength: [Gender: [Game: Int]] = [
+                .Male: [.Game1: 35, .Game2: 34, .Game3: 34],
+                .Female: [.Game1: 37, .Game2: 36, .Game3: 36]
+            ]
+            
+            public static let CodeLengthIncorrect = "Warning: code length (%d) does not match game selected (expected %d)"
+            
+            public static func CodeLengthError(code: String, gender: Gender, game: Game) -> String? {
+                let reportLength = Format.ExpectedCodeLength[gender]?[game] ?? 0
+                if reportLength == code.characters.count {
+                    return nil
+                } else {
+                    return String(format: Format.CodeLengthIncorrect, code.characters.count, reportLength)
+                }
+            }
+        
         
             public static let AvailableAlphabet = "123456789ABCDEFGHIJKLMNPQRSTUVW"
             
@@ -469,4 +480,11 @@ extension Shepard {
 // Haircolor:
 // ME1: Blond, Dark Blond, Red, Light Brown, Brown, Dark Brown, Black
 // ME3: Blond, Dark Blond, Light Brown, Brown, Dark Brown, Black, Dark Gray, Gray, Light Gray, Silver, Dark Red, Red, Bright Red
+}
+
+
+extension Shepard.Appearance: Equatable {}
+
+public func ==(a: Shepard.Appearance, b: Shepard.Appearance) -> Bool {
+    return a.format() == b.format()
 }

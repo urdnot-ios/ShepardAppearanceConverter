@@ -13,93 +13,94 @@ public struct Shepard {
     public static let DefaultSurname = "Shepard"
     
     public init(game: Game = .Game1) {
-        _game = game
-        _appearance = Appearance(game: game)
+        self.game = game
+        appearance = Appearance(game: game)
     }
 
 //MARK: Properties
 
-    internal var _uuid = "\(NSUUID().UUIDString)"
-    public var uuid: String { return _uuid }
+    public private(set) var uuid = "\(NSUUID().UUIDString)"
     
-    internal var _createdDate = NSDate()
-    public var createdDate: NSDate { return _createdDate }
+    public private(set) var createdDate = NSDate()
     
-    internal var _modifiedDate = NSDate()
-    public var modifiedDate: NSDate { return _modifiedDate }
+    public private(set) var modifiedDate = NSDate()
     
-    internal var _game: Game
-    public var game: Game { return _game }
+    public private(set) var game: Game 
     
-    internal var _gender = Gender.Male { didSet{ markUpdated() } }
-    public var gender: Gender { return _gender }
-    
-    internal var _name = Name.DefaultMaleName { didSet{ markUpdated() } }
-    public var name: Name { return _name }
-    public var fullName: String { return "\(name.stringValue!) Shepard" }
-    
-    internal var _photo = Photo.DefaultMalePhoto { didSet{ markUpdated() } }
-    public var photo: Photo { return _photo }
-
-    internal var _appearance: Appearance { didSet{ markUpdated() } }
-    public var appearance: Appearance { return _appearance }
-    
-    public var origin = Origin.Earthborn { didSet{ markUpdated() } }
-    
-    public var reputation = Reputation.SoleSurvivor { didSet{ markUpdated() } }
-    
-    public var classTalent = ClassTalent.Soldier { didSet{ markUpdated() } }
-    
-    public var title: String {
-        return "\(origin.rawValue) \(reputation.rawValue) \(classTalent.rawValue)"
-    }
-    
-//MARK: Supporting Functions
-    
-    public mutating func setGender(gender: Gender) {
-        _gender = gender
-        switch gender {
-        case .Male:
-            if _name == .DefaultFemaleName {
-                _name = .DefaultMaleName
+    public var gender = Gender.Male {
+        didSet{
+            let oldDontMarkUpdated = dontMarkUpdated
+            dontMarkUpdated = true // only trigger update once
+            switch gender {
+            case .Male:
+                if name == .DefaultFemaleName {
+                    name = .DefaultMaleName
+                }
+                if photo == .DefaultFemalePhoto {
+                    photo = .DefaultMalePhoto
+                }
+                appearance.gender = gender
+            case .Female:
+                if name == .DefaultMaleName {
+                    name = .DefaultFemaleName
+                }
+                if photo == .DefaultMalePhoto {
+                    photo = .DefaultFemalePhoto
+                }
+                appearance.gender = gender
             }
-            if _photo == .DefaultFemalePhoto {
-                _photo = .DefaultMalePhoto
-            }
-            _appearance.gender = gender
-        case .Female:
-            if _name == .DefaultMaleName {
-                _name = .DefaultFemaleName
-            }
-            if _photo == .DefaultMalePhoto {
-                _photo = .DefaultFemalePhoto
-            }
-            _appearance.gender = gender
+            dontMarkUpdated = oldDontMarkUpdated
+            markUpdated()
         }
     }
-
+    
+    public var name = Name.DefaultMaleName { didSet{
+    markUpdated()
+    } }
+    // special setter for taking strings:
     public mutating func setName(name: String?) {
         if name == Name.DefaultMaleName.stringValue || (name == nil && gender == .Male) {
-            _name = .DefaultMaleName
+            self.name = .DefaultMaleName
         }
         if name == Name.DefaultFemaleName.stringValue || (name == nil && gender == .Female)  {
-            _name = .DefaultFemaleName
+            self.name = .DefaultFemaleName
         } else if name != nil {
-            _name = .Custom(name: name!)
+            self.name = .Custom(name: name!)
         }
     }
+    public var fullName: String { return "\(name.stringValue!) Shepard" }
     
+    public var photo = Photo.DefaultMalePhoto { didSet{
+    markUpdated()
+    } }
+    // special setter for taking UIImage:
     public mutating func setPhoto(image: UIImage) -> Bool {
-        let fileName = "MyShepardPhoto\(_uuid)"
+        let fileName = "MyShepardPhoto\(uuid)"
         if SavedData.saveImageToDocuments(fileName, image: image) {
-            _photo = .Custom(file: fileName)
+            photo = .Custom(file: fileName)
             return true
         }
         return false
     }
+
+    public var appearance: Appearance { didSet{
+    markUpdated()
+    } }
     
-    public mutating func setAppearance(appearance: Appearance) {
-        _appearance = appearance
+    public var origin = Origin.Earthborn { didSet{ 
+    markUpdated()
+    } }
+    
+    public var reputation = Reputation.SoleSurvivor { didSet{ 
+    markUpdated()
+    } }
+    
+    public var classTalent = ClassTalent.Soldier { didSet{ 
+    markUpdated()
+    } }
+    
+    public var title: String {
+        return "\(origin.rawValue) \(reputation.rawValue) \(classTalent.rawValue)"
     }
     
 //MARK: Listeners
@@ -107,9 +108,9 @@ public struct Shepard {
     internal var dontMarkUpdated = false
     internal var hasUnsavedData = false
     
-    public mutating func markUpdated() {
+    public mutating func markUpdated(fireChangeListener: Bool = false) {
         if !dontMarkUpdated {
-            _modifiedDate = NSDate()
+            self.modifiedDate = NSDate()
             hasUnsavedData = true
             // for some reason, the changes aren't propogated up to CurrentGame.Shepard (despite value type), unless we do this delayed call?
             Delay.bySeconds(0, { self.onChange.fire(self) })
@@ -119,13 +120,6 @@ public struct Shepard {
     /// Don't use this. Use CurrentGame.onCurrentShepardChange instead.
     internal let onChange = Signal<(Shepard)>()
 }
-
-
-extension Shepard: Equatable {}
-public func ==(a: Shepard, b: Shepard) -> Bool {
-    return a._uuid == b._uuid
-}
-
 
 
 //MARK: Save/Retrieve Data
@@ -143,7 +137,7 @@ extension Shepard: SerializableDataType {
     ///
     public func getData() -> SerializableData {
         var list = [String: SerializableDataType?]()
-        list["uuid"] = _uuid
+        list["uuid"] = uuid
         list["created_date"] = createdDate
         list["modified_date"] = modifiedDate
         list["game"] = game.rawValue
@@ -166,29 +160,32 @@ extension Shepard: SerializableDataType {
     /// Values general to all shepards within a set should be placed in setCommonData instead.
     ///
     public mutating func setData(data: SerializableData, source: SetDataSource) {
-        if source == .SavedData {
-            dontMarkUpdated = true
-            _uuid = data["uuid"]?.string ?? _uuid
-            _game = Game(rawValue: data["game"]?.string ?? "0") ?? .Game1
-            _createdDate = data["created_date"]?.date ?? NSDate()
-            _modifiedDate = data["modified_date"]?.date ?? NSDate()
-        }
+        //don't first any changes from these functions - they aren't true changes, just loading data from elsewhere
+        let oldDontMarkUpdated = dontMarkUpdated
+        dontMarkUpdated = true
         
-        let gender = data["gender"]?.string == "M" ? Gender.Male : Gender.Female
+        let gender = data["gender"]?.string == "M" ? Gender.Male : Gender.Female // just for local use
         
         if case let .GameConversion(oldGame) = source {
             var appearance = Appearance(data["appearance"]?.string ?? "", fromGame: oldGame, withGender: gender)
             appearance.convert(toGame: game)
-            setAppearance(appearance)
+            self.appearance = appearance
         } else {
-            setAppearance(Appearance(data["appearance"]?.string ?? "", fromGame: game, withGender: gender))
+            self.appearance = Appearance(data["appearance"]?.string ?? "", fromGame: game, withGender: gender)
         }
         
         classTalent = ClassTalent(rawValue: data["class"]?.string ?? "") ?? classTalent
         
         setCommonData(data)
         
-        dontMarkUpdated = false
+        if source == .SavedData {
+            self.uuid = data["uuid"]?.string ?? uuid
+            self.game = Game(rawValue: data["game"]?.string ?? "0") ?? .Game1
+            self.createdDate = data["created_date"]?.date ?? NSDate()
+            self.modifiedDate = data["modified_date"]?.date ?? NSDate()
+        }
+        
+        dontMarkUpdated = oldDontMarkUpdated
     }
     
     ///
@@ -196,6 +193,9 @@ extension Shepard: SerializableDataType {
     /// Put souvenirs/achievements here?
     ///
     public mutating func setCommonData(data: SerializableData) {
+        //don't first any changes from these functions - they aren't true changes, just loading data from elsewhere
+        let oldDontMarkUpdated = dontMarkUpdated
+        dontMarkUpdated = true
     
         let gender = data["gender"]?.string == "M" ? Gender.Male : Gender.Female
         
@@ -205,13 +205,23 @@ extension Shepard: SerializableDataType {
         reputation = Reputation(rawValue: data["reputation"]?.string ?? "") ?? reputation
         
         // do gender last (it changes stuff):
-        setGender(gender)
+        self.gender = gender
+        
+        dontMarkUpdated = oldDontMarkUpdated
     }
 }
 
 
+//MARK: Equatable
 
-//MARK: Supporting Data types
+extension Shepard: Equatable {}
+
+public func ==(a: Shepard, b: Shepard) -> Bool {
+    return a.uuid == b.uuid
+}
+
+
+//MARK: SetDataSource
 
 extension Shepard {
     public enum SetDataSource: Equatable {

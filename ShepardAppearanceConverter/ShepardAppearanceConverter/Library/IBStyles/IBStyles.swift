@@ -72,10 +72,6 @@ public struct Styles: Stylesheet {}
 public enum IBStylePropertyName {
     case Inherit //[String]
     
-    case IPadStyles //IBStyleProperties
-    case IPhoneStyles //IBStyleProperties
-    //size-specific styles?
-    
     case Font //IBFont
     case TextColor //UIColor
     case CornerRadius //Double
@@ -117,11 +113,6 @@ public struct IBStyles {
             switch (type){
                 case .Inherit: assert(value as? [String] != nil)
                 
-                case .IPadStyles: fallthrough
-                case .IPhoneStyles:
-                    assert(value as? IBStyleProperties != nil)
-                    validate(value as! IBStyleProperties)
-                
                 case .Font: assert(value as? IBFont != nil)
                 case .TextColor: assert(value as? UIColor != nil)
                 case .CornerRadius: assert(value as? Double != nil)
@@ -156,10 +147,9 @@ public struct IBStyles {
             var properties2 = IBStyleProperties()
             for name in inheritProperties {
                 if let styles = stylesList[name] {
-                    properties2.merge(styles)
+                    properties2 = properties2.merge(styles)
                 }
             }
-            properties2 = mergeDeviceStyles( properties2.merge(properties) )
             applyProperties(properties2, to: element)
         }
     }
@@ -195,25 +185,6 @@ public struct IBStyles {
                 return //don't do anything
         }
         applyProperties(properties, to: element, forState: state)
-    }
-    
-    /**
-        Adds in device-specific styles (if any exist). These override higher-level styles.
-    */
-    private static func mergeDeviceStyles(var properties: IBStyleProperties) -> (IBStyleProperties) {
-        if let ipad = properties[.IPadStyles] as? IBStyleProperties {
-            if deviceKind == UIUserInterfaceIdiom.Pad {
-                properties.merge(ipad)
-                return properties
-            }
-        }
-        if let iphone = properties[.IPhoneStyles] as? IBStyleProperties {
-            if deviceKind == UIUserInterfaceIdiom.Phone {
-                properties.merge(iphone)
-                return properties
-            }
-        }
-        return properties
     }
 
     /**
@@ -375,7 +346,7 @@ public struct IBGradient {
     public func createGradientView(bounds: CGRect) -> (IBGradientView) {
         let gradientView = IBGradientView(frame: bounds)
         gradientView.setLayerColors(colors)
-        if locations.count > 0 {
+        if !locations.isEmpty {
             gradientView.setLayerLocations(locations)
         } else {
             gradientView.setLayerEndPoint(direction == .Vertical ? CGPoint(x: 0, y: 1) : CGPoint(x: 1, y: 0))

@@ -46,9 +46,9 @@ import UIKit
             nib = view
         }
         if let view = nib {
-            hidden = ((text == "Label" || text.characters.count == 0) && multipleTexts.count == 0)
+            hidden = ((text == "Label" || text.isEmpty) && multipleTexts.isEmpty)
             if !hidden {
-                if multipleTexts.count == 0 {
+                if multipleTexts.isEmpty {
                     if text.rangeOfString("\u{2028}\u{2028}") != nil {
                         multipleTexts = text.componentsSeparatedByString("\u{2028}\u{2028}").map{ String($0) }
                     } else if text.rangeOfString("\n\n") != nil {

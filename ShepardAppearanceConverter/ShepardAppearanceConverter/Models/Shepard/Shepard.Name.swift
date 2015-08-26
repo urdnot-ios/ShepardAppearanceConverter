@@ -10,7 +10,7 @@ import Foundation
 
 extension Shepard {
 
-    public enum Name: Equatable {
+    public enum Name {
         case DefaultMaleName
         case DefaultFemaleName
         case Custom(name: String)
@@ -27,14 +27,17 @@ extension Shepard {
             }
         }
     }
-    
 }
 
+extension Shepard.Name: Equatable {}
+
 public func ==(a: Shepard.Name, b: Shepard.Name) -> Bool {
-    switch (a, b) {
-    case (.DefaultMaleName, .DefaultMaleName): return true
-    case (.DefaultFemaleName, .DefaultFemaleName): return true
-    case (.Custom(let a), .Custom(let b)) where a == b: return true
-    default: return false
-    }
+    return a.stringValue == b.stringValue
+//    switch (a, b) {
+//    case (.DefaultMaleName, .DefaultMaleName): return true
+//    case (.DefaultFemaleName, .DefaultFemaleName): return true
+//    case (.Custom(let a), .Custom(let b)) where a == b: return true
+//    case (.Custom(let a), .Custom(let b)) where a == b: return true
+//    default: return false
+//    }
 }

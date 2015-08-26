@@ -17,3 +17,5 @@ extension Shepard {
         }
     }
 }
+
+// already Equatable

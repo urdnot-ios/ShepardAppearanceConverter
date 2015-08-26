@@ -69,14 +69,14 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
 
     //MARK: Actions
     @IBAction func ME2CodeSelected(sender: UITextField) {
-        if Shepard.Appearance.Formatting.isEmpty(ME2CodeField.text ?? "") {
+        if Shepard.Appearance.Format.isEmpty(ME2CodeField.text ?? "") {
             ME2CodeField.text = ""
         }
     }
     
     private var lastCode: String?
     @IBAction func ME2CodeChanged(sender: UITextField) {
-        ME2CodeField.text = Shepard.Appearance.Formatting.formatCode(ME2CodeField.text, lastCode: lastCode)
+        ME2CodeField.text = Shepard.Appearance.Format.formatCode(ME2CodeField.text, lastCode: lastCode)
         lastCode = ME2CodeField.text
         ME2CodeLabel.text = ME2CodeField.text
     }
@@ -126,10 +126,9 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
             for (attribute, slider) in sliders {
                 newAppearance.contents[attribute] = Int(slider.slider?.value ?? 0.0)
             }
-            CurrentGame.shepard.setAppearance(newAppearance)
+            CurrentGame.shepard.appearance = newAppearance
         } else if let appearanceCode = ME2CodeField.text {
-            let newAppearance = Shepard.Appearance(appearanceCode, fromGame: game23SliderChoice, withGender: gender)
-            CurrentGame.shepard.setAppearance(newAppearance)
+            CurrentGame.shepard.appearance = Shepard.Appearance(appearanceCode, fromGame: game23SliderChoice, withGender: gender)
         }
         spinner.stop()
     }
@@ -167,9 +166,9 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
         ME2CodeField.delegate = self
     }
     
-    var groups: [Shepard.Appearance.AttributeGroups: Int] = [:]
+    var groups: [Shepard.Appearance.GroupType: Int] = [:]
     typealias SliderElements = (value: UILabel!, slider: UISlider!, alert: UILabel!, notice: UILabel!)
-    var sliders: [Shepard.Appearance.Attributes: SliderElements] = [:]
+    var sliders: [Shepard.Appearance.AttributeType: SliderElements] = [:]
     
     /// using placeholder UIStackView elements, creates all the sliders we need for all the attributes of this group and gender, and adds them to the view hierachy while saving references to variables for later use.
     func setupGame1Fields() {
@@ -228,7 +227,7 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
     
     //MARK: Setup Values
     
-    func setSliderValue(attribute: Shepard.Appearance.Attributes, value: Int?) {
+    func setSliderValue(attribute: Shepard.Appearance.AttributeType, value: Int?) {
         guard
         let slider = sliders[attribute],
         let maxValue = Shepard.Appearance.slidersMax[gender]?[attribute]?[.Game1]
@@ -251,9 +250,9 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
         ME2NoticeLabel.text = nil
         if appearance.initError != nil {
             ME2AlertLabel.text = appearance.initError!
-        } else if appearance.alerts.count > 0 {
+        } else if !appearance.alerts.isEmpty {
             ME2AlertLabel.text = ConvertAlert
-        } else if appearance.notices.count > 0 {
+        } else if !appearance.notices.isEmpty {
             ME2NoticeLabel.text = ConvertNotice
         }
         if ME2AlertLabel.text != nil {
@@ -282,28 +281,28 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func showSliderAlert(attribute: Shepard.Appearance.Attributes, alert: String) {
+    func showSliderAlert(attribute: Shepard.Appearance.AttributeType, alert: String) {
         if let slider = sliders[attribute] {
             slider.alert?.text = alert
             slider.alert?.hidden = false
         }
     }
     
-    func showSliderNotice(attribute: Shepard.Appearance.Attributes, notice: String) {
+    func showSliderNotice(attribute: Shepard.Appearance.AttributeType, notice: String) {
         if let slider = sliders[attribute] {
             slider.notice?.text = notice
             slider.notice?.hidden = false
         }
     }
     
-    func hideSliderAlert(attribute: Shepard.Appearance.Attributes) {
+    func hideSliderAlert(attribute: Shepard.Appearance.AttributeType) {
         if let slider = sliders[attribute] {
             slider.alert?.text = ""
             slider.alert?.hidden = true
         }
     }
     
-    func hideSliderNotice(attribute: Shepard.Appearance.Attributes) {
+    func hideSliderNotice(attribute: Shepard.Appearance.AttributeType) {
         if let slider = sliders[attribute] {
             slider.notice?.text = ""
             slider.notice?.hidden = true

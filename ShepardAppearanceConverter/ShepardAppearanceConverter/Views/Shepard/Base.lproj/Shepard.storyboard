@@ -36,8 +36,8 @@
                                                     <action selector="startChangingName:" destination="FE8-Fz-nu7" eventType="editingDidBegin" id="GhJ-N7-DTY"/>
                                                 </connections>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text=" Shepard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqP-pb-4o7" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                                <rect key="frame" x="49" y="0.0" width="521" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text="Shepard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SqP-pb-4o7" customClass="IBStyledLabel" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                                <rect key="frame" x="51" y="0.0" width="519" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -53,7 +53,7 @@
                                             <constraint firstAttribute="trailing" secondItem="SqP-pb-4o7" secondAttribute="trailing" id="VAk-Cd-Qtg"/>
                                             <constraint firstItem="Zco-9l-Ov9" firstAttribute="top" secondItem="xyn-6v-Kpl" secondAttribute="top" priority="500" id="d1Z-PU-K5t"/>
                                             <constraint firstItem="Zco-9l-Ov9" firstAttribute="centerY" secondItem="xyn-6v-Kpl" secondAttribute="centerY" id="iGc-g4-q9k"/>
-                                            <constraint firstItem="SqP-pb-4o7" firstAttribute="leading" secondItem="Zco-9l-Ov9" secondAttribute="trailing" id="n8O-0H-Mge"/>
+                                            <constraint firstItem="SqP-pb-4o7" firstAttribute="leading" secondItem="Zco-9l-Ov9" secondAttribute="trailing" constant="2" id="n8O-0H-Mge"/>
                                         </constraints>
                                     </view>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VAQ-zb-J9q" customClass="IBStyledSegmentedControl" customModule="ShepardAppearanceConverter" customModuleProvider="target">
@@ -75,7 +75,7 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="300" verticalCompressionResistancePriority="800" image="BroShep Sample" translatesAutoresizingMaskIntoConstraints="NO" id="m7D-Ro-5UT" userLabel="Photo">
                                                 <rect key="frame" x="1" y="1" width="148" height="198"/>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msc-1V-qjG">
+                                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="msc-1V-qjG">
                                                 <rect key="frame" x="117" y="167" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="aM7-RC-sdO"/>
@@ -101,6 +101,17 @@
                                             <constraint firstItem="m7D-Ro-5UT" firstAttribute="leading" secondItem="aOL-n6-EQC" secondAttribute="leading" constant="1" id="vqV-of-QOJ"/>
                                         </constraints>
                                     </view>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="300" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iwQ-xh-tdL" customClass="IBStyledSegmentedControl" customModule="ShepardAppearanceConverter" customModuleProvider="target">
+                                        <rect key="frame" x="15" y="253" width="570" height="29"/>
+                                        <segments>
+                                            <segment title="Game 1"/>
+                                            <segment title="Game 2"/>
+                                            <segment title="Game 3"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="gameChanged:" destination="FE8-Fz-nu7" eventType="valueChanged" id="CVN-th-aFy"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ap3-MV-ssv" userLabel="Values">
                                         <rect key="frame" x="165" y="106" width="435" height="132"/>
                                         <subviews>
@@ -133,17 +144,6 @@
                                             </view>
                                         </subviews>
                                     </stackView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="300" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iwQ-xh-tdL" customClass="IBStyledSegmentedControl" customModule="ShepardAppearanceConverter" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="253" width="570" height="29"/>
-                                        <segments>
-                                            <segment title="Game 1"/>
-                                            <segment title="Game 2"/>
-                                            <segment title="Game 3"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="gameChanged:" destination="FE8-Fz-nu7" eventType="valueChanged" id="CVN-th-aFy"/>
-                                        </connections>
-                                    </segmentedControl>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="iwQ-xh-tdL" secondAttribute="bottom" constant="15" id="7xR-an-xVT"/>

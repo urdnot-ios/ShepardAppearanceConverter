@@ -27,10 +27,6 @@ public class IBStyledLabel: UILabel, IBStylable {
     }
     var defaultIdentifier: String { return "Label" }
     internal lazy var styler: IBStyler = { return IBStyler(delegate: self) }()
-
-    public convenience init(frame: CGRect, identifier:String) {
-        self.init(frame: frame)
-    }
     
     override public func layoutSubviews() {
         super.layoutSubviews()
