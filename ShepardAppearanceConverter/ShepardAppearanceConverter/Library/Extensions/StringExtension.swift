@@ -66,7 +66,7 @@ extension String {
         :returns: Character
     */
     subscript (i: Int) -> Character {
-        return self[advance(self.startIndex, i)]
+        return self[self.startIndex.advancedBy(i)]
     }
     subscript (i: Int) -> String {
         return String(self[i] as Character)
@@ -80,9 +80,11 @@ extension String {
     */
     func stringFrom(start: Int, to end: Int? = nil) -> String {
         var maximum = characters.count
-        let startIndex = advance(start < 0 ? self.endIndex : self.startIndex, min(maximum, max(-1 * maximum, start)))
+        let useIndex1 = start < 0 ? self.endIndex : self.startIndex
+        let startIndex = useIndex1.advancedBy(min(maximum, max(-1 * maximum, start)))
         maximum -= start
-        let endIndex = end != nil && end! < characters.count ? advance(end < 0 ? self.endIndex : self.startIndex, min(maximum, max(-1 * maximum, end!))) : self.endIndex
+        let useIndex2 = end < 0 ? self.endIndex : self.startIndex
+        let endIndex = end != nil && end < characters.count ? useIndex2.advancedBy(min(maximum, max(-1 * maximum, end!))) : self.endIndex
         return self.substringWithRange(Range(start: startIndex, end: endIndex))
     }
     /**

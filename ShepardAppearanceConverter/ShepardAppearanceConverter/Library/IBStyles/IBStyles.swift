@@ -150,6 +150,7 @@ public struct IBStyles {
                     properties2 = properties2.merge(styles)
                 }
             }
+            properties2 = properties2.merge(properties)
             applyProperties(properties2, to: element)
         }
     }

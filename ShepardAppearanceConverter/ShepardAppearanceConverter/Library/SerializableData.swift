@@ -480,27 +480,19 @@ extension SerializableData:  DictionaryLiteralConvertible {
     public typealias Key = String
     public typealias Value = SerializableDataType
 	public init(dictionaryLiteral tuples: (Key, Value)...) {
-        var d = [String: SerializableData]()
-        tuples.map { (k,v) in d[k] = v.getData() }
-        contents = .DictionaryType(d)
+        contents = .DictionaryType(Dictionary(tuples.map { ($0.0, $0.1.getData()) }))
 	}
 	public init(dictionaryLiteral tuples: (Key, Value?)...) {
-        var d = [String: SerializableData]()
-        tuples.map { (k,v) in d[k] = v?.getData() ?? SerializableData() }
-        contents = .DictionaryType(d)
+        contents = .DictionaryType(Dictionary(tuples.map { ($0.0, $0.1?.getData()  ?? SerializableData()) }))
 	}
 }
 extension SerializableData:  ArrayLiteralConvertible {
     public typealias Element = SerializableDataType
 	public init(arrayLiteral elements: Element...) {
-        var a = [SerializableData]()
-        elements.map { (v) in a.append(v.getData()) }
-        contents = .ArrayType(a)
+        contents = .ArrayType(elements.map { $0.getData() })
 	}
 	public init(arrayLiteral elements: Element?...) {
-        var a = [SerializableData]()
-        elements.map { (v) in a.append(v?.getData() ?? SerializableData()) }
-        contents = .ArrayType(a)
+        contents = .ArrayType(elements.map { $0?.getData() ?? SerializableData() })
 	}
 }
 

@@ -15,7 +15,7 @@ import UIKit
 /**
     Used by IBIncludedWrapperViewController, but since we don't know if that class was included, here's a short protocol to define it for use in IBIncludedThing.
 */
-public protocol IBIncludedSegueableWrapper {
+public protocol IBIncludedSegueableWrapper: class {
     func addIncludedViewController(viewController: UIViewController)
 }
 
@@ -25,7 +25,7 @@ public protocol IBIncludedSegueableWrapper {
 /**
     Abstract class for including nibs/storyboards in other views.
 */
-public protocol IBIncludingView {
+public protocol IBIncludingView: class {
 
     var IBDebugId: String { get }
     var constrainHeight: Bool { get }
@@ -34,8 +34,6 @@ public protocol IBIncludingView {
     var miscellaneousStoredValues: [IBIncludingViewStoredValueType: AnyObject] { get set }
 
     func getViewController() -> UIViewController?
-    
-    func includeThing() // stated only for visibility to UIView extension
     
 }
 public enum IBIncludingViewStoredValueType {
@@ -70,7 +68,7 @@ extension IBIncludingView where Self: UIView {
         Setup function for initializing the view controller and attaching it and its view to hierarchy.
         Should probably override in child classes.
     */
-    public func includeThing() {
+    internal func includeThing() {
         if miscellaneousStoredValues.isEmpty {
             initIBIncludingView()
         }
@@ -250,6 +248,17 @@ public class IBIncludedNib: UIView, IBIncludingView {
     
     public var miscellaneousStoredValues: [IBIncludingViewStoredValueType: AnyObject] = [:]
     
+    override public func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        // BTW - nested IBIncluded{Thing} do not use prepareForInterfaceBuilder()
+        includeThing()
+    }
+    
+    override public func awakeFromNib() {
+        super.awakeFromNib()
+        includeThing()
+    }
+    
     override public func layoutSubviews() {
         attachThing()
         super.layoutSubviews()
@@ -297,6 +306,7 @@ public class IBIncludedNib: UIView, IBIncludingView {
         }
         return nil
     }
+    
 }
 
 //MARK: IBIncludedStoryboard implemented class
@@ -317,6 +327,17 @@ public class IBIncludedStoryboard: UIView, IBIncludingView {
     public var IBDebugId: String { return "\(storyboard) \(sceneId)" }
     
     public var miscellaneousStoredValues: [IBIncludingViewStoredValueType: AnyObject] = [:]
+    
+    override public func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        // BTW - nested IBIncluded{Thing} do not use prepareForInterfaceBuilder()
+        includeThing()
+    }
+    
+    override public func awakeFromNib() {
+        super.awakeFromNib()
+        includeThing()
+    }
     
     override public func layoutSubviews() {
         attachThing()
@@ -415,6 +436,7 @@ public class IBIncludedStoryboard: UIView, IBIncludingView {
         parent.modalPresentationCapturesStatusBarAppearance = includedController.modalPresentationCapturesStatusBarAppearance
         parent.transitioningDelegate = includedController.transitioningDelegate
     }
+    
 }
 
 /**
@@ -432,21 +454,6 @@ extension UIView {
         #else
             return false
         #endif
-    }
-
-    override public func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
-        // BTW - nested IBIncluded{Thing} do not use prepareForInterfaceBuilder()
-        if let view = self as? IBIncludingView {
-            view.includeThing()
-        }
-    }
-    
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-        if let view = self as? IBIncludingView {
-            view.includeThing()
-        }
     }
     
     /**
@@ -491,6 +498,7 @@ extension UIView {
         }
         return false
     }
+    
 }
 
 class InterfaceBuilderLog {
