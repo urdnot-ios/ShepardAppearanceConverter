@@ -37,7 +37,7 @@ class ShepardFlowController: UIViewController {
     }
     
     func openApp() {
-        if SavedData.shepardSets.isEmpty {
+        if SavedGames.shepardsSequences.isEmpty {
             createGame(nil)
         } else {
             performSegueWithIdentifier("Select Shepard", sender: nil)
@@ -50,8 +50,9 @@ class ShepardFlowController: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
 
+    
     @IBAction func createGame(sender: AnyObject!) {
-        let newShepard = SavedData.addNewShepard(.Game1)
+        let newShepard = SavedGames.addNewShepard(.Game1)
         CurrentGame.changeShepard(newShepard)
         performSegueWithIdentifier("Select Shepard", sender: sender)
     }

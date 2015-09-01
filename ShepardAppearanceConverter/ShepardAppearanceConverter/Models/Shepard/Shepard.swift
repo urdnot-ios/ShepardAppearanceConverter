@@ -19,11 +19,13 @@ public struct Shepard {
 
 //MARK: Properties
 
+    public internal(set) var sequenceUuid = "\(NSUUID().UUIDString)"
+
     public private(set) var uuid = "\(NSUUID().UUIDString)"
     
     public private(set) var createdDate = NSDate()
     
-    public private(set) var modifiedDate = NSDate()
+    public var modifiedDate = NSDate()
     
     public private(set) var game: Game 
     
@@ -76,7 +78,7 @@ public struct Shepard {
     // special setter for taking UIImage:
     public mutating func setPhoto(image: UIImage) -> Bool {
         let fileName = "MyShepardPhoto\(uuid)"
-        if SavedData.saveImageToDocuments(fileName, image: image) {
+        if SavedGames.saveImageToDocuments(fileName, image: image) {
             photo = .Custom(file: fileName)
             return true
         }
@@ -106,12 +108,12 @@ public struct Shepard {
 //MARK: Listeners
 
     internal var dontMarkUpdated = false
-    internal var hasUnsavedData = false
+    internal var hasUnSavedGames = false
     
     public mutating func markUpdated(fireChangeListener: Bool = false) {
         if !dontMarkUpdated {
             self.modifiedDate = NSDate()
-            hasUnsavedData = true
+            hasUnSavedGames = true
             // for some reason, the changes aren't propogated up to CurrentGame.Shepard (despite value type), unless we do this delayed call?
             Delay.bySeconds(0, { self.onChange.fire(self) })
         }
@@ -122,21 +124,22 @@ public struct Shepard {
 }
 
 
+//MARK: Equatable
+
+extension Shepard: Equatable {}
+
+public func ==(a: Shepard, b: Shepard) -> Bool {
+    return a.uuid == b.uuid
+}
+
+
 //MARK: Save/Retrieve Data
 
-extension Shepard: SerializableDataType {
+extension Shepard: SerializedDataStorable {
 
-    public init(data: SerializableData) {
-        let game = Game(rawValue: data["game"]?.string ?? "0") ?? .Game1
-        self.init(game: game)
-        setData(data)
-    }
-    
-    ///
-    /// Extracts all data from this shepard and stores it in a dictionary.
-    ///
-    public func getData() -> SerializableData {
-        var list = [String: SerializableDataType?]()
+    public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+        var list = [String: SerializedDataStorable?]()
+        list["sequence_uuid"] = sequenceUuid
         list["uuid"] = uuid
         list["created_date"] = createdDate
         list["modified_date"] = modifiedDate
@@ -148,25 +151,37 @@ extension Shepard: SerializableDataType {
         list["origin"] = origin.rawValue
         list["reputation"] = reputation.rawValue
         list["class"] = classTalent.rawValue
-        return SerializableData(list)
+        return SerializedData(list)
     }
     
-    public mutating func setData(data: SerializableData) {
-        setData(data, source: .SavedData)
+}
+extension Shepard: SerializedDataRetrievable {
+    
+    public init(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
+        self.init()
+        setData(data, origin: origin)
+    }
+    
+    public init(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws {
+        self.init(data: try SerializedData(serializedData: data), origin: origin)
+    }
+    
+    public mutating func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
+        setData(data, gameConversion: nil, origin: origin)
     }
     
     ///
     /// Creates a shepard with a dictionary of data. Can be from saved values, or from a previous game.
     /// Values general to all shepards within a set should be placed in setCommonData instead.
     ///
-    public mutating func setData(data: SerializableData, source: SetDataSource) {
+    public mutating func setData(data: SerializedData, gameConversion oldGame: Game?, origin: SerializedDataOrigin = .LocalStore) {
         //don't first any changes from these functions - they aren't true changes, just loading data from elsewhere
         let oldDontMarkUpdated = dontMarkUpdated
         dontMarkUpdated = true
         
         let gender = data["gender"]?.string == "M" ? Gender.Male : Gender.Female // just for local use
         
-        if case let .GameConversion(oldGame) = source {
+        if let oldGame = oldGame {
             var appearance = Appearance(data["appearance"]?.string ?? "", fromGame: oldGame, withGender: gender)
             appearance.convert(toGame: game)
             self.appearance = appearance
@@ -178,7 +193,8 @@ extension Shepard: SerializableDataType {
         
         setCommonData(data)
         
-        if source == .SavedData {
+        if origin != .DataChange {
+            self.sequenceUuid = data["sequence_uuid"]?.string ?? sequenceUuid
             self.uuid = data["uuid"]?.string ?? uuid
             self.game = Game(rawValue: data["game"]?.string ?? "0") ?? .Game1
             self.createdDate = data["created_date"]?.date ?? NSDate()
@@ -192,7 +208,7 @@ extension Shepard: SerializableDataType {
     /// Data shared by all shepards in a Set.
     /// Put souvenirs/achievements here?
     ///
-    public mutating func setCommonData(data: SerializableData) {
+    public mutating func setCommonData(data: SerializedData) {
         //don't first any changes from these functions - they aren't true changes, just loading data from elsewhere
         let oldDontMarkUpdated = dontMarkUpdated
         dontMarkUpdated = true
@@ -212,28 +228,4 @@ extension Shepard: SerializableDataType {
 }
 
 
-//MARK: Equatable
-
-extension Shepard: Equatable {}
-
-public func ==(a: Shepard, b: Shepard) -> Bool {
-    return a.uuid == b.uuid
-}
-
-
-//MARK: SetDataSource
-
-extension Shepard {
-    public enum SetDataSource: Equatable {
-        case SavedData, GameConversion(priorGame: Game)
-    }
-}
-
-public func ==(a: Shepard.SetDataSource, b: Shepard.SetDataSource) -> Bool {
-    switch (a, b) {
-    case (.SavedData, .SavedData): return true
-    case (.GameConversion(let a), .GameConversion(let b)) where a == b: return true
-    default: return false
-    }
-}
 

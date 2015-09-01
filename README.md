@@ -14,7 +14,7 @@ A Swift 2.0 experiment
   - ~~Save photos from Camera Roll~~ (completed)
   - Save photos from Camera
 - ~~Save multiple Shepards~~ (completed)
-- Save to a database instead of NSUserDefaults
+- ~~Save to a database instead of NSUserDefaults~~ (completed)
 
 ## Things learned
 

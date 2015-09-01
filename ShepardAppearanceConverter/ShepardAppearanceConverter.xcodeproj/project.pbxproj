@@ -11,7 +11,7 @@
 		B03883651B76D57E00895145 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B03883631B76D57E00895145 /* Assets.xcassets */; };
 		B04A91B41B843A3D003C3241 /* ShepardPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A91B31B843A3D003C3241 /* ShepardPopoverController.swift */; };
 		B05A26ED1B842550008A8AAE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05A26EC1B842550008A8AAE /* RadioButton.swift */; };
-		B06FD2211B7C4DF600326CA0 /* ShepardSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FD2201B7C4DF600326CA0 /* ShepardSet.swift */; };
+		B06FD2211B7C4DF600326CA0 /* ShepardSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FD2201B7C4DF600326CA0 /* ShepardSequence.swift */; };
 		B071D2221B811F8700A54F8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B071D2111B811F8700A54F8F /* Assets.xcassets */; };
 		B071D2231B811F8700A54F8F /* ShepardClass.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B071D2131B811F8700A54F8F /* ShepardClass.storyboard */; };
 		B071D2241B811F8700A54F8F /* ShepardClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B071D2151B811F8700A54F8F /* ShepardClassController.swift */; };
@@ -55,7 +55,7 @@
 		B0AD3FDC1B6EEE000013C0F7 /* IBIncludedThing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD3FDA1B6EEE000013C0F7 /* IBIncludedThing.swift */; };
 		B0AD3FDD1B6EEE000013C0F7 /* IBIncludedWrapperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD3FDB1B6EEE000013C0F7 /* IBIncludedWrapperViewController.swift */; };
 		B0AD3FF41B6EEE290013C0F7 /* ShepardFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0AD3FE21B6EEE290013C0F7 /* ShepardFlow.storyboard */; };
-		B0AD40011B6EEE640013C0F7 /* SavedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD3FFF1B6EEE640013C0F7 /* SavedData.swift */; };
+		B0AD40011B6EEE640013C0F7 /* SavedGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD3FFF1B6EEE640013C0F7 /* SavedGames.swift */; };
 		B0AD40061B6EEE730013C0F7 /* RoundedCornersBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD40041B6EEE730013C0F7 /* RoundedCornersBox.swift */; };
 		B0AD40071B6EEE730013C0F7 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0AD40051B6EEE730013C0F7 /* Spinner.swift */; };
 		B0AD40181B6EEE970013C0F7 /* Shepard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0AD40151B6EEE970013C0F7 /* Shepard.storyboard */; };
@@ -82,8 +82,14 @@
 		B0EF005C1B81551400E74F94 /* FauxRadioRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF005A1B81551400E74F94 /* FauxRadioRow.swift */; };
 		B0EF00611B8157BC00E74F94 /* SideEffectsNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0EF005E1B8157BC00E74F94 /* SideEffectsNib.xib */; };
 		B0EF00621B8157BC00E74F94 /* SideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EF00601B8157BC00E74F94 /* SideEffects.swift */; };
+		B10DA1011B940F8C008BE38B /* CoreDataStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10DA1001B940F8C008BE38B /* CoreDataStorable.swift */; settings = {ASSET_TAGS = (); }; };
+		B10DA1031B941005008BE38B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10DA1021B941005008BE38B /* CoreDataManager.swift */; settings = {ASSET_TAGS = (); }; };
+		B10DA1061B94341C008BE38B /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B10DA1041B94341C008BE38B /* CoreData.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		B12949941B78425F003B88FD /* ShepardFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12949931B78425F003B88FD /* ShepardFlowController.swift */; };
 		B12949961B78747F003B88FD /* CurrentGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12949951B78747F003B88FD /* CurrentGame.swift */; };
+		B13B8EAC1B94F9E50029F55F /* GameShepards.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13B8EAB1B94F9E50029F55F /* GameShepards.swift */; settings = {ASSET_TAGS = (); }; };
+		B1DC0A2A1B94FF2E00555092 /* GameShepardsSequences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC0A291B94FF2E00555092 /* GameShepardsSequences.swift */; settings = {ASSET_TAGS = (); }; };
+		B1DC0A2C1B952EDA00555092 /* GameCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC0A2B1B952EDA00555092 /* GameCurrent.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,7 +97,7 @@
 		B03883641B76D57E00895145 /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
 		B04A91B31B843A3D003C3241 /* ShepardPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardPopoverController.swift; sourceTree = "<group>"; };
 		B05A26EC1B842550008A8AAE /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
-		B06FD2201B7C4DF600326CA0 /* ShepardSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardSet.swift; sourceTree = "<group>"; };
+		B06FD2201B7C4DF600326CA0 /* ShepardSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardSequence.swift; sourceTree = "<group>"; };
 		B071D2121B811F8700A54F8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
 		B071D2141B811F8700A54F8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ShepardClass.storyboard; sourceTree = "<group>"; };
 		B071D2151B811F8700A54F8F /* ShepardClassController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardClassController.swift; sourceTree = "<group>"; };
@@ -137,7 +143,7 @@
 		B0AD3FDA1B6EEE000013C0F7 /* IBIncludedThing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBIncludedThing.swift; sourceTree = "<group>"; };
 		B0AD3FDB1B6EEE000013C0F7 /* IBIncludedWrapperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBIncludedWrapperViewController.swift; sourceTree = "<group>"; };
 		B0AD3FE31B6EEE290013C0F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ShepardFlow.storyboard; sourceTree = "<group>"; };
-		B0AD3FFF1B6EEE640013C0F7 /* SavedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedData.swift; sourceTree = "<group>"; };
+		B0AD3FFF1B6EEE640013C0F7 /* SavedGames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedGames.swift; sourceTree = "<group>"; };
 		B0AD40041B6EEE730013C0F7 /* RoundedCornersBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornersBox.swift; sourceTree = "<group>"; };
 		B0AD40051B6EEE730013C0F7 /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		B0AD40161B6EEE970013C0F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Shepard.storyboard; sourceTree = "<group>"; };
@@ -164,8 +170,14 @@
 		B0EF005A1B81551400E74F94 /* FauxRadioRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FauxRadioRow.swift; sourceTree = "<group>"; };
 		B0EF005F1B8157BC00E74F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SideEffectsNib.xib; sourceTree = "<group>"; };
 		B0EF00601B8157BC00E74F94 /* SideEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideEffects.swift; sourceTree = "<group>"; };
+		B10DA1001B940F8C008BE38B /* CoreDataStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStorable.swift; sourceTree = "<group>"; };
+		B10DA1021B941005008BE38B /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B10DA1051B94341C008BE38B /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		B12949931B78425F003B88FD /* ShepardFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShepardFlowController.swift; sourceTree = "<group>"; };
 		B12949951B78747F003B88FD /* CurrentGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentGame.swift; sourceTree = "<group>"; };
+		B13B8EAB1B94F9E50029F55F /* GameShepards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameShepards.swift; sourceTree = "<group>"; };
+		B1DC0A291B94FF2E00555092 /* GameShepardsSequences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameShepardsSequences.swift; sourceTree = "<group>"; };
+		B1DC0A2B1B952EDA00555092 /* GameCurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCurrent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,11 +353,12 @@
 		B0AD3FFE1B6EEE640013C0F7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B10DA0FB1B94017A008BE38B /* CoreData */,
 				B12949951B78747F003B88FD /* CurrentGame.swift */,
 				B0D4C2461B7C31D90023B9C4 /* Date.swift */,
-				B0AD3FFF1B6EEE640013C0F7 /* SavedData.swift */,
+				B0AD3FFF1B6EEE640013C0F7 /* SavedGames.swift */,
 				B07699E91B80639E00BAE295 /* Shepard */,
-				B06FD2201B7C4DF600326CA0 /* ShepardSet.swift */,
+				B06FD2201B7C4DF600326CA0 /* ShepardSequence.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -464,6 +477,19 @@
 			path = "Side Effects";
 			sourceTree = "<group>";
 		};
+		B10DA0FB1B94017A008BE38B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B10DA1041B94341C008BE38B /* CoreData.xcdatamodeld */,
+				B10DA1021B941005008BE38B /* CoreDataManager.swift */,
+				B10DA1001B940F8C008BE38B /* CoreDataStorable.swift */,
+				B1DC0A2B1B952EDA00555092 /* GameCurrent.swift */,
+				B13B8EAB1B94F9E50029F55F /* GameShepards.swift */,
+				B1DC0A291B94FF2E00555092 /* GameShepardsSequences.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -559,15 +585,18 @@
 				B12949961B78747F003B88FD /* CurrentGame.swift in Sources */,
 				B086990A1B76E63A00C3BF3F /* AppearanceME1Slider.swift in Sources */,
 				B0AD3FD71B6EEDEA0013C0F7 /* UIView.swift in Sources */,
+				B1DC0A2C1B952EDA00555092 /* GameCurrent.swift in Sources */,
 				B0D957E51B87B47E00F061CB /* Signal.swift in Sources */,
 				B0AD40061B6EEE730013C0F7 /* RoundedCornersBox.swift in Sources */,
 				B12949941B78425F003B88FD /* ShepardFlowController.swift in Sources */,
 				B08699071B76E63A00C3BF3F /* AppearanceCodeReader.swift in Sources */,
-				B06FD2211B7C4DF600326CA0 /* ShepardSet.swift in Sources */,
+				B06FD2211B7C4DF600326CA0 /* ShepardSequence.swift in Sources */,
+				B10DA1061B94341C008BE38B /* CoreData.xcdatamodeld in Sources */,
 				B0C6F52C1B858D480060F509 /* PopoverValues.swift in Sources */,
 				B08699091B76E63A00C3BF3F /* AppearanceME1Group.swift in Sources */,
 				B0AD40191B6EEE970013C0F7 /* ShepardController.swift in Sources */,
 				B0C6F5291B858D480060F509 /* PopoverSourceHandler.swift in Sources */,
+				B1DC0A2A1B94FF2E00555092 /* GameShepardsSequences.swift in Sources */,
 				B0AD3FD61B6EEDEA0013C0F7 /* StringExtension.swift in Sources */,
 				B0AD3F521B6EEC6D0013C0F7 /* AppDelegate.swift in Sources */,
 				B071D22A1B811F8700A54F8F /* ShepardReputationController.swift in Sources */,
@@ -582,9 +611,10 @@
 				B071D2241B811F8700A54F8F /* ShepardClassController.swift in Sources */,
 				B07699F31B806AF600BAE295 /* UIViewController.swift in Sources */,
 				B07699EB1B80639E00BAE295 /* Shepard.swift in Sources */,
+				B13B8EAC1B94F9E50029F55F /* GameShepards.swift in Sources */,
 				B0AD3FDD1B6EEE000013C0F7 /* IBIncludedWrapperViewController.swift in Sources */,
 				B08699081B76E63A00C3BF3F /* AppearanceController.swift in Sources */,
-				B0AD40011B6EEE640013C0F7 /* SavedData.swift in Sources */,
+				B0AD40011B6EEE640013C0F7 /* SavedGames.swift in Sources */,
 				B0769A021B80762F00BAE295 /* Shepard.Appearance.swift in Sources */,
 				B0EF00521B8154E100E74F94 /* FauxContentRow.swift in Sources */,
 				B0AD3FDC1B6EEE000013C0F7 /* IBIncludedThing.swift in Sources */,
@@ -604,7 +634,9 @@
 				B07699FB1B80757B00BAE295 /* Shepard.Name.swift in Sources */,
 				B0A4A71B1B88461500D9B698 /* IBStyles.swift in Sources */,
 				B09187601B7A8C5800A2F8E4 /* Styles.swift in Sources */,
+				B10DA1011B940F8C008BE38B /* CoreDataStorable.swift in Sources */,
 				B0C6F5281B858D480060F509 /* PopoverBackgroundView.swift in Sources */,
+				B10DA1031B941005008BE38B /* CoreDataManager.swift in Sources */,
 				B08699281B76E96800C3BF3F /* HairlineBorderView.swift in Sources */,
 				B07699ED1B8063B800BAE295 /* Shepard.ClassTalent.swift in Sources */,
 				B0D4C2451B7C283A0023B9C4 /* ShepardRowCell.swift in Sources */,
@@ -920,6 +952,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B10DA1041B94341C008BE38B /* CoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B10DA1051B94341C008BE38B /* CoreData.xcdatamodel */,
+			);
+			currentVersion = B10DA1051B94341C008BE38B /* CoreData.xcdatamodel */;
+			path = CoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B0AD3F461B6EEC6D0013C0F7 /* Project object */;
 }

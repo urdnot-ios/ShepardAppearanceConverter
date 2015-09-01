@@ -1,5 +1,5 @@
 //
-//  SerializableData.swift
+//  SerializedData.swift
 //
 //  Copyright 2015 Emily Ivie
 
@@ -11,38 +11,46 @@
 import Foundation
 
 
-public enum SerializableDataError : ErrorType {
+public enum SerializedDataError : ErrorType {
     case ParsingError
     case TypeMismatch
 }
 
+public enum SerializedDataOrigin {
+    case Database
+    case LocalStore
+    case DataChange
+}
 
-//MARK: SerializableDataType Protocol
+//MARK: SerializedDataStorable Protocol
 // (can be extended to any type you want, just implement getData)
 
-public protocol SerializableDataType { // any struct or object can be stored in SerializableData, provided it adheres to this
-    func getData() -> SerializableData
+public protocol SerializedDataStorable { // any struct or object can be stored in SerializedData, provided it adheres to this
+    var serializedData: String { get }
+    func getData(target target: SerializedDataOrigin) -> SerializedData
 }
-extension SerializableDataType {
-    public func getData() -> SerializableData { return SerializableData(self) }
+public protocol SerializedDataRetrievable {
+    init(serializedData: String, origin: SerializedDataOrigin) throws
+    mutating func setData(data: SerializedData, origin: SerializedDataOrigin)
+    mutating func setData(serializedData json: String, origin: SerializedDataOrigin) throws
 }
 
 
 /**
  * Example:
  *
-        let x = SerializableData(["something": 3.05] as [String: SerializableDataType])
+        let x = SerializedData(["something": 3.05] as [String: SerializedDataStorable])
         print(x["something"]?.string) //Optional("3.05")
         print(x["something"]?.double) //Optional(3.05)
 */
-public struct SerializableData {
+public struct SerializedData {
 //MARK: Contents
     
     internal enum StorageType {
         case None
-        case ValueType(SerializableDataType)
-        case DictionaryType([String: SerializableData])
-        case ArrayType([SerializableData])
+        case ValueType(SerializedDataStorable)
+        case DictionaryType([String: SerializedData])
+        case ArrayType([SerializedData])
         
         internal func isNone() -> Bool {
             if case .None = self { return true } else { return false }
@@ -63,10 +71,10 @@ public struct SerializableData {
     
     public init() {}
     
-    public init(_ data: SerializableDataType?) {
+    public init(_ data: SerializedDataStorable?) {
         if let data = data {
-            if let serializableData = data as? SerializableData {
-                self = serializableData
+            if let SerializedData = data as? SerializedData {
+                self = SerializedData
             } else if let vDate = data as? NSDate, let sDate = stringFromDate(vDate) {
                 // dates cause problems in nsData and jsonString, so for now we are stringifying first :/
                 contents = .ValueType(sDate)
@@ -77,62 +85,62 @@ public struct SerializableData {
             // do nothing - leave .None
         }
     }
-    public init(_ data: [SerializableData]) {
+    public init(_ data: [SerializedData]) {
         contents = .ArrayType(data)
     }
-    public init(_ data: [SerializableDataType?]) {
+    public init(_ data: [SerializedDataStorable?]) {
         self = data.getData()
     }
-    public init(_ data: [String: SerializableData]) {
+    public init(_ data: [String: SerializedData]) {
         contents = .DictionaryType(data)
     }
-    public init(_ data: [String: SerializableDataType?]) {
+    public init(_ data: [String: SerializedDataStorable?]) {
         self = data.getData()
     }
     
     //MARK: Throws initializers (try to use one of the ones above instead, if at all possible)
     
-    /// - Parameter data: a variety of data that can be categorized as AnyObject. Anything not SerializableDataType at some level will eventually be rejected and throw error. NSNull is acceptable.
-    public init(data: AnyObject) throws {
+    /// - Parameter data: a variety of data that can be categorized as AnyObject. Anything not SerializedDataStorable at some level will eventually be rejected and throw error. NSNull is acceptable.
+    public init(anyData data: AnyObject) throws {
         if let a = data as? [AnyObject] {
-            var aValues = [SerializableData]()
-            for (value) in a { aValues.append( try SerializableData(data: value) ) }
+            var aValues = [SerializedData]()
+            for (value) in a { aValues.append( try SerializedData(anyData: value) ) }
             contents = .ArrayType(aValues)
         } else if let d = data as? [String: AnyObject] {
-            var dValues = [String: SerializableData]()
-            for (key, value) in d { dValues[key] = try SerializableData(data: value) }
+            var dValues = [String: SerializedData]()
+            for (key, value) in d { dValues[key] = try SerializedData(anyData: value) }
             contents = .DictionaryType(dValues)
-        } else if let v = data as? SerializableDataType {
+        } else if let v = data as? SerializedDataStorable {
             contents = .ValueType(v)
         } else if data is NSNull {
             // do nothing
         } else {
-            throw SerializableDataError.ParsingError
+            throw SerializedDataError.ParsingError
         }
     }
 
-    /// - Parameter jsonData: parses a json list of NSData format. Throws error if it can't parse it/make it SerializableData.
+    /// - Parameter jsonData: parses a json list of NSData format. Throws error if it can't parse it/make it SerializedData.
     public init(jsonData: NSData) throws {
         do {
             let data = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.AllowFragments)
-            try self.init(data: data)
+            try self.init(anyData: data)
         } catch {
-            throw SerializableDataError.ParsingError
+            throw SerializedDataError.ParsingError
         }
     }
     
-    /// - Parameter jsonString: parses a json-formatted string. Throws error if it can't parse it/make it SerializableData.
+    /// - Parameter jsonString: parses a json-formatted string. Throws error if it can't parse it/make it SerializedData.
     public init(jsonString: String) throws {
         if let data = (jsonString as NSString).dataUsingEncoding(NSUTF8StringEncoding) {
             try self.init(jsonData: data)
         } else {
-            throw SerializableDataError.ParsingError
+            throw SerializedDataError.ParsingError
         }
     }
 }
 
 
-extension SerializableData {
+extension SerializedData {
 //MARK: Return stored data
     
     /// - Returns: Whatever type requested, if it is possible to convert the data into that format.
@@ -217,13 +225,13 @@ extension SerializableData {
 }
 
 
-extension SerializableData {
+extension SerializedData {
 //MARK: subscript and array access
     
-    // SerializableData does not implement full sequence/collection type because you should be using .array and .dictionary instead (trust me, you will find it is far easier when dealing with mixed data-!).
+    // SerializedData does not implement full sequence/collection type because you should be using .array and .dictionary instead (trust me, you will find it is far easier when dealing with mixed data-!).
     // But I've included append and subscript just to make editing your data a little bit easier.
     
-    public subscript(index: String) -> SerializableData? {
+    public subscript(index: String) -> SerializedData? {
         get {
             if case .DictionaryType(let d) = contents {
                 return d[index]
@@ -232,18 +240,18 @@ extension SerializableData {
         }
         set {
             if case .DictionaryType(let d) = contents {
-                var newDictionary: [String: SerializableData] = d
-                newDictionary[index] = newValue ?? SerializableData()
+                var newDictionary: [String: SerializedData] = d
+                newDictionary[index] = newValue ?? SerializedData()
                 contents = .DictionaryType(newDictionary)
             } else if case .None = contents {
-                contents = .DictionaryType([index: newValue ?? SerializableData()] as [String: SerializableData])
+                contents = .DictionaryType([index: newValue ?? SerializedData()] as [String: SerializedData])
             } else {
                 assert(false, "Key does not point to dictionary-type data")
-                // someday: throw SerializableDataError.TypeMismatch
+                // someday: throw SerializedDataError.TypeMismatch
             }
         }
     }
-    public subscript(index: Int) -> SerializableData? {
+    public subscript(index: Int) -> SerializedData? {
         get {
             if case .ArrayType(let a) = contents {
                 return a[index]
@@ -252,33 +260,33 @@ extension SerializableData {
         }
         set {
             if case .ArrayType(let a) = contents {
-                var newArray: [SerializableData] = a
-                newArray.append(newValue ?? SerializableData())
+                var newArray: [SerializedData] = a
+                newArray.append(newValue ?? SerializedData())
                 contents = .ArrayType(newArray)
             } else if case .None = contents {
-                contents = .ArrayType([newValue ?? SerializableData()] as [SerializableData])
+                contents = .ArrayType([newValue ?? SerializedData()] as [SerializedData])
             } else {
                 assert(false, "Key does not point to array-type data")
-                // someday: throw SerializableDataError.TypeMismatch
+                // someday: throw SerializedDataError.TypeMismatch
             }
         }
     }
     
-    /// - Parameter value: Any value type. If value cannot be converted to SerializableData, or if this SerializableData object is not an array, then it throws error. (If this object is .None, then it changes to an array of the new value.)
+    /// - Parameter value: Any value type. If value cannot be converted to SerializedData, or if this SerializedData object is not an array, then it throws error. (If this object is .None, then it changes to an array of the new value.)
     public mutating func append<T>(value: T?) throws {
         guard case .ArrayType(let a) = contents else {
-            throw SerializableDataError.TypeMismatch
+            throw SerializedDataError.TypeMismatch
         }
-        var newArray: [SerializableData] = a
-        let newValue: SerializableData = try {
+        var newArray: [SerializedData] = a
+        let newValue: SerializedData = try {
             switch value {
-            case let v as [SerializableData]: return SerializableData(v)
-            case let v as [SerializableDataType?]: return SerializableData(v)
-            case let v as [String: SerializableData]: return SerializableData(v)
-            case let v as [String: SerializableDataType?]: return SerializableData(v)
-            case let v as SerializableDataType: return SerializableData(v)
-            case nil: return SerializableData()
-            default: throw SerializableDataError.TypeMismatch
+            case let v as [SerializedData]: return SerializedData(v)
+            case let v as [SerializedDataStorable?]: return SerializedData(v)
+            case let v as [String: SerializedData]: return SerializedData(v)
+            case let v as [String: SerializedDataStorable?]: return SerializedData(v)
+            case let v as SerializedDataStorable: return SerializedData(v)
+            case nil: return SerializedData()
+            default: throw SerializedDataError.TypeMismatch
             }
         }()
         newArray.append(newValue)
@@ -286,7 +294,7 @@ extension SerializableData {
     }
     
     /// - Returns: A dictionary if this object is one
-    public var dictionary: [String: SerializableData]? {
+    public var dictionary: [String: SerializedData]? {
         if case .DictionaryType(let d) = contents {
             return d
         }
@@ -294,7 +302,7 @@ extension SerializableData {
     }
     
     /// - Returns: An array if this object is one
-    public var array: [SerializableData]? {
+    public var array: [SerializedData]? {
         if case .ArrayType(let a) = contents {
             return a
         }
@@ -303,10 +311,10 @@ extension SerializableData {
 }
 
 
-extension SerializableData {
+extension SerializedData {
 //MARK: formatting data for other uses
     
-    /// - Returns: AnyObject (closest to the format used to create the SerializableData object originally)
+    /// - Returns: AnyObject (closest to the format used to create the SerializedData object originally)
     var anyObject: AnyObject {
         switch contents {
         case .ValueType(let v):
@@ -362,9 +370,9 @@ extension SerializableData {
     /// - Returns: A flattened String in format "key=value&key=value"
     public var urlString: String {
         switch contents {
-        case .ValueType(_): return SerializableData.urlEncode(self.jsonString)
-        case .DictionaryType(let d): return SerializableData.urlString(d)
-        case .ArrayType(let a): return SerializableData.urlString(a)
+        case .ValueType(_): return SerializedData.urlEncode(self.jsonString)
+        case .DictionaryType(let d): return SerializedData.urlString(d)
+        case .ArrayType(let a): return SerializedData.urlString(a)
         default: return ""
         }
     }
@@ -372,7 +380,7 @@ extension SerializableData {
     /// - Parameter list: a dictionary to convert
     /// - Parameter prefix: - an optional prefix to use before the key (necessary for nested data)
     /// - Returns: A flattened String in format "key=value&key=value"
-    public static func urlString(list: [String: SerializableData], prefix: String = "") -> String {
+    public static func urlString(list: [String: SerializedData], prefix: String = "") -> String {
         var urlStringValue = String("")
         for (key, value) in list {
             let prefixedKey = prefix != "" ? "\(prefix)[\(key)]" : key
@@ -389,7 +397,7 @@ extension SerializableData {
     /// - Parameter list: an array to convert
     /// - Parameter prefix: - an optional prefix to use before the key (necessary for nested data)
     /// - Returns: A flattened String in format "key=value&key=value"
-    public static func urlString(list: [SerializableData], prefix: String = "") -> String {
+    public static func urlString(list: [SerializedData], prefix: String = "") -> String {
         var urlStringValue = String("")
         for (value) in list {
             let prefixedKey = prefix != "" ? "\(prefix)[]" : ""
@@ -406,7 +414,7 @@ extension SerializableData {
 
     /// - Parameter unescaped: The string to be escaped
     /// - Returns: An escaped String in format "something%20here"
-    static func urlEncode(unescaped: SerializableDataType) -> String {
+    static func urlEncode(unescaped: SerializedDataStorable) -> String {
         if !(unescaped is NSNull), let escaped = "\(unescaped)".stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()) {
             return escaped
         }
@@ -415,42 +423,79 @@ extension SerializableData {
 }
 
 
-//MARK: SerializableDataType Protocol (associations)
+//MARK: SerializedDataStorable Protocol (associations)
 
-extension Bool: SerializableDataType {}
-extension String: SerializableDataType {}
-extension NSString: SerializableDataType {}
-extension Int: SerializableDataType {}
-extension Double: SerializableDataType {}
-extension Float: SerializableDataType {}
-extension NSNumber: SerializableDataType {}
-extension NSDate: SerializableDataType {}
-extension NSNull: SerializableDataType {}
-
-extension SerializableData: SerializableDataType {
-    public func getData() -> SerializableData { return self }
-}
-
-// You cannot declare Array/Dictionary -both- SerializableDataType and containing SerializableDataType type (it's one or the other)
-extension SequenceType where Generator.Element == (T: String, U: SerializableDataType?) {
-    func getData() -> SerializableData {
-        return SerializableData( Dictionary( map { ($0.0, SerializableData($0.1) ) } ) )
+extension SerializedDataStorable {
+    public var serializedData: String {
+        get { return getData().jsonString }
+    }
+    public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+        return SerializedData(self)
     }
 }
-extension SequenceType where Generator.Element == SerializableDataType? {
-    func getData() -> SerializableData {
-        return SerializableData( Array( map { SerializableData($0) } ) )
+extension SerializedDataRetrievable {
+    public mutating func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {}
+    public mutating func setData(serializedData json: String, origin: SerializedDataOrigin = .LocalStore) throws {
+        self.setData(try SerializedData(serializedData: json))
+    }
+}
+//extension SerializedDataRetrievable where Self: SerializedDataStorable {
+//    public var serializedData: String {
+//        get { return getData().jsonString }
+//        set {
+//            do {
+//                setData(try SerializedData(serializedData: newValue))
+//            } catch {} // hopefully someday we can throw in set/get :(
+//        }
+//    }
+//}
+
+extension Bool: SerializedDataStorable {}
+extension String: SerializedDataStorable {}
+extension Int: SerializedDataStorable {}
+extension Double: SerializedDataStorable {}
+extension Float: SerializedDataStorable {}
+// NS-stuff is nearly impossible to conform to SerializedDataRetrievable, so I am just skipping that for basic types
+extension NSString: SerializedDataStorable {}
+extension NSNumber: SerializedDataStorable {}
+extension NSDate: SerializedDataStorable {}
+extension NSNull: SerializedDataStorable {}
+
+extension SerializedData: SerializedDataStorable {
+    public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData { return self }
+}
+extension SerializedData: SerializedDataRetrievable {
+    public init(serializedData json: String, origin: SerializedDataOrigin = .LocalStore) throws {
+        try self.init(jsonString: json)
+    }
+    public mutating func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
+        contents = data.contents
+    }
+    public mutating func setData(serializedData json: String, origin: SerializedDataOrigin = .LocalStore) throws {
+        setData(try SerializedData(jsonString: json), origin: origin)
+    }
+}
+
+// You cannot declare Array/Dictionary -both- SerializedDataStorable and containing SerializedDataStorable type (it's one or the other)
+extension SequenceType where Generator.Element == (T: String, U: SerializedDataStorable?) {
+    func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+        return SerializedData( Dictionary( map { ($0.0, SerializedData($0.1) ) } ) )
+    }
+}
+extension SequenceType where Generator.Element == SerializedDataStorable? {
+    func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+        return SerializedData( Array( map { SerializedData($0) } ) )
     }
 }
 
 
 //MARK: LiteralConvertible Protocols
 
-extension SerializableData: NilLiteralConvertible {
+extension SerializedData: NilLiteralConvertible {
 	public init(nilLiteral: ()) {
     }
 }
-extension SerializableData: StringLiteralConvertible {
+extension SerializedData: StringLiteralConvertible {
 	public init(stringLiteral s: StringLiteralType) {
         contents = .ValueType(s)
 	}
@@ -461,61 +506,61 @@ extension SerializableData: StringLiteralConvertible {
         contents = .ValueType(s)
 	}
 }
-extension SerializableData: IntegerLiteralConvertible {
+extension SerializedData: IntegerLiteralConvertible {
 	public init(integerLiteral i: IntegerLiteralType) {
         contents = .ValueType(i)
 	}
 }
-extension SerializableData: FloatLiteralConvertible {
+extension SerializedData: FloatLiteralConvertible {
 	public init(floatLiteral f: FloatLiteralType) {
         contents = .ValueType(f)
 	}
 }
-extension SerializableData: BooleanLiteralConvertible {
+extension SerializedData: BooleanLiteralConvertible {
 	public init(booleanLiteral b: BooleanLiteralType) {
         contents = .ValueType(b)
 	}
 }
-extension SerializableData:  DictionaryLiteralConvertible {
+extension SerializedData:  DictionaryLiteralConvertible {
     public typealias Key = String
-    public typealias Value = SerializableDataType
+    public typealias Value = SerializedDataStorable
 	public init(dictionaryLiteral tuples: (Key, Value)...) {
         contents = .DictionaryType(Dictionary(tuples.map { ($0.0, $0.1.getData()) }))
 	}
 	public init(dictionaryLiteral tuples: (Key, Value?)...) {
-        contents = .DictionaryType(Dictionary(tuples.map { ($0.0, $0.1?.getData()  ?? SerializableData()) }))
+        contents = .DictionaryType(Dictionary(tuples.map { ($0.0, $0.1?.getData()  ?? SerializedData()) }))
 	}
 }
-extension SerializableData:  ArrayLiteralConvertible {
-    public typealias Element = SerializableDataType
+extension SerializedData:  ArrayLiteralConvertible {
+    public typealias Element = SerializedDataStorable
 	public init(arrayLiteral elements: Element...) {
         contents = .ArrayType(elements.map { $0.getData() })
 	}
 	public init(arrayLiteral elements: Element?...) {
-        contents = .ArrayType(elements.map { $0?.getData() ?? SerializableData() })
+        contents = .ArrayType(elements.map { $0?.getData() ?? SerializedData() })
 	}
 }
 
 
-extension SerializableData: Equatable {}
+extension SerializedData: Equatable {}
 //MARK: - Equatable Protocol
 
-public func ==(lhs: SerializableData, rhs: SerializableData) -> Bool {
+public func ==(lhs: SerializedData, rhs: SerializedData) -> Bool {
     return lhs.contents == rhs.contents
 }
-public func ==(lhs: SerializableData?, rhs: SerializableData?) -> Bool {
+public func ==(lhs: SerializedData?, rhs: SerializedData?) -> Bool {
     return lhs?.contents ?? .None == rhs?.contents ?? .None
 }
-public func ==(lhs: SerializableData, rhs: SerializableData?) -> Bool {
+public func ==(lhs: SerializedData, rhs: SerializedData?) -> Bool {
     return lhs.contents == rhs?.contents ?? .None
 }
-public func ==(lhs: SerializableData?, rhs: SerializableData) -> Bool {
+public func ==(lhs: SerializedData?, rhs: SerializedData) -> Bool {
     return lhs?.contents ?? .None == rhs.contents
 }
 
-extension SerializableData.StorageType: Equatable {}
+extension SerializedData.StorageType: Equatable {}
 
-func == (lhs: SerializableData.StorageType, rhs: SerializableData.StorageType) -> Bool {
+func == (lhs: SerializedData.StorageType, rhs: SerializedData.StorageType) -> Bool {
     switch (lhs, rhs) {
     case (.None, .None):
         return true
@@ -530,16 +575,16 @@ func == (lhs: SerializableData.StorageType, rhs: SerializableData.StorageType) -
     }
 }
 
-//extension SerializableDataType: Equatable {}
-// we can't declare SerializableDataType Equatable or ArrayLiteralConvertible and DictionaryLiteralConvertible break, also would have to be declared on SerializableDataType initial definition
-// also, since SerializableData is SerializableDataType, there is infinite looping. :(
-//public func ==(lhs: SerializableDataType?, rhs: SerializableDataType?) -> Bool {
+//extension SerializedDataStorable: Equatable {}
+// we can't declare SerializedDataStorable Equatable or ArrayLiteralConvertible and DictionaryLiteralConvertible break, also would have to be declared on SerializedDataStorable initial definition
+// also, since SerializedData is SerializedDataStorable, there is infinite looping. :(
+//public func ==(lhs: SerializedDataStorable?, rhs: SerializedDataStorable?) -> Bool {
 //    print("X")
 //    return (lhs?.getData() ?? nil) == (rhs?.getData() ?? nil)
 //}
 
 
-extension SerializableData: CustomStringConvertible {
+extension SerializedData: CustomStringConvertible {
 //MARK: - CustomStringConvertible Protocol
 
     public var description: String {

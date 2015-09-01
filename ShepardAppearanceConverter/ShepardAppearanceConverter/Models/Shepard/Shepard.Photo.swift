@@ -35,7 +35,7 @@ extension Shepard {
                     return photo
                 }
             case .Custom(let fileName):
-                if let photo = SavedData.loadImageFromDocuments(fileName) {
+                if let photo = SavedGames.loadImageFromDocuments(fileName) {
                     return photo
                 }
             }

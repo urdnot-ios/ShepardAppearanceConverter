@@ -10,7 +10,7 @@ import UIKit
 
 class ShepardsController: UITableViewController {
 
-    var shepards: [ShepardSet] = []
+    var shepards: [ShepardsSequence] = []
     var updating = true
     
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class ShepardsController: UITableViewController {
             }
         }
         // don't think we need this?
-//        SavedData.onShepardsListChange.listen(self) { [weak self] (shepard) in
+//        SavedGames.onShepardsListChange.listen(self) { [weak self] (shepard) in
 //            if self?.updating == false {
 //                self?.setupPage(reloadData: true)
 //            }
@@ -104,7 +104,7 @@ class ShepardsController: UITableViewController {
                 view.userInteractionEnabled = false
                 updating = true
                 let shepard = shepards[indexPath.row].last
-                SavedData.deleteShepard(shepard)
+                SavedGames.deleteShepard(shepard)
                 setupShepards()
                 tableView.beginUpdates()
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
@@ -126,12 +126,12 @@ class ShepardsController: UITableViewController {
     //MARK: Table Data
     
     func dummyData() {
-        SavedData.addNewShepard()
-        SavedData.addNewShepard()
+        SavedGames.addNewShepard()
+        SavedGames.addNewShepard()
     }
 
     func setupShepards() {
-        shepards = SavedData.shepardSets.sort { $0.sortDate.compare($1.sortDate) == .OrderedDescending }
+        shepards = SavedGames.shepardsSequences.sort { $0.sortDate.compare($1.sortDate) == .OrderedDescending }
     }
     
     func setupShepardRow(row: Int, cell: ShepardRowCell) {
