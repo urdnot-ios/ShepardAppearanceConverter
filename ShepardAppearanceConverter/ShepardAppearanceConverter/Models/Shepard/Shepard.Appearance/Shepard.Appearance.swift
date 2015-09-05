@@ -121,7 +121,7 @@ extension Shepard {
             ],
         ]
         
-        public static let attributes: [Gender: [Game: [AttributeType]]] = [
+        public static let attributes: [Gender: [GameSequence.GameVersion: [AttributeType]]] = [
             .Female: [
                 .Game1: [
                 .FacialStructure, .SkinTone, .Complexion, .Scar,
@@ -186,8 +186,8 @@ extension Shepard {
             ]
         ]
         
-        public static let slidersMax : [Gender: [AttributeType: [Game: Int]]] = {
-            func sliderMaxValues(value1: Int, _ value2: Int, _ value3: Int) -> [Game: Int] {
+        public static let slidersMax : [Gender: [AttributeType: [GameSequence.GameVersion: Int]]] = {
+            func sliderMaxValues(value1: Int, _ value2: Int, _ value3: Int) -> [GameSequence.GameVersion: Int] {
                 return [.Game1: value1, .Game2: value2, .Game3: value3]
             }
             return [
@@ -272,23 +272,23 @@ extension Shepard {
         
         public var contents: [AttributeType: Int] = [:]
         public var gender: Gender = .Male
-        public var game: Game = .Game1
+        public var gameVersion: GameSequence.GameVersion = .Game1
         public var initError: String?
 
-        public init(game: Game) {
-            self.game = game
+        public init(gameVersion: GameSequence.GameVersion) {
+            self.gameVersion = gameVersion
         }
         
-        public init(_ appearance: String, fromGame: Game = .Game1, withGender: Shepard.Gender = .Male) {
+        public init(_ appearance: String, fromGame: GameSequence.GameVersion = .Game1, withGender: Shepard.Gender = .Male) {
             //ME1 format?
             contents = [AttributeType: Int]()
-            self.game = fromGame
+            self.gameVersion = fromGame
             let oldAppearanceCode = Format.unformatCode(appearance)
-            if let error = Format.CodeLengthError(oldAppearanceCode, gender: gender, game: game) {
+            if let error = Format.CodeLengthError(oldAppearanceCode, gender: gender, game: gameVersion) {
                 initError = error
             }
             for element in oldAppearanceCode.characters {
-                if let attributeList = Appearance.attributes[gender]?[game] where attributeList.count > contents.count {
+                if let attributeList = Appearance.attributes[gender]?[gameVersion] where attributeList.count > contents.count {
                     let attribute = attributeList[contents.count]
                     contents[attribute] = Format.unformatAttribute(element)
                 }
@@ -296,11 +296,11 @@ extension Shepard {
         }
         
         /// Converts attribute values between games.
-        public mutating func convert(toGame toGame: Game) {
+        public mutating func convert(toGame toGame: GameSequence.GameVersion) {
             alerts = [:]
             notices = [:]
             var newAppearance = [AttributeType: Int]()
-            if let sourceAttributes = Appearance.attributes[gender]?[game] {
+            if let sourceAttributes = Appearance.attributes[gender]?[gameVersion] {
                 for attribute in sourceAttributes {
                     var attributeValue = contents[attribute]
                     if attributeValue == nil { // not set, skip
@@ -329,7 +329,7 @@ extension Shepard {
                         }
                     }
                     // game 3 has extra hair colors
-                    if (attribute == .HairColor || attribute == .BrowColor || attribute == .FacialHairColor) && game == .Game3 {
+                    if (attribute == .HairColor || attribute == .BrowColor || attribute == .FacialHairColor) && gameVersion == .Game3 {
                         if attributeValue == 15 { // purple
                             alerts[attribute] = Appearance.HairColorNotFound
                             attributeValue = 0
@@ -349,7 +349,7 @@ extension Shepard {
                         }
                     }
                     // game 3 has extra hair styles
-                    if attribute == .Hair && game == .Game3 {
+                    if attribute == .Hair && gameVersion == .Game3 {
                         if gender == .Male && (attributeValue == 7 || attributeValue > 10) { // mohawk, other new styles
                             alerts[attribute] = Appearance.HairNotFound
                             attributeValue = 0
@@ -366,7 +366,7 @@ extension Shepard {
                 }
             }
             contents = newAppearance
-            game = toGame
+            gameVersion = toGame
         }
         
         //MARK: Alert/Notice messages on conversion failures
@@ -383,7 +383,7 @@ extension Shepard {
         /// Returns a formatted code, of the typical XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.XXX.X format.
         public func format() -> String {
             var newAppearance = String()
-            if let sourceAttributes = Appearance.attributes[gender]?[game] {
+            if let sourceAttributes = Appearance.attributes[gender]?[gameVersion] {
                 newAppearance = sourceAttributes.reduce("") { $0 + Format.formatAttribute(contents[$1]) }
             }
             return Format.formatCode(newAppearance)
@@ -392,14 +392,14 @@ extension Shepard {
     
         public struct Format { // not an object, just a collection of functions
         
-            public static let ExpectedCodeLength: [Gender: [Game: Int]] = [
+            public static let ExpectedCodeLength: [Gender: [GameSequence.GameVersion: Int]] = [
                 .Male: [.Game1: 35, .Game2: 34, .Game3: 34],
                 .Female: [.Game1: 37, .Game2: 36, .Game3: 36]
             ]
             
             public static let CodeLengthIncorrect = "Warning: code length (%d) does not match game selected (expected %d)"
             
-            public static func CodeLengthError(code: String, gender: Gender, game: Game) -> String? {
+            public static func CodeLengthError(code: String, gender: Gender, game: GameSequence.GameVersion) -> String? {
                 let reportLength = Format.ExpectedCodeLength[gender]?[game] ?? 0
                 if reportLength == code.characters.count {
                     return nil

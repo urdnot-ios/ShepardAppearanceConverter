@@ -21,23 +21,23 @@ class ShepardOriginController: UIViewController {
     
     func setupPage() {
         earthbornRadio.onClick = {
-            CurrentGame.shepard.origin = .Earthborn
+            App.currentGame.shepard.origin = .Earthborn
             self.setupRadios()
         }
         spacerRadio.onClick = {
-            CurrentGame.shepard.origin = .Spacer
+            App.currentGame.shepard.origin = .Spacer
             self.setupRadios()
         }
         colonistRadio.onClick = {
-            CurrentGame.shepard.origin = .Colonist
+            App.currentGame.shepard.origin = .Colonist
             self.setupRadios()
         }
         setupRadios()
     }
     
     func setupRadios() {
-        earthbornRadio.isOn = CurrentGame.shepard.origin == .Earthborn
-        spacerRadio.isOn = CurrentGame.shepard.origin == .Spacer
-        colonistRadio.isOn = CurrentGame.shepard.origin == .Colonist
+        earthbornRadio.isOn = App.currentGame.shepard.origin == .Earthborn
+        spacerRadio.isOn = App.currentGame.shepard.origin == .Spacer
+        colonistRadio.isOn = App.currentGame.shepard.origin == .Colonist
     }
 }

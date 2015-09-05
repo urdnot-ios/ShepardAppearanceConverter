@@ -23,38 +23,38 @@ class ShepardClassController: UIViewController {
     
     func setupPage() {
         soldierRadio.onClick = {
-            CurrentGame.shepard.classTalent = .Soldier
+            App.currentGame.shepard.classTalent = .Soldier
             self.setupRadios()
         }
         engineerRadio.onClick = {
-            CurrentGame.shepard.classTalent = .Engineer
+            App.currentGame.shepard.classTalent = .Engineer
             self.setupRadios()
         }
         adeptRadio.onClick = {
-            CurrentGame.shepard.classTalent = .Adept
+            App.currentGame.shepard.classTalent = .Adept
             self.setupRadios()
         }
         infiltratorRadio.onClick = {
-            CurrentGame.shepard.classTalent = .Infiltrator
+            App.currentGame.shepard.classTalent = .Infiltrator
             self.setupRadios()
         }
         sentinelRadio.onClick = {
-            CurrentGame.shepard.classTalent = .Sentinel
+            App.currentGame.shepard.classTalent = .Sentinel
             self.setupRadios()
         }
         vanguardRadio.onClick = {
-            CurrentGame.shepard.classTalent = .Vanguard
+            App.currentGame.shepard.classTalent = .Vanguard
             self.setupRadios()
         }
         setupRadios()
     }
     
     func setupRadios() {
-        soldierRadio.isOn = CurrentGame.shepard.classTalent == .Soldier
-        engineerRadio.isOn = CurrentGame.shepard.classTalent == .Engineer
-        adeptRadio.isOn = CurrentGame.shepard.classTalent == .Adept
-        infiltratorRadio.isOn = CurrentGame.shepard.classTalent == .Infiltrator
-        sentinelRadio.isOn = CurrentGame.shepard.classTalent == .Sentinel
-        vanguardRadio.isOn = CurrentGame.shepard.classTalent == .Vanguard
+        soldierRadio.isOn = App.currentGame.shepard.classTalent == .Soldier
+        engineerRadio.isOn = App.currentGame.shepard.classTalent == .Engineer
+        adeptRadio.isOn = App.currentGame.shepard.classTalent == .Adept
+        infiltratorRadio.isOn = App.currentGame.shepard.classTalent == .Infiltrator
+        sentinelRadio.isOn = App.currentGame.shepard.classTalent == .Sentinel
+        vanguardRadio.isOn = App.currentGame.shepard.classTalent == .Vanguard
     }
 }

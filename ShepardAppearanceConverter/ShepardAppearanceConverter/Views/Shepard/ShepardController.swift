@@ -23,12 +23,6 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     @IBOutlet weak var photoImageView: UIImageView!
     
-    lazy var imagePicker: UIImagePickerController = {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        return imagePicker
-    }()
-    
     @IBOutlet weak var originRow: FauxValueRow!
     @IBOutlet weak var reputationRow: FauxValueRow!
     @IBOutlet weak var classRow: FauxValueRow!
@@ -37,7 +31,7 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPage()
-        CurrentGame.onCurrentShepardChange.listen(self) { [weak self] (_) in
+        App.onCurrentShepardChange.listen(self) { [weak self] (_) in
             self?.setupPage()
         }
     }
@@ -108,10 +102,10 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
         view.userInteractionEnabled = false
         sender.resignFirstResponder()
         if nameField.text == nil || nameField.text!.isEmpty {
-            nameField.text = CurrentGame.shepard.name.stringValue
+            nameField.text = App.currentGame.shepard.name.stringValue
             nameChanged(nameField)
         } else {
-            CurrentGame.shepard.setName(nameField.text)
+            App.currentGame.shepard.setName(nameField.text)
         }
         nameField.superview?.setNeedsLayout()
         nameField.superview?.layoutIfNeeded()
@@ -120,13 +114,13 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     @IBAction func genderChanged(sender: AnyObject) {
         view.userInteractionEnabled = false
-        CurrentGame.shepard.gender = genderSegment.selectedSegmentIndex == 0 ? .Male : .Female
+        App.currentGame.shepard.gender = genderSegment.selectedSegmentIndex == 0 ? .Male : .Female
         view.userInteractionEnabled = true
     }
     
     @IBAction func gameChanged(sender: AnyObject) {
         view.userInteractionEnabled = false
-        let newGame: Shepard.Game = {
+        let newGame: GameSequence.GameVersion = {
             switch gameSegment.selectedSegmentIndex {
             case 0: return .Game1
             case 1: return .Game2
@@ -134,7 +128,7 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
             default: return .Game1
             }
         }()
-        CurrentGame.changeGame(newGame)
+        App.currentGame.changeGameVersion(newGame)
         view.userInteractionEnabled = true
     }
     
@@ -146,15 +140,15 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
 
     func setupPage() {
         view.userInteractionEnabled = false
-        genderSegment.selectedSegmentIndex = CurrentGame.shepard.gender == .Male ? 0 : 1
+        genderSegment.selectedSegmentIndex = App.currentGame.shepard.gender == .Male ? 0 : 1
         gameSegment.selectedSegmentIndex = {
-            switch CurrentGame.shepard.game {
+            switch App.currentGame.shepard.gameVersion {
             case .Game1: return 0
             case .Game2: return 1
             case .Game3: return 2
             }
         }()
-        nameField.text = CurrentGame.shepard.name.stringValue
+        nameField.text = App.currentGame.shepard.name.stringValue
         surnameLabel.text = Shepard.DefaultSurname
         setupPhoto()
         setupFauxRows()
@@ -162,82 +156,69 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
     
     func setupFauxRows() {
-        originRow.value = CurrentGame.shepard.origin.rawValue
+        originRow.value = App.currentGame.shepard.origin.rawValue
         originRow.onClick = { [weak self] () in
             let parentController = self?.parentViewController as? ShepardFlowController
             parentController?.performChangeableSegue("Edit Origin", sender: self?.originRow)
         }
-        reputationRow.value = CurrentGame.shepard.reputation.rawValue
+        reputationRow.value = App.currentGame.shepard.reputation.rawValue
         reputationRow.onClick = { [weak self] () in
             let parentController = self?.parentViewController as? ShepardFlowController
             parentController?.performChangeableSegue("Edit Reputation", sender: self?.reputationRow)
         }
-        classRow.value = CurrentGame.shepard.classTalent.rawValue
+        classRow.value = App.currentGame.shepard.classTalent.rawValue
         classRow.onClick = { [weak self] () in
             let parentController = self?.parentViewController as? ShepardFlowController
             parentController?.performChangeableSegue("Edit Class", sender: self?.classRow)
         }
-        let appearanceCode = CurrentGame.shepard.appearance.format()
-        appearanceRow.value = appearanceCode.isEmpty ? Shepard.Appearance.SampleAppearance : CurrentGame.shepard.appearance.format()
+        let appearanceCode = App.currentGame.shepard.appearance.format()
+        appearanceRow.value = appearanceCode.isEmpty ? Shepard.Appearance.SampleAppearance : App.currentGame.shepard.appearance.format()
         appearanceRow.onClick = { [weak self] () in
             self?.parentViewController?.performSegueWithIdentifier("Edit Appearance", sender: appearanceRow)
         }
     }
     
     func setupPhoto() {
-        photoImageView.image = CurrentGame.shepard.photo.image()
+        photoImageView.image = App.currentGame.shepard.photo.image()
     }
     
-    //MARK: Photo
+    //MARK: Photo Picker
+    
+    lazy var imagePicker: UIImagePickerController = {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        return imagePicker
+    }()
     
     func pickPhoto() {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .PhotoLibrary
-            
-        presentViewController(imagePicker, animated: true, completion: nil)
-//        let imageController = UIAlertController(title: title, message: "Select Image", preferredStyle:UIAlertControllerStyle.ActionSheet)
-//        self.presentViewController(imageController, animated: true, completion: nil)
-//        imageController.addAction(UIAlertAction(title: "Camera Roll", style: UIAlertActionStyle.Default)
-//            { action -> Void in
-//                if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
-//                    imagePicker?.sourceType = .PhotoLibrary
-//                    imagePicker!.allowsEditing = true
-//                    self.presentViewController(imagePicker!, animated: true, completion: nil)
-//                }
-//            })
-//        imageController.addAction(UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default)
-//            { action -> Void in
-//                if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-//                    imagePicker?.sourceType = .Camera
-//                    imagePicker!.allowsEditing = true
-//                    self.presentViewController(imagePicker!, animated: true, completion: nil)
-//                }
-//            })
-//        imageController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel)
-//            { action -> Void in
-//            })
-//        if image_picture_URL?.text != nil {
-//            let imageURLText = image_picture_URL?.text
-//            imageController.addAction(UIAlertAction(title: "Image URL", style: UIAlertActionStyle.Default)
-//                { action -> Void in
-//                let imageURL = NSURL(string: imageURLText!)
-//                let urlRequest = NSURLRequest(URL: imageURL!)
-//                NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler: {
-//                    response, data, error in
-//                    if error != nil {
-//                        // println("error")
-//                    } else {
-//                        self.contactImageView.image = UIImage(data: data)
-//                    }
-//                })
-//                
-//            })
-//        }
+        let imageController = UIAlertController(title: nil, message: nil, preferredStyle:UIAlertControllerStyle.ActionSheet)
+        
+        imageController.addAction(UIAlertAction(title: "Camera Roll", style: UIAlertActionStyle.Default) { _ in
+            if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+                self.imagePicker.sourceType = .PhotoLibrary
+                self.imagePicker.allowsEditing = true
+                self.presentViewController(self.imagePicker, animated: true, completion: nil)
+            }
+        })
+        
+        if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil { // prevent simulator error
+            imageController.addAction(UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default) { _ in
+                if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+                    self.imagePicker.sourceType = .Camera
+                    self.imagePicker.allowsEditing = true
+                    self.presentViewController(self.imagePicker, animated: true, completion: nil)
+                }
+            })
+        }
+        
+        imageController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { _ in })
+        
+        presentViewController(imageController, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         picker.dismissViewControllerAnimated(true, completion: nil)
-        if CurrentGame.shepard.setPhoto(image) {
+        if App.currentGame.shepard.setPhoto(image) {
             setupPhoto()
         } else {
             let alert = UIAlertController(title: nil, message: "There was an error saving this image", preferredStyle: UIAlertControllerStyle.Alert)

@@ -33,11 +33,4 @@ extension Shepard.Name: Equatable {}
 
 public func ==(a: Shepard.Name, b: Shepard.Name) -> Bool {
     return a.stringValue == b.stringValue
-//    switch (a, b) {
-//    case (.DefaultMaleName, .DefaultMaleName): return true
-//    case (.DefaultFemaleName, .DefaultFemaleName): return true
-//    case (.Custom(let a), .Custom(let b)) where a == b: return true
-//    case (.Custom(let a), .Custom(let b)) where a == b: return true
-//    default: return false
-//    }
 }

@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="14E46" minimumToolsVersion="Xcode 7.0">
-    <entity name="GameCurrent" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
+    <entity name="AppData" syncable="YES">
         <attribute name="serializedData" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="shepard" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GameShepards" inverseName="currentGame" inverseEntity="GameShepards" syncable="YES"/>
+    </entity>
+    <entity name="GameSequences" syncable="YES">
+        <attribute name="serializedData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="shepards" optional="YES" toMany="YES" minCount="1" maxCount="3" deletionRule="Nullify" destinationEntity="GameShepards" inverseName="sequence" inverseEntity="GameShepards" syncable="YES"/>
     </entity>
     <entity name="GameShepards" syncable="YES">
         <attribute name="createdDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -10,17 +15,12 @@
         <attribute name="sequenceUuid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="serializedData" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="currentGame" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GameCurrent" inverseName="shepard" inverseEntity="GameCurrent" syncable="YES"/>
-        <relationship name="sequence" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GameShepardsSequences" inverseName="shepards" inverseEntity="GameShepardsSequences" syncable="YES"/>
-    </entity>
-    <entity name="GameShepardsSequences" syncable="YES">
-        <attribute name="serializedData" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="shepards" optional="YES" toMany="YES" minCount="1" maxCount="3" deletionRule="Nullify" destinationEntity="GameShepards" inverseName="sequence" inverseEntity="GameShepards" syncable="YES"/>
+        <relationship name="currentGame" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppData" inverseName="shepard" inverseEntity="AppData" syncable="YES"/>
+        <relationship name="sequence" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GameSequences" inverseName="shepards" inverseEntity="GameSequences" syncable="YES"/>
     </entity>
     <elements>
+        <element name="AppData" positionX="-18" positionY="90" width="128" height="75"/>
+        <element name="GameSequences" positionX="-36" positionY="54" width="128" height="90"/>
         <element name="GameShepards" positionX="-36" positionY="18" width="128" height="150"/>
-        <element name="GameShepardsSequences" positionX="-36" positionY="54" width="128" height="90"/>
-        <element name="GameCurrent" positionX="-18" positionY="90" width="128" height="75"/>
     </elements>
 </model>

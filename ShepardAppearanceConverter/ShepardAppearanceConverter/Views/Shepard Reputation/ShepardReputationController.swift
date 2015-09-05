@@ -21,23 +21,23 @@ class ShepardReputationController: UIViewController {
     
     func setupPage() {
         ruthlessRadio.onClick = {
-            CurrentGame.shepard.reputation = .Ruthless
+            App.currentGame.shepard.reputation = .Ruthless
             self.setupRadios()
         }
         warHeroRadio.onClick = {
-            CurrentGame.shepard.reputation = .WarHero
+            App.currentGame.shepard.reputation = .WarHero
             self.setupRadios()
         }
         soleSurvivorRadio.onClick = {
-            CurrentGame.shepard.reputation = .SoleSurvivor
+            App.currentGame.shepard.reputation = .SoleSurvivor
             self.setupRadios()
         }
         setupRadios()
     }
     
     func setupRadios() {
-        ruthlessRadio.isOn = CurrentGame.shepard.reputation == .Ruthless
-        warHeroRadio.isOn = CurrentGame.shepard.reputation == .WarHero
-        soleSurvivorRadio.isOn = CurrentGame.shepard.reputation == .SoleSurvivor
+        ruthlessRadio.isOn = App.currentGame.shepard.reputation == .Ruthless
+        warHeroRadio.isOn = App.currentGame.shepard.reputation == .WarHero
+        soleSurvivorRadio.isOn = App.currentGame.shepard.reputation == .SoleSurvivor
     }
 }

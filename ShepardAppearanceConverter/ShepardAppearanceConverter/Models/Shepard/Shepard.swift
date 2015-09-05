@@ -12,14 +12,15 @@ public struct Shepard {
 
     public static let DefaultSurname = "Shepard"
     
-    public init(game: Game = .Game1) {
-        self.game = game
-        appearance = Appearance(game: game)
+    public init(sequenceUuid: String, gameVersion: GameSequence.GameVersion = .Game1) {
+        self.sequenceUuid = sequenceUuid
+        self.gameVersion = gameVersion
+        appearance = Appearance(gameVersion: gameVersion)
     }
 
 //MARK: Properties
 
-    public internal(set) var sequenceUuid = "\(NSUUID().UUIDString)"
+    public internal(set) var sequenceUuid: String
 
     public private(set) var uuid = "\(NSUUID().UUIDString)"
     
@@ -27,7 +28,7 @@ public struct Shepard {
     
     public var modifiedDate = NSDate()
     
-    public private(set) var game: Game 
+    public private(set) var gameVersion: GameSequence.GameVersion
     
     public var gender = Gender.Male {
         didSet{
@@ -56,9 +57,12 @@ public struct Shepard {
         }
     }
     
-    public var name = Name.DefaultMaleName { didSet{
-    markUpdated()
-    } }
+    public var name = Name.DefaultMaleName { 
+        didSet{
+            markUpdated()
+        }
+    }
+    
     // special setter for taking strings:
     public mutating func setName(name: String?) {
         if name == Name.DefaultMaleName.stringValue || (name == nil && gender == .Male) {
@@ -70,36 +74,48 @@ public struct Shepard {
             self.name = .Custom(name: name!)
         }
     }
+    
     public var fullName: String { return "\(name.stringValue!) Shepard" }
     
-    public var photo = Photo.DefaultMalePhoto { didSet{
-    markUpdated()
-    } }
+    public var photo = Photo.DefaultMalePhoto { 
+        didSet{
+            markUpdated()
+        }
+    }
+    
     // special setter for taking UIImage:
     public mutating func setPhoto(image: UIImage) -> Bool {
         let fileName = "MyShepardPhoto\(uuid)"
-        if SavedGames.saveImageToDocuments(fileName, image: image) {
+        if image.save(documentsFileName: fileName) {
             photo = .Custom(file: fileName)
             return true
         }
         return false
     }
 
-    public var appearance: Appearance { didSet{
-    markUpdated()
-    } }
+    public var appearance: Appearance { 
+        didSet{
+            markUpdated()
+        }
+    }
     
-    public var origin = Origin.Earthborn { didSet{ 
-    markUpdated()
-    } }
+    public var origin = Origin.Earthborn {
+        didSet{
+            markUpdated()
+        }
+    }
     
-    public var reputation = Reputation.SoleSurvivor { didSet{ 
-    markUpdated()
-    } }
+    public var reputation = Reputation.SoleSurvivor {
+        didSet{
+            markUpdated()
+        }
+    }
     
-    public var classTalent = ClassTalent.Soldier { didSet{ 
-    markUpdated()
-    } }
+    public var classTalent = ClassTalent.Soldier { 
+        didSet{
+            markUpdated()
+        }
+    }
     
     public var title: String {
         return "\(origin.rawValue) \(reputation.rawValue) \(classTalent.rawValue)"
@@ -108,18 +124,18 @@ public struct Shepard {
 //MARK: Listeners
 
     internal var dontMarkUpdated = false
-    internal var hasUnSavedGames = false
+    internal var hasUnsavedChanges = false
     
     public mutating func markUpdated(fireChangeListener: Bool = false) {
         if !dontMarkUpdated {
             self.modifiedDate = NSDate()
-            hasUnSavedGames = true
+            hasUnsavedChanges = true
             // for some reason, the changes aren't propogated up to CurrentGame.Shepard (despite value type), unless we do this delayed call?
             Delay.bySeconds(0, { self.onChange.fire(self) })
         }
     }
     
-    /// Don't use this. Use CurrentGame.onCurrentShepardChange instead.
+    /// Don't use this. Use App.onCurrentShepardChange instead.
     internal let onChange = Signal<(Shepard)>()
 }
 
@@ -143,11 +159,12 @@ extension Shepard: SerializedDataStorable {
         list["uuid"] = uuid
         list["created_date"] = createdDate
         list["modified_date"] = modifiedDate
-        list["game"] = game.rawValue
+        list["game_version"] = gameVersion.rawValue
         list["gender"] = gender == .Male ? "M" : "F"
         list["name"] = name.stringValue
         list["appearance"] = appearance.format()
         list["photo"] = photo.stringValue
+        print(photo.stringValue)
         list["origin"] = origin.rawValue
         list["reputation"] = reputation.rawValue
         list["class"] = classTalent.rawValue
@@ -158,7 +175,7 @@ extension Shepard: SerializedDataStorable {
 extension Shepard: SerializedDataRetrievable {
     
     public init(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
-        self.init()
+        self.init(sequenceUuid: "")
         setData(data, origin: origin)
     }
     
@@ -174,7 +191,7 @@ extension Shepard: SerializedDataRetrievable {
     /// Creates a shepard with a dictionary of data. Can be from saved values, or from a previous game.
     /// Values general to all shepards within a set should be placed in setCommonData instead.
     ///
-    public mutating func setData(data: SerializedData, gameConversion oldGame: Game?, origin: SerializedDataOrigin = .LocalStore) {
+    public mutating func setData(data: SerializedData, gameConversion oldGame: GameSequence.GameVersion?, origin: SerializedDataOrigin = .LocalStore) {
         //don't first any changes from these functions - they aren't true changes, just loading data from elsewhere
         let oldDontMarkUpdated = dontMarkUpdated
         dontMarkUpdated = true
@@ -183,10 +200,10 @@ extension Shepard: SerializedDataRetrievable {
         
         if let oldGame = oldGame {
             var appearance = Appearance(data["appearance"]?.string ?? "", fromGame: oldGame, withGender: gender)
-            appearance.convert(toGame: game)
+            appearance.convert(toGame: gameVersion)
             self.appearance = appearance
         } else {
-            self.appearance = Appearance(data["appearance"]?.string ?? "", fromGame: game, withGender: gender)
+            self.appearance = Appearance(data["appearance"]?.string ?? "", fromGame: gameVersion, withGender: gender)
         }
         
         classTalent = ClassTalent(rawValue: data["class"]?.string ?? "") ?? classTalent
@@ -196,9 +213,13 @@ extension Shepard: SerializedDataRetrievable {
         if origin != .DataChange {
             self.sequenceUuid = data["sequence_uuid"]?.string ?? sequenceUuid
             self.uuid = data["uuid"]?.string ?? uuid
-            self.game = Game(rawValue: data["game"]?.string ?? "0") ?? .Game1
+            self.gameVersion = GameSequence.GameVersion(rawValue: data["game"]?.string ?? "0") ?? .Game1
             self.createdDate = data["created_date"]?.date ?? NSDate()
             self.modifiedDate = data["modified_date"]?.date ?? NSDate()
+        }
+        
+        if let photo = Photo(data: data["photo"]) {
+            self.photo = photo
         }
         
         dontMarkUpdated = oldDontMarkUpdated

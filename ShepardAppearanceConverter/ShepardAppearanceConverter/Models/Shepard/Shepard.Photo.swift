@@ -21,7 +21,7 @@ extension Shepard {
             case .DefaultFemalePhoto:
                 return "FemShep Sample"
             case .Custom(let fileName):
-                return "Custom:\(fileName)"
+                return "\(fileName)"
             }
         }
         func image() -> UIImage? {
@@ -35,7 +35,7 @@ extension Shepard {
                     return photo
                 }
             case .Custom(let fileName):
-                if let photo = SavedGames.loadImageFromDocuments(fileName) {
+                if let photo = UIImage(documentsFileName: fileName) {
                     return photo
                 }
             }
@@ -54,3 +54,28 @@ public func ==(a: Shepard.Photo, b: Shepard.Photo) -> Bool {
     default: return false
     }
 }
+
+
+//MARK: Save/Retrieve Data
+
+extension Shepard.Photo {
+    
+    /// special retriever for saved image
+    public init?(data: SerializedData?) {
+        if let fileName = data?.string {
+            if fileName == Shepard.Photo.DefaultMalePhoto.stringValue {
+                self = .DefaultMalePhoto
+            } else if fileName == Shepard.Photo.DefaultFemalePhoto.stringValue {
+                self = .DefaultFemalePhoto
+            } else {
+                self = Shepard.Photo.Custom(file: fileName)
+            }
+            return
+        }
+        return nil
+    }
+    
+}
+
+
+    

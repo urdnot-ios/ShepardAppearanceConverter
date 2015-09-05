@@ -10,7 +10,8 @@ import UIKit
 
 class ShepardsController: UITableViewController {
 
-    var shepards: [ShepardsSequence] = []
+    lazy var games: [GameSequence] = []
+    
     var updating = true
     
     override func viewDidLoad() {
@@ -22,12 +23,12 @@ class ShepardsController: UITableViewController {
         
         setupPage()
         
-        CurrentGame.onCurrentShepardChange.listen(self) { [weak self] (shepard) in
+        App.onCurrentShepardChange.listen(self) { [weak self] (shepard) in
             if self?.updating == false {
                 self?.setupPage(reloadData: true)
             }
         }
-        // don't think we need this?
+//         don't think we need this?
 //        SavedGames.onShepardsListChange.listen(self) { [weak self] (shepard) in
 //            if self?.updating == false {
 //                self?.setupPage(reloadData: true)
@@ -49,7 +50,7 @@ class ShepardsController: UITableViewController {
     func setupPage(reloadData reloadData: Bool = false) {
         tableView.allowsMultipleSelectionDuringEditing = false
         setupTableCustomCells()
-        setupShepards()
+        setupGames()
         if reloadData {
             tableView.reloadData()
         }
@@ -63,7 +64,7 @@ class ShepardsController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shepards.count
+        return games.count
     }
     
 //    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -72,7 +73,7 @@ class ShepardsController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCellWithIdentifier("Shepard Row") as? ShepardRowCell {
-            setupShepardRow(indexPath.row, cell: cell)
+            setupGameRow(indexPath.row, cell: cell)
             return cell
         }
         return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
@@ -85,10 +86,10 @@ class ShepardsController: UITableViewController {
     var prepareAfterIBIncludedSegue: PrepareAfterIBIncludedSegueType = { destination in }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row < shepards.count {
+        if indexPath.row < games.count {
             view.userInteractionEnabled = false
-            let shepard = shepards[indexPath.row].lastPlayed
-            CurrentGame.changeShepard(shepard)
+            let game = games[indexPath.row]
+            App.changeGame(game)
             parentViewController?.performSegueWithIdentifier("Select Shepard", sender: nil)
             view.userInteractionEnabled = true
         }
@@ -100,12 +101,12 @@ class ShepardsController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            if indexPath.row < shepards.count {
+            if indexPath.row < games.count {
                 view.userInteractionEnabled = false
                 updating = true
-                let shepard = shepards[indexPath.row].last
-                SavedGames.deleteShepard(shepard)
-                setupShepards()
+                var game = games.removeAtIndex(indexPath.row)
+                game.delete()
+                setupGames()
                 tableView.beginUpdates()
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                 tableView.endUpdates()
@@ -126,21 +127,21 @@ class ShepardsController: UITableViewController {
     //MARK: Table Data
     
     func dummyData() {
-        SavedGames.addNewShepard()
-        SavedGames.addNewShepard()
+        App.addNewGame()
+        App.addNewGame()
     }
 
-    func setupShepards() {
-        shepards = SavedGames.shepardsSequences.sort { $0.sortDate.compare($1.sortDate) == .OrderedDescending }
+    func setupGames() {
+        games = App.allGames.sortedUnfaultedGames()
     }
     
-    func setupShepardRow(row: Int, cell: ShepardRowCell) {
-        if row < shepards.count {
-            let shepard = shepards[row].lastPlayed
+    func setupGameRow(row: Int, cell: ShepardRowCell) {
+        if row < games.count {
+            let shepard = games[row].shepard
             cell.photo = shepard.photo.image()
             cell.name = shepard.fullName
             cell.title = shepard.title
-            cell.date = Date.format(shepard.modifiedDate)
+            cell.date = shepard.modifiedDate.format(.Typical)
         }
     }
     

@@ -30,11 +30,11 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
     let ConvertAlert = "This conversion may be flawed. See more notes on the sliders below."
     let ConvertNotice = "This conversion is approximate. See more notes on the sliders below."
     
-    var game23SliderChoice = Shepard.Game.Game2 // set by slider
+    var game23SliderChoice = GameSequence.GameVersion.Game2 // set by slider
     
-    var appearance: Shepard.Appearance { return CurrentGame.shepard.appearance }
-    var gender: Shepard.Gender { return CurrentGame.shepard.gender }
-    var game: Shepard.Game { return CurrentGame.shepard.game }
+    var appearance: Shepard.Appearance { return App.currentGame.shepard.appearance }
+    var gender: Shepard.Gender { return App.currentGame.shepard.gender }
+    var game: GameSequence.GameVersion { return App.currentGame.gameVersion }
     
     lazy var spinner: Spinner = {
         return Spinner(parent: self)
@@ -126,9 +126,9 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
             for (attribute, slider) in sliders {
                 newAppearance.contents[attribute] = Int(slider.slider?.value ?? 0.0)
             }
-            CurrentGame.shepard.appearance = newAppearance
+            App.currentGame.shepard.appearance = newAppearance
         } else if let appearanceCode = ME2CodeField.text {
-            CurrentGame.shepard.appearance = Shepard.Appearance(appearanceCode, fromGame: game23SliderChoice, withGender: gender)
+            App.currentGame.shepard.appearance = Shepard.Appearance(appearanceCode, fromGame: game23SliderChoice, withGender: gender)
         }
         spinner.stop()
     }
@@ -147,14 +147,14 @@ public class AppearanceController: UIViewController, UITextFieldDelegate {
         ME23GameSegment.selectedSegmentIndex = game == .Game3 ? 1 : 0
         
         // Game 1 Sliders:
-        var appearance = CurrentGame.shepard.appearance // value type == copy
+        var appearance = App.currentGame.shepard.appearance // value type == copy
         appearance.convert(toGame: .Game1)
         for (attribute, value) in appearance.contents {
             setSliderValue(attribute, value: value)
         }
         // Game 2/3 Code:
-        appearance = CurrentGame.shepard.appearance // value type == copy
-        appearance.convert(toGame: CurrentGame.shepard.game == .Game3 ? .Game3 : .Game2)
+        appearance = App.currentGame.shepard.appearance // value type == copy
+        appearance.convert(toGame: App.currentGame.gameVersion == .Game3 ? .Game3 : .Game2) 
         ME2CodeField.text = appearance.format()
         
         ME2CodeChanged(ME2CodeField)

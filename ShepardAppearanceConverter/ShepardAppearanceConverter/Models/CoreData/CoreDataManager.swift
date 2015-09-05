@@ -15,7 +15,8 @@ public enum CoreDataManagerError : ErrorType {
 
 public typealias SetAdditionColumnsClosure = ((NSManagedObject)->Void)
 public typealias SetSearchPredicateClosure = ((NSFetchRequest)->Void)
-public typealias MatchingCriteriaList = [(key: String, value: CVarArgType)]
+public typealias MatchingCriteria = (key: String, value: CVarArgType)
+public typealias SortingCriteria = (key: String, ascending: Bool)
 
 public struct CoreDataManager {
 
@@ -72,14 +73,40 @@ public struct CoreDataManager {
                 context.deleteObject(coreItem)
                 try context.save()
                 return true
-            } else {
-                return false
             }
         } catch let deleteError as NSError{
             print("delete failed for \(T.coreDataEntityName): \(deleteError.localizedDescription)")
         }
         
         return false
+    }
+    
+    /// retrieve single row with criteria closure
+    public static func delete<T: CoreDataStorable>(setSearchPredicates: SetSearchPredicateClosure, sortBy: [SortingCriteria] = [], itemType: T.Type) -> Bool {
+        guard let context = self.context else {
+            print("Error: could not initalize core data context")
+            return false
+        }
+        
+        do {
+            if let coreItem = fetchRow(setSearchPredicates, sortBy: sortBy, itemType: itemType) {
+                context.deleteObject(coreItem)
+                try context.save()
+                return true
+            }
+        } catch let deleteError as NSError {
+            print("delete failed for \(T.coreDataEntityName): \(deleteError.localizedDescription)")
+        }
+        return false
+    }
+    
+    /// retrieve single row with criteria list
+    public static func delete<T: CoreDataStorable>(matching matching: [MatchingCriteria], sortBy: [SortingCriteria] = [], itemType: T.Type) -> Bool {
+        let predicates: [NSPredicate] = matching.map { NSPredicate(format: "\($0.key) = %@", $0.value) }
+        let setSearchPredicates: SetSearchPredicateClosure = { (fetchRequest) in
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        }
+        return self.delete(setSearchPredicates, sortBy: sortBy, itemType: itemType)
     }
     
     
@@ -89,7 +116,7 @@ public struct CoreDataManager {
     }
     
     /// retrieve multiple rows with criteria closure
-    public static func getAll<T: CoreDataStorable>(setSearchPredicates: SetSearchPredicateClosure) -> [T] {
+    public static func getAll<T: CoreDataStorable>(setSearchPredicates: (SetSearchPredicateClosure), sortBy: [SortingCriteria] = []) -> [T] {
         guard let context = self.context else {
             print("Error: could not initalize core data context")
             return []
@@ -97,6 +124,7 @@ public struct CoreDataManager {
         
         let fetchRequest = NSFetchRequest(entityName: T.coreDataEntityName)
         setSearchPredicates(fetchRequest)
+        fetchRequest.sortDescriptors = sortBy.map { NSSortDescriptor(key: $0.key, ascending: $0.ascending) }
         
         do {
             let coreItems = (try context.executeFetchRequest(fetchRequest) as? [NSManagedObject]) ?? [NSManagedObject]()
@@ -113,21 +141,21 @@ public struct CoreDataManager {
     }
     
     /// retrieve multiple rows with criteria list
-    public static func getAll<T: CoreDataStorable>(matching matching: MatchingCriteriaList) -> [T] {
+    public static func getAll<T: CoreDataStorable>(matching matching: [MatchingCriteria], sortBy: [SortingCriteria] = []) -> [T] {
         let predicates: [NSPredicate] = matching.map { NSPredicate(format: "\($0.key) = %@", $0.value) }
         let setSearchPredicates: SetSearchPredicateClosure = { (fetchRequest) in
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         }
-        return self.getAll(setSearchPredicates)
+        return self.getAll(setSearchPredicates, sortBy: sortBy)
     }
 
 
 
     
     /// retrieve single row with criteria closure
-    public static func get<T: CoreDataStorable>(setSearchPredicates: SetSearchPredicateClosure) -> T? {
+    public static func get<T: CoreDataStorable>(setSearchPredicates: (SetSearchPredicateClosure), sortBy: [SortingCriteria] = []) -> T? {
         do {
-            if let coreItem = fetchRow(setSearchPredicates, itemType: T.self) {
+            if let coreItem = fetchRow(setSearchPredicates, sortBy: sortBy, itemType: T.self) {
                 let serializedData = (coreItem.valueForKey(Keys.serializedData) as? String) ?? ""
                 return try T(serializedData: serializedData, origin: .Database)
             }
@@ -138,12 +166,12 @@ public struct CoreDataManager {
     }
     
     /// retrieve single row with criteria list
-    public static func get<T: CoreDataStorable>(matching matching: MatchingCriteriaList) -> T? {
+    public static func get<T: CoreDataStorable>(matching matching: [MatchingCriteria], sortBy: [SortingCriteria] = []) -> T? {
         let predicates: [NSPredicate] = matching.map { NSPredicate(format: "\($0.key) = %@", $0.value) }
         let setSearchPredicates: SetSearchPredicateClosure = { (fetchRequest) in
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         }
-        return self.get(setSearchPredicates)
+        return self.get(setSearchPredicates, sortBy: sortBy)
     }
     
     
@@ -155,7 +183,7 @@ public struct CoreDataManager {
         }
         
         let fetchRequest = NSFetchRequest(entityName: T.coreDataEntityName)
-        
+        fetchRequest.fetchLimit = 1
         item.setIdentifyingPredicate(fetchRequest)
         
         do {
@@ -168,14 +196,16 @@ public struct CoreDataManager {
     }
     
     /// retrieve single row introspective core data with criteria closure
-    public static func fetchRow<T: CoreDataStorable>(setSearchPredicates: SetSearchPredicateClosure, itemType: T.Type) -> NSManagedObject? {
+    public static func fetchRow<T: CoreDataStorable>(setSearchPredicates: SetSearchPredicateClosure, sortBy: [SortingCriteria] = [], itemType: T.Type) -> NSManagedObject? {
         guard let context = self.context else {
             print("Error: could not initalize core data context")
             return nil
         }
         
         let fetchRequest = NSFetchRequest(entityName: T.coreDataEntityName)
+        fetchRequest.fetchLimit = 1
         setSearchPredicates(fetchRequest)
+        fetchRequest.sortDescriptors = sortBy.map { NSSortDescriptor(key: $0.key, ascending: $0.ascending) }
         
         do {
             let coreItems = (try context.executeFetchRequest(fetchRequest) as? [NSManagedObject]) ?? [NSManagedObject]()
@@ -188,12 +218,12 @@ public struct CoreDataManager {
     }
     
     /// retrieve single row introspective core data with criteria list
-    public static func fetchRow<T: CoreDataStorable>(matching matching: MatchingCriteriaList, itemType: T.Type) -> NSManagedObject? {
+    public static func fetchRow<T: CoreDataStorable>(matching matching: [MatchingCriteria], sortBy: [SortingCriteria] = [], itemType: T.Type) -> NSManagedObject? {
         let predicates: [NSPredicate] = matching.map { NSPredicate(format: "\($0.key) = %@", $0.value) }
         let setSearchPredicates: SetSearchPredicateClosure = { (fetchRequest) in
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         }
-        return self.fetchRow(setSearchPredicates, itemType: itemType)
+        return self.fetchRow(setSearchPredicates, sortBy: sortBy, itemType: itemType)
     }
     
 }
