@@ -89,6 +89,7 @@
 		B1628D891B99506E008A3D2D /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1628D881B99506E008A3D2D /* NSDate.swift */; settings = {ASSET_TAGS = (); }; };
 		B1628D8B1B99531E008A3D2D /* Games.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1628D8A1B99531E008A3D2D /* Games.swift */; settings = {ASSET_TAGS = (); }; };
 		B1628D8D1B99653B008A3D2D /* FaultedGameSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1628D8C1B99653B008A3D2D /* FaultedGameSequence.swift */; settings = {ASSET_TAGS = (); }; };
+		B1D42AA01B9C199C0069756A /* FaultedShepard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D42A9F1B9C199C0069756A /* FaultedShepard.swift */; settings = {ASSET_TAGS = (); }; };
 		B1DC0A2A1B94FF2E00555092 /* CoreGameSequences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC0A291B94FF2E00555092 /* CoreGameSequences.swift */; settings = {ASSET_TAGS = (); }; };
 		B1DC0A2C1B952EDA00555092 /* CoreAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DC0A2B1B952EDA00555092 /* CoreAppData.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -178,6 +179,7 @@
 		B1628D881B99506E008A3D2D /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
 		B1628D8A1B99531E008A3D2D /* Games.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Games.swift; sourceTree = "<group>"; };
 		B1628D8C1B99653B008A3D2D /* FaultedGameSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaultedGameSequence.swift; sourceTree = "<group>"; };
+		B1D42A9F1B9C199C0069756A /* FaultedShepard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaultedShepard.swift; sourceTree = "<group>"; };
 		B1DC0A291B94FF2E00555092 /* CoreGameSequences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGameSequences.swift; sourceTree = "<group>"; };
 		B1DC0A2B1B952EDA00555092 /* CoreAppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreAppData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,6 +228,7 @@
 		B07699E91B80639E00BAE295 /* Shepard */ = {
 			isa = PBXGroup;
 			children = (
+				B1D42A9F1B9C199C0069756A /* FaultedShepard.swift */,
 				B07699EA1B80639E00BAE295 /* Shepard.swift */,
 				B0769A001B80762F00BAE295 /* Shepard.Appearance */,
 				B07699EC1B8063B800BAE295 /* Shepard.ClassTalent.swift */,
@@ -357,10 +360,10 @@
 			isa = PBXGroup;
 			children = (
 				B0AD3FFF1B6EEE640013C0F7 /* App.swift */,
-				B1628D8C1B99653B008A3D2D /* FaultedGameSequence.swift */,
-				B1628D8A1B99531E008A3D2D /* Games.swift */,
-				B12949951B78747F003B88FD /* GameSequence.swift */,
 				B10DA0FB1B94017A008BE38B /* CoreData */,
+				B1628D8A1B99531E008A3D2D /* Games.swift */,
+				B1628D8C1B99653B008A3D2D /* FaultedGameSequence.swift */,
+				B12949951B78747F003B88FD /* GameSequence.swift */,
 				B07699E91B80639E00BAE295 /* Shepard */,
 			);
 			path = Models;
@@ -606,6 +609,7 @@
 				B0AD3F521B6EEC6D0013C0F7 /* AppDelegate.swift in Sources */,
 				B071D22A1B811F8700A54F8F /* ShepardReputationController.swift in Sources */,
 				B071D2271B811F8700A54F8F /* ShepardOriginController.swift in Sources */,
+				B1D42AA01B9C199C0069756A /* FaultedShepard.swift in Sources */,
 				B00AB2741B7AB19D0002C44B /* Dictionary.swift in Sources */,
 				B0C6F52B1B858D480060F509 /* PopoverTargetHandler.swift in Sources */,
 				B0EF00621B8157BC00E74F94 /* SideEffects.swift in Sources */,

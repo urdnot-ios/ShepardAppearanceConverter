@@ -16,6 +16,7 @@ public struct Shepard {
         self.sequenceUuid = sequenceUuid
         self.gameVersion = gameVersion
         appearance = Appearance(gameVersion: gameVersion)
+        markChanged()
     }
 
 //MARK: Properties
@@ -32,34 +33,41 @@ public struct Shepard {
     
     public var gender = Gender.Male {
         didSet{
-            let oldDontMarkUpdated = dontMarkUpdated
-            dontMarkUpdated = true // only trigger update once
-            switch gender {
-            case .Male:
-                if name == .DefaultFemaleName {
-                    name = .DefaultMaleName
+            if oldValue != gender {
+                hasSequenceChanges = true
+                
+                let oldNotifyChanges = notifyChanges
+                notifyChanges = false // only trigger update once
+                switch gender {
+                case .Male:
+                    if name == .DefaultFemaleName {
+                        name = .DefaultMaleName
+                    }
+                    if photo == .DefaultFemalePhoto {
+                        photo = .DefaultMalePhoto
+                    }
+                    appearance.gender = gender
+                case .Female:
+                    if name == .DefaultMaleName {
+                        name = .DefaultFemaleName
+                    }
+                    if photo == .DefaultMalePhoto {
+                        photo = .DefaultFemalePhoto
+                    }
+                    appearance.gender = gender
                 }
-                if photo == .DefaultFemalePhoto {
-                    photo = .DefaultMalePhoto
-                }
-                appearance.gender = gender
-            case .Female:
-                if name == .DefaultMaleName {
-                    name = .DefaultFemaleName
-                }
-                if photo == .DefaultMalePhoto {
-                    photo = .DefaultFemalePhoto
-                }
-                appearance.gender = gender
+                notifyChanges = oldNotifyChanges
+                markChanged()
             }
-            dontMarkUpdated = oldDontMarkUpdated
-            markUpdated()
         }
     }
     
     public var name = Name.DefaultMaleName { 
         didSet{
-            markUpdated()
+            if oldValue != name {
+                hasSequenceChanges = true //?
+                markChanged()
+            }
         }
     }
     
@@ -79,7 +87,9 @@ public struct Shepard {
     
     public var photo = Photo.DefaultMalePhoto { 
         didSet{
-            markUpdated()
+            if oldValue != photo {
+                markChanged()
+            }
         }
     }
     
@@ -95,25 +105,35 @@ public struct Shepard {
 
     public var appearance: Appearance { 
         didSet{
-            markUpdated()
+            if oldValue != appearance {
+                markChanged()
+            }
         }
     }
     
     public var origin = Origin.Earthborn {
         didSet{
-            markUpdated()
+            if oldValue != origin {
+                hasSequenceChanges = true
+                markChanged()
+            }
         }
     }
     
     public var reputation = Reputation.SoleSurvivor {
         didSet{
-            markUpdated()
+            if oldValue != reputation {
+                hasSequenceChanges = true
+                markChanged()
+            }
         }
     }
     
     public var classTalent = ClassTalent.Soldier { 
         didSet{
-            markUpdated()
+            if oldValue != classTalent {
+                markChanged()
+            }
         }
     }
     
@@ -123,11 +143,12 @@ public struct Shepard {
     
 //MARK: Listeners
 
-    internal var dontMarkUpdated = false
+    internal var notifyChanges = true
     internal var hasUnsavedChanges = false
+    internal var hasSequenceChanges = false
     
-    public mutating func markUpdated(fireChangeListener: Bool = false) {
-        if !dontMarkUpdated {
+    public mutating func markChanged(fireChangeListener: Bool = false) {
+        if notifyChanges {
             self.modifiedDate = NSDate()
             hasUnsavedChanges = true
             // for some reason, the changes aren't propogated up to CurrentGame.Shepard (despite value type), unless we do this delayed call?
@@ -164,7 +185,6 @@ extension Shepard: SerializedDataStorable {
         list["name"] = name.stringValue
         list["appearance"] = appearance.format()
         list["photo"] = photo.stringValue
-        print(photo.stringValue)
         list["origin"] = origin.rawValue
         list["reputation"] = reputation.rawValue
         list["class"] = classTalent.rawValue
@@ -193,8 +213,8 @@ extension Shepard: SerializedDataRetrievable {
     ///
     public mutating func setData(data: SerializedData, gameConversion oldGame: GameSequence.GameVersion?, origin: SerializedDataOrigin = .LocalStore) {
         //don't first any changes from these functions - they aren't true changes, just loading data from elsewhere
-        let oldDontMarkUpdated = dontMarkUpdated
-        dontMarkUpdated = true
+        let oldNotifyChanges = notifyChanges
+        notifyChanges = false
         
         let gender = data["gender"]?.string == "M" ? Gender.Male : Gender.Female // just for local use
         
@@ -210,10 +230,10 @@ extension Shepard: SerializedDataRetrievable {
         
         setCommonData(data)
         
-        if origin != .DataChange {
+        if oldGame == nil {
             self.sequenceUuid = data["sequence_uuid"]?.string ?? sequenceUuid
             self.uuid = data["uuid"]?.string ?? uuid
-            self.gameVersion = GameSequence.GameVersion(rawValue: data["game"]?.string ?? "0") ?? .Game1
+            self.gameVersion = GameSequence.GameVersion(rawValue: data["game_version"]?.string ?? "0") ?? .Game1
             self.createdDate = data["created_date"]?.date ?? NSDate()
             self.modifiedDate = data["modified_date"]?.date ?? NSDate()
         }
@@ -222,7 +242,7 @@ extension Shepard: SerializedDataRetrievable {
             self.photo = photo
         }
         
-        dontMarkUpdated = oldDontMarkUpdated
+        notifyChanges = oldNotifyChanges
     }
     
     ///
@@ -230,10 +250,6 @@ extension Shepard: SerializedDataRetrievable {
     /// Put souvenirs/achievements here?
     ///
     public mutating func setCommonData(data: SerializedData) {
-        //don't first any changes from these functions - they aren't true changes, just loading data from elsewhere
-        let oldDontMarkUpdated = dontMarkUpdated
-        dontMarkUpdated = true
-    
         let gender = data["gender"]?.string == "M" ? Gender.Male : Gender.Female
         
         setName(data["name"]?.string)
@@ -243,8 +259,6 @@ extension Shepard: SerializedDataRetrievable {
         
         // do gender last (it changes stuff):
         self.gender = gender
-        
-        dontMarkUpdated = oldDontMarkUpdated
     }
 }
 

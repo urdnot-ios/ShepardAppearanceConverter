@@ -36,7 +36,7 @@ public class App {
     }
     
     public class func addNewGame() {
-        currentGame.save()
+        currentGame.saveAnyChanges()
         let newGame = GameSequence()
         allGames.add(newGame)
         currentGame = newGame
@@ -44,7 +44,7 @@ public class App {
     }
     
     public class func changeGame(game: GameSequence) {
-        currentGame.save()
+        currentGame.saveAnyChanges()
         currentGame = game
     }
     

@@ -21,8 +21,16 @@ extension GameSequence: CoreDataStorable {
     }
     
     public mutating func save() -> Bool {
-        shepard.save()
+        shepard.saveAnyChanges()
         let isSaved = CoreDataManager.save(self)
+        return isSaved
+    }
+    
+    public mutating func saveAnyChanges() -> Bool {
+        // currently GameSequence saves on any changes, so we don't need to save game, but that may change.
+        // But shepard doesn't save all the time, so save it if it has unsaved changes:
+        var isSaved = shepard.saveAnyChanges()
+        isSaved = isSaved && save()
         return isSaved
     }
     

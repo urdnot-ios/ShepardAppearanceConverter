@@ -18,7 +18,6 @@ extension Shepard: CoreDataDatedStorable {
     public func setAdditionalColumns(coreItem: NSManagedObject) {
         coreItem.setValue(sequenceUuid, forKey: "sequenceUuid")
         coreItem.setValue(uuid, forKey: "uuid")
-        coreItem.setValue(fetchSequenceRow(), forKey: "sequence")
     }
     
     public func setIdentifyingPredicate(fetchRequest: NSFetchRequest) {
@@ -26,11 +25,35 @@ extension Shepard: CoreDataDatedStorable {
     }
     
     public mutating func save() -> Bool {
+        if hasSequenceChanges {
+            saveCommonDataToAllShepardsInSequence()
+        }
         let isSaved = CoreDataManager.save(self)
         if isSaved {
             hasUnsavedChanges = false
         }
         return isSaved
+    }
+    
+    public mutating func saveAnyChanges() -> Bool {
+        if hasUnsavedChanges {
+            return save()
+        }
+        return true
+    }
+    
+    public mutating func saveCommonDataToAllShepardsInSequence() {
+        let shepards = Shepard.getAll(matching: [(key: "sequenceUuid", value: sequenceUuid)])
+        let commonData = getData()
+        var isSaved = true
+        for var sequenceShepard in shepards {
+            if sequenceShepard.uuid != uuid {
+                sequenceShepard.setCommonData(commonData)
+                sequenceShepard.hasSequenceChanges = false // don't recurse forever
+                isSaved = isSaved && sequenceShepard.saveAnyChanges()
+            }
+        }
+        hasSequenceChanges = !isSaved
     }
     
     public mutating func delete() -> Bool {
@@ -61,17 +84,14 @@ extension Shepard: CoreDataDatedStorable {
         return shepards
     }
     
+    public static func getAll(matching criteria: [MatchingCriteria]) -> [Shepard] {
+        let shepards: [Shepard] = CoreDataManager.getAll(matching: criteria)
+        return shepards
+    }
+    
     public static func getCurrent() -> Shepard? {
         let shepard: Shepard? = CoreDataManager.get(matching: [(key: "isCurrent", value: true)])
         return shepard
-    }
-    
-    internal func fetchSequenceRow() -> NSManagedObject? {
-        if let identifyingSequence = GameSequence(uuid: sequenceUuid) {
-            return identifyingSequence.nsManagedObject
-        }
-        // save game sequence new?
-        return nil
     }
     
 }

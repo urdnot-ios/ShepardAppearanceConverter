@@ -1,43 +1,42 @@
 //
-//  FaultedGameSequence.swift
+//  FaultedShepard.swift
 //  ShepardAppearanceConverter
 //
-//  Created by Emily Ivie on 9/3/15.
-//  Copyright © 2015 Emily Ivie. All rights reserved.
+//  Created by Emily Ivie on 9/5/15.
+//  Copyright © 2015 urdnot. All rights reserved.
 //
 
 import Foundation
 
-/// Defines an abbreviates GameSequence so we don't have to download giant data for all games all the time
-public struct FaultedGameSequence {
+public struct FaultedShepard {
 
     public var uuid: String = ""
     
-    public var shepardUuids: [String] = []
+    public var gameVersion: GameSequence.GameVersion = .Game1
     
     public init() {}
     
-    public init(uuid: String, shepardUuids: [String]) {
+    public init(uuid: String, gameVersion: GameSequence.GameVersion) {
         self.uuid = uuid
-        self.shepardUuids = shepardUuids
+        self.gameVersion = gameVersion
     }
     
 }
     
 //MARK: Saving/Retrieving Data
 
-extension FaultedGameSequence: SerializedDataStorable {
+extension FaultedShepard: SerializedDataStorable {
 
     public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
         var list = [String: SerializedDataStorable?]()
         list["uuid"] = uuid
-        list["shepard_uuids"] = SerializedData(shepardUuids.map { $0 as SerializedDataStorable? })
+        list["game_version"] = gameVersion.rawValue
         return SerializedData(list)
     }
     
 }
 
-extension FaultedGameSequence: SerializedDataRetrievable {
+extension FaultedShepard: SerializedDataRetrievable {
 
     public init(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
         setData(data, origin: origin)
@@ -49,12 +48,12 @@ extension FaultedGameSequence: SerializedDataRetrievable {
     
     public mutating func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
         guard let uuid = data["uuid"]?.string,
-              let shepardUuids = data["shepard_uuids"]?.array?.filter({ $0.string != nil }).map({ $0.string! })
+              let gameVersion = GameSequence.GameVersion(rawValue: data["game_version"]?.string ?? "")
         else {
             return
         }
         self.uuid = uuid
-        self.shepardUuids = shepardUuids
+        self.gameVersion = gameVersion
     }
     
     public mutating func setData(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws {
@@ -66,8 +65,9 @@ extension FaultedGameSequence: SerializedDataRetrievable {
 
 //MARK: Equatable
 
-extension FaultedGameSequence: Equatable {}
+extension FaultedShepard: Equatable {}
 
-public func ==(lhs: FaultedGameSequence, rhs: FaultedGameSequence) -> Bool {
+public func ==(lhs: FaultedShepard, rhs: FaultedShepard) -> Bool {
     return lhs.uuid == rhs.uuid
 }
+
