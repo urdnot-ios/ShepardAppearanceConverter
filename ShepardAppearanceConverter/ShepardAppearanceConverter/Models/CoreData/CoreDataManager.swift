@@ -41,7 +41,7 @@ public struct CoreDataManager {
         
         let coreItem = fetchRow(item) ?? NSManagedObject(entity: entity, insertIntoManagedObjectContext: context)
         
-        coreItem.setValue(item.getData(target: .Database).serializedData, forKey: Keys.serializedData)
+        coreItem.setValue(item.getData().serializedData, forKey: Keys.serializedData)
         if let datedItem = item as? CoreDataDatedStorable {
             coreItem.setValue(datedItem.createdDate, forKey: Keys.createdDate)
             coreItem.setValue(datedItem.modifiedDate, forKey: Keys.modifiedDate)
@@ -130,7 +130,7 @@ public struct CoreDataManager {
             let coreItems = (try context.executeFetchRequest(fetchRequest) as? [NSManagedObject]) ?? [NSManagedObject]()
             let results: [T] = try coreItems.map { (coreItem) in
                 let serializedData = (coreItem.valueForKey(Keys.serializedData) as? String) ?? ""
-                return try T(serializedData: serializedData, origin: .Database)
+                return try T(serializedData: serializedData)
             }
             return results
         } catch let fetchError as NSError {
@@ -157,7 +157,7 @@ public struct CoreDataManager {
         do {
             if let coreItem = fetchRow(setSearchPredicates, sortBy: sortBy, itemType: T.self) {
                 let serializedData = (coreItem.valueForKey(Keys.serializedData) as? String) ?? ""
-                return try T(serializedData: serializedData, origin: .Database)
+                return try T(serializedData: serializedData)
             }
         } catch let fetchError as NSError {
             print("get failed for \(T.coreDataEntityName): \(fetchError.localizedDescription)")
@@ -224,6 +224,30 @@ public struct CoreDataManager {
             fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         }
         return self.fetchRow(setSearchPredicates, sortBy: sortBy, itemType: itemType)
+    }
+    
+    
+    /// remove all rows
+    public static func truncateTable<T: CoreDataStorable>(itemType: T.Type) -> Bool {
+        return truncateTable(T.coreDataEntityName)
+    }
+    
+    public static func truncateTable(entityName: String) -> Bool {
+        guard let context = self.context else {
+            print("Error: could not initalize core data context")
+            return false
+        }
+        
+        let fetchRequest = NSFetchRequest(entityName: entityName)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try context.persistentStoreCoordinator?.executeRequest(deleteRequest, withContext: context)
+        } catch let deleteError as NSError {
+            print("delete failed for \(entityName): \(deleteError.localizedDescription)")
+        }
+        
+        return false
     }
     
 }

@@ -22,14 +22,17 @@ class ShepardReputationController: UIViewController {
     func setupPage() {
         ruthlessRadio.onClick = {
             App.currentGame.shepard.reputation = .Ruthless
+            App.currentGame.shepard.saveAnyChanges()
             self.setupRadios()
         }
         warHeroRadio.onClick = {
             App.currentGame.shepard.reputation = .WarHero
+            App.currentGame.shepard.saveAnyChanges()
             self.setupRadios()
         }
         soleSurvivorRadio.onClick = {
             App.currentGame.shepard.reputation = .SoleSurvivor
+            App.currentGame.shepard.saveAnyChanges()
             self.setupRadios()
         }
         setupRadios()

@@ -14,6 +14,7 @@ import Foundation
 public enum SerializedDataError : ErrorType {
     case ParsingError
     case TypeMismatch
+    case MissingRequiredField
 }
 
 public enum SerializedDataOrigin {
@@ -27,12 +28,12 @@ public enum SerializedDataOrigin {
 
 public protocol SerializedDataStorable { // any struct or object can be stored in SerializedData, provided it adheres to this
     var serializedData: String { get }
-    func getData(target target: SerializedDataOrigin) -> SerializedData
+    func getData() -> SerializedData
 }
 public protocol SerializedDataRetrievable {
-    init(serializedData: String, origin: SerializedDataOrigin) throws
-    mutating func setData(data: SerializedData, origin: SerializedDataOrigin)
-    mutating func setData(serializedData json: String, origin: SerializedDataOrigin) throws
+    init(serializedData: String) throws
+    mutating func setData(data: SerializedData)
+    mutating func setData(serializedData json: String) throws
 }
 
 
@@ -110,10 +111,10 @@ public struct SerializedData {
             var dValues = [String: SerializedData]()
             for (key, value) in d { dValues[key] = try SerializedData(anyData: value) }
             contents = .DictionaryType(dValues)
-        } else if let v = data as? SerializedDataStorable {
-            contents = .ValueType(v)
         } else if data is NSNull {
             // do nothing
+        } else if let v = data as? SerializedDataStorable {
+            contents = .ValueType(v)
         } else {
             throw SerializedDataError.ParsingError
         }
@@ -414,7 +415,7 @@ extension SerializedData {
 
     /// - Parameter unescaped: The string to be escaped
     /// - Returns: An escaped String in format "something%20here"
-    static func urlEncode(unescaped: SerializedDataStorable) -> String {
+    public static func urlEncode(unescaped: SerializedDataStorable) -> String {
         if !(unescaped is NSNull), let escaped = "\(unescaped)".stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()) {
             return escaped
         }
@@ -429,13 +430,13 @@ extension SerializedDataStorable {
     public var serializedData: String {
         get { return getData().jsonString }
     }
-    public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+    public func getData() -> SerializedData {
         return SerializedData(self)
     }
 }
 extension SerializedDataRetrievable {
-    public mutating func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {}
-    public mutating func setData(serializedData json: String, origin: SerializedDataOrigin = .LocalStore) throws {
+    public mutating func setData(data: SerializedData) {}
+    public mutating func setData(serializedData json: String) throws {
         self.setData(try SerializedData(serializedData: json))
     }
 }
@@ -462,28 +463,28 @@ extension NSDate: SerializedDataStorable {}
 extension NSNull: SerializedDataStorable {}
 
 extension SerializedData: SerializedDataStorable {
-    public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData { return self }
+    public func getData() -> SerializedData { return self }
 }
 extension SerializedData: SerializedDataRetrievable {
-    public init(serializedData json: String, origin: SerializedDataOrigin = .LocalStore) throws {
+    public init(serializedData json: String) throws {
         try self.init(jsonString: json)
     }
-    public mutating func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
+    public mutating func setData(data: SerializedData) {
         contents = data.contents
     }
-    public mutating func setData(serializedData json: String, origin: SerializedDataOrigin = .LocalStore) throws {
-        setData(try SerializedData(jsonString: json), origin: origin)
+    public mutating func setData(serializedData json: String) throws {
+        setData(try SerializedData(jsonString: json))
     }
 }
 
 // You cannot declare Array/Dictionary -both- SerializedDataStorable and containing SerializedDataStorable type (it's one or the other)
 extension SequenceType where Generator.Element == (T: String, U: SerializedDataStorable?) {
-    func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+    func getData() -> SerializedData {
         return SerializedData( Dictionary( map { ($0.0, SerializedData($0.1) ) } ) )
     }
 }
 extension SequenceType where Generator.Element == SerializedDataStorable? {
-    func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+    func getData() -> SerializedData {
         return SerializedData( Array( map { SerializedData($0) } ) )
     }
 }

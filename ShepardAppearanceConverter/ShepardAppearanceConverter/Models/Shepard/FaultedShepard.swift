@@ -27,10 +27,10 @@ public struct FaultedShepard {
 
 extension FaultedShepard: SerializedDataStorable {
 
-    public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+    public func getData() -> SerializedData {
         var list = [String: SerializedDataStorable?]()
         list["uuid"] = uuid
-        list["game_version"] = gameVersion.rawValue
+        list["gameVersion"] = gameVersion.rawValue
         return SerializedData(list)
     }
     
@@ -38,17 +38,17 @@ extension FaultedShepard: SerializedDataStorable {
 
 extension FaultedShepard: SerializedDataRetrievable {
 
-    public init(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
-        setData(data, origin: origin)
+    public init(data: SerializedData) {
+        setData(data)
     }
     
-    public init(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws {
-        try setData(serializedData: data, origin: origin)
+    public init(serializedData data: String) throws {
+        try setData(serializedData: data)
     }
     
-    public mutating func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
+    public mutating func setData(data: SerializedData) {
         guard let uuid = data["uuid"]?.string,
-              let gameVersion = GameSequence.GameVersion(rawValue: data["game_version"]?.string ?? "")
+              let gameVersion = GameSequence.GameVersion(rawValue: data["gameVersion"]?.string ?? "")
         else {
             return
         }
@@ -56,9 +56,9 @@ extension FaultedShepard: SerializedDataRetrievable {
         self.gameVersion = gameVersion
     }
     
-    public mutating func setData(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws {
-        let extractedData = try SerializedData(serializedData: data, origin: origin)
-        setData(extractedData, origin: origin)
+    public mutating func setData(serializedData data: String) throws {
+        let extractedData = try SerializedData(serializedData: data)
+        setData(extractedData)
     }
     
 }

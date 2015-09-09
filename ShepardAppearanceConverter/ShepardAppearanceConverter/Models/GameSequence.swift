@@ -48,7 +48,7 @@ public struct GameSequence {
         } else {
             var newShepard = Shepard(sequenceUuid: uuid, gameVersion: newGameVersion)
             // share all data from other game version:
-            newShepard.setData(shepard.getData(), gameConversion: shepard.gameVersion, origin: .DataChange)
+            newShepard.setData(shepard.getData(), gameConversion: shepard.gameVersion)
             newShepard.saveAnyChanges()
             allShepards.append(FaultedShepard(uuid: newShepard.uuid, gameVersion: newGameVersion))
             if let foundIndex = App.allGames.indexOf({ $0.uuid == uuid }) {
@@ -65,35 +65,34 @@ public struct GameSequence {
     
 }
 
+//MARK: Saving/Retrieving Data
+
 extension GameSequence: SerializedDataStorable {
 
-    public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+    public func getData() -> SerializedData {
         var list = [String: SerializedDataStorable?]()
         list["uuid"] = uuid
-        list["last_played_shepard"] = shepard.uuid
-        list["all_shepards"] = SerializedData(allShepards.map { $0.getData() })
-        if target == .LocalStore {
-        } else if target == .Database {
-        }
+        list["lastPlayedShepard"] = shepard.uuid
+        list["allShepards"] = SerializedData(allShepards.map { $0.getData() })
         return SerializedData(list)
     }
     
 }
 extension GameSequence: SerializedDataRetrievable {
     
-    public init(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws {
+    public init(serializedData data: String) throws {
         self.init()
-        setData(try SerializedData(serializedData: data), origin: origin)
+        setData(try SerializedData(serializedData: data))
     }
 
-    public mutating func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
+    public mutating func setData(data: SerializedData) {
         uuid = data["uuid"]?.string ?? uuid
-        if let lastPlayedShepard = data["last_played_shepard"]?.string,
+        if let lastPlayedShepard = data["lastPlayedShepard"]?.string,
            let shepard = Shepard.get(uuid: lastPlayedShepard) {
             self.shepard = shepard
             changeGameVersion(shepard.gameVersion)
         }
-        if let allShepards = data["all_shepards"]?.array {
+        if let allShepards = data["allShepards"]?.array {
             self.allShepards = []
             for faultedShepardData in allShepards {
                 self.allShepards.append(FaultedShepard(data: faultedShepardData))

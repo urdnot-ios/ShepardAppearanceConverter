@@ -18,8 +18,8 @@ public struct Games {
         contents = [FaultedGameSequence(uuid: game.uuid, shepardUuids: game.allShepards.map { $0.uuid })]
     }
     
-    public init(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws { // protocol conformance SerializedDataRetrievable
-        try setData(serializedData: data, origin: origin)
+    public init(serializedData data: String) throws { // protocol conformance SerializedDataRetrievable
+        try setData(serializedData: data)
     }
     
 }
@@ -104,7 +104,7 @@ extension Games: RangeReplaceableCollectionType {
 
 extension Games: SerializedDataStorable {
 
-    public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+    public func getData() -> SerializedData {
         return SerializedData(contents.map { $0.getData() })
     }
     
@@ -112,17 +112,17 @@ extension Games: SerializedDataStorable {
 
 extension Games: SerializedDataRetrievable {
 
-    public mutating func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
+    public mutating func setData(data: SerializedData) {
         if let allGames = data.array where allGames.count > 0 {
             contents = []
             for data in allGames {
-                contents.append(FaultedGameSequence(data: data, origin: origin))
+                contents.append(FaultedGameSequence(data: data))
             }
         }
     }
     
-    public mutating func setData(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws {
-        setData(try SerializedData(serializedData: data), origin: origin)
+    public mutating func setData(serializedData data: String) throws {
+        setData(try SerializedData(serializedData: data))
     }
     
 }

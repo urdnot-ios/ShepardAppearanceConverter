@@ -28,10 +28,10 @@ public struct FaultedGameSequence {
 
 extension FaultedGameSequence: SerializedDataStorable {
 
-    public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+    public func getData() -> SerializedData {
         var list = [String: SerializedDataStorable?]()
         list["uuid"] = uuid
-        list["shepard_uuids"] = SerializedData(shepardUuids.map { $0 as SerializedDataStorable? })
+        list["shepardUuids"] = SerializedData(shepardUuids.map { $0 as SerializedDataStorable? })
         return SerializedData(list)
     }
     
@@ -39,17 +39,17 @@ extension FaultedGameSequence: SerializedDataStorable {
 
 extension FaultedGameSequence: SerializedDataRetrievable {
 
-    public init(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
-        setData(data, origin: origin)
+    public init(data: SerializedData) {
+        setData(data)
     }
     
-    public init(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws {
-        try setData(serializedData: data, origin: origin)
+    public init(serializedData data: String) throws {
+        try setData(serializedData: data)
     }
     
-    public mutating func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
+    public mutating func setData(data: SerializedData) {
         guard let uuid = data["uuid"]?.string,
-              let shepardUuids = data["shepard_uuids"]?.array?.filter({ $0.string != nil }).map({ $0.string! })
+              let shepardUuids = data["shepardUuids"]?.array?.filter({ $0.string != nil }).map({ $0.string! })
         else {
             return
         }
@@ -57,9 +57,9 @@ extension FaultedGameSequence: SerializedDataRetrievable {
         self.shepardUuids = shepardUuids
     }
     
-    public mutating func setData(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws {
-        let extractedData = try SerializedData(serializedData: data, origin: origin)
-        setData(extractedData, origin: origin)
+    public mutating func setData(serializedData data: String) throws {
+        let extractedData = try SerializedData(serializedData: data)
+        setData(extractedData)
     }
     
 }

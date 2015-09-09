@@ -19,11 +19,15 @@ public protocol CoreDataStorable: SerializedDataStorable, SerializedDataRetrieva
     func setIdentifyingPredicate(fetchRequest: NSFetchRequest)
     
     func setAdditionalColumns(coreItem: NSManagedObject)
+    
+    mutating func save() -> Bool
 }
 
 extension CoreDataStorable {
 
-    public var nsManagedObject: NSManagedObject? { return CoreDataManager.fetchRow(self) }
+    public var nsManagedObject: NSManagedObject? {
+        return CoreDataManager.fetchRow(self)
+    }
     
 }
 

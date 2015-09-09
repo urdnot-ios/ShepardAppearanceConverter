@@ -13,7 +13,7 @@ extension Shepard {
     public enum Photo {
         case DefaultMalePhoto
         case DefaultFemalePhoto
-        case Custom(file: String)
+        case Custom(fileName: String)
         var stringValue: String {
             switch self {
             case .DefaultMalePhoto:
@@ -40,6 +40,14 @@ extension Shepard {
                 }
             }
             return nil
+        }
+        public static func create(image: UIImage, forShepard shepard: Shepard) -> Photo? {
+            let fileName = "MyShepardPhoto\(shepard.uuid)"
+            if image.save(documentsFileName: fileName) {
+                return Photo.Custom(fileName: fileName)
+            } else {
+                return nil
+            }
         }
     }
 }
@@ -68,7 +76,7 @@ extension Shepard.Photo {
             } else if fileName == Shepard.Photo.DefaultFemalePhoto.stringValue {
                 self = .DefaultFemalePhoto
             } else {
-                self = Shepard.Photo.Custom(file: fileName)
+                self = Shepard.Photo.Custom(fileName: fileName)
             }
             return
         }

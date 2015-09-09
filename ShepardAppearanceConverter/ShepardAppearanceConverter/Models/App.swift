@@ -19,11 +19,9 @@ import UIKit
 
 public class App {
 
-    public static var currentGame = GameSequence() {
-        didSet {
-            resetShepardListener()
-        }
-    }
+    public static var dataVersion = 0.01
+
+    public static var currentGame = GameSequence()
     
     public static var allGames: Games = {
         return Games(startingGame: App.currentGame)
@@ -31,8 +29,8 @@ public class App {
     
     public init() {}
     
-    public required init(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws { // protocol conformance SerializedDataRetrievable
-        try setData(serializedData: data, origin: origin)
+    public required init(serializedData data: String) throws { // protocol conformance SerializedDataRetrievable
+        try setData(serializedData: data)
     }
     
     public class func addNewGame() {
@@ -40,12 +38,15 @@ public class App {
         let newGame = GameSequence()
         allGames.add(newGame)
         currentGame = newGame
+        resetShepardListener()
         save()
     }
     
     public class func changeGame(game: GameSequence) {
         currentGame.saveAnyChanges()
         currentGame = game
+        resetShepardListener()
+        save()
     }
     
     public class func deleteGame(uuid uuid: String) -> Bool {
@@ -54,6 +55,7 @@ public class App {
             // pick a new current game if necessary:
             if uuid == currentGame.uuid, let newUuid = allGames.last?.uuid, let game = GameSequence(uuid: newUuid) {
                 currentGame = game
+                resetShepardListener()
             }
             save()
         }
@@ -64,7 +66,7 @@ public class App {
         currentGame.shepard.onChange.listen(App.self) { (shepard) in
             onCurrentShepardChange.fire(true)
         }
-        onCurrentShepardChange.fire(true)
+        Delay.bySeconds(0, { self.onCurrentShepardChange.fire(true) })
     }
 }
     
@@ -85,7 +87,12 @@ extension App {
     }
     
     public class func retrieve() {
-        get()
+        if get() == nil {
+            // first time opening app
+            App().setData(SerializedData())
+            resetShepardListener()
+            save()
+        }
     }
     
 }
@@ -94,10 +101,11 @@ extension App {
 
 extension App: SerializedDataStorable {
 
-    public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+    public func getData() -> SerializedData {
         var list = [String: SerializedDataStorable?]()
-        list["all_games"] = App.allGames.getData(target: target)
-        list["current_game_uuid"] = App.currentGame.uuid
+        list["lastDataVersion"] = App.dataVersion
+        list["allGames"] = App.allGames.getData()
+        list["currentGameUuid"] = App.currentGame.uuid
         return SerializedData(list)
     }
     
@@ -105,18 +113,23 @@ extension App: SerializedDataStorable {
 
 extension App: SerializedDataRetrievable {
     
-    public func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
-        if let data = data["all_games"] {
-            App.allGames.setData(data, origin: origin)
+    public func setData(data: SerializedData) {
+        let lastDataVersion = data["lastDataVersion"]?.double ?? 0.00
+        if lastDataVersion != App.dataVersion {
+//           CoreDataSync().syncFrom(lastDataVersion, to: App.dataVersion)
         }
-        if let currentGameUuid = data["current_game_uuid"]?.string,
+        
+        if let data = data["allGames"] {
+            App.allGames.setData(data)
+        }
+        if let currentGameUuid = data["currentGameUuid"]?.string,
            let game = GameSequence(uuid: currentGameUuid) {
            App.currentGame = game
         }
     }
     
-    public func setData(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws {
-        setData(try SerializedData(serializedData: data), origin: origin)
+    public func setData(serializedData data: String) throws {
+        setData(try SerializedData(serializedData: data))
     }
     
 }

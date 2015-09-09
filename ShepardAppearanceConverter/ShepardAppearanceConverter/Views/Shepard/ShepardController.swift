@@ -26,6 +26,7 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBOutlet weak var originRow: FauxValueRow!
     @IBOutlet weak var reputationRow: FauxValueRow!
     @IBOutlet weak var classRow: FauxValueRow!
+    
     @IBOutlet weak var appearanceRow: FauxValueRow!
     
     override func viewDidLoad() {
@@ -107,6 +108,7 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
         } else {
             App.currentGame.shepard.setName(nameField.text)
         }
+        App.currentGame.shepard.saveAnyChanges()
         nameField.superview?.setNeedsLayout()
         nameField.superview?.layoutIfNeeded()
         view.userInteractionEnabled = true
@@ -115,6 +117,7 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBAction func genderChanged(sender: AnyObject) {
         view.userInteractionEnabled = false
         App.currentGame.shepard.gender = genderSegment.selectedSegmentIndex == 0 ? .Male : .Female
+        App.currentGame.shepard.saveAnyChanges()
         view.userInteractionEnabled = true
     }
     
@@ -152,6 +155,7 @@ class ShepardController: UIViewController, UIImagePickerControllerDelegate, UINa
         surnameLabel.text = Shepard.DefaultSurname
         setupPhoto()
         setupFauxRows()
+        
         view.userInteractionEnabled = true
     }
     

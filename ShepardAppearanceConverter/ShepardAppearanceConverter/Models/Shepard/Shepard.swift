@@ -1,6 +1,6 @@
 //
 //  Shepard.swift
-//  ShepardAppearanceConverter
+//  MassEffectTracker
 //
 //  Created by Emily Ivie on 7/19/15.
 //  Copyright © 2015 urdnot. All rights reserved.
@@ -24,9 +24,8 @@ public struct Shepard {
     public internal(set) var sequenceUuid: String
 
     public private(set) var uuid = "\(NSUUID().UUIDString)"
-    
+
     public private(set) var createdDate = NSDate()
-    
     public var modifiedDate = NSDate()
     
     public private(set) var gameVersion: GameSequence.GameVersion
@@ -65,7 +64,6 @@ public struct Shepard {
     public var name = Name.DefaultMaleName { 
         didSet{
             if oldValue != name {
-                hasSequenceChanges = true //?
                 markChanged()
             }
         }
@@ -95,9 +93,8 @@ public struct Shepard {
     
     // special setter for taking UIImage:
     public mutating func setPhoto(image: UIImage) -> Bool {
-        let fileName = "MyShepardPhoto\(uuid)"
-        if image.save(documentsFileName: fileName) {
-            photo = .Custom(file: fileName)
+        if let photo = Photo.create(image, forShepard: self) {
+            self.photo = photo
             return true
         }
         return false
@@ -174,13 +171,13 @@ public func ==(a: Shepard, b: Shepard) -> Bool {
 
 extension Shepard: SerializedDataStorable {
 
-    public func getData(target target: SerializedDataOrigin = .LocalStore) -> SerializedData {
+    public func getData() -> SerializedData {
         var list = [String: SerializedDataStorable?]()
-        list["sequence_uuid"] = sequenceUuid
+        list["sequenceUuid"] = sequenceUuid
         list["uuid"] = uuid
-        list["created_date"] = createdDate
-        list["modified_date"] = modifiedDate
-        list["game_version"] = gameVersion.rawValue
+        list["createdDate"] = createdDate
+        list["modifiedDate"] = modifiedDate
+        list["gameVersion"] = gameVersion.rawValue
         list["gender"] = gender == .Male ? "M" : "F"
         list["name"] = name.stringValue
         list["appearance"] = appearance.format()
@@ -194,24 +191,24 @@ extension Shepard: SerializedDataStorable {
 }
 extension Shepard: SerializedDataRetrievable {
     
-    public init(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
+    public init(data: SerializedData) {
         self.init(sequenceUuid: "")
-        setData(data, origin: origin)
+        setData(data)
     }
     
-    public init(serializedData data: String, origin: SerializedDataOrigin = .LocalStore) throws {
-        self.init(data: try SerializedData(serializedData: data), origin: origin)
+    public init(serializedData data: String) throws {
+        self.init(data: try SerializedData(serializedData: data))
     }
     
-    public mutating func setData(data: SerializedData, origin: SerializedDataOrigin = .LocalStore) {
-        setData(data, gameConversion: nil, origin: origin)
+    public mutating func setData(data: SerializedData) {
+        setData(data, gameConversion: nil)
     }
     
     ///
     /// Creates a shepard with a dictionary of data. Can be from saved values, or from a previous game.
     /// Values general to all shepards within a set should be placed in setCommonData instead.
     ///
-    public mutating func setData(data: SerializedData, gameConversion oldGame: GameSequence.GameVersion?, origin: SerializedDataOrigin = .LocalStore) {
+    public mutating func setData(data: SerializedData, gameConversion oldGame: GameSequence.GameVersion?) {
         //don't first any changes from these functions - they aren't true changes, just loading data from elsewhere
         let oldNotifyChanges = notifyChanges
         notifyChanges = false
@@ -231,11 +228,11 @@ extension Shepard: SerializedDataRetrievable {
         setCommonData(data)
         
         if oldGame == nil {
-            self.sequenceUuid = data["sequence_uuid"]?.string ?? sequenceUuid
-            self.uuid = data["uuid"]?.string ?? uuid
-            self.gameVersion = GameSequence.GameVersion(rawValue: data["game_version"]?.string ?? "0") ?? .Game1
-            self.createdDate = data["created_date"]?.date ?? NSDate()
-            self.modifiedDate = data["modified_date"]?.date ?? NSDate()
+            sequenceUuid = data["sequenceUuid"]?.string ?? sequenceUuid
+            uuid = data["uuid"]?.string ?? uuid
+            gameVersion = GameSequence.GameVersion(rawValue: data["gameVersion"]?.string ?? "0") ?? .Game1
+            createdDate = data["createdDate"]?.date ?? NSDate()
+            modifiedDate = data["modifiedDate"]?.date ?? NSDate()
         }
         
         if let photo = Photo(data: data["photo"]) {

@@ -24,26 +24,32 @@ class ShepardClassController: UIViewController {
     func setupPage() {
         soldierRadio.onClick = {
             App.currentGame.shepard.classTalent = .Soldier
+            App.currentGame.shepard.saveAnyChanges()
             self.setupRadios()
         }
         engineerRadio.onClick = {
             App.currentGame.shepard.classTalent = .Engineer
+            App.currentGame.shepard.saveAnyChanges()
             self.setupRadios()
         }
         adeptRadio.onClick = {
             App.currentGame.shepard.classTalent = .Adept
+            App.currentGame.shepard.saveAnyChanges()
             self.setupRadios()
         }
         infiltratorRadio.onClick = {
             App.currentGame.shepard.classTalent = .Infiltrator
+            App.currentGame.shepard.saveAnyChanges()
             self.setupRadios()
         }
         sentinelRadio.onClick = {
             App.currentGame.shepard.classTalent = .Sentinel
+            App.currentGame.shepard.saveAnyChanges()
             self.setupRadios()
         }
         vanguardRadio.onClick = {
             App.currentGame.shepard.classTalent = .Vanguard
+            App.currentGame.shepard.saveAnyChanges()
             self.setupRadios()
         }
         setupRadios()
